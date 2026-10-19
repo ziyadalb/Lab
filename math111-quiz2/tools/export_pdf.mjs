@@ -34,7 +34,7 @@ const fontsOk = await page.evaluate(() => {
 if (tocFile && fs.existsSync(tocFile)) {
   const toc = JSON.parse(fs.readFileSync(tocFile, 'utf8'));
   await page.evaluate((toc) => {
-    for (const el of document.querySelectorAll('.toc .pg')) {
+    for (const el of document.querySelectorAll('.toc .pg, .pgref')) {
       const n = toc[el.dataset.target];
       el.textContent = n ? String(n) : '';
     }

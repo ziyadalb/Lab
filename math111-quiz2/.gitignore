@@ -4,3 +4,6 @@ __pycache__/
 .cache/
 out/sample/pass1.pdf
 out/sample/toc_check.json
+out/guide/pass1.pdf
+out/guide/toc_check.json
+src/guide.katex.html

@@ -7,7 +7,7 @@ state is checked by arith().
 import sympy as s
 
 from booklet_engine import (ITEMS, ans_tex, arith, formula, functional, parts_rows, q_tex, same_antiderivative,
-                            same_derivative, same_value, sub_row, use)
+                            same_defint, same_derivative, same_value, sub_row, use)
 from html_kit import box, chip, en, lines, link, md, mi, p, table, ul
 from mathlib import rawtex, tex, texsum, x
 
@@ -16,6 +16,8 @@ EXAM = {'SE': 'الاختبار الثاني', 'FE': 'النهائي'}
 
 
 def source_label(it):
+    if it['kind'] == 'generated':
+        return 'تدريب إضافي (من إعداد هذه المذكرة، جوابه متحقق)'
     if it['kind'] == 'exam':
         y, s_, e, q = it['id'].split('-')
         return 'اختبار سابق %s، %s، %s، س%s، ص%d' % (y, SEM[s_], EXAM[e], q[1:].replace('.', ' جزء '),
@@ -40,6 +42,8 @@ def question(it, where):
 def final(it, where):
     if it['task'] == 'diff':
         same_derivative(it['answer'], it, where)
+    elif it['task'] == 'defint':
+        same_defint(it['answer'], it, where)
     else:
         same_antiderivative(it['answer'], it, where)
     return md(ans_tex(it), 'ans')
@@ -62,7 +66,8 @@ def card(sid, num, title, section, pages, sign, short, memo, example, trap, pape
 
 
 # ================================================================== 4.2
-def card_twins():
+def sc_twins():
+    """Shortcut box and memory line of card twins (shared by the booklet and the full guide)."""
     rows = [formula('asinh(u)', '1/sqrt(u**2+1)', 'diff', branches=('t', '-t'), uprime=True, label='twins sinh'),
             formula('acosh(u)', '1/sqrt(u**2-1)', 'diff', branches=('1+t',), uprime=True, label='twins cosh'),
             formula('atanh(u)', '1/(1-u**2)', 'diff', branches=('t/(1+t)', '-t/(1+t)'), uprime=True, label='twins tanh'),
@@ -76,6 +81,11 @@ def card_twins():
                '<b>tanh و coth</b>: الصيغة نفسها تمامًا؛ الفرق في المجال فقط.',
                '<b>sech و csch</b>: إشارة سالبة و ' + mi('u') + ' خارج الجذر؛ sech معها ' + mi('1-u^{2}') + ' و csch معها '
                + mi('1+u^{2}') + ' و ' + mi('|u|') + '.'])
+    return short, memo
+
+
+def card_twins():
+    short, memo = sc_twins()
     it = ITEMS['1447-S2-SE-Q1.2']
     ex_ = question(it, 'card S1')
     ex_ += md(arith(r"u=\sqrt{x+2},\qquad u'=\frac{1}{2\sqrt{x+2}},\qquad 1+u^{2}=x+3",
@@ -94,7 +104,8 @@ def card_twins():
                 short, memo, ex_, trap, paper, fallback)
 
 
-def card_six():
+def sc_six():
+    """Shortcut box and memory line of card six (shared by the booklet and the full guide)."""
     rows = [formula('1/sqrt(u**2+a**2)', 'asinh(u/a)', pos=('a',), label='six sinh'),
             formula('1/sqrt(u**2-a**2)', 'acosh(u/a)', branches=('a+t',), pos=('a',), label='six cosh'),
             formula('1/(a**2-u**2)', 'atanh(u/a)/a', branches=('a*t/(1+t)', '-a*t/(1+t)'), pos=('a',), label='six tanh'),
@@ -110,6 +121,11 @@ def card_six():
     memo = ul(['صيغتا الجذر وحده (sinh و cosh) <b>بلا</b> ' + mi(r'\frac1a') + '؛ الأربع الباقية فيها ' + mi(r'\frac1a') + '.',
                'tanh أم coth؟ قارن ' + mi('|u|') + ' مع ' + mi('a') + ': أصغر ⇐ tanh، أكبر ⇐ coth.',
                'وجود ' + mi('u') + ' خارج الجذر ⇐ sech أو csch، والإشارة سالبة.'])
+    return short, memo
+
+
+def card_six():
+    short, memo = sc_six()
     it = ITEMS['N42-X2-01']
     ex_ = question(it, 'card S2')
     ex_ += md(arith(r'16x^{6}=(4x^{3})^{2}:\quad u=4x^{3},\ a=3,\ c=5,\ n=3,\ k=4,\quad \frac{c}{nk}=\frac{5}{12}',
@@ -126,7 +142,8 @@ def card_six():
                   + '، والبسط مشتقة ' + mi('u') + ' أو مضاعف لها.'), short, memo, ex_, trap, paper, fallback)
 
 
-def card_lamda():
+def sc_lamda():
+    """Shortcut box and memory line of card lamda (shared by the booklet and the full guide)."""
     r = [formula('1/sqrt(b**(2*lam*x)+a**2)', '-acsch(b**(lam*x)/a)/(a*lam*log(b))', var='x', branches=('x',),
                  pos=('a', 'b', 'lam'), label='lamda exp csch'),
          formula('1/sqrt(a**2-b**(2*lam*x))', '-asech(b**(lam*x)/a)/(a*lam*log(b))', var='x', branches=('-t',),
@@ -140,6 +157,11 @@ def card_lamda():
                + '. ومع الأساس ' + mi('e') + ' يكون ' + mi(r'\ln e=1') + '.')
     memo = ul(['المقام دائمًا ' + mi(r'a\times\lambda') + '، ومعه ' + mi(r'\ln b') + ' إذا لم يكن الأساس ' + mi('e') + '.',
                'الإشارة سالبة دائمًا. داخل الجذر ' + mi('+') + ' ⇐ csch⁻¹، وداخل الجذر ' + mi('-') + ' ⇐ sech⁻¹.'])
+    return short, memo
+
+
+def card_lamda():
+    short, memo = sc_lamda()
     it = ITEMS['1446-S2-SE-Q2.7']
     ex_ = question(it, 'card S3')
     ex_ += md(arith(r'e^{6x}=(e^{3x})^{2}:\quad b=e,\ \lambda=3,\ a=1', [('exp(6*x)', 'exp(3*x)**2')], 'S3 params'))
@@ -160,7 +182,8 @@ def card_lamda():
                   + '، ولا تظهر مشتقة الداخل.'), short, memo, ex_, trap, paper, fallback)
 
 
-def card_square():
+def sc_square():
+    """Shortcut box and memory line of card square (shared by the booklet and the full guide)."""
     r = [formula('c/sqrt(A*(x-h)**2+d)', 'c*asinh(sqrt(A)*(x-h)/sqrt(d))/sqrt(A)', var='x', branches=('h+t', 'h-t'),
                  pos=('A', 'c', 'd'), real=('h',), label='square sinh'),
          formula('c/sqrt(A*(x-h)**2-d)', 'c*acosh(sqrt(A)*(x-h)/sqrt(d))/sqrt(A)', var='x', branches=('h+sqrt(d/A)+t',),
@@ -180,6 +203,11 @@ def card_square():
     memo = ul([mi('d') + ' هو قيمة الثلاثي عند المركز؛ لا تحفظ له قانونًا.',
                'العامل الخطي خارج الجذر ⇐ المعامل ' + mi(r'-\frac{c}{\sqrt d}') + ' دائمًا.',
                'معامل ' + mi('x^2') + ': موجب ⇐ sinh أو cosh أو csch؛ سالب ⇐ sech.'])
+    return short, memo
+
+
+def card_square():
+    short, memo = sc_square()
     it = ITEMS['1446-S1-SE-Q2.2']
     ex_ = question(it, 'card S4')
     ex_ += md(arith(r'A=1,\quad h=-\frac{6}{2}=-3,\quad Q(-3)=9-18-16=-25 \\ x^{2}+6x-16=(x+3)^{2}-5^{2}',
@@ -206,7 +234,8 @@ def di_table(rows):
     return table(['الإشارة', 'D: اشتق', 'I: كامل'], [[mi(sg), mi(tex(d)), mi(tex(i))] for sg, d, i in rows], 'di')
 
 
-def card_folded():
+def sc_folded():
+    """Shortcut box and memory line of card folded (shared by the booklet and the full guide)."""
     G1, G2, g = s.Function('G_1')(x), s.Function('G_2')(x), s.Function('g')(x)
     pp, qq = s.symbols('p q', real=True)
     functional(lambda: (s.diff((pp * x + qq) * G1 - pp * G2, x) - (pp * x + qq) * g)
@@ -216,6 +245,11 @@ def card_folded():
     short += p('<b>ب) جدول DI:</b> عمود D: اشتق كثيرة الحدود حتى الصفر. عمود I: كامل الدالة الأخرى. اضرب قطريًا بالإشارات ' + mi('+\\ -\\ +\\ -\\ \\cdots') + '.')
     memo = ul(['كثيرة الحدود تنزل للصفر، والدالة الأخرى تُكامل.',
                'مع ' + mi('kx') + ' تقسم على ' + mi('k') + ' في كل خطوة تكامل.'])
+    return short, memo
+
+
+def card_folded():
+    short, memo = sc_folded()
     it = ITEMS['1446-S1-SE-Q2.4']
     ex_ = question(it, 'card S5 a')
     ex_ += md(arith(r'p=3,\quad G_{1}=\cosh x,\quad G_{2}=\sinh x',
@@ -234,11 +268,17 @@ def card_folded():
                   + mi(r'\sinh kx') + ' أو ' + mi(r'\cosh kx') + ').'), short, memo, ex_, trap, paper, fallback)
 
 
-def card_qaws():
+def sc_qaws():
+    """Shortcut box and memory line of card qaws (shared by the booklet and the full guide)."""
     f = formula('x**n*log(a*x)', 'x**(n+1)/(n+1)*(log(a*x)-1/(n+1))', var='x', branches=('t',), pos=('a',), real=('n',),
                 label='qaws (symbolic real n)')
     short = md(f[0] + ' = ' + f[1] + ' + C') + p('لكل ' + mi(r'n\neq-1') + '، والصيغة نفسها مع ' + mi(r'\ln|ax|') + ' عندما ' + mi('x<0') + '.', 'small')
     memo = p('قاعدة القوة على ' + mi('x^{n}') + '، ثم قوس: ' + mi(r'\ln') + ' ناقص واحد على نفس المقام.')
+    return short, memo
+
+
+def card_qaws():
+    short, memo = sc_qaws()
     it = ITEMS['1446-S1-SE-Q2.5']
     ex_ = question(it, 'card S6')
     ex_ += md(arith(r'n=-2,\quad n+1=-1:\quad \frac{x^{-1}}{-1}\left(\ln x-\frac{1}{-1}\right)=-\frac{\ln x+1}{x}',
@@ -257,7 +297,8 @@ def card_qaws():
                 p(mi('x^{n}') + ' مضروبة في ' + mi(r'\ln|ax|') + '، أو ' + mi(r'\ln|x|') + ' وحدها.'), short, memo, ex_, trap, paper, fallback)
 
 
-def card_rafeeq():
+def sc_rafeeq():
+    """Shortcut box and memory line of card rafeeq (shared by the booklet and the full guide)."""
     gf = s.Function('g')(x)
     functional(lambda: s.diff(x * gf - s.Integral(x * s.diff(gf, x), x), x) - gf, 'rafeeq identity')
     short = md(r'\int f^{-1}(x)\,dx=x\,f^{-1}(x)-\int x\,\big(f^{-1}\big)'"'"r'(x)\,dx')
@@ -274,6 +315,11 @@ def card_rafeeq():
             formula('atanh(x)', 'x*atanh(x)+log(1-x**2)/2', var='x', branches=('t/(1+t)', '-t/(1+t)'), label='r atanh')]
     short += p('نتائج للتحقق السريع (لا يلزم حفظها):', 'small') + table(['التكامل', 'الجواب (+C)'], [frow(z, None) for z in rows], 'formula compact')
     memo = p('الرفيق دائمًا ' + mi('x') + ': نضرب ' + mi('x') + ' في الدالة، ثم نطرح تكامل ' + mi('x') + ' في مشتقتها.')
+    return short, memo
+
+
+def card_rafeeq():
+    short, memo = sc_rafeeq()
     it = ITEMS['1445-S1-SE-Q2.5']
     ex_ = question(it, 'card S7')
     ex_ += md(r'= x\cosh^{-1}x-\int\frac{x}{\sqrt{x^{2}-1}}\,dx')
@@ -292,12 +338,18 @@ def card_rafeeq():
                 short, memo, ex_, trap, paper, fallback)
 
 
-def card_dawaran():
+def sc_dawaran():
+    """Shortcut box and memory line of card dawaran (shared by the booklet and the full guide)."""
     f1 = formula('exp(a*x)*sin(b*x)', 'exp(a*x)*(a*sin(b*x)-b*cos(b*x))/(a**2+b**2)', var='x', branches=('x',), pos=('a', 'b'), label='dawaran sin')
     f2 = formula('exp(a*x)*cos(b*x)', 'exp(a*x)*(a*cos(b*x)+b*sin(b*x))/(a**2+b**2)', var='x', branches=('x',), pos=('a', 'b'), label='dawaran cos')
     short = md(f1[0] + ' = ' + f1[1] + ' + C') + md(f2[0] + ' = ' + f2[1] + ' + C')
     short += p('فُحصت أيضًا مع ' + mi('a') + ' سالب (مثل ' + mi('e^{-x}') + ').', 'small')
     memo = p('المقام ' + mi('a^{2}+b^{2}') + '. البسط: ' + mi('a') + ' × نفس الدالة، ثم ' + mi('b') + ' × الأخرى؛ مع sin الإشارة ' + mi('-') + '، ومع cos ' + mi('+') + '.')
+    return short, memo
+
+
+def card_dawaran():
+    short, memo = sc_dawaran()
     it = ITEMS['1447-S2-FE-Q2.3']
     ex_ = question(it, 'card S8')
     ex_ += md(arith(r'a=2,\quad b=1,\quad a^{2}+b^{2}=5', [('2**2+1**2', '5')], 'S8'))
@@ -312,12 +364,18 @@ def card_dawaran():
                 p(mi('e^{ax}') + ' مضروبة في ' + mi(r'\sin bx') + ' أو ' + mi(r'\cos bx') + '.'), short, memo, ex_, trap, paper, fallback)
 
 
-def card_nisfayn():
+def sc_nisfayn():
+    """Shortcut box and memory line of card nisfayn (shared by the booklet and the full guide)."""
     f1 = formula('exp(a*x)*cosh(b*x)', '(exp((a+b)*x)/(a+b)+exp((a-b)*x)/(a-b))/2', var='x', branches=('x',), real=('a', 'b'), label='nisfayn cosh')
     f2 = formula('exp(a*x)*sinh(b*x)', '(exp((a+b)*x)/(a+b)-exp((a-b)*x)/(a-b))/2', var='x', branches=('x',), real=('a', 'b'), label='nisfayn sinh')
     short = md(f1[0] + ' = ' + f1[1] + ' + C') + md(f2[0] + ' = ' + f2[1] + ' + C')
     short += p('بشرط ' + mi(r'a\neq\pm b') + '.', 'small')
     memo = p('نصفان: نصف بأس مجموع ' + mi('(a+b)') + '، ونصف بأس فرق ' + mi('(a-b)') + '. مع sinh يصير بينهما ' + mi('-') + '.')
+    return short, memo
+
+
+def card_nisfayn():
+    short, memo = sc_nisfayn()
     it = ITEMS['1446-S1-SE-Q2.3']
     ex_ = question(it, 'card S9')
     ex_ += md(arith(r'a=1,\ b=2:\quad \frac12\left[\frac{e^{3x}}{3}+\frac{e^{-x}}{-1}\right]',
@@ -333,7 +391,8 @@ def card_nisfayn():
                 p(mi('e^{ax}') + ' مضروبة في ' + mi(r'\sinh bx') + ' أو ' + mi(r'\cosh bx') + '.'), short, memo, ex_, trap, paper, fallback)
 
 
-def card_small():
+def sc_small():
+    """Shortcut box and memory line of card small (shared by the booklet and the full guide)."""
     rows = [formula('log(Abs(x))', 'x*log(Abs(x))-x', var='x', label='small ln'),
             formula('log(Abs(x))**2', 'x*log(Abs(x))**2-2*x*log(Abs(x))+2*x', var='x', label='small ln2'),
             formula('exp(sqrt(x))', '2*exp(sqrt(x))*(sqrt(x)-1)', var='x', branches=('t',), label='small e sqrt'),
@@ -342,6 +401,11 @@ def card_small():
     notes = ['تمرين (5)', 'تمرين (16)', 'تمرين (15)', 'مثال 4', 'تمرين (17)']
     short = table(['التكامل', 'الجواب (+C)', 'في المذكرة ص64–66'], [frow(z, n) for z, n in zip(rows, notes)], 'formula')
     memo = p('خمس حالات قصيرة: يكفي أن تتعرف شكلها وتعرف أن لها جوابًا جاهزًا.')
+    return short, memo
+
+
+def card_small():
+    short, memo = sc_small()
     it = ITEMS['N51-X17']
     ex_ = question(it, 'card S10') + md(arith(r'c=-1', [], 'S10')) + final(it, 'card S10')
     trap = ul([mi(r'e^{\sqrt x}') + ': ابدأ بـ ' + mi(r't=\sqrt x,\ x=t^{2},\ dx=2t\,dt') + ' ثم الجدول المطوي.',
@@ -353,7 +417,8 @@ def card_small():
 
 
 # ================================================================== 5.2
-def card_pascal():
+def sc_pascal():
+    """Shortcut box and memory line of card pascal (shared by the booklet and the full guide)."""
     routes = [[mi(r'\cos^{2k+1}x'), mi(r'u=\sin x'), '+', 'أس sin', mi(r'(1-u^{2})^{k}')],
               [mi(r'\sin^{2k+1}x'), mi(r'u=\cos x'), '−', 'أس cos', mi(r'(1-u^{2})^{k}')],
               [mi(r'\sec^{2k+2}x'), mi(r'u=\tan x'), '+', 'أس tan', mi(r'(1+u^{2})^{k}')],
@@ -366,6 +431,11 @@ def card_pascal():
                  + ' تتناوب، والحد الأعلى أسًّا في ' + mi(r'(u^{2}-1)') + ' موجب.',
                  'الأسس في الجواب تبدأ من ' + mi('p+1') + ' وتزيد 2، وكل حد يُقسم على أسه.'])
     memo = p('احجز قطعة المشتقة، والباقي قوس من صف باسكال، ثم ارفع كل أس واحدًا واقسم عليه.')
+    return short, memo
+
+
+def card_pascal():
+    short, memo = sc_pascal()
     it = ITEMS['1446-S1-SE-Q2.6']
     ex_ = question(it, 'card S11')
     ex_ += md(arith(r'\cos^{5}x=\cos^{2\cdot2+1}x:\ k=2,\ u=\sin x,\ p=4;\quad (1-u^{2})^{2}=1-2u^{2}+u^{4}',
@@ -389,12 +459,18 @@ def card_pascal():
                 short, memo, ex_, trap, paper, fallback)
 
 
-def card_even():
+def sc_even():
+    """Shortcut box and memory line of card even (shared by the booklet and the full guide)."""
     f1 = formula('sin(k*x)**2', 'x/2-sin(2*k*x)/(4*k)', var='x', branches=('x',), pos=('k',), label='even sin2')
     f2 = formula('cos(k*x)**2', 'x/2+sin(2*k*x)/(4*k)', var='x', branches=('x',), pos=('k',), label='even cos2')
     f3 = formula('sin(x)**2*cos(x)**2', 'x/8-sin(4*x)/32', var='x', branches=('x',), label='even sin2cos2')
     short = table(['التكامل', 'الجواب (+C)'], [frow(z, None) for z in (f1, f2, f3)], 'formula')
     memo = p('نصف ' + mi('x') + '، ثم ' + mi(r'\sin') + ' ضعف الزاوية على ' + mi('4k') + ': ناقص مع sin، زائد مع cos.')
+    return short, memo
+
+
+def card_even():
+    short, memo = sc_even()
     it = ITEMS['N52-X13']
     ex_ = question(it, 'card S12') + final(it, 'card S12')
     it2 = ITEMS['N52-E1-3']
@@ -407,7 +483,8 @@ def card_even():
                 short, memo, ex_, trap, paper, fallback)
 
 
-def card_reduce():
+def sc_reduce():
+    """Shortcut box and memory line of card reduce (shared by the booklet and the full guide)."""
     n_ = s.Symbol('n', positive=True)
     functional(lambda: s.simplify((s.diff(s.sec(x) ** (n_ - 2) * s.tan(x) / (n_ - 1), x)
                                    + (n_ - 2) / (n_ - 1) * s.sec(x) ** (n_ - 2) - s.sec(x) ** n_).rewrite(s.cos)), 'sec reduction (symbolic n)')
@@ -428,6 +505,11 @@ def card_reduce():
     short += table(['التكامل', 'الجواب (+C)'], [frow(z, None) for z in (b1, b2)], 'formula compact')
     memo = p('tan: أسس فردية نازلة بإشارات متناوبة، والنهاية ' + mi(r'\pm x') + ' إذا كان الأس زوجيًا، أو '
              + mi(r'\pm\ln\left|\sec x\right|') + ' إذا كان فرديًا.')
+    return short, memo
+
+
+def card_reduce():
+    short, memo = sc_reduce()
     it = ITEMS['N52-E3-2']
     ex_ = question(it, 'card S13') + final(it, 'card S13')
     it2 = ITEMS['N52-E3-1']
@@ -440,12 +522,18 @@ def card_reduce():
                 short, memo, ex_, trap, paper, fallback)
 
 
-def card_prod():
+def sc_prod():
+    """Shortcut box and memory line of card prod (shared by the booklet and the full guide)."""
     r = [formula('sin(m*x)*cos(n*x)', '-(cos((m-n)*x)/(m-n)+cos((m+n)*x)/(m+n))/2', var='x', branches=('x',), real=('m', 'n'), label='prod sc'),
          formula('sin(m*x)*sin(n*x)', '(sin((m-n)*x)/(m-n)-sin((m+n)*x)/(m+n))/2', var='x', branches=('x',), real=('m', 'n'), label='prod ss'),
          formula('cos(m*x)*cos(n*x)', '(sin((m-n)*x)/(m-n)+sin((m+n)*x)/(m+n))/2', var='x', branches=('x',), real=('m', 'n'), label='prod cc')]
     short = ''.join(md(z[0] + ' = ' + z[1] + ' + C') for z in r) + p('بشرط ' + mi(r'm\neq\pm n') + '.', 'small')
     memo = p('الضرب يصير جمعًا: زاويتان ' + mi('(m-n)') + ' و ' + mi('(m+n)') + '، وكل حد يقسم على زاويته.')
+    return short, memo
+
+
+def card_prod():
+    short, memo = sc_prod()
     it = ITEMS['N52-E5-1']
     ex_ = question(it, 'card S14')
     ex_ += md(arith(r'm=7,\ n=5:\quad -\frac12\left[\frac{\cos2x}{2}+\frac{\cos12x}{12}\right]',

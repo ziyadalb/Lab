@@ -39,7 +39,8 @@ def main():
     fonts = {}
     for p in doc:
         for xref, ext, ftype, base, name, enc, *_ in p.get_fonts(full=True):
-            fonts[base] = ext
+            # Type3 fonts (Chromium's colour emoji) carry their glyph programs inside the PDF: embedded by definition
+            fonts[base or name] = 'type3 (embedded glyph procedures)' if ftype == 'Type3' else ext
     res['fonts'] = {k: v for k, v in sorted(fonts.items())}
     not_embedded = [k for k, v in fonts.items() if v in ('n/a', '')]
     if not_embedded:

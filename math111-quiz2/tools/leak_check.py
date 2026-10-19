@@ -90,7 +90,7 @@ def commands(toks):
 
 
 def main():
-    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    args = [a for i, a in enumerate(sys.argv[1:], 1) if not a.startswith('--') and not sys.argv[i - 1].startswith('--')]
     report_path = ROOT / 'reports' / 'leak_check.json'
     if '--report' in sys.argv:
         report_path = Path(sys.argv[sys.argv.index('--report') + 1])
@@ -101,7 +101,8 @@ def main():
     annotations = [html.unescape(a) for a in re.findall(r'<annotation encoding="application/x-tex">(.*?)</annotation>', doc, re.S)]
     ann_tokens = [tokens(a) for a in annotations]
     plain = html.unescape(re.sub(r'<[^>]+>', ' ', doc))
-    usage = json.loads((ROOT / 'data' / 'usage.json').read_text(encoding='utf-8'))
+    usage_file = Path(sys.argv[sys.argv.index('--usage') + 1]) if '--usage' in sys.argv else ROOT / 'data' / 'usage.json'
+    usage = json.loads(usage_file.read_text(encoding='utf-8'))
     held = held_set()
     avoid = {a: 'near copy %d' % n for n, a in enumerate(HOLD['avoid'], 1)}
     failures, review, seen = [], [], set()

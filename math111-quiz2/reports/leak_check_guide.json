@@ -1,0 +1,249 @@
+{
+ "document": "src/guide.katex.html",
+ "pdf": "out/guide/MATH111_Quiz2_Guide.pdf",
+ "formulas_scanned": 2022,
+ "held_checked": 10,
+ "avoid_checked": 7,
+ "used_items": 164,
+ "failures": [],
+ "for_manual_review": [
+  {
+   "check": "same shape in a formula",
+   "item": "H01",
+   "formula": "\\int \\frac{1}{\\sqrt{9 x^{2} + 36 x + 45}}\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^2x+\\cos^2x=1"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\sin^{2}x+\\cos^{2}x=1"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{4} x \\cos^{5} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\sin^{4}x\\cos^{5}x=\\sin^{4}x\\,(1-\\sin^{2}x)^{2}\\cos x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^{4}x\\cos^{5}x=\\sin^{4}x\\,(1-\\sin^{2}x)^{2}\\cos x,\\quad u=\\sin x,\\ du=\\cos x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{2} x \\cos^{5} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{3} x \\cos^{4} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\sin^{3}x\\cos^{4}x=(1-\\cos^{2}x)\\cos^{4}x\\sin x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\int \\sin^{2} x \\cos^{2} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{2} x \\cos^{4} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^2x\\cos^4x=(\\sin x\\cos x)^2\\cos^2x=\\frac14\\sin^22x\\cdot\\frac{1+\\cos2x}{2}"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\sin^{2}x\\cos^{4}x=\\frac18\\left(\\sin^{2}2x+\\sin^{2}2x\\cos2x\\right)"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{3} x \\cos^{2} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{2} x \\cos^{3} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\int\\sin^{2}x,\\ \\cos^{4}x,\\ \\sin^{2}x\\cos^{2}x"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "1446-S1-SE-Q2.6",
+   "where": "U-T2 example"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "1447-S1-SE-Q2.3",
+   "where": "U-T2 drill 1"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X01",
+   "where": "U-T2 drill 2"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-E2-2",
+   "where": "U-T2 drill 3"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-E2-4",
+   "where": "U-T3 drill 2"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X04",
+   "where": "speed52"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "G-23",
+   "where": "speed52"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "G-33",
+   "where": "mixed review"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\int \\tan^{3} x \\sec^{2} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\sec^{4}x=\\sec^{2}x\\cdot\\sec^{2}x=(1+\\tan^{2}x)\\sec^{2}x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\int \\tan^{3} x \\sec^{6} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\tan^{3}x\\sec^{6}x=\\tan^{3}x\\,(1+\\tan^{2}x)^{2}\\sec^{2}x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\tan^2x=\\sec^2x-1"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\sec^{3}x\\tan^{3}x=\\sec^{2}x\\,(\\sec^{2}x-1)\\cdot\\sec x\\tan x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\int \\tan^{5} x \\sec^{3} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\tan^4x=(\\sec^2x-1)^2"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\int \\tan^{5} x \\sec^{5} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\tan^{5}x\\sec^{3}x=(\\sec^{2}x-1)^{2}\\sec^{2}x\\cdot\\sec x\\tan x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\tan^{5}x\\sec^{5}x=(\\sec^{2}x-1)^{2}\\sec^{4}x\\cdot\\sec x\\tan x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\tan^{4}x=\\tan^{2}x\\,(\\sec^{2}x-1)=\\tan^{2}x\\sec^{2}x-\\tan^{2}x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\tan^{2}x=\\sec^{2}x-1"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\int\\tan^{4}x\\,dx=\\int\\tan^{2}x\\,(\\sec^{2}x-1)\\,dx=\\frac{\\tan^{3}x}{3}-\\int\\tan^{2}x\\,dx"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H10",
+   "used": "1447-S1-FE-Q2.6",
+   "where": "U-T4 example"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H10",
+   "used": "G-12",
+   "where": "U-T4 drill 2"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H10",
+   "used": "1447-S2-SE-Q3.3",
+   "where": "U-T5 example"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H10",
+   "used": "N52-E3-4",
+   "where": "U-T5 drill 2"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H10",
+   "used": "N52-X06",
+   "where": "U-T5 drill 3"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H06",
+   "formula": "\\frac12[\\cos2x+\\cos4x]"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H06",
+   "formula": "\\displaystyle \\cos3x\\cos x=\\frac12\\left[\\cos2x+\\cos4x\\right]"
+  }
+ ]
+}

@@ -10,6 +10,8 @@ from mathlib import P, check, log_forms, rawtex, sumexpr, tex, texsum, x, t
 
 ROOT = Path(__file__).resolve().parent.parent
 ITEMS = {i['id']: i for i in json.loads((ROOT / 'data' / 'items.json').read_text(encoding='utf-8'))}
+# extra practice written in this project (verified like the real items; labelled in the documents)
+ITEMS.update({i['id']: i for i in json.loads((ROOT / 'data' / 'generated_items.json').read_text(encoding='utf-8'))})
 HOLD = json.loads((ROOT / 'data' / 'holdout_ids.json').read_text())
 BLOCKED = set(HOLD['held_items']) | set(HOLD['avoid']) | {c for v in HOLD['held_copies'].values() for c in v}
 LOG = []          # every check performed while rendering
@@ -26,8 +28,8 @@ def _record(kind, ok, **info):
         raise BuildError(f'{kind} failed: {info}')
 
 
-def use(item_id, where):
-    if item_id in BLOCKED:
+def use(item_id, where, allow_held=False):
+    if item_id in BLOCKED and not allow_held:
         raise BuildError(f'{item_id} is held out (or a near copy) and may not appear in study material')
     USED.setdefault(item_id, []).append(where)
     return ITEMS[item_id]
@@ -68,6 +70,32 @@ def same_antiderivative(terms_or_expr, item, label):
     _record('antiderivative', res['status'] == 'symbolic', item=item['id'], label=label, status=res['status'])
 
 
+def same_defint(terms, item, label):
+    """Claimed value of a definite integral: F' = f on [a, b] and F(b) - F(a) = value, exactly."""
+    f = P(_strip(item['q']))
+    lo, hi = P(item['bounds'][0]), P(item['bounds'][1])
+    res = check('defint', f, sumexpr(item['antiderivative']), [], lower=lo, upper=hi, exact_value=sumexpr(terms))
+    _record('definite integral', res['status'] == 'symbolic', item=item['id'], label=label, status=res['status'])
+
+
+def step_ok(expr, item, label):
+    """A middle line of a solution (it may still contain Integral(...)): its derivative is the integrand
+    on every real branch of the item, so the line equals the integral up to a constant."""
+    S = P(expr) if isinstance(expr, str) else expr
+    f = P(_strip(item['q']))
+    brs = item.get('sym') or item['branches'] or ['x']
+    ok = all(_zero(s.diff(S, x) - f, None if b == 'x' else b) for b in brs)
+    _record('step', ok, item=item['id'], label=label, step=str(expr))
+
+
+def diff_step_ok(expr, item, label):
+    """A middle line of a derivative solution equals the verified derivative on every branch."""
+    S = P(expr) if isinstance(expr, str) else expr
+    brs = item['branches'] or ['x']
+    ok = all(_zero(S - sumexpr(item['answer']), None if b == 'x' else b) for b in brs)
+    _record('derivative step', ok, item=item['id'], label=label, step=str(expr))
+
+
 def same_derivative(terms_or_expr, item, label):
     F = sumexpr(terms_or_expr) if isinstance(terms_or_expr, list) else terms_or_expr
     res = check('diff', P(_strip(item['q'])), F, [x if b == 'x' else P(b) for b in item['branches']])
@@ -94,6 +122,8 @@ def _zero(expr, branch=None):
     r = s.simplify(e)
     if r != 0:
         r = s.simplify(s.trigsimp(r.rewrite(s.cos)))
+    if r != 0:      # products of trig functions with different angles
+        r = s.simplify(s.expand(s.expand_trig(r).rewrite(s.exp)))
     return r == 0
 
 
@@ -107,9 +137,9 @@ def parts_rows(u, dv, du, v, label, branch=None):
             % (tex(u), dv_tex, tex(du), tex(v)))
 
 
-def sub_row(u_of_x, du_claim, label, var='u'):
+def sub_row(u_of_x, du_claim, label, var='u', branch=None):
     U, DU = P(u_of_x), P(du_claim)
-    _record('substitution', s.simplify(log_forms(s.diff(U, x) - DU)) == 0, label=label, u=u_of_x, du=du_claim)
+    _record('substitution', _zero(s.diff(U, x) - DU, branch), label=label, u=u_of_x, du=du_claim)
     return r'%s = %s \qquad d%s = %s\,dx' % (var, tex(u_of_x), var, tex(du_claim))
 
 
@@ -146,8 +176,12 @@ def formula(f, F, kind='int', var='u', branches=('t', '-t'), pos=(), real=(), up
 
 def arith(latex, claims, label):
     """Hand-typed parameter/arithmetic line; each (lhs, rhs) claim is checked exactly."""
-    for lhs, rhs in claims:
-        d = s.simplify(P(lhs) - P(rhs))
+    for claim in claims:
+        lhs, rhs = claim[0], claim[1]
+        d = P(lhs) - P(rhs)
+        if len(claim) > 2:          # the claim holds on a branch x = phi(t), t > 0 (e.g. x > 1/2)
+            d = log_forms(d).subs(x, P(claim[2]))
+        d = s.simplify(d)
         if d != 0:
             d = s.simplify(s.trigsimp(d.rewrite(s.cos)))
         if d != 0:

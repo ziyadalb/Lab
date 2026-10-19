@@ -1,0 +1,18 @@
+{
+ "out": "out/guide/pass1.pdf",
+ "fonts": [
+  [
+   "Plex Arabic",
+   true
+  ],
+  [
+   "KaTeX_Main",
+   true
+  ],
+  [
+   "KaTeX_Math",
+   true
+  ]
+ ],
+ "overflow": []
+}

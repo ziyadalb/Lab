@@ -1,0 +1,18 @@
+{
+ "out": "out/guide/MATH111_Quiz2_Guide.pdf",
+ "fonts": [
+  [
+   "Plex Arabic",
+   true
+  ],
+  [
+   "KaTeX_Main",
+   true
+  ],
+  [
+   "KaTeX_Math",
+   true
+  ]
+ ],
+ "overflow": []
+}

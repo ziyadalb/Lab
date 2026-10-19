@@ -13,12 +13,12 @@
   --warn: #8a4b00; --warn-tint: #fdf2e3;
   --ok: #1f5e2b; --ok-tint: #eaf4ec;
   --memo: #4b3a7a; --memo-tint: #f1eef8;
-  --gap: 3.2mm;
+  --gap: 2.4mm;
 }
 @page { size: A4; margin: 15mm 15mm 17mm 15mm;
   @bottom-center { content: counter(page); font-family: 'Plex Arabic', sans-serif; font-size: 11pt; color: #555; } }
 html { background: var(--paper); }
-body { font-family: 'Plex Arabic', 'DejaVu Sans', sans-serif; font-size: 12.5pt; line-height: 1.75; color: var(--ink);
+body { font-family: 'Plex Arabic', 'DejaVu Sans', sans-serif; font-size: 12pt; line-height: 1.62; color: var(--ink);
        margin: 0; background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 h1 { font-size: 30pt; margin: 6mm 0 2mm; line-height: 1.3; }
 h2 { font-size: 18pt; margin: 0 0 3mm; padding-bottom: 1.5mm; border-bottom: 2.5px solid var(--accent); color: var(--accent); }
@@ -30,7 +30,7 @@ a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(-
 b { font-weight: 700; }
 
 /* math and English: isolated left-to-right islands */
-.md { direction: ltr; unicode-bidi: isolate; text-align: left; margin: 1.6mm 0; overflow-x: hidden; }
+.md { direction: ltr; unicode-bidi: isolate; text-align: left; margin: 1.2mm 0; overflow-x: hidden; }
 .md .katex-display { margin: 0.6mm 0; text-align: left; }
 .md .katex-display > .katex { text-align: left; }
 .mi { unicode-bidi: isolate; direction: ltr; }
@@ -55,7 +55,7 @@ b { font-weight: 700; }
 .toc .pg { font-variant-numeric: tabular-nums; min-width: 10mm; text-align: left; }
 
 /* boxes */
-.box { border: 1.5px solid var(--line); border-radius: 2.5mm; padding: 2mm 3.5mm 2.5mm; margin: var(--gap) 0; position: relative; }
+.box { border: 1.5px solid var(--line); border-radius: 2.5mm; padding: 1.5mm 3mm 2mm; margin: var(--gap) 0; position: relative; }
 .box > .lbl { display: block; width: fit-content; font-weight: 700; font-size: 12pt; padding: 0 2.5mm; border-radius: 1.5mm;
               background: #f1f1f1; border: 1px solid var(--line); margin-bottom: 1mm; }
 .box.sign { border-color: var(--accent); background: var(--accent-tint); break-inside: avoid; }
@@ -91,7 +91,7 @@ b { font-weight: 700; }
 
 /* tables */
 table { border-collapse: collapse; width: 100%; margin: 1.5mm 0; font-size: 12pt; }
-th, td { border: 1px solid #b5b5b5; padding: 1mm 2mm; vertical-align: middle; }
+th, td { border: 1px solid #b5b5b5; padding: 0.8mm 2mm; vertical-align: middle; }
 th { background: #f0f0f0; font-weight: 700; text-align: start; }
 table.formula td:nth-child(1), table.formula td:nth-child(2) { direction: ltr; text-align: left; padding: 1.5mm 2mm; }
 table.formula tr, table.di tr, table.answers tr, table.skills tr, table.glossary tr { break-inside: avoid; }
@@ -100,13 +100,13 @@ table.di td { text-align: center; direction: ltr; }
 table.compact td { padding: 0.6mm 2mm; }
 
 /* drills and writing space */
-.drill { border: 1.5px solid var(--line); border-radius: 2.5mm; padding: 2mm 3.5mm; margin: 3mm 0; break-inside: avoid; }
+.drill { border: 1.5px solid var(--line); border-radius: 2.5mm; padding: 1.5mm 3mm; margin: 2.4mm 0; break-inside: avoid; }
 .drill-head { display: flex; gap: 3mm; align-items: center; }
 .drill-head .help { margin-inline-start: auto; font-size: 12pt; }
 .write { height: calc(var(--n) * 9.5mm); background: repeating-linear-gradient(to bottom, transparent 0, transparent 9mm, #c8c8c8 9mm, #c8c8c8 9.5mm);
          margin: 1mm 0; }
 .write.short { height: 9.5mm; }
-.write.tight { height: calc(var(--n) * 8mm); background: repeating-linear-gradient(to bottom, transparent 0, transparent 7.5mm, #c8c8c8 7.5mm, #c8c8c8 8mm); }
+.write.tight { height: calc(var(--n) * 7.5mm); background: repeating-linear-gradient(to bottom, transparent 0, transparent 7mm, #c8c8c8 7mm, #c8c8c8 7.5mm); }
 .chgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 5mm; }
 .ch { border: 1px solid var(--line); border-radius: 2mm; padding: 0.6mm 2.5mm; break-inside: avoid; line-height: 1.5; }
 .ch .md { margin: 0.4mm 0; }
@@ -126,3 +126,38 @@ table.compact td { padding: 0.6mm 2mm; }
 .sol { border: 1.5px solid var(--ok); border-radius: 2.5mm; padding: 2mm 3.5mm; margin: 3mm 0; break-inside: avoid; }
 .sol .back { margin-inline-start: auto; font-size: 12pt; }
 ul { padding-inline-start: 6mm; }
+
+/* ---------------- full guide: units, steps, algebra boxes, hints, solutions ---------------- */
+:root { --alg: #1d5f8a; --alg-tint: #eaf3f9; --idea: #4f4f4f; --idea-tint: #f5f5f5; }
+.unit { margin-top: 9mm; }
+.unit-head { display: flex; align-items: center; gap: 2.5mm; flex-wrap: wrap; border-bottom: 2.5px solid var(--accent);
+             padding-bottom: 1.5mm; margin-bottom: 2mm; break-after: avoid; break-inside: avoid; }
+.unit-head h3 { margin: 0; font-size: 17pt; }
+.unit-head .num { display: inline-flex; min-width: 9mm; height: 9mm; padding: 0 1.5mm; border-radius: 4.5mm; background: var(--accent);
+                  color: #fff; align-items: center; justify-content: center; font-weight: 700; }
+.chip.day { border-color: var(--warn); color: var(--warn); }
+.box.idea { border-color: var(--idea); background: var(--idea-tint); break-inside: avoid; }
+.box.idea > .lbl { color: var(--idea); background: #fff; border-color: var(--idea); }
+.box.ok { border-color: var(--ok); background: var(--ok-tint); break-inside: avoid; }
+.box.ok > .lbl { color: var(--ok); background: #fff; border-color: var(--ok); }
+.box.alg { border-color: var(--alg); background: var(--alg-tint); border-width: 1.5px; break-inside: avoid; }
+.box.alg > .lbl { color: var(--alg); background: #fff; border-color: var(--alg); }
+.algsteps { margin: 1mm 0; padding-inline-start: 7mm; }
+.algsteps li { margin: 1.2mm 0; }
+.algref { color: var(--alg); margin: 1.5mm 0; }
+.memo-inline { margin-top: 2mm; padding: 1mm 3mm; background: var(--memo-tint); border-inline-start: 3px solid var(--memo); border-radius: 1mm; }
+table.steps td:nth-child(1), table.contrast td:nth-child(1) { direction: ltr; text-align: left; }
+table.steps td:nth-child(1) { width: 60%; }
+table.steps tr, table.contrast tr { break-inside: avoid; }
+.chip.k-idea { border-color: var(--idea); } .chip.k-note { background: #f7f7f7; }
+.chip.k-alg { border-color: var(--alg); color: var(--alg); } .chip.k-ok { border-color: var(--ok); color: var(--ok); }
+h4.drills-title { font-size: 15pt; margin: 6mm 0 1mm; padding-bottom: 1mm; border-bottom: 1.5px solid var(--line); break-after: avoid; }
+.hint { margin-top: 2mm; text-align: center; }
+.flip { display: inline-block; transform: rotate(180deg); color: var(--muted); border: 1px dashed var(--line);
+        padding: 1mm 3mm; border-radius: 2mm; }
+.sols { break-before: page; }
+.sols > h4 { font-size: 15pt; color: var(--ok); margin: 0 0 1mm; break-after: avoid; }
+.day-page > h2 { font-size: 22pt; }
+.chapter.flow { break-before: auto; margin-top: 9mm; }
+.fsheet { break-inside: avoid; margin: 2mm 0 4mm; }
+table.errlog td { height: 13mm; }

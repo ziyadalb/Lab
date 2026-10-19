@@ -124,6 +124,7 @@ def main():
     report = dict(libraries=dict(python=platform.python_version(), sympy=s.__version__))
     if args.only in (None, 'items'):
         items = json.loads((ROOT / 'data' / 'items.json').read_text(encoding='utf-8'))
+        items += json.loads((ROOT / 'data' / 'generated_items.json').read_text(encoding='utf-8'))
         with mp.Pool(max(2, mp.cpu_count())) as pool:
             rows = pool.map(run_item, items, chunksize=1)
         report['items'] = rows
