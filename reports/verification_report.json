@@ -1,0 +1,4116 @@
+{
+ "libraries": {
+  "python": "3.13.16",
+  "sympy": "1.14.0"
+ },
+ "items": [
+  {
+   "id": "1445-S1-SE-Q1.1",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(2*t + 2)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(2*t + 2)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S1-SE-Q1.2",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1/3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1/3"
+     }
+    ]
+   },
+   "official": {
+    "status": "failed",
+    "details": [
+     {
+      "branch": "t + 1/3",
+      "residual": "2/(t*(3*t + 2))",
+      "symbolic_zero": false,
+      "numeric_max_abs": "2.0",
+      "real_valued": true,
+      "probe_branch": "t + 1/3"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1445-S1-FE-Q1.3",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-SE-Q1.1",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(3*t + 3)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(3*t + 3)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-SE-Q1.2",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-FE-Q1.3",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1/2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1/2"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-SE-Q1.1",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-SE-Q1.2",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-FE-Q1.3",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     },
+     {
+      "branch": "-t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 1"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-SE-Q1.1",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   },
+   "official": {
+    "status": "branch_only",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "2/sqrt(t**2 + 4)",
+      "symbolic_zero": false,
+      "numeric_max_abs": "0.9863939238321437",
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1446-S2-SE-Q1.2",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 3**(1/3)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 3**(1/3)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-FE-Q1.3",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-SE-Q1.1",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-SE-Q1.2",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S2-SE-Q1.1",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 1"
+     },
+     {
+      "branch": "-t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 1"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S2-SE-Q1.2",
+   "kind": "exam",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t - 2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 2"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S1-SE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-I-SINH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S1-SE-Q2.7",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-I-TANH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-SE-Q2.4",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-I-CSCH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   },
+   "official": {
+    "status": "branch_only",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "-2/(t*sqrt(t**6 + 25))",
+      "symbolic_zero": false,
+      "numeric_max_abs": "1.1999670795440456",
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1446-S2-SE-Q2.7",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-SE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S2-SE-Q3.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-I-COSH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "exp(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "exp(t + 1)"
+     },
+     {
+      "branch": "-exp(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-exp(t + 1)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-SE-Q2.7",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 3"
+     },
+     {
+      "branch": "-t - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 3"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-FE-Q2.1",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 1"
+     },
+     {
+      "branch": "-t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 1"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-SE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 2"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-SE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 1"
+     },
+     {
+      "branch": "-t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 1"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-FE-Q2.1",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 4",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 4"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-SE-Q2.4",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-CSL",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "4*t/(t + 1) + 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "4*t/(t + 1) + 3"
+     },
+     {
+      "branch": "-4*t/(t + 1) + 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-4*t/(t + 1) + 3"
+     }
+    ]
+   },
+   "official": {
+    "status": "partial_domain",
+    "details": [
+     {
+      "branch": "4*t/(t + 1) + 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "4*t/(t + 1) + 3"
+     },
+     {
+      "branch": "-4*t/(t + 1) + 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": false,
+      "probe_branch": "-4*t/(t + 1) + 3"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1447-S2-SE-Q3.4",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-CSL",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "sqrt(2)*t/(t + 1) + 2"
+     },
+     {
+      "branch": "2 - t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-sqrt(2)*t/(t + 1) + 2"
+     }
+    ]
+   },
+   "official": {
+    "status": "partial_domain",
+    "details": [
+     {
+      "branch": "t + 2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "sqrt(2)*t/(t + 1) + 2"
+     },
+     {
+      "branch": "2 - t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": false,
+      "probe_branch": "-sqrt(2)*t/(t + 1) + 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1447-S2-FE-Q2.6",
+   "kind": "exam",
+   "task": "int",
+   "case": "C42-CSL",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 3"
+     },
+     {
+      "branch": "-t - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 3"
+     }
+    ]
+   },
+   "official": {
+    "status": "branch_only",
+    "details": [
+     {
+      "branch": "t - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 3"
+     },
+     {
+      "branch": "-t - 3",
+      "residual": "-2/(t*sqrt(t**2 + 4))",
+      "symbolic_zero": false,
+      "numeric_max_abs": "2.9591817714964312",
+      "real_valued": true,
+      "probe_branch": "-t - 3"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1445-S1-FE-Q2.1",
+   "kind": "exam",
+   "task": "int",
+   "case": "C34-CONTRAST",
+   "section": "3.4",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "3*t/(t + 1) - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "3*t/(t + 1) - 3"
+     },
+     {
+      "branch": "-3*t/(t + 1) - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-3*t/(t + 1) - 3"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-FE-Q2.1",
+   "kind": "exam",
+   "task": "int",
+   "case": "C34-CONTRAST",
+   "section": "3.4",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1) + 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1) + 3"
+     },
+     {
+      "branch": "-t/(t + 1) + 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(t + 1) + 3"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-FE-Q2.1",
+   "kind": "exam",
+   "task": "int",
+   "case": "C34-CONTRAST",
+   "section": "3.4",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "3*t/(t + 1) - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "3*t/(t + 1) - 1"
+     },
+     {
+      "branch": "-3*t/(t + 1) - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-3*t/(t + 1) - 1"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S1-SE-Q2.1",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-EXPH",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S1-SE-Q2.3",
+   "kind": "exam",
+   "task": "defint",
+   "case": "C51-DEF",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "check": "F(b)-F(a) equals stated value",
+      "residual": "0"
+     },
+     {
+      "check": "F'=f on [a,b]",
+      "residual": "0"
+     },
+     {
+      "check": "integrand continuous on [a,b]",
+      "result": "Interval(1, E)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "details": [
+     {
+      "check": "F(b)-F(a) equals stated value",
+      "residual": "0"
+     },
+     {
+      "check": "F'=f on [a,b]",
+      "residual": "0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1445-S1-SE-Q2.5",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S1-FE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-POLY2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-SE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-POLY1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-SE-Q2.5",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-LN",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-FE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-SE-Q2.8",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-SE-Q2.3",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-EXPH",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-SE-Q2.4",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-POLY1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-SE-Q2.5",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-LN",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-FE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-LN",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-SE-Q2.3",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-POLY1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-SE-Q2.5",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-EXPH",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-FE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-XINV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     },
+     {
+      "branch": "-t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(t + 1)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-SE-Q2.5",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     },
+     {
+      "branch": "-t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(t + 1)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-SE-Q2.7",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-LN",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-FE-Q2.2",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-POLY2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S2-SE-Q3.1",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-XINV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S2-FE-Q2.3",
+   "kind": "exam",
+   "task": "int",
+   "case": "C51-CYC",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "1445-S1-SE-Q2.4",
+   "kind": "exam",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-SE-Q2.3",
+   "kind": "exam",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1445-S2-FE-Q2.6",
+   "kind": "exam",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S1-SE-Q2.6",
+   "kind": "exam",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1446-S2-SE-Q2.4",
+   "kind": "exam",
+   "task": "int",
+   "case": "C52-CC-CSCEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-SE-Q2.3",
+   "kind": "exam",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S1-FE-Q2.6",
+   "kind": "exam",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "1447-S2-SE-Q3.3",
+   "kind": "exam",
+   "task": "int",
+   "case": "C52-TS-TANODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   },
+   "official": {
+    "status": "symbolic",
+    "same_as_answer": true
+   }
+  },
+  {
+   "id": "N42-E1-1",
+   "kind": "notes_example",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E1-2",
+   "kind": "notes_example",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E1-3",
+   "kind": "notes_example",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E1-4",
+   "kind": "notes_example",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1/2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1/2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E1-5",
+   "kind": "notes_example",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1/2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1/2"
+     }
+    ]
+   },
+   "official": {
+    "status": "failed",
+    "details": [
+     {
+      "branch": "t + 1/2",
+      "residual": "4/(t*(4*t**3 + 8*t**2 + 5*t + log(t**(-2*t - 2)*(t + 1)**(2*t + 2)) + 1))",
+      "symbolic_zero": false,
+      "numeric_max_abs": "1.6215145432236822",
+      "real_valued": true,
+      "probe_branch": "t + 1/2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E1-6",
+   "kind": "notes_example",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(3*t + 3)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(3*t + 3)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E1-7",
+   "kind": "notes_example",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E1-8",
+   "kind": "notes_example",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E2-1",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C42-I-COSH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E2-2",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C42-I-TANH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "-t + log(5)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t + log(5)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E2-3",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C42-I-SINH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E2-4",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E2-5",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "2*t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "2*t/(t + 1)"
+     },
+     {
+      "branch": "-2*t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-2*t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E2-6",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E2-7",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-E2-8",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C42-CSL",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "2*t/(t + 1) + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "2*t/(t + 1) + 1"
+     },
+     {
+      "branch": "-2*t/(t + 1) + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-2*t/(t + 1) + 1"
+     }
+    ]
+   },
+   "official": {
+    "status": "partial_domain",
+    "details": [
+     {
+      "branch": "2*t/(t + 1) + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "2*t/(t + 1) + 1"
+     },
+     {
+      "branch": "-2*t/(t + 1) + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": false,
+      "probe_branch": "-2*t/(t + 1) + 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X1-1",
+   "kind": "notes_exercise",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X1-2",
+   "kind": "notes_exercise",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X1-3",
+   "kind": "notes_exercise",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(3*t + 3)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(3*t + 3)"
+     },
+     {
+      "branch": "-t/(3*t + 3)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(3*t + 3)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X1-4",
+   "kind": "notes_exercise",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1/2",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1/2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X1-5",
+   "kind": "notes_exercise",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X1-6",
+   "kind": "notes_exercise",
+   "task": "diff",
+   "case": "C42-D",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-01",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-02",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-03",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-TANH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "2**(1/4)*t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "2**(1/4)*t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-04",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "sqrt(3)*t/(2*(t + 1))",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "sqrt(3)*t/(2*(t + 1))"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-05",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "sqrt(6)*t/(3*(t + 1))",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "sqrt(6)*t/(3*(t + 1))"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-06",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-TANH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-07",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-SPLIT",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-08",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-SPLIT",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "4*t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "4*t/(t + 1)"
+     },
+     {
+      "branch": "-4*t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-4*t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-09",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-INVNUM",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-10",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "-t + log(3)/3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t + log(3)/3"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-11",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-12",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "5**(2/3)*t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "5**(2/3)*t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-13",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-14",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 1"
+     },
+     {
+      "branch": "-t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-15",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-CSL",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t - 3"
+     },
+     {
+      "branch": "-t - 3",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 3"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N42-X2-16",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C42-CSL",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "2*t/(t + 1) - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "2*t/(t + 1) - 1"
+     },
+     {
+      "branch": "-2*t/(t + 1) - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-2*t/(t + 1) - 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-E1",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C51-POLY1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-E2",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C51-POLY2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-E3",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C51-LN",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-E4",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C51-LN0",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-E5",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-E6",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C51-XINV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-E7",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C51-CYC",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X01",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-POLY1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X02",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-POLY2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X03",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-POLY2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X04",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-SEC2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X05",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-LN0",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X06",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-LN",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X07",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-LN",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X08",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     },
+     {
+      "branch": "-t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X09",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X10",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-XINV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X11",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-CYC",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X12",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-CYC",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X13",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-EXPH",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X14",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-EXPH",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X15",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-SUBPARTS",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X16",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-LN0",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X17",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-ROOT",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 1"
+     },
+     {
+      "branch": "-t - 1",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t - 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N51-X18",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C51-ROOT",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E1-1",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-ODD1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E1-2",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-ODD1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E1-3",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-EVEN1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E2-1",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E2-2",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E2-3",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E2-4",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-SC-EVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E3-1",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-TS-SEC0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E3-2",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-TS-TAN0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E3-3",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E3-4",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-TS-TANODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E4-1",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-CC-CSCEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E4-2",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-CC-COTODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E5-1",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-E5-2",
+   "kind": "notes_example",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X01",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X02",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X03",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X04",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X05",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X06",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-TS-TANODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X07",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X08",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-CC-CSCEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X09",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-CC-COTODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X10",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X11",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X12",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X13",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-EVEN1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X14",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-EVEN1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X15",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-TS-SEC0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "N52-X16",
+   "kind": "notes_exercise",
+   "task": "int",
+   "case": "C52-TS-TAN0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  }
+ ],
+ "items_summary": {
+  "answer": {
+   "symbolic": 155
+  },
+  "official": {
+   "symbolic": 55,
+   "failed": 2,
+   "branch_only": 3,
+   "partial_domain": 3
+  }
+ },
+ "formulas": [
+  {
+   "id": "F-D1",
+   "page": 57,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t"
+    },
+    {
+     "branch": "-t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t"
+    }
+   ]
+  },
+  {
+   "id": "F-D2",
+   "page": 58,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t + 1",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t + 1"
+    }
+   ]
+  },
+  {
+   "id": "F-D3",
+   "page": 58,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t/(t + 1)"
+    },
+    {
+     "branch": "-t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t/(t + 1)"
+    }
+   ]
+  },
+  {
+   "id": "F-D4-notes",
+   "page": 58,
+   "note": "as printed in the notes (K1)",
+   "status": "failed",
+   "details": [
+    {
+     "branch": "t + 1",
+     "residual": "2/(t*(t + 2))",
+     "symbolic_zero": false,
+     "numeric_max_abs": "2.5714285714285716",
+     "real_valued": true,
+     "probe_branch": "t + 1"
+    },
+    {
+     "branch": "-t - 1",
+     "residual": "-2/(t*(t + 2))",
+     "symbolic_zero": false,
+     "numeric_max_abs": "2.5714285714285716",
+     "real_valued": true,
+     "probe_branch": "-t - 1"
+    }
+   ]
+  },
+  {
+   "id": "F-D4-correct",
+   "page": 58,
+   "note": "corrected sign",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t + 1",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t + 1"
+    },
+    {
+     "branch": "-t - 1",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t - 1"
+    }
+   ]
+  },
+  {
+   "id": "F-D5",
+   "page": 58,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t/(t + 1)"
+    }
+   ]
+  },
+  {
+   "id": "F-D6",
+   "page": 58,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t"
+    },
+    {
+     "branch": "-t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t"
+    }
+   ]
+  },
+  {
+   "id": "F-I1",
+   "page": 59,
+   "note": "a>0",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t"
+    },
+    {
+     "branch": "-t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t"
+    }
+   ]
+  },
+  {
+   "id": "F-I2",
+   "page": 59,
+   "note": "x>a",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "a + t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "a + t"
+    }
+   ]
+  },
+  {
+   "id": "F-I3",
+   "page": 60,
+   "note": "|x|<a",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "a*t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "a*t/(t + 1)"
+    },
+    {
+     "branch": "-a*t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-a*t/(t + 1)"
+    }
+   ]
+  },
+  {
+   "id": "F-I4-notes",
+   "page": 60,
+   "note": "as printed in the notes (K1)",
+   "status": "failed",
+   "details": [
+    {
+     "branch": "a + t",
+     "residual": "2/(t*(2*a + t))",
+     "symbolic_zero": false,
+     "numeric_max_abs": "1.3846153846153846",
+     "real_valued": true,
+     "probe_branch": "a + t"
+    },
+    {
+     "branch": "-a - t",
+     "residual": "-2/(t*(2*a + t))",
+     "symbolic_zero": false,
+     "numeric_max_abs": "1.3846153846153846",
+     "real_valued": true,
+     "probe_branch": "-a - t"
+    }
+   ]
+  },
+  {
+   "id": "F-I4-correct",
+   "page": 60,
+   "note": "corrected sign",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "a + t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "a + t"
+    },
+    {
+     "branch": "-a - t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-a - t"
+    }
+   ]
+  },
+  {
+   "id": "F-I5",
+   "page": 60,
+   "note": "0<|x|<a",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "a*t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "a*t/(t + 1)"
+    },
+    {
+     "branch": "-a*t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-a*t/(t + 1)"
+    }
+   ]
+  },
+  {
+   "id": "F-I6",
+   "page": 60,
+   "note": "x!=0",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t"
+    },
+    {
+     "branch": "-t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t"
+    }
+   ]
+  },
+  {
+   "id": "F-P1",
+   "page": 63,
+   "note": "parts example",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "x",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "x"
+    }
+   ]
+  },
+  {
+   "id": "F-T1",
+   "page": 70,
+   "note": "reduction, m=2..8",
+   "status": "symbolic",
+   "rows": [
+    {
+     "m": 2,
+     "residual": "0"
+    },
+    {
+     "m": 3,
+     "residual": "0"
+    },
+    {
+     "m": 4,
+     "residual": "0"
+    },
+    {
+     "m": 5,
+     "residual": "0"
+    },
+    {
+     "m": 6,
+     "residual": "0"
+    },
+    {
+     "m": 7,
+     "residual": "0"
+    },
+    {
+     "m": 8,
+     "residual": "0"
+    }
+   ]
+  },
+  {
+   "id": "F-T2",
+   "page": 73,
+   "note": "reduction, m=2..8",
+   "status": "symbolic",
+   "rows": [
+    {
+     "m": 2,
+     "residual": "0"
+    },
+    {
+     "m": 3,
+     "residual": "0"
+    },
+    {
+     "m": 4,
+     "residual": "0"
+    },
+    {
+     "m": 5,
+     "residual": "0"
+    },
+    {
+     "m": 6,
+     "residual": "0"
+    },
+    {
+     "m": 7,
+     "residual": "0"
+    },
+    {
+     "m": 8,
+     "residual": "0"
+    }
+   ]
+  },
+  {
+   "id": "F-S1",
+   "page": 74,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  },
+  {
+   "id": "F-S2",
+   "page": 74,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  },
+  {
+   "id": "F-S3",
+   "page": 74,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  },
+  {
+   "id": "F-H1",
+   "page": 67,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  },
+  {
+   "id": "F-H2",
+   "page": 67,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  }
+ ],
+ "shortcuts": [
+  {
+   "id": "S-TWINS",
+   "status": "symbolic",
+   "conditions": "chain rule multiplies by u'",
+   "detail": "(['symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic'],)"
+  },
+  {
+   "id": "S-SIX",
+   "status": "symbolic",
+   "conditions": "a>0 symbolic",
+   "detail": "(['symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic'],)"
+  },
+  {
+   "id": "S-LAMDA",
+   "status": "symbolic",
+   "conditions": "a>0, k>0, b>0 (b != 1); x>0 shown, x<0 by evenness with |x|",
+   "detail": "(['0', '0', '0'],)"
+  },
+  {
+   "id": "S-SQUARE",
+   "status": "symbolic",
+   "conditions": "h=-B/(2A), d=Q(h); A,d symbolic with stated signs",
+   "detail": "([True, 'symbolic', 'symbolic', 'symbolic', 'symbolic'],)"
+  },
+  {
+   "id": "S-FOLDED",
+   "status": "symbolic",
+   "conditions": "symbolic coefficients p0..p4, symbolic k>0",
+   "detail": "(25, 25)"
+  },
+  {
+   "id": "S-QAWS",
+   "status": "symbolic",
+   "conditions": "x>0 symbolic n,a; x<0 follows since d/dx ln|ax| = 1/x on both sides",
+   "detail": "(['0'],)"
+  },
+  {
+   "id": "S-RAFEEQ",
+   "status": "symbolic",
+   "conditions": "table rows each verified",
+   "detail": "(['symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic'],)"
+  },
+  {
+   "id": "S-DAWARAN",
+   "status": "symbolic",
+   "conditions": "a, b real, (a,b) != (0,0)",
+   "detail": "(['0', '0'],)"
+  },
+  {
+   "id": "S-NISFAYN",
+   "status": "symbolic",
+   "conditions": "A != ±B; separate line when A = ±B",
+   "detail": "(['0', '0', '0', '0'],)"
+  },
+  {
+   "id": "S-SMALL",
+   "status": "symbolic",
+   "conditions": "listed rows",
+   "detail": "(['symbolic', 'symbolic', 'symbolic', 'symbolic', 'symbolic'],)"
+  },
+  {
+   "id": "S-PASCAL",
+   "status": "symbolic",
+   "conditions": "grid p in {0..4,1/2,1/3}, k in {0..3}, six families",
+   "detail": "(168, 168)"
+  },
+  {
+   "id": "S-EVEN",
+   "status": "symbolic",
+   "conditions": "k>0",
+   "detail": "([True, True, True],)"
+  },
+  {
+   "id": "S-REDUCE",
+   "status": "symbolic",
+   "conditions": "tan/cot m=2..8; sec/csc n=3,5,7",
+   "detail": "([],)"
+  },
+  {
+   "id": "S-PROD",
+   "status": "symbolic",
+   "conditions": "M != N",
+   "detail": "([True, True, True],)"
+  }
+ ]
+}

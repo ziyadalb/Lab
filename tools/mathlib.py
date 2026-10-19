@@ -4,6 +4,7 @@ Every displayed formula is printed from the same SymPy string that verify.py che
 Expressions are authored in this project (data/*.json) after visual review of the sources;
 nothing from the source files is evaluated.
 """
+import re
 import signal
 
 import sympy as s
@@ -21,7 +22,7 @@ NAMES = {n: getattr(s, n) for n in [
     'sin', 'cos', 'tan', 'cot', 'sec', 'csc', 'sinh', 'cosh', 'tanh', 'coth', 'sech', 'csch',
     'asinh', 'acosh', 'atanh', 'acoth', 'asech', 'acsch', 'asin', 'acos', 'atan', 'asec',
     'log', 'exp', 'sqrt', 'Abs', 'Rational', 'Integer', 'pi', 'E', 'cbrt', 'real_root',
-    'Integral', 'Derivative', 'Eq', 'Symbol', 'sign']}
+    'Integral', 'Derivative', 'Eq', 'Symbol', 'sign', 'integrate', 'diff']}
 NAMES.update(x=x, t=t, u=u, e=s.E, C=C)
 for name in 'a b c d k m n p q r w v h A B D'.split():
     NAMES[name] = s.Symbol(name, real=True)
@@ -32,6 +33,9 @@ def P(text, evaluate=True, extra=None):
     names = dict(NAMES)
     if extra:
         names.update(extra)
+    if not evaluate:
+        # the unevaluated parser distributes a unary minus over a bracket; -1*( keeps the bracket
+        text = re.sub(r'(?<![*/])-\(', '-1*(', text)
     glob = {'__builtins__': {}, 'Mul': s.Mul, 'Add': s.Add, 'Pow': s.Pow, 'Integer': s.Integer,
             'Rational': s.Rational, 'Float': s.Float, 'Symbol': s.Symbol, 'Function': s.Function}
     return parse_expr(text, local_dict=names, global_dict=glob,
@@ -195,7 +199,7 @@ class NotesPrinter(LatexPrinter):
             'asin': r'\sin^{-1}', 'acos': r'\cos^{-1}', 'atan': r'\tan^{-1}', 'asec': r'\sec^{-1}'}
 
     def __init__(self, settings=None):
-        base = dict(ln_notation=True, fold_short_frac=False, mul_symbol=None,
+        base = dict(ln_notation=True, fold_short_frac=False, fold_frac_powers=True, mul_symbol=None,
                     inv_trig_style='power')
         base.update(settings or {})
         super().__init__(base)
@@ -207,6 +211,8 @@ class NotesPrinter(LatexPrinter):
             head = self._inv[name]
             if exp is not None:
                 return r'\left(%s\left(%s\right)\right)^{%s}' % (head, arg, exp)
+            if expr.args[0].is_Symbol:
+                return r'%s %s' % (head, arg)
             return r'%s\left(%s\right)' % (head, arg)
         if name in ('sech', 'csch'):
             arg = self._print(expr.args[0])
@@ -215,16 +221,16 @@ class NotesPrinter(LatexPrinter):
                 head += '^{%s}' % exp
             return r'%s\left(%s\right)' % (head, arg) if not expr.args[0].is_Symbol else r'%s %s' % (head, arg)
         simple = ('sin', 'cos', 'tan', 'cot', 'sec', 'csc', 'sinh', 'cosh', 'tanh', 'coth')
-        if name in simple and (expr.args[0].is_Symbol or (expr.args[0].is_Mul and len(expr.args[0].args) == 2
-                                                           and expr.args[0].args[0].is_Number
-                                                           and expr.args[0].args[1].is_Symbol)):
+        a0 = expr.args[0]
+        if name in simple and (a0.is_Symbol or (a0.is_Mul and all(f.is_Symbol or (f.is_Integer and f > 0)
+                                                                  for f in a0.args))):
             head = '\\' + name + ('^{%s}' % exp if exp is not None else '')
             return '%s %s' % (head, self._print(expr.args[0]))
         return super()._print_Function(expr, exp)
 
     def _print_log(self, expr, exp=None):
         z = expr.args[0]
-        if z.is_Symbol:
+        if z.is_Symbol or (z.is_Integer and z > 0):
             body = r'\ln %s' % self._print(z)
         elif z.func == s.Abs:
             body = r'\ln\left|%s\right|' % self._print(z.args[0])
@@ -248,25 +254,137 @@ class NotesPrinter(LatexPrinter):
         return super()._print_Integral(expr).replace(r'\, dx', r'\,dx')
 
 
+def plain(e):
+    """Rebuild an unevaluated parse without evaluating, dropping the unit factors the parser
+    leaves behind (x - 1 is parsed as x + (-1)*1), so the authored order survives printing."""
+    if not e.args:
+        return e
+    args = [plain(a) for a in e.args]
+    if e.is_Mul:
+        args = [a for a in args if a != 1]
+        if not args:
+            return s.S.One
+        if len(args) == 2:    # real_root(b, n) parses as |b|^(1/n) sign(b); show it as the n-th root of b
+            pw = [a for a in args if a.is_Pow and isinstance(a.base, s.Abs) and a.exp.is_Rational and a.exp.p == 1]
+            sg = [a for a in args if isinstance(a, s.sign)]
+            if pw and sg and pw[0].base.args[0] == sg[0].args[0]:
+                return s.Pow(sg[0].args[0], pw[0].exp, evaluate=False)
+        return args[0] if len(args) == 1 else s.Mul(*args, evaluate=False)
+    if e.is_Add:
+        return s.Add(*args, evaluate=False)
+    if e.is_Pow:
+        return s.Pow(*args, evaluate=False)
+    try:
+        return e.func(*args, evaluate=False)
+    except TypeError:
+        return e.func(*args)
+
+
+def _factors(e):
+    if e.is_Mul:
+        return [g for a in e.args for g in _factors(a)]
+    return [e]
+
+
+def _join(pr, fs, wrap=False):
+    out = ''
+    for f in fs:
+        piece = r'\left(%s\right)' % pr._print(f) if f.is_Add and (len(fs) > 1 or wrap) else pr._print(f)
+        if out and out[-1].isdigit() and piece[0].isdigit():
+            out += r' \cdot '
+        elif out:
+            out += ' '
+        out += piece
+    return out
+
+
+def _term(pr, e):
+    """One authored term: numeric coefficient first (-\\frac{2}{5} e^{2x} ...), other factors in
+    the authored order, non-numeric denominators as one fraction."""
+    if not e.is_Mul and not (e.is_Pow and e.exp.is_Number and e.exp < 0):
+        return pr._print(e)
+    num, den, c = [], [], s.S.One
+    for f in _factors(e):
+        if f.is_Number:
+            c *= f
+        elif f.is_Pow and f.exp.is_Number and f.exp < 0:
+            k = -f.exp
+            if f.base.is_Number:
+                c /= f.base ** k
+                continue
+            for g in (_factors(f.base) if k == 1 else [s.Pow(f.base, k, evaluate=False)]):
+                if g.is_Number:
+                    c /= g
+                else:
+                    den.append(g)
+        else:
+            num.append(f)
+    if not c.is_Rational:
+        return pr._print(e)
+    sign, c = ('-' if c < 0 else ''), abs(c)
+    p_, q_ = int(c.p), int(c.q)
+    if not den:
+        coef = '' if c == 1 else (str(p_) if q_ == 1 else r'\frac{%d}{%d}' % (p_, q_))
+        body = _join(pr, num, wrap=bool(sign or coef))
+        if not body:
+            return sign + (coef or '1')
+        if coef and body[0].isdigit():
+            coef += r' \cdot'
+        return sign + coef + (' ' if coef else '') + body
+    free = lambda f: not ({str(z) for z in f.free_symbols} & {'x', 'u'})
+    rest = [f for f in num if not free(f)]
+    if (all(free(g) for g in den) and rest and rest[0].is_Function and not isinstance(rest[0], s.exp)):
+        # constant denominator before a function: \frac{c}{nk}\sinh^{-1}(...), as the notes write it
+        k = _join(pr, ([s.Integer(p_)] if p_ != 1 else []) + [f for f in num if free(f)]) or '1'
+        d = _join(pr, ([s.Integer(q_)] if q_ != 1 else []) + den)
+        return sign + r'\frac{%s}{%s} ' % (k, d) + _join(pr, rest)
+    tail = []      # trailing bracket factors go after the fraction: \frac{e^{ax}}{a^2+b^2}(a sin bx - ...)
+    while len(num) > 1 and num[-1].is_Add:
+        tail.insert(0, num.pop())
+    n = _join(pr, ([s.Integer(p_)] if p_ != 1 else []) + num) or '1'
+    d = _join(pr, ([s.Integer(q_)] if q_ != 1 else []) + den)
+    return sign + r'\frac{%s}{%s}' % (n, d) + ''.join(r' \left(%s\right)' % pr._print(a) for a in tail)
+
+
+def rawtex(text, extra=None, append=None):
+    """LaTeX of an authored expression in the authored order (for answers and formulas).
+    `append` multiplies the printed expression by an extra symbol (u' in derivative tables)."""
+    e = plain(P(text, evaluate=False, extra=extra))
+    pr = NotesPrinter(dict(order='none'))
+    if append is not None:
+        if e.is_Add:
+            return r'\left(%s\right) %s' % (rawtex(text, extra), append)
+        body = _term(pr, e)
+        if not body.lstrip('-').startswith(r'\frac'):
+            return body + r' \cdot ' + append
+        e = s.Mul(e, s.Symbol(append), evaluate=False)
+    if e.is_Add:
+        return texsum([a for a in e.args], _pr=pr)
+    return _term(pr, e)
+
+
 def tex(text_or_expr, **settings):
-    """LaTeX of an authored expression (evaluated, so SymPy normalises signs and fractions)."""
+    """LaTeX of an authored expression. 'raw:' strings keep the authored order; others are
+    evaluated (SymPy normalises signs and fractions)."""
     if isinstance(text_or_expr, str):
         raw = text_or_expr.startswith('raw:')
-        e = P(text_or_expr[4:], evaluate=False) if raw else P(text_or_expr)
+        e = plain(P(text_or_expr[4:], evaluate=False)) if raw else P(text_or_expr)
         if raw:
             settings = dict(settings, order='none')
-            e = e.replace(lambda z: z.is_Mul and s.S.One in z.args,
-                          lambda z: s.Mul(*[a for a in z.args if a != 1], evaluate=False))
     else:
         e = text_or_expr
     return NotesPrinter(settings).doprint(e)
 
 
-def texsum(terms, **settings):
-    """LaTeX of a sum printed in the authored order: terms is a list of expression strings."""
+def texsum(terms, _pr=None, **settings):
+    """LaTeX of a sum printed in the authored order: terms is a list of expression strings
+    (or unevaluated expressions); each term is printed coefficient-first."""
+    pr = _pr or NotesPrinter(dict(settings, order='none'))
     out = ''
     for i, term in enumerate(terms):
-        body = tex(term, **settings)
+        if isinstance(term, str):
+            term = plain(P(term[4:] if term.startswith('raw:') else term, evaluate=False))
+        body = _term(pr, term)
         if i == 0:
             out = body
         elif body.startswith('-'):

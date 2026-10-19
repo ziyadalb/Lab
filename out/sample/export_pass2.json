@@ -1,0 +1,18 @@
+{
+ "out": "out/sample/MATH111_Quiz2_Shortcuts_Sample.pdf",
+ "fonts": [
+  [
+   "Plex Arabic",
+   true
+  ],
+  [
+   "KaTeX_Main",
+   true
+  ],
+  [
+   "KaTeX_Math",
+   true
+  ]
+ ],
+ "overflow": []
+}

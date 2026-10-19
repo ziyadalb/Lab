@@ -2,3 +2,5 @@ node_modules/
 __pycache__/
 *.pyc
 .cache/
+out/sample/pass1.pdf
+out/sample/toc_check.json
