@@ -1,0 +1,354 @@
+{
+ "seed": 1112027,
+ "unit": "independent part (one derivative or one integral)",
+ "blueprint": "declared educational choice: 4.2 x4 (2 derivatives + 2 integrals), 5.1 x3, 5.2 x3; each mock covers all three sections",
+ "section_counts": {
+  "4.2": 4,
+  "5.1": 3,
+  "5.2": 3
+ },
+ "mocks": {
+  "A": [
+   {
+    "hid": "H02",
+    "item": "1447-S1-SE-Q1.1",
+    "reason": "4.2 derivative: cosh^-1 of an exponential + a 4.1 chain term",
+    "q": "raw:sinh(sqrt(x**2+1))+acosh(exp(x))",
+    "answer": [
+     "x*cosh(sqrt(x**2+1))/sqrt(x**2+1)",
+     "exp(x)/sqrt(exp(2*x)-1)"
+    ],
+    "source": {
+     "file": "EX1447",
+     "pdf_page": 5,
+     "number": "Q1.1"
+    }
+   },
+   {
+    "hid": "H01",
+    "item": "1445-S2-FE-Q2.1",
+    "reason": "4.2 integral: completing the square with a leading coefficient",
+    "q": "raw:2/sqrt(4*x**2+8*x+20)",
+    "answer": [
+     "asinh((x+1)/2)"
+    ],
+    "source": {
+     "file": "EX1445",
+     "pdf_page": 27,
+     "number": "Q2.1"
+    }
+   },
+   {
+    "hid": "H09",
+    "item": "1447-S1-FE-Q2.2",
+    "reason": "5.1: quadratic times trig with an inner coefficient (fractions)",
+    "q": "raw:x**2*cos(3*x)",
+    "answer": [
+     "x**2*sin(3*x)/3",
+     "2*x*cos(3*x)/9",
+     "-2*sin(3*x)/27"
+    ],
+    "source": {
+     "file": "EX1447",
+     "pdf_page": 10,
+     "number": "Q2.2"
+    }
+   },
+   {
+    "hid": "H07",
+    "item": "1446-S2-SE-Q2.5",
+    "reason": "5.1: exponential times hyperbolic with fractional exponents",
+    "q": "raw:exp(x/2)*sinh(3*x)",
+    "answer": [
+     "exp(7*x/2)/7",
+     "exp(-5*x/2)/5"
+    ],
+    "source": {
+     "file": "EX1446",
+     "pdf_page": 22,
+     "number": "Q2.5"
+    }
+   },
+   {
+    "hid": "H03",
+    "item": "1445-S2-FE-Q2.6",
+    "reason": "5.2: odd sine power, u = cos, three-term expansion",
+    "q": "raw:sin(x)**5*cos(x)**6",
+    "answer": [
+     "-cos(x)**7/7",
+     "2*cos(x)**9/9",
+     "-cos(x)**11/11"
+    ],
+    "source": {
+     "file": "EX1445",
+     "pdf_page": 29,
+     "number": "Q2.6"
+    }
+   }
+  ],
+  "B": [
+   {
+    "hid": "H04",
+    "item": "1446-S1-SE-Q1.1",
+    "reason": "4.2 derivative: tanh^-1 of an exponential + csch of 2/x",
+    "q": "raw:csch(2/x)+atanh(exp(5*x))",
+    "answer": [
+     "2*csch(2/x)*coth(2/x)/x**2",
+     "5*exp(5*x)/(1-exp(10*x))"
+    ],
+    "source": {
+     "file": "EX1446",
+     "pdf_page": 5,
+     "number": "Q1.1"
+    }
+   },
+   {
+    "hid": "H05",
+    "item": "1445-S1-SE-Q2.7",
+    "reason": "4.2 integral: visible derivative, tanh^-1 vs coth^-1 decision",
+    "q": "raw:sin(x)/(4-cos(x)**2)",
+    "answer": [
+     "-atanh(cos(x)/2)/2"
+    ],
+    "source": {
+     "file": "EX1445",
+     "pdf_page": 8,
+     "number": "Q2.7"
+    }
+   },
+   {
+    "hid": "H08",
+    "item": "1447-S2-SE-Q3.1",
+    "reason": "5.1: x times an inverse hyperbolic function",
+    "q": "raw:x*asech(x)",
+    "answer": [
+     "x**2*asech(x)/2",
+     "-sqrt(1-x**2)/2"
+    ],
+    "source": {
+     "file": "EX1447",
+     "pdf_page": 21,
+     "number": "Q3.1"
+    }
+   },
+   {
+    "hid": "H10",
+    "item": "1445-S2-SE-Q2.3",
+    "reason": "5.2: even secant power, u = tan",
+    "q": "raw:tan(x)**2*sec(x)**4",
+    "answer": [
+     "tan(x)**3/3",
+     "tan(x)**5/5"
+    ],
+    "source": {
+     "file": "EX1445",
+     "pdf_page": 23,
+     "number": "Q2.3"
+    }
+   },
+   {
+    "hid": "H06",
+    "item": "N52-X12",
+    "reason": "5.2: product of cosines with different angles (notes exercise; no exam question of this case)",
+    "q": "raw:cos(4*x)*cos(7*x)",
+    "answer": [
+     "sin(3*x)/6",
+     "sin(11*x)/22"
+    ],
+    "source": {
+     "file": "NOTES",
+     "pdf_page": 76,
+     "number": "(12)"
+    }
+   }
+  ]
+ },
+ "criteria": {
+  "1447-S1-SE-Q1.1": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "1445-S2-FE-Q2.1": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "1447-S1-FE-Q2.2": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "1446-S2-SE-Q2.5": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "1445-S2-FE-Q2.6": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "1446-S1-SE-Q1.1": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "1445-S1-SE-Q2.7": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "1447-S2-SE-Q3.1": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "1445-S2-SE-Q2.3": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  },
+  "N52-X12": {
+   "in_scope": true,
+   "real_source": true,
+   "answer_symbolic": true,
+   "official_full_domain": true,
+   "not_prior_exposed": true,
+   "case_still_taught": true
+  }
+ },
+ "criteria_failures": [],
+ "held_copies": {},
+ "near_items": {
+  "1445-S2-FE-Q2.1": [
+   {
+    "id": "1446-S1-FE-Q2.1",
+    "relation": "numbers_changed",
+    "kind": "exam"
+   }
+  ],
+  "1445-S2-FE-Q2.6": [
+   {
+    "id": "1445-S1-SE-Q2.4",
+    "relation": "one_number_changed",
+    "kind": "exam"
+   },
+   {
+    "id": "1446-S1-SE-Q2.6",
+    "relation": "numbers_changed",
+    "kind": "exam"
+   },
+   {
+    "id": "1447-S1-SE-Q2.3",
+    "relation": "numbers_changed",
+    "kind": "exam"
+   },
+   {
+    "id": "N52-E2-1",
+    "relation": "one_number_changed",
+    "kind": "notes_example"
+   },
+   {
+    "id": "N52-E2-2",
+    "relation": "numbers_changed",
+    "kind": "notes_example"
+   },
+   {
+    "id": "N52-E2-3",
+    "relation": "one_number_changed",
+    "kind": "notes_example"
+   },
+   {
+    "id": "N52-E2-4",
+    "relation": "numbers_changed",
+    "kind": "notes_example"
+   },
+   {
+    "id": "N52-X01",
+    "relation": "numbers_changed",
+    "kind": "notes_exercise"
+   },
+   {
+    "id": "N52-X02",
+    "relation": "numbers_changed",
+    "kind": "notes_exercise"
+   },
+   {
+    "id": "N52-X03",
+    "relation": "one_number_changed",
+    "kind": "notes_exercise"
+   },
+   {
+    "id": "N52-X04",
+    "relation": "numbers_changed",
+    "kind": "notes_exercise"
+   }
+  ],
+  "1445-S2-SE-Q2.3": [
+   {
+    "id": "1447-S1-FE-Q2.6",
+    "relation": "numbers_changed",
+    "kind": "exam"
+   },
+   {
+    "id": "1447-S2-SE-Q3.3",
+    "relation": "numbers_changed",
+    "kind": "exam"
+   },
+   {
+    "id": "N52-E3-3",
+    "relation": "one_number_changed",
+    "kind": "notes_example"
+   },
+   {
+    "id": "N52-E3-4",
+    "relation": "numbers_changed",
+    "kind": "notes_example"
+   },
+   {
+    "id": "N52-X05",
+    "relation": "one_number_changed",
+    "kind": "notes_exercise"
+   },
+   {
+    "id": "N52-X06",
+    "relation": "numbers_changed",
+    "kind": "notes_exercise"
+   },
+   {
+    "id": "N52-X07",
+    "relation": "one_number_changed",
+    "kind": "notes_exercise"
+   }
+  ]
+ },
+ "novelty": "not guaranteed: every past question and key is in the student's patterns workbook; exposure is unknown (user answer)"
+}

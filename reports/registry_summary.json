@@ -1,0 +1,78 @@
+{
+ "registry_rows": 257,
+ "kinds": {
+  "exam": 157,
+  "exam_unit": 6,
+  "notes_example": 38,
+  "notes_exercise": 56
+ },
+ "exams_indexed": 18,
+ "exams_with_in_scope_parts": 12,
+ "in_scope_exam_parts": 58,
+ "in_scope_exam_unique": 57,
+ "notes_items": {
+  "notes_example": 38,
+  "notes_exercise": 56
+ },
+ "usage": {
+  "مستبعد (خارج النطاق المثبت)": 102,
+  "مرجع إضافي (لم يُستخدم في العينة بعد)": 135,
+  "مرجع إضافي (صف مقارنة فقط؛ 3.4 خارج النطاق)": 3,
+  "معلق مؤقتًا: قريب جدًا من سؤال محجوز (لا يستخدم قبل المحاكاة)": 7,
+  "محجوز": 10
+ },
+ "appearances_in_independent_exams": {
+  "C42-CS": 5,
+  "C42-CSL": 3,
+  "C42-D": 10,
+  "C42-I-COSH": 1,
+  "C42-I-CSCH": 1,
+  "C42-I-HIDDEN": 2,
+  "C42-I-SINH": 1,
+  "C42-I-TANH": 1,
+  "C51-CYC": 1,
+  "C51-DEF": 1,
+  "C51-EXPH": 3,
+  "C51-INV": 4,
+  "C51-LN": 4,
+  "C51-POLY1": 3,
+  "C51-POLY2": 2,
+  "C51-XINV": 2,
+  "C52-CC-CSCEVEN": 1,
+  "C52-SC-ODD": 4,
+  "C52-TS-SECEVEN": 2,
+  "C52-TS-TANODD": 1
+ },
+ "duplicate_groups": {
+  "DG01": [
+   "1445-S2-FE-Q2.2",
+   "1446-S2-SE-Q2.8",
+   "N51-E5"
+  ],
+  "DG02": [
+   "1447-S1-SE-Q2.5",
+   "N51-X08"
+  ],
+  "DG03": [
+   "1445-S1-SE-Q2.4",
+   "N52-X03"
+  ],
+  "DG04": [
+   "1446-S2-SE-Q2.4",
+   "N52-E4-1"
+  ],
+  "DG05": [
+   "1447-S1-SE-Q2.3",
+   "N52-X02"
+  ]
+ },
+ "verification": {
+  "symbolic": 155
+ },
+ "official": {
+  "symbolic": 55,
+  "failed": 2,
+  "branch_only": 3,
+  "partial_domain": 3
+ }
+}
