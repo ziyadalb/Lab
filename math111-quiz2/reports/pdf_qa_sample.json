@@ -1,0 +1,74 @@
+{
+ "pages": 44,
+ "page_sizes_pt": [
+  [
+   595,
+   842
+  ]
+ ],
+ "fonts": {
+  "AAAAAA+IBMPlexSansArabic-Regular": "ttf",
+  "BAAAAA+IBMPlexSansArabic-SemiBold": "ttf",
+  "CAAAAA+IBMPlexSansArabic-SemiBold": "ttf",
+  "DAAAAA+IBMPlexSansArabic-Bold": "ttf",
+  "EAAAAA+IBMPlexSansArabic-Bold": "ttf",
+  "FAAAAA+IBMPlexSansArabic-Regular": "ttf",
+  "GAAAAA+KaTeX_Main-Regular": "ttf",
+  "HAAAAA+KaTeX_Math-Italic": "ttf",
+  "IAAAAA+KaTeX_Size1-Regular": "ttf",
+  "JAAAAA+DejaVuSans": "ttf",
+  "KAAAAA+DejaVuSans-Bold": "ttf",
+  "LAAAAA+KaTeX_Size2-Regular": "ttf",
+  "MAAAAA+KaTeX_Size3-Regular": "ttf",
+  "NAAAAA+KaTeX_Size4-Regular": "ttf",
+  "OAAAAA+KaTeX_AMS-Regular": "ttf"
+ },
+ "min_arabic_pt": 12.0,
+ "min_text_pt_excluding_math_and_page_numbers": 12.0,
+ "internal_links": 171,
+ "named_destinations": 91,
+ "html_links": 167,
+ "bookmarks": 35,
+ "text_extraction": {
+  "tool": "pdftotext (poppler)",
+  "characters": 116941,
+  "english_found": {
+   "Evaluate the following integrals": true,
+   "Find dy/dx of the following": true
+  },
+  "arabic_found": {
+   "الاختصار": false,
+   "العلامة": false,
+   "مثال من سؤال حقيقي": true,
+   "سلّم المساعدة": false
+  },
+  "arabic_found_in_logical_order": {
+   "الاختصار": false,
+   "العلامة": false,
+   "مثال من سؤال حقيقي": true,
+   "سلّم المساعدة": false
+  }
+ },
+ "math": {
+  "produced": 596,
+  "rendered": 596,
+  "mismatched": 0,
+  "katex_errors": 0
+ },
+ "overflowing_formulas": 0,
+ "fonts_loaded_in_browser": [
+  [
+   "Plex Arabic",
+   true
+  ],
+  [
+   "KaTeX_Main",
+   true
+  ],
+  [
+   "KaTeX_Math",
+   true
+  ]
+ ],
+ "failures": []
+}

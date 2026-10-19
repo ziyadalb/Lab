@@ -1,0 +1,1411 @@
+{
+ "checks": [
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "4.1 sinh",
+   "f": "sinh(u)",
+   "F": "cosh(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "4.1 cosh",
+   "f": "cosh(u)",
+   "F": "sinh(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "4.1 tanh",
+   "f": "tanh(u)",
+   "F": "sech(u)**2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "4.1 coth",
+   "f": "coth(u)",
+   "F": "-csch(u)**2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "4.1 sech",
+   "f": "sech(u)",
+   "F": "-sech(u)*tanh(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "4.1 csch",
+   "f": "csch(u)",
+   "F": "-csch(u)*coth(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "alg1",
+   "claim": "Rational(5,3*4) = Rational(5,12)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "alg2",
+   "claim": "x**(-2) = 1/x**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "alg2",
+   "claim": "integrate(x**(-2),x) = -1/x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "alg3",
+   "claim": "sqrt(x) = x**Rational(1,2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "alg4",
+   "claim": "diff(cosh(3*x**2),x) = 6*x*sinh(3*x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "twins sinh",
+   "f": "asinh(u)",
+   "F": "1/sqrt(u**2+1)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "twins cosh",
+   "f": "acosh(u)",
+   "F": "1/sqrt(u**2-1)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "twins tanh",
+   "f": "atanh(u)",
+   "F": "1/(1-u**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "twins coth",
+   "f": "acoth(u)",
+   "F": "1/(1-u**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "twins sech",
+   "f": "asech(u)",
+   "F": "-1/(u*sqrt(1-u**2))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "twins csch",
+   "f": "acsch(u)",
+   "F": "-1/(Abs(u)*sqrt(1+u**2))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S1 parts",
+   "claim": "diff(sqrt(x+2),x) = 1/(2*sqrt(x+2))",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S1 parts",
+   "claim": "1+(sqrt(x+2))**2 = x+3",
+   "residual": "0"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1447-S2-SE-Q1.2",
+   "label": "card S1",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "six sinh",
+   "f": "1/sqrt(u**2+a**2)",
+   "F": "asinh(u/a)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "six cosh",
+   "f": "1/sqrt(u**2-a**2)",
+   "F": "acosh(u/a)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "six tanh",
+   "f": "1/(a**2-u**2)",
+   "F": "atanh(u/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "six coth",
+   "f": "1/(a**2-u**2)",
+   "F": "acoth(u/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "six sech",
+   "f": "1/(u*sqrt(a**2-u**2))",
+   "F": "-asech(Abs(u)/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "six csch",
+   "f": "1/(u*sqrt(a**2+u**2))",
+   "F": "-acsch(Abs(u)/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "adjust rule (sinh row)",
+   "f": "c*x**(n-1)/sqrt((k*x**n)**2+a**2)",
+   "F": "c*asinh(k*x**n/a)/(n*k)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S2 params",
+   "claim": "16*x**6 = (4*x**3)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S2 params",
+   "claim": "Rational(5,3*4) = Rational(5,12)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-01",
+   "label": "card S2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "lamda exp csch",
+   "f": "1/sqrt(b**(2*lam*x)+a**2)",
+   "F": "-acsch(b**(lam*x)/a)/(a*lam*log(b))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "lamda exp sech",
+   "f": "1/sqrt(a**2-b**(2*lam*x))",
+   "F": "-asech(b**(lam*x)/a)/(a*lam*log(b))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "lamda power csch",
+   "f": "1/(x*sqrt((m*x**lam)**2+a**2))",
+   "F": "-acsch(Abs(m*x**lam)/a)/(a*lam)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "lamda power sech",
+   "f": "1/(x*sqrt(a**2-(m*x**lam)**2))",
+   "F": "-asech(Abs(m*x**lam)/a)/(a*lam)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S3 params",
+   "claim": "exp(6*x) = exp(3*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S2-SE-Q2.7",
+   "label": "card S3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S1-SE-Q2.2",
+   "label": "card S3 variation",
+   "status": "symbolic"
+  },
+  {
+   "kind": "identity",
+   "ok": true,
+   "label": "S3 paper line",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "square sinh",
+   "f": "c/sqrt(A*(x-h)**2+d)",
+   "F": "c*asinh(sqrt(A)*(x-h)/sqrt(d))/sqrt(A)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "square cosh (d stands for -d)",
+   "f": "c/sqrt(A*(x-h)**2-d)",
+   "F": "c*acosh(sqrt(A)*(x-h)/sqrt(d))/sqrt(A)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "square csch",
+   "f": "c/((x-h)*sqrt(A*(x-h)**2+d))",
+   "F": "-c*acsch(sqrt(A)*Abs(x-h)/sqrt(d))/sqrt(d)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "square sech",
+   "f": "c/((x-h)*sqrt(d-A*(x-h)**2))",
+   "F": "-c*asech(sqrt(A)*Abs(x-h)/sqrt(d))/sqrt(d)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S4 a",
+   "claim": "-Rational(6,2) = -3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S4 a",
+   "claim": "9-18-16 = -25",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S4 a",
+   "claim": "x**2+6*x-16 = (x+3)**2-5**2",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.2",
+   "label": "card S4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S4 b",
+   "claim": "9-18+13 = 4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S4 b",
+   "claim": "x**2+6*x+13 = (x+3)**2+4",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S2-FE-Q2.6",
+   "label": "card S4 b",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S4 trap",
+   "claim": "sqrt(9*x**2+36*x+45) = 3*sqrt(x**2+4*x+5)",
+   "residual": "0"
+  },
+  {
+   "kind": "functional",
+   "ok": true,
+   "label": "linear folded rule",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S5a",
+   "claim": "integrate(sinh(x),x) = cosh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S5a",
+   "claim": "integrate(cosh(x),x) = sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.4",
+   "label": "card S5 a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S1-FE-Q2.2",
+   "label": "card S5 b",
+   "status": "symbolic"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "S5 fallback",
+   "u": "x**2",
+   "du": "2*x"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "S5 fallback",
+   "dv": "cosh(x)",
+   "v": "sinh(x)"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "qaws (symbolic real n)",
+   "f": "x**n*log(a*x)",
+   "F": "x**(n+1)/(n+1)*(log(a*x)-1/(n+1))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S6",
+   "claim": "x**(-1)/(-1)*(log(x)-1/(-1)) = -(log(x)+1)/x",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.5",
+   "label": "card S6",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X05",
+   "label": "card S6 variation",
+   "status": "symbolic"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "S6 paper",
+   "u": "log(x)",
+   "du": "1/x"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "S6 paper",
+   "dv": "x**(-2)",
+   "v": "-1/x"
+  },
+  {
+   "kind": "functional",
+   "ok": true,
+   "label": "rafeeq identity",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "micro +",
+   "f": "x/sqrt(c+x**2)",
+   "F": "sqrt(c+x**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "micro -",
+   "f": "x/sqrt(c-x**2)",
+   "F": "-sqrt(c-x**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "micro ln +",
+   "f": "x/(c+x**2)",
+   "F": "log(c+x**2)/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "micro ln -",
+   "f": "x/(c-x**2)",
+   "F": "-log(c-x**2)/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "r asin",
+   "f": "asin(x)",
+   "F": "x*asin(x)+sqrt(1-x**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "r atan",
+   "f": "atan(x)",
+   "F": "x*atan(x)-log(1+x**2)/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "r asec",
+   "f": "asec(x)",
+   "F": "x*asec(x)-acosh(x)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "r acosh",
+   "f": "acosh(x)",
+   "F": "x*acosh(x)-sqrt(x**2-1)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "r atanh",
+   "f": "atanh(x)",
+   "F": "x*atanh(x)+log(1-x**2)/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S1-SE-Q2.5",
+   "label": "card S7",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S7 division",
+   "claim": "x**2/(1-x**2) = -1+1/(1-x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S2-FE-Q2.2",
+   "label": "card S7 b",
+   "status": "symbolic"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "S7 paper",
+   "u": "acosh(x)",
+   "du": "1/sqrt(x**2-1)"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "S7 paper",
+   "dv": "1",
+   "v": "x"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "dawaran sin",
+   "f": "exp(a*x)*sin(b*x)",
+   "F": "exp(a*x)*(a*sin(b*x)-b*cos(b*x))/(a**2+b**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "dawaran cos",
+   "f": "exp(a*x)*cos(b*x)",
+   "F": "exp(a*x)*(a*cos(b*x)+b*sin(b*x))/(a**2+b**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S8",
+   "claim": "2**2+1**2 = 5",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S2-FE-Q2.3",
+   "label": "card S8",
+   "status": "symbolic"
+  },
+  {
+   "kind": "identity",
+   "ok": true,
+   "label": "S8 official equals",
+   "residual": "0"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "S8 fallback",
+   "u": "sin(x)",
+   "du": "cos(x)"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "S8 fallback",
+   "dv": "exp(2*x)",
+   "v": "exp(2*x)/2"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "nisfayn cosh",
+   "f": "exp(a*x)*cosh(b*x)",
+   "F": "(exp((a+b)*x)/(a+b)+exp((a-b)*x)/(a-b))/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "nisfayn sinh",
+   "f": "exp(a*x)*sinh(b*x)",
+   "F": "(exp((a+b)*x)/(a+b)-exp((a-b)*x)/(a-b))/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S9",
+   "claim": "(exp(3*x)/3+exp(-x)/(-1))/2 = exp(3*x)/6-exp(-x)/2",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.3",
+   "label": "card S9",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S1-SE-Q2.1",
+   "label": "card S9 trap",
+   "status": "symbolic"
+  },
+  {
+   "kind": "identity",
+   "ok": true,
+   "label": "S9 trap line",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "small ln",
+   "f": "log(Abs(x))",
+   "F": "x*log(Abs(x))-x",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "small ln2",
+   "f": "log(Abs(x))**2",
+   "F": "x*log(Abs(x))**2-2*x*log(Abs(x))+2*x",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "small e sqrt",
+   "f": "exp(sqrt(x))",
+   "F": "2*exp(sqrt(x))*(sqrt(x)-1)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "small ln quad",
+   "f": "log(x**2+a**2)",
+   "F": "x*log(x**2+a**2)-2*x+2*a*atan(x/a)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "small root",
+   "f": "x**3*sqrt(x**2+c)",
+   "F": "(x**2+c)**Rational(5,2)/5-c*(x**2+c)**Rational(3,2)/3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X17",
+   "label": "card S10",
+   "status": "symbolic"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "S10 paper",
+   "u": "x**2-1",
+   "du": "2*x"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S11",
+   "claim": "sin(x)**4*cos(x)**5 = sin(x)**4*(1-sin(x)**2)**2*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S11",
+   "claim": "(1-u**2)**2 = 1-2*u**2+u**4",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.6",
+   "label": "card S11",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S11b",
+   "claim": "sec(x)**3*tan(x)**3 = sec(x)**2*(sec(x)**2-1)*sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S11b",
+   "claim": "u**2*(u**2-1) = u**4-u**2",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S2-SE-Q3.3",
+   "label": "card S11 b",
+   "status": "symbolic"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "S11 paper",
+   "u": "sin(x)",
+   "du": "cos(x)"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "even sin2",
+   "f": "sin(k*x)**2",
+   "F": "x/2-sin(2*k*x)/(4*k)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "even cos2",
+   "f": "cos(k*x)**2",
+   "F": "x/2+sin(2*k*x)/(4*k)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "even sin2cos2",
+   "f": "sin(x)**2*cos(x)**2",
+   "F": "x/8-sin(4*x)/32",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X13",
+   "label": "card S12",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E1-3",
+   "label": "card S12 b",
+   "status": "symbolic"
+  },
+  {
+   "kind": "functional",
+   "ok": true,
+   "label": "sec reduction (symbolic n)",
+   "residual": "0"
+  },
+  {
+   "kind": "functional",
+   "ok": true,
+   "label": "tan reduction (symbolic m)",
+   "residual": "0"
+  },
+  {
+   "kind": "functional",
+   "ok": true,
+   "label": "tan derivative identity",
+   "residual": "0"
+  },
+  {
+   "kind": "functional",
+   "ok": true,
+   "label": "cot reduction (symbolic m)",
+   "residual": "0"
+  },
+  {
+   "kind": "functional",
+   "ok": true,
+   "label": "cot derivative identity",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "sec base",
+   "f": "sec(x)",
+   "F": "log(Abs(sec(x)+tan(x)))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "tan base",
+   "f": "tan(x)",
+   "F": "log(Abs(sec(x)))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E3-2",
+   "label": "card S13",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E3-1",
+   "label": "card S13 b",
+   "status": "symbolic"
+  },
+  {
+   "kind": "identity",
+   "ok": true,
+   "label": "S13 paper",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "prod sc",
+   "f": "sin(m*x)*cos(n*x)",
+   "F": "-(cos((m-n)*x)/(m-n)+cos((m+n)*x)/(m+n))/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "prod ss",
+   "f": "sin(m*x)*sin(n*x)",
+   "F": "(sin((m-n)*x)/(m-n)-sin((m+n)*x)/(m+n))/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "prod cc",
+   "f": "cos(m*x)*cos(n*x)",
+   "F": "(sin((m-n)*x)/(m-n)+sin((m+n)*x)/(m+n))/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S14",
+   "claim": "-(cos(2*x)/2+cos(12*x)/12)/2 = -cos(2*x)/4-cos(12*x)/24",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E5-1",
+   "label": "card S14",
+   "status": "symbolic"
+  },
+  {
+   "kind": "identity",
+   "ok": true,
+   "label": "S14 paper",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G1",
+   "claim": "integrate(cosh(x),x) = sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G2",
+   "claim": "-4+1 = -3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G3",
+   "claim": "9-18+13 = 4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G3",
+   "claim": "x**2+6*x+13 = (x+3)**2+2**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G4",
+   "claim": "sin(x)**2*cos(x)**5 = sin(x)**2*(1-sin(x)**2)**2*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G1",
+   "claim": "integrate(cosh(x),x) = sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X01",
+   "label": "solution G1",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G2",
+   "claim": "-4+1 = -3",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X07",
+   "label": "solution G2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G3",
+   "claim": "9-18+13 = 4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G3",
+   "claim": "x**2+6*x+13 = (x+3)**2+2**2",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S2-SE-Q2.7",
+   "label": "solution G3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first G4",
+   "claim": "sin(x)**2*cos(x)**5 = sin(x)**2*(1-sin(x)**2)**2*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S1-SE-Q2.3",
+   "label": "solution G4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first P1",
+   "claim": "diff(3**x,x) = 3**x*log(3)",
+   "residual": "0"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1445-S1-FE-Q1.3",
+   "label": "solution P1",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first P2",
+   "claim": "9-exp(6*x) = 3**2-exp(3*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-10",
+   "label": "solution P2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-10",
+   "label": "solution P2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first P3",
+   "claim": "2**2+3**2 = 13",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X11",
+   "label": "solution P3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X11",
+   "label": "solution P3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first P4",
+   "claim": "cot(x)**5*csc(x)**3 = (csc(x)**2-1)**2*csc(x)**2*csc(x)*cot(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X09",
+   "label": "solution P4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X09",
+   "label": "solution P4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1445-S2-SE-Q1.1",
+   "label": "solution I1",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first I2",
+   "claim": "9-18+25 = 16",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first I2",
+   "claim": "x**2+6*x+25 = (x+3)**2+16",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-15",
+   "label": "solution I2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S1-SE-Q2.7",
+   "label": "solution I3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S1-SE-Q2.7",
+   "label": "solution I3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X03",
+   "label": "solution I4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first I5",
+   "claim": "1/(sqrt(x)*sqrt(1+x)) = 2*(1/(2*sqrt(x)))/sqrt(1+sqrt(x)**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first I5",
+   "claim": "diff(sqrt(x),x) = 1/(2*sqrt(x))",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S1-SE-Q2.2",
+   "label": "solution I5",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X10",
+   "label": "solution I6",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X10",
+   "label": "solution I6",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "first I7",
+   "claim": "integrate(sec(x)**2,x) = tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X04",
+   "label": "solution I7",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X04",
+   "label": "solution I7",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "F1",
+   "claim": "1/(Rational(1,4)) = 4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "F2",
+   "claim": "integrate(x**(-3),x) = -1/(2*x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "F3",
+   "claim": "(1-u**2)**2 = 1-2*u**2+u**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "F4",
+   "claim": "diff(tanh(x**3),x) = 3*x**2*sech(x**3)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "F5",
+   "claim": "-1/(-3) = Rational(1,3)",
+   "residual": "0"
+  }
+ ],
+ "used": {
+  "1447-S2-SE-Q1.2": [
+   "card S1"
+  ],
+  "N42-X2-01": [
+   "card S2"
+  ],
+  "N42-X2-06": [
+   "card S2 trap"
+  ],
+  "1446-S2-SE-Q2.7": [
+   "card S3"
+  ],
+  "1447-S1-SE-Q2.2": [
+   "card S3 variation"
+  ],
+  "1446-S1-SE-Q2.2": [
+   "card S4"
+  ],
+  "1447-S2-FE-Q2.6": [
+   "card S4 b"
+  ],
+  "1446-S1-SE-Q2.4": [
+   "card S5 a"
+  ],
+  "1445-S1-FE-Q2.2": [
+   "card S5 b"
+  ],
+  "1446-S1-SE-Q2.5": [
+   "card S6"
+  ],
+  "N51-X05": [
+   "card S6 variation"
+  ],
+  "1445-S1-SE-Q2.5": [
+   "card S7"
+  ],
+  "1446-S2-FE-Q2.2": [
+   "card S7 b"
+  ],
+  "1447-S2-FE-Q2.3": [
+   "card S8"
+  ],
+  "1446-S1-SE-Q2.3": [
+   "card S9"
+  ],
+  "1445-S1-SE-Q2.1": [
+   "card S9 trap"
+  ],
+  "N51-X17": [
+   "card S10"
+  ],
+  "1446-S1-SE-Q2.6": [
+   "card S11"
+  ],
+  "1447-S2-SE-Q3.3": [
+   "card S11 b"
+  ],
+  "N52-X04": [
+   "card S11 trap"
+  ],
+  "N52-X13": [
+   "card S12"
+  ],
+  "N52-E1-3": [
+   "card S12 b"
+  ],
+  "N52-E3-2": [
+   "card S13"
+  ],
+  "N52-E3-1": [
+   "card S13 b"
+  ],
+  "N52-E5-1": [
+   "card S14"
+  ],
+  "1446-S2-SE-Q2.3": [
+   "choose drill"
+  ],
+  "N42-X2-11": [
+   "choose drill"
+  ],
+  "N51-X06": [
+   "choose drill"
+  ],
+  "N52-X01": [
+   "choose drill"
+  ],
+  "N51-X12": [
+   "choose drill"
+  ],
+  "1447-S1-FE-Q2.1": [
+   "choose drill"
+  ],
+  "N52-X11": [
+   "choose drill"
+  ],
+  "N51-X09": [
+   "choose drill"
+  ],
+  "N42-X2-03": [
+   "choose drill"
+  ],
+  "N51-X14": [
+   "choose drill"
+  ],
+  "N52-X16": [
+   "choose drill"
+  ],
+  "1446-S2-FE-Q1.3": [
+   "choose drill"
+  ],
+  "N42-X2-09": [
+   "choose drill"
+  ],
+  "N52-X14": [
+   "choose drill"
+  ],
+  "N51-X01": [
+   "drill G1"
+  ],
+  "N51-X07": [
+   "drill G2"
+  ],
+  "1445-S2-SE-Q2.7": [
+   "drill G3"
+  ],
+  "1447-S1-SE-Q2.3": [
+   "drill G4"
+  ],
+  "1445-S1-FE-Q1.3": [
+   "drill P1"
+  ],
+  "N42-X2-10": [
+   "drill P2"
+  ],
+  "N51-X11": [
+   "drill P3"
+  ],
+  "N52-X09": [
+   "drill P4"
+  ],
+  "1445-S2-SE-Q1.1": [
+   "drill I1"
+  ],
+  "N42-X2-15": [
+   "drill I2"
+  ],
+  "1447-S1-SE-Q2.7": [
+   "drill I3"
+  ],
+  "N51-X03": [
+   "drill I4"
+  ],
+  "1445-S1-SE-Q2.2": [
+   "drill I5"
+  ],
+  "N52-X10": [
+   "drill I6"
+  ],
+  "N51-X04": [
+   "drill I7"
+  ]
+ },
+ "counts": {
+  "total": 171,
+  "ok": 171
+ }
+}

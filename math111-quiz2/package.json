@@ -1,0 +1,9 @@
+{
+  "name": "math111-quiz2-build",
+  "private": true,
+  "description": "Render math with KaTeX and export PDFs with Playwright (global).",
+  "dependencies": {
+    "katex": "0.16.22",
+    "@fontsource/ibm-plex-sans-arabic": "5.2.5"
+  }
+}

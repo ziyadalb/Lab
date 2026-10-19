@@ -1,0 +1,421 @@
+{
+ "libraries": {
+  "python": "3.13.16",
+  "sympy": "1.14.0"
+ },
+ "formulas": [
+  {
+   "id": "F-D1",
+   "page": 57,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t"
+    },
+    {
+     "branch": "-t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t"
+    }
+   ]
+  },
+  {
+   "id": "F-D2",
+   "page": 58,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t + 1",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t + 1"
+    }
+   ]
+  },
+  {
+   "id": "F-D3",
+   "page": 58,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t/(t + 1)"
+    },
+    {
+     "branch": "-t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t/(t + 1)"
+    }
+   ]
+  },
+  {
+   "id": "F-D4-notes",
+   "page": 58,
+   "note": "as printed in the notes (K1)",
+   "status": "failed",
+   "details": [
+    {
+     "branch": "t + 1",
+     "residual": "2/(t*(t + 2))",
+     "symbolic_zero": false,
+     "numeric_max_abs": "2.5714285714285716",
+     "real_valued": true,
+     "probe_branch": "t + 1"
+    },
+    {
+     "branch": "-t - 1",
+     "residual": "-2/(t*(t + 2))",
+     "symbolic_zero": false,
+     "numeric_max_abs": "2.5714285714285716",
+     "real_valued": true,
+     "probe_branch": "-t - 1"
+    }
+   ]
+  },
+  {
+   "id": "F-D4-correct",
+   "page": 58,
+   "note": "corrected sign",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t + 1",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t + 1"
+    },
+    {
+     "branch": "-t - 1",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t - 1"
+    }
+   ]
+  },
+  {
+   "id": "F-D5",
+   "page": 58,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t/(t + 1)"
+    }
+   ]
+  },
+  {
+   "id": "F-D6",
+   "page": 58,
+   "note": "",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t"
+    },
+    {
+     "branch": "-t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t"
+    }
+   ]
+  },
+  {
+   "id": "F-I1",
+   "page": 59,
+   "note": "a>0",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t"
+    },
+    {
+     "branch": "-t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t"
+    }
+   ]
+  },
+  {
+   "id": "F-I2",
+   "page": 59,
+   "note": "x>a",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "a + t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "a + t"
+    }
+   ]
+  },
+  {
+   "id": "F-I3",
+   "page": 60,
+   "note": "|x|<a",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "a*t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "a*t/(t + 1)"
+    },
+    {
+     "branch": "-a*t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-a*t/(t + 1)"
+    }
+   ]
+  },
+  {
+   "id": "F-I4-notes",
+   "page": 60,
+   "note": "as printed in the notes (K1)",
+   "status": "failed",
+   "details": [
+    {
+     "branch": "a + t",
+     "residual": "2/(t*(2*a + t))",
+     "symbolic_zero": false,
+     "numeric_max_abs": "1.3846153846153846",
+     "real_valued": true,
+     "probe_branch": "a + t"
+    },
+    {
+     "branch": "-a - t",
+     "residual": "-2/(t*(2*a + t))",
+     "symbolic_zero": false,
+     "numeric_max_abs": "1.3846153846153846",
+     "real_valued": true,
+     "probe_branch": "-a - t"
+    }
+   ]
+  },
+  {
+   "id": "F-I4-correct",
+   "page": 60,
+   "note": "corrected sign",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "a + t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "a + t"
+    },
+    {
+     "branch": "-a - t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-a - t"
+    }
+   ]
+  },
+  {
+   "id": "F-I5",
+   "page": 60,
+   "note": "0<|x|<a",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "a*t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "a*t/(t + 1)"
+    },
+    {
+     "branch": "-a*t/(t + 1)",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-a*t/(t + 1)"
+    }
+   ]
+  },
+  {
+   "id": "F-I6",
+   "page": 60,
+   "note": "x!=0",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "t"
+    },
+    {
+     "branch": "-t",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "-t"
+    }
+   ]
+  },
+  {
+   "id": "F-P1",
+   "page": 63,
+   "note": "parts example",
+   "status": "symbolic",
+   "details": [
+    {
+     "branch": "x",
+     "residual": "0",
+     "symbolic_zero": true,
+     "real_valued": true,
+     "probe_branch": "x"
+    }
+   ]
+  },
+  {
+   "id": "F-T1",
+   "page": 70,
+   "note": "reduction, m=2..8",
+   "status": "symbolic",
+   "rows": [
+    {
+     "m": 2,
+     "residual": "0"
+    },
+    {
+     "m": 3,
+     "residual": "0"
+    },
+    {
+     "m": 4,
+     "residual": "0"
+    },
+    {
+     "m": 5,
+     "residual": "0"
+    },
+    {
+     "m": 6,
+     "residual": "0"
+    },
+    {
+     "m": 7,
+     "residual": "0"
+    },
+    {
+     "m": 8,
+     "residual": "0"
+    }
+   ]
+  },
+  {
+   "id": "F-T2",
+   "page": 73,
+   "note": "reduction, m=2..8",
+   "status": "symbolic",
+   "rows": [
+    {
+     "m": 2,
+     "residual": "0"
+    },
+    {
+     "m": 3,
+     "residual": "0"
+    },
+    {
+     "m": 4,
+     "residual": "0"
+    },
+    {
+     "m": 5,
+     "residual": "0"
+    },
+    {
+     "m": 6,
+     "residual": "0"
+    },
+    {
+     "m": 7,
+     "residual": "0"
+    },
+    {
+     "m": 8,
+     "residual": "0"
+    }
+   ]
+  },
+  {
+   "id": "F-S1",
+   "page": 74,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  },
+  {
+   "id": "F-S2",
+   "page": 74,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  },
+  {
+   "id": "F-S3",
+   "page": 74,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  },
+  {
+   "id": "F-H1",
+   "page": 67,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  },
+  {
+   "id": "F-H2",
+   "page": 67,
+   "note": "",
+   "status": "symbolic",
+   "residual": "0"
+  }
+ ]
+}

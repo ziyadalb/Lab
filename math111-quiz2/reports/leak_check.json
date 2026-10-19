@@ -1,0 +1,81 @@
+{
+ "document": "src/booklet.katex.html",
+ "pdf": "out/sample/MATH111_Quiz2_Shortcuts_Sample.pdf",
+ "formulas_scanned": 596,
+ "held_checked": 10,
+ "avoid_checked": 7,
+ "used_items": 54,
+ "failures": [],
+ "for_manual_review": [
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{4} x \\cos^{5} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^{4}x\\cos^{5}x=\\sin^{4}x\\,(1-\\sin^{2}x)^{2}\\cos x,\\qquad u = \\sin x \\qquad du = \\cos x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^{2}x+\\cos^{2}x=1"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\int \\sin^{2} x \\cos^{2} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{3} x \\cos^{4} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\int \\sin^{2} x \\cos^{5} x\\,dx"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "1446-S1-SE-Q2.6",
+   "where": "card S11"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X04",
+   "where": "card S11 trap"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X01",
+   "where": "choose drill"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "1447-S1-SE-Q2.3",
+   "where": "drill G4"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\tan^{2}x=\\sec^{2}x-1"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\int\\tan^{4}x\\,dx=\\int\\tan^{2}x\\,(\\sec^{2}x-1)\\,dx=\\frac{\\tan^{3}x}{3}-\\int\\tan^{2}x\\,dx"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H10",
+   "used": "1447-S2-SE-Q3.3",
+   "where": "card S11 b"
+  }
+ ]
+}
