@@ -153,7 +153,8 @@ def sc_lamda():
          formula('1/(x*sqrt(a**2-(m*x**lam)**2))', '-asech(Abs(m*x**lam)/a)/(a*lam)', var='x',
                  branches=('(a/m)**(1/lam)*t/(1+t)',), pos=('a', 'm', 'lam'), label='lamda power sech')]
     short = table(['الشكل', 'الجواب (+C)'], [frow(z, None) for z in r], 'formula')
-    short += p(mi(r'\lambda') + ' (لامدا) هي العدد الذي يضرب ' + mi('x') + ' في أس الأسية، أو أس ' + mi('x')
+    short += p(mi(r'\lambda') + ' (لامدا): اكتب ما تحت الجذر كمربع، مثل ' + mi(r'e^{6x}=\left(e^{3x}\right)^{2}') + ' ⇐ '
+               + mi(r'\lambda=3') + '، و ' + mi(r'x^{3}=\left(x^{3/2}\right)^{2}') + ' ⇐ ' + mi(r'\lambda=\frac32')
                + '. ومع الأساس ' + mi('e') + ' يكون ' + mi(r'\ln e=1') + '.')
     memo = ul(['المقام دائمًا ' + mi(r'a\times\lambda') + '، ومعه ' + mi(r'\ln b') + ' إذا لم يكن الأساس ' + mi('e') + '.',
                'الإشارة سالبة دائمًا. داخل الجذر ' + mi('+') + ' ⇐ csch⁻¹، وداخل الجذر ' + mi('-') + ' ⇐ sech⁻¹.'])
@@ -196,9 +197,9 @@ def sc_square():
               + '. فيصير ما تحت الجذر ' + mi(r'A(x-h)^{2}+d') + '.')
     labels = ['معامل ' + mi('x^2') + ' موجب، ' + mi('d>0'),
               'معامل ' + mi('x^2') + ' موجب، والباقي سالب (اكتبه ' + mi('-d') + ')، بشرط ' + mi(r'x-h>\sqrt{d/A}'),
-              'عامل ' + mi('(x-h)') + ' خارج الجذر، معامل ' + mi('x^2') + ' موجب',
-              'عامل ' + mi('(x-h)') + ' خارج الجذر، معامل ' + mi('x^2') + ' سالب']
-    short += table(['الشكل (+C)', 'الجواب', 'متى'], [frow(z, l) for z, l in zip(r, labels)], 'formula')
+              'عامل ' + mi('(x-h)') + ' خارج الجذر، معامل ' + mi('x^2') + ' موجب، ' + mi('d>0'),
+              'عامل ' + mi('(x-h)') + ' خارج الجذر، معامل ' + mi('x^2') + ' سالب، ' + mi('d>0')]
+    short += table(['الشكل', 'الجواب (+C)', 'متى'], [frow(z, l) for z, l in zip(r, labels)], 'formula')
     short += p('للمقارنة فقط (درس 3.4): معامل ' + mi('x^2') + ' سالب ولا عامل خارج الجذر ⇐ ' + mi(r'\sin^{-1}') + '.', 'small')
     memo = ul([mi('d') + ' هو قيمة الثلاثي عند المركز؛ لا تحفظ له قانونًا.',
                'العامل الخطي خارج الجذر ⇐ المعامل ' + mi(r'-\frac{c}{\sqrt d}') + ' دائمًا.',
@@ -297,8 +298,9 @@ def card_qaws():
                 p(mi('x^{n}') + ' مضروبة في ' + mi(r'\ln|ax|') + '، أو ' + mi(r'\ln|x|') + ' وحدها.'), short, memo, ex_, trap, paper, fallback)
 
 
-def sc_rafeeq():
-    """Shortcut box and memory line of card rafeeq (shared by the booklet and the full guide)."""
+def sc_rafeeq(sheet=False):
+    """Shortcut box and memory line of card rafeeq (shared by the booklet and the full guide);
+    sheet=True leaves out the optional results table (formula sheet)."""
     gf = s.Function('g')(x)
     functional(lambda: s.diff(x * gf - s.Integral(x * s.diff(gf, x), x), x) - gf, 'rafeeq identity')
     short = md(r'\int f^{-1}(x)\,dx=x\,f^{-1}(x)-\int x\,\big(f^{-1}\big)'"'"r'(x)\,dx')
@@ -306,14 +308,15 @@ def sc_rafeeq():
     m1 = formula('x/sqrt(c+x**2)', 'sqrt(c+x**2)', var='x', branches=('t', '-t'), pos=('c',), label='micro +')
     m2 = formula('x/sqrt(c-x**2)', '-sqrt(c-x**2)', var='x', branches=('sqrt(c)*t/(1+t)',), pos=('c',), label='micro -')
     m3 = formula('x/(c+x**2)', 'log(c+x**2)/2', var='x', branches=('t',), pos=('c',), label='micro ln +')
-    m4 = formula('x/(c-x**2)', '-log(c-x**2)/2', var='x', branches=('sqrt(c)*t/(1+t)',), pos=('c',), label='micro ln -')
+    m4 = formula('x/(c-x**2)', '-log(Abs(c-x**2))/2', var='x', branches=('sqrt(c)*t/(1+t)', 'sqrt(c)+t'), pos=('c',), label='micro ln -')
     short += p('التكامل الباقي يُحسم غالبًا بأحد هذه السطور:') + table(['التكامل', 'الجواب (+C)'], [frow(z, None) for z in (m1, m2, m3, m4)], 'formula compact')
     rows = [formula('asin(x)', 'x*asin(x)+sqrt(1-x**2)', var='x', branches=('t/(1+t)', '-t/(1+t)'), label='r asin'),
             formula('atan(x)', 'x*atan(x)-log(1+x**2)/2', var='x', branches=('x',), label='r atan'),
             formula('asec(x)', 'x*asec(x)-acosh(x)', var='x', branches=('1+t',), label='r asec'),
             formula('acosh(x)', 'x*acosh(x)-sqrt(x**2-1)', var='x', branches=('1+t',), label='r acosh'),
             formula('atanh(x)', 'x*atanh(x)+log(1-x**2)/2', var='x', branches=('t/(1+t)', '-t/(1+t)'), label='r atanh')]
-    short += p('نتائج للتحقق السريع (لا يلزم حفظها):', 'small') + table(['التكامل', 'الجواب (+C)'], [frow(z, None) for z in rows], 'formula compact')
+    if not sheet:
+        short += p('نتائج للتحقق السريع (لا يلزم حفظها):', 'small') + table(['التكامل', 'الجواب (+C)'], [frow(z, None) for z in rows], 'formula compact')
     memo = p('الرفيق دائمًا ' + mi('x') + ': نضرب ' + mi('x') + ' في الدالة، ثم نطرح تكامل ' + mi('x') + ' في مشتقتها.')
     return short, memo
 
@@ -503,7 +506,7 @@ def sc_reduce():
     b1 = formula('sec(x)', 'log(Abs(sec(x)+tan(x)))', var='x', branches=('t/(1+t)',), label='sec base')
     b2 = formula('tan(x)', 'log(Abs(sec(x)))', var='x', branches=('t/(1+t)',), label='tan base')
     short += table(['التكامل', 'الجواب (+C)'], [frow(z, None) for z in (b1, b2)], 'formula compact')
-    memo = p('tan: أسس فردية نازلة بإشارات متناوبة، والنهاية ' + mi(r'\pm x') + ' إذا كان الأس زوجيًا، أو '
+    memo = p('tan: الأسس تنزل 2 كل مرة (' + mi(r'm-1,\ m-3,\ \ldots') + ') بإشارات متناوبة، والنهاية ' + mi(r'\pm x') + ' إذا كان الأس زوجيًا، أو '
              + mi(r'\pm\ln\left|\sec x\right|') + ' إذا كان فرديًا.')
     return short, memo
 

@@ -1,16 +1,21 @@
 {
  "document": "src/guide.katex.html",
  "pdf": "out/guide/MATH111_Quiz2_Guide.pdf",
- "formulas_scanned": 2022,
+ "formulas_scanned": 2489,
  "held_checked": 10,
  "avoid_checked": 7,
- "used_items": 164,
+ "used_items": 167,
  "failures": [],
  "for_manual_review": [
   {
    "check": "same shape in a formula",
    "item": "H01",
    "formula": "\\int \\frac{1}{\\sqrt{9 x^{2} + 36 x + 45}}\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H01",
+   "formula": "\\displaystyle \\int \\frac{1}{\\sqrt{9 x^{2} + 36 x + 45}}\\,dx"
   },
   {
    "check": "same shape in a formula",
@@ -50,6 +55,16 @@
   {
    "check": "same shape in a formula",
    "item": "H03",
+   "formula": "\\displaystyle \\int \\sin^{2} x \\cos^{5} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\int \\sin^{3} x \\cos^{4} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
    "formula": "\\displaystyle \\sin^{3}x\\cos^{4}x=(1-\\cos^{2}x)\\cos^{4}x\\sin x"
   },
   {
@@ -65,7 +80,7 @@
   {
    "check": "same shape in a formula",
    "item": "H03",
-   "formula": "\\sin^2x\\cos^4x=(\\sin x\\cos x)^2\\cos^2x=\\frac14\\sin^22x\\cdot\\frac{1+\\cos2x}{2}"
+   "formula": "\\displaystyle \\int \\sin^{2} x \\cos^{4} x\\,dx"
   },
   {
    "check": "same shape in a formula",
@@ -86,6 +101,21 @@
    "check": "same shape in a formula",
    "item": "H03",
    "formula": "\\displaystyle \\int\\sin^{2}x,\\ \\cos^{4}x,\\ \\sin^{2}x\\cos^{2}x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^2x\\cos^4x=(\\sin x\\cos x)^2\\cos^2x=\\frac14\\sin^22x\\cdot\\frac{1+\\cos2x}{2}"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^{3}x\\cos^{4}x=(1-\\cos^{2}x)\\cos^{4}x\\sin x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^{2}x\\cos^{4}x=\\frac18\\left(\\sin^{2}2x+\\sin^{2}2x\\cos2x\\right)"
   },
   {
    "check": "used question of the same shape, several numbers changed",
@@ -116,6 +146,12 @@
    "item": "H03",
    "used": "N52-E2-4",
    "where": "U-T3 drill 2"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X02",
+   "where": "day 6 warm-up"
   },
   {
    "check": "used question of the same shape, several numbers changed",
@@ -153,6 +189,11 @@
   {
    "check": "same shape in a formula",
    "item": "H10",
+   "formula": "\\displaystyle \\int \\tan^{3} x \\sec^{6} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
    "formula": "\\displaystyle \\tan^{3}x\\sec^{6}x=\\tan^{3}x\\,(1+\\tan^{2}x)^{2}\\sec^{2}x"
   },
   {
@@ -173,17 +214,22 @@
   {
    "check": "same shape in a formula",
    "item": "H10",
-   "formula": "\\tan^4x=(\\sec^2x-1)^2"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
    "formula": "\\int \\tan^{5} x \\sec^{5} x\\,dx"
   },
   {
    "check": "same shape in a formula",
    "item": "H10",
+   "formula": "\\displaystyle \\int \\tan^{5} x \\sec^{3} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
    "formula": "\\displaystyle \\tan^{5}x\\sec^{3}x=(\\sec^{2}x-1)^{2}\\sec^{2}x\\cdot\\sec x\\tan x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\int \\tan^{5} x \\sec^{5} x\\,dx"
   },
   {
    "check": "same shape in a formula",
@@ -204,6 +250,26 @@
    "check": "same shape in a formula",
    "item": "H10",
    "formula": "\\int\\tan^{4}x\\,dx=\\int\\tan^{2}x\\,(\\sec^{2}x-1)\\,dx=\\frac{\\tan^{3}x}{3}-\\int\\tan^{2}x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\tan^4x=(\\sec^2x-1)^2"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\tan^{3}x\\sec^{6}x=\\tan^{3}x\\,(1+\\tan^{2}x)^{2}\\sec^{2}x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\tan^{5}x\\sec^{3}x=(\\sec^{2}x-1)^{2}\\sec^{2}x\\cdot\\sec x\\tan x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\tan^{5}x\\sec^{5}x=(\\sec^{2}x-1)^{2}\\sec^{4}x\\cdot\\sec x\\tan x"
   },
   {
    "check": "used question of the same shape, several numbers changed",
@@ -238,12 +304,22 @@
   {
    "check": "same shape in a formula",
    "item": "H06",
+   "formula": "\\displaystyle \\cos3x\\cos x=\\frac12\\left[\\cos2x+\\cos4x\\right]"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H06",
    "formula": "\\frac12[\\cos2x+\\cos4x]"
   },
   {
    "check": "same shape in a formula",
    "item": "H06",
-   "formula": "\\displaystyle \\cos3x\\cos x=\\frac12\\left[\\cos2x+\\cos4x\\right]"
+   "formula": "\\cos3x\\cos x=\\frac12\\left[\\cos2x+\\cos4x\\right]"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H06",
+   "formula": "\\displaystyle \\sin6x\\sin2x=\\frac12\\left[\\cos4x-\\cos8x\\right]"
   }
  ]
 }

@@ -154,7 +154,8 @@
   "domain": "x>1/2",
   "case": "C42-D",
   "section": "4.2",
-  "note": "log means log base 10 in the exam"
+  "note": "log means log base 10 in the exam; log means base 10 (qtex shows log, q stores ln/ln10)",
+  "qtex": "\\cosh^{-1}\\left(3^{2 x - 1}\\right) + \\log\\left|\\operatorname{csch}\\left(\\frac{x}{2}\\right)\\right|"
  },
  {
   "id": "1446-S1-SE-Q1.1",
@@ -233,7 +234,8 @@
   "domain": "|x|>1",
   "case": "C42-D",
   "section": "4.2",
-  "note": "log means log base 10 in the exam"
+  "note": "log means log base 10 in the exam; log means base 10 (qtex shows log, q stores ln/ln10)",
+  "qtex": "\\cosh^{-1}\\left(3^{x^{2} - 1}\\right) + \\log\\left|\\tanh 2 x\\right|"
  },
  {
   "id": "1446-S2-SE-Q1.1",

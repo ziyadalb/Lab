@@ -1,24 +1,30 @@
-"""المذكرة الكاملة — صفحات الأيام، سرعة الاختصار، المراجعة المخلوطة، ورقة القوانين، بطاقة القرار، إذا علقت، سجل الأخطاء، الملحق."""
+"""المذكرة الكاملة — صفحات الأيام، سرعة الاختصار، المراجعة المخلوطة، ورقة القوانين، بطاقة القرار، إذا علقت، سجل الأخطاء،
+سلّم المساعدة (التلميح وأول خطوة لكل تمرين)، المفاتيح، الملحق."""
 import json
 from pathlib import Path
 
 import booklet as B
-from booklet import final, sc_dawaran, sc_even, sc_lamda, sc_nisfayn, sc_pascal, sc_prod, sc_qaws, sc_rafeeq, sc_reduce, \
+from booklet import sc_dawaran, sc_even, sc_lamda, sc_nisfayn, sc_pascal, sc_prod, sc_qaws, sc_rafeeq, sc_reduce, \
     sc_six, sc_small, sc_square, sc_twins
 from booklet_engine import HOLD, ITEMS, LOG, ans_tex, q_tex
-from guide_kit import ALG_SEEN, DAYS as UNIT_DAYS, pgref, question, rich
-from html_kit import box, chip, en, lines, link, md, mi, p, table, ul
+from guide_kit import ALG_SEEN, DAYS as UNIT_DAYS, DRILLS_N, HELP, TRY_KEYS, final, pgref, rich
+from html_kit import box, chip, lines, link, md, mi, p, table, ul
 
 ROOT = Path(__file__).resolve().parent.parent
 
-EXTRA_TOC = {3: [('speed42', 'سرعة الاختصار: 4.2')], 5: [('speed51', 'سرعة الاختصار: 5.1')],
-             6: [('speed52', 'سرعة الاختصار: 5.2'), ('mockA', 'الاختبار التجريبي A')],
-             7: [('mixed', 'المراجعة المخلوطة'), ('mockB', 'الاختبار التجريبي B')]}
+TITLES = {'speed42': 'سرعة الاختصار: 4.2', 'speed51': 'سرعة الاختصار: 5.1', 'speed52': 'سرعة الاختصار: 5.2',
+          'mockA': 'الاختبار التجريبي A', 'mixed': 'المراجعة المخلوطة', 'mockB': 'الاختبار التجريبي B'}
+# a speed drill opens the day after its lesson ends (retrieval after a night); mocks and mixed review close the last days
+DAY_START = {3: ['speed42'], 5: ['speed51'], 7: ['speed52']}
+DAY_END = {6: ['mockA'], 7: ['mixed', 'mockB']}
 END_TOC = [('formulas', 'ورقة القوانين والاختصارات'), ('decide', 'بطاقة القرار: أي نوع؟'), ('stuck', 'إذا علقت'),
-           ('errlog', 'سجل الأخطاء'), ('appendix', 'ملحق: المصادر والتحقق')]
+           ('errlog', 'سجل الأخطاء'), ('help', 'سلّم المساعدة: التلميح وأول خطوة لكل تمرين'),
+           ('keys', 'المفاتيح: الإحماء، سرعة الاختصار، المراجعة المخلوطة، «جرّب»'),
+           ('appendix', 'ملحق: المصادر والتحقق')]
 
-WARM = {2: ['1445-S2-SE-Q1.1', 'N42-E1-3'], 3: ['N42-E1-2', 'N42-X2-04'], 4: ['N42-X1-5', '1445-S2-SE-Q2.2'],
-        5: ['N51-X06', '1445-S2-SE-Q1.2'], 6: ['1446-S1-FE-Q2.2', 'N42-X1-6']}
+# two review questions per day: one from yesterday's types, one from an older day (spaced retrieval)
+WARM = {2: ['1445-S2-SE-Q1.1', 'N42-X2-04'], 3: ['G-38', 'N42-X1-5'], 4: ['1445-S2-SE-Q2.2', 'N42-E1-2'],
+        5: ['1445-S2-FE-Q2.2', 'N51-X06'], 6: ['N52-X02', '1446-S1-FE-Q2.2'], 7: ['N52-E4-1', 'N42-X1-6']}
 
 SPEED = {
     'speed42': ('4.2', [('N42-X2-13', 'النوع 10: $h=-3$، $d=-9$ ⇐ cosh، $a=3$'),
@@ -53,51 +59,81 @@ MIXED = [('1445-S2-FE-Q1.3', 'النوعان 1 و 2'), ('1446-S2-SE-Q1.1', 'ال
          ('N42-X1-2', 'النوع 2: ضرب'), ('G-29', 'النوع 10'), ('G-30', 'النوع 5'), ('G-31', 'النوع 12'), ('G-32', 'النوع 19'),
          ('G-37', 'النوع 16'), ('G-33', 'النوع 23'), ('G-34', 'النوع 27'), ('G-35', 'النوع 29')]
 
+WARM_KEYS = {}     # day -> answers of the two review questions (printed in the keys section)
+SPEED_KEYS = {}    # speed page -> rows of its key (printed in the keys section)
+MIXED_KEY = []     # rows of the mixed-review key
+
 
 def section(id_, title, inner, cls=''):
     return '<section class="chapter %s" id="%s"><h2>%s</h2>%s</section>' % (cls, id_, title, inner)
 
 
-def day_schedule(d, n_units):
-    rows = [['5 دقائق', 'اقرأ صفحة "كيف تستخدم المذكرة"' if d == 1 else '🔁 الإحماء تحت: اكتب الاختصارات من ذاكرتك وحل سؤالي المراجعة']]
-    for _, num, title in UNIT_DAYS.get(d, []):
-        rows.append(['25 دقيقة', 'النوع %d (%s): الفكرة ← المثال ← التمارين ← الحلول' % (num, title)])
-        rows.append(['5 دقائق', 'راحة: قم من مكانك واشرب ماء'])
-    for anchor, title in EXTRA_TOC.get(d, []):
-        if anchor.startswith('speed'):
-            rows.append(['10 دقائق', title])
-        elif anchor.startswith('mock'):
-            rows.append(['60 + 15 دقيقة', title + ' في الملف المنفصل، ثم التصحيح'])
-        elif anchor == 'mixed':
-            rows.append(['45 دقيقة', title])
+def unit_minutes(uid):
+    """Study time of one type: 25 minutes with three exercises, 20 with two (plus a 5-minute break)."""
+    return 25 if DRILLS_N.get(uid, 3) >= 3 else 20
+
+
+def day_extras(d):
+    return [(a, TITLES[a]) for a in DAY_START.get(d, []) + DAY_END.get(d, [])]
+
+
+def day_schedule(d):
+    rows, total = [], 0
+
+    def add(minutes, label, what):
+        nonlocal total
+        total += minutes
+        rows.append([label, what])
+    add(5, '5 دقائق', 'اقرأ صفحة "كيف تستخدم المذكرة"' if d == 1 else
+        '🔁 الإحماء تحت: اكتب الاختصارات من ذاكرتك، وابدأ سؤالي المراجعة')
+    for a in DAY_START.get(d, []):
+        add(10, '10 دقائق', '⚡ %s: رقم النوع وأول سطر فقط' % TITLES[a])
+    for uid, num, title in UNIT_DAYS.get(d, []):
+        m = unit_minutes(uid)
+        add(m + 5, '%d دقيقة + 5 راحة' % m, 'النوع %d: %s' % (num, title))
+    for a in DAY_END.get(d, []):
+        if a == 'mockA':
+            add(75, '60 + 15 دقيقة', 'الاختبار التجريبي A (الملف الثاني)، ثم صحّح A فقط')
+        elif a == 'mockB':
+            add(75, '60 + 15 دقيقة', 'الاختبار التجريبي B، ثم صحّح B')
+        elif a == 'mixed':
+            add(45, '45 دقيقة', 'المراجعة المخلوطة (12 سؤالًا بدون عناوين)')
     if d == 7:
-        rows.append(['20 دقيقة', 'اقرأ ورقة القوانين وسجل أخطائك'])
-    rows.append(['5 دقائق', 'سجّل أخطاء اليوم في سجل الأخطاء'])
-    return rows
+        add(20, '20 دقيقة', 'اقرأ ورقة القوانين وسجل أخطائك كله')
+    add(5, '5 دقائق', 'سجّل أخطاء اليوم في سجل الأخطاء')
+    return rows, total
 
 
-def warmup(d):
-    learned = [t for dd in sorted(UNIT_DAYS) if dd < d for _, _, t in UNIT_DAYS[dd]]
-    body = p('اكتب على ورقة جانبية، بدون ما تفتح المذكرة: اسم كل نوع درسته واختصاره في سطر.')
-    if learned:
-        body += p('<b>الأنواع اللي درستها:</b> ' + '، '.join(learned) + '.', 'small')
-    if d in WARM:
-        qs, keys = '', []
-        for k, item_id in enumerate(WARM[d], 1):
-            it = ITEMS[item_id]
-            qs += '<div class="ch"><b>مراجعة %d</b>%s%s%s</div>' % (k, chip(B.source_label(it), 'src'), md(q_tex(question_used(it, 'day %d warm-up' % d))),
-                                                                 lines(2, 'write tight'))
-            final(it, 'day %d warm-up' % d)
-            keys.append(mi(ans_tex(it, with_lhs=False).lstrip('= ')))
-        body += '<div class="chgrid">' + qs + '</div>'
-        body += '<div class="hint"><span class="flip">✅ الأجوبة: ' + ' &nbsp;|&nbsp; '.join(keys) + '</span></div>'
-    return box('memo', '🔁 الإحماء (5 دقائق)', body)
+def duration(minutes):
+    h, m = divmod(minutes, 60)
+    hours = {1: 'ساعة', 2: 'ساعتان', 3: '3 ساعات'}.get(h, '%d ساعات' % h)
+    if not m:
+        return hours
+    return '%s و%d %s' % (hours, m, 'دقائق' if 3 <= m <= 10 else 'دقيقة')
 
 
 def question_used(it, where):
     from booklet_engine import use
     use(it['id'], where)
     return it
+
+
+def warmup(d):
+    learned = [n for dd in sorted(UNIT_DAYS) if dd < d for _, n, _ in UNIT_DAYS[dd]]
+    body = p('اكتب على ورقة جانبية، بدون ما تفتح المذكرة: اسم كل نوع درسته واختصاره في سطر'
+             + (' (الأنواع 1–%d؛ تأكد من الأسماء في ' % max(learned) + link('toc', 'المحتويات') + ' بعد ما تكتب).' if learned else '.'))
+    if d in WARM:
+        qs, keys = '', []
+        for k, item_id in enumerate(WARM[d], 1):
+            it = ITEMS[item_id]
+            qs += '<div class="ch"><b>مراجعة %d</b>%s%s%s</div>' % (k, chip(B.source_label(it), 'src'), md(q_tex(question_used(it, 'day %d warm-up' % d))),
+                                                                 lines(3, 'write tight'))
+            final(it, 'day %d warm-up' % d)
+            keys.append(mi(r'\displaystyle ' + ans_tex(it, with_lhs=False).lstrip('= ')))
+        WARM_KEYS[d] = keys
+        body += '<div class="chgrid">' + qs + '</div>'
+        body += p('اكتب أول سطر على الأقل. الأجوبة في ' + link('k-warm-%d' % d, 'المفاتيح ص ' + pgref('k-warm-%d' % d)) + '.', 'small')
+    return box('memo', '🔁 الإحماء (5 دقائق)', body)
 
 
 def speed_page(anchor):
@@ -108,25 +144,27 @@ def speed_page(anchor):
         qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(q_tex(question_used(it, anchor))), lines(1, 'write short'))
         key.append([str(k), rich(hint), mi(r'\displaystyle ' + ans_tex(it, with_lhs=False).lstrip('= '))])
         final(it, anchor)
-    page = (p(rich('لا تحل. اكتب تحت كل سؤال <b>رقم النوع</b> و<b>الأرقام المهمة</b> فقط (مثل $u$ و $a$ و $p$). '
-                   'الهدف أن تعرف النوع في ثوانٍ. المفتاح في الصفحة التالية.'))
-            + '<div class="chgrid">' + qs + '</div>'
-            + '<section class="sols"><h4>مفتاح سرعة الاختصار: %s</h4>' % lesson
-            + table(['#', 'النوع والأرقام', 'الجواب (للتأكد فقط)'], key, 'answers') + '</section>')
+    SPEED_KEYS[anchor] = (lesson, key)
+    page = (p(rich('لا تحل. اكتب تحت كل سؤال <b>رقم النوع</b> و<b>أول سطر</b> فقط (مثل $u$ و $a$، أو $u$ و $dv$). '
+                   'الهدف أن تعرف النوع والبداية في ثوانٍ. المفتاح في ') + link('k-' + anchor, 'المفاتيح ص ' + pgref('k-' + anchor)) + '.')
+            + '<div class="chgrid">' + qs + '</div>')
     return section(anchor, '⚡ سرعة الاختصار: %s' % lesson, page, 'flow')
-
-
-def after_lesson(lesson):
-    return speed_page({'4.2': 'speed42', '5.1': 'speed51', '5.2': 'speed52'}[lesson])
 
 
 def mock_box(which):
     anchor = 'mock' + which
-    body = ul(['افتح ملف <b>الاختبارين التجريبيين</b>، الاختبار %s.' % which,
-               '60 دقيقة بالضبط (اضبط منبهًا)، بدون مذكرة وبدون ورقة قوانين وبدون آلة حاسبة.',
-               'بعد الوقت: صحّح من صفحة الحلول في نفس الملف، وسجّل كل غلطة في ' + link('errlog', 'سجل الأخطاء') + '.',
-               'أي نوع غلطت فيه: ارجع لصفحته في المذكرة وحل تمرينه الثالث مرة ثانية.'])
-    return section(anchor, '📝 الاختبار التجريبي %s' % which, box('warn', 'التعليمات', body), 'flow')
+    if which == 'A':
+        items = ['افتح ملف <b>الاختبارين التجريبيين</b>، الاختبار A.',
+                 '60 دقيقة بالضبط (اضبط منبهًا)، بدون مذكرة وبدون ورقة قوانين وبدون آلة حاسبة.',
+                 'بعد الوقت صحّح <b>A فقط</b> من صفحة حلوله، وسجّل كل غلطة في ' + link('errlog', 'سجل الأخطاء')
+                 + '. حلول B بعد فاصل ثاني: لا تفتحها قبل ما تحل B بكرة.',
+                 'أي نوع غلطت فيه: ارجع لصفحته، واقرأ ⚡ و🧱، وحل تمرينه الأخير مرة ثانية.']
+    else:
+        items = ['افتح الملف نفسه، الاختبار B. نفس الشروط: 60 دقيقة، بدون مذكرة وبدون قوانين وبدون آلة.',
+                 'بعد الوقت صحّح B من صفحة حلوله، وسجّل أخطاءك في ' + link('errlog', 'سجل الأخطاء') + '.',
+                 'أي نوع غلطت فيه: ارجع لصفحته، واقرأ ⚡ و🧱، وحل تمرينه الأخير مرة ثانية.',
+                 'آخر شي اليوم: اقرأ سجل أخطائك كله، ثم ' + link('formulas', 'ورقة القوانين') + '.']
+    return section(anchor, '📝 الاختبار التجريبي %s' % which, box('warn', 'التعليمات', ul(items)), 'flow')
 
 
 def mixed_page():
@@ -136,20 +174,21 @@ def mixed_page():
         qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(q_tex(question_used(it, 'mixed review'))), lines(4, 'write tight'))
         key.append([str(k), rich(kind), mi(r'\displaystyle ' + ans_tex(it, with_lhs=False).lstrip('= '))])
         final(it, 'mixed review')
-    page = (p('12 سؤالًا من الدروس الثلاثة بدون عناوين، مثل الكويز. لكل سؤال: حدّد النوع، ثم حل. الوقت المقترح 45 دقيقة.')
-            + '<div class="chgrid">' + qs + '</div>'
-            + '<section class="sols"><h4>أجوبة المراجعة المخلوطة</h4>'
-            + p('إذا اختلف جوابك: اشتقه؛ إذا رجع السؤال فهو صحيح (قد يختلف بثابت). وإلا افتح صفحة النوع.', 'small')
-            + table(['#', 'النوع', 'الجواب'], key, 'answers') + '</section>')
+    MIXED_KEY[:] = key
+    page = (p('12 سؤالًا من الدروس الثلاثة بدون عناوين، مثل الكويز. لكل سؤال: حدّد النوع، اكتب أول سطر، ثم حل. الوقت المقترح 45 دقيقة. '
+              'الأجوبة في ' + link('k-mixed', 'المفاتيح ص ' + pgref('k-mixed')) + '.')
+            + '<div class="chgrid">' + qs + '</div>')
     return section('mixed', '🔀 المراجعة المخلوطة', page)
+
+
+def day_start(d):
+    return ''.join(speed_page(a) for a in DAY_START.get(d, []))
 
 
 def after_day(d):
     out = ''
-    if d == 6:
-        out += mock_box('A')
-    if d == 7:
-        out += mixed_page() + mock_box('B')
+    for a in DAY_END.get(d, []):
+        out += mixed_page() if a == 'mixed' else mock_box(a[-1])
     return out
 
 
@@ -160,11 +199,11 @@ def formulas():
                        ('5.2', [sc_pascal, sc_even, sc_reduce, sc_prod])]:
         inner = p('<b>الخطي و DI:</b> ' + rich('$\\int(px+q)\\,g\\,dx=(px+q)G_1-pG_2$؛ ومع $x^2$ أو $x^3$ جدول DI.')) if title == '5.1' else ''
         for fn in fns:
-            short, _ = fn()
+            short, _ = fn(sheet=True) if fn is sc_rafeeq else fn()
             inner += '<div class="fsheet">' + short + '</div>'
         parts.append('<h3>%s</h3>' % title + inner)
     return section('formulas', '📋 ورقة القوانين والاختصارات',
-                   p('اقرأها يوم 26 ومرة صباح الكويز. لا تُدخل معك القاعة.', 'small') + ''.join(parts))
+                   p('اقرأها يوم 26 ومرة صباح الكويز. لا تُدخلها معك القاعة.', 'small') + ''.join(parts), 'fsheets')
 
 
 DECIDE = [
@@ -185,27 +224,61 @@ DECIDE = [
 def decide():
     num_to = {num: (uid, title) for d in UNIT_DAYS.values() for uid, num, title in d}
     rows = [[mi(r'\displaystyle ' + shape), link(num_to[n][0], '%d. %s' % (n, num_to[n][1])), pgref(num_to[n][0])] for shape, n in DECIDE]
-    return section('decide', '🧭 بطاقة القرار: أي نوع؟', p('شوف شكل السؤال، وروح للنوع.') + table(['شكل السؤال', 'النوع', 'ص'], rows, 'answers'))
+    return section('decide', '🧭 بطاقة القرار: أي نوع؟',
+                   p('شوف شكل السؤال، وروح للنوع. إذا شكّيت بين نوعين، اقرأ «العلامة» في صفحتيهما.') + table(['شكل السؤال', 'النوع', 'ص'], rows, 'answers'))
 
 
 def stuck():
     skills = '، '.join(link('alg-' + k, t) for k, t in ALG_SEEN.items())
-    body = ul(['<b>ما عرفت النوع؟</b> ' + link('decide', 'بطاقة القرار') + '.',
+    body = ul(['<b>ما عرفت النوع؟</b> ' + link('decide', 'بطاقة القرار') + '. اقرأ المطلوب (المشتقة أم التكامل) وشكل المقام أولًا.',
+               '<b>عرفت النوع وما عرفت تبدأ؟</b> اكتب سطر «في ورقة الكويز» من صفحة النوع: غالبًا $u$ و $du$، أو $u$ و $dv$.',
                '<b>عرفت النوع ونسيت الاختصار؟</b> استخدم 🧱 الطريقة الأساسية في صفحة النوع، أو ' + link('formulas', 'ورقة القوانين') + '.',
                '<b>الجبر وقفك؟</b> صناديق 🧮: ' + skills + '.',
                '<b>جوابك يختلف عن الحل؟</b> اشتق جوابك. إذا رجع السؤال فهو صحيح (قد يختلف بثابت). وإلا ابحث عن الإشارة أو المعامل.',
-               rich('<b>tanh⁻¹ أم coth⁻¹؟</b> قارن $|u|$ مع $a$.'),
-               rich('<b>نسيت الإشارة في sin و cos؟</b> $\\int\\sin=-\\cos$ و $\\int\\cos=\\sin$؛ و sinh و cosh بدون سالب.'),
-               rich('<b>في الكويز:</b> ابدأ بالسؤال الأسهل (المشتقات عادة أسرع). لا تترك سؤالًا فاضيًا: الخطوة الأولى الصحيحة '
-                    '(مثل $u$ و $du$، أو $u$ و $dv$) أفضل من ورقة فاضية.')])
-    return section('stuck', '🆘 إذا علقت', body)
+               '<b>tanh⁻¹ أم coth⁻¹؟</b> قارن $|u|$ مع $a$.',
+               '<b>نسيت الإشارة في sin و cos؟</b> $\\int\\sin=-\\cos$ و $\\int\\cos=\\sin$؛ و sinh و cosh بدون سالب.',
+               '<b>في الكويز:</b> ابدأ بالسؤال الأسهل (المشتقات عادة أسرع). لا تترك سؤالًا فاضيًا: الخطوة الأولى الصحيحة '
+               '(مثل $u$ و $du$، أو $u$ و $dv$) أفضل من ورقة فاضية.'])
+    return section('stuck', '🆘 إذا علقت', rich(body))
 
 
 def errlog():
     rows = [['', '', '', ''] for _ in range(14)]
     intro = p('كل غلطة تكتبها هنا مرة واحدة. نوع الغلطة: <b>فهم</b> (ما فهمت الفكرة)، <b>اختيار</b> (اخترت النوع الغلط)، '
-              '<b>استرجاع</b> (نسيت القانون)، <b>جبر</b> (حساب أو إشارة). راجع هذه الصفحة يوم 26.')
+              '<b>استرجاع</b> (نسيت القانون أو البداية)، <b>جبر</b> (حساب أو إشارة). راجع هذه الصفحة كل صباح ويوم 26.')
     return section('errlog', '📒 سجل الأخطاء', intro + table(['التمرين (والصفحة)', 'وش صار', 'نوع الغلطة', 'الصح'], rows, 'errlog'))
+
+
+def help_ladder():
+    intro = (p('لكل تمرين ثلاث درجات مساعدة. <b>افتح درجة وحدة بس</b>، ثم ارجع للتمرين واكتب خطوتك التالية بنفسك. '
+               'إذا علقت مرة ثانية، افتح الدرجة اللي بعدها.')
+             + ul(['<b>💡 الدرجة 1: تلميح العلامة</b> — الجدول الأول هنا.',
+                   '<b>✍️ الدرجة 2: أول خطوة</b> — الجدول الثاني هنا. في التمرين الموجّه هي الخطوة اللي بعد البداية الجاهزة.',
+                   '<b>✅ الدرجة 3: الحل الكامل</b> — في الصفحة اللي بعد تمارين النوع.']))
+    h_rows = [['<span id="h-%s"></span>%s' % (e['dtag'], link('d-' + e['dtag'], '%d.%s ↩' % (e['num'], e['tag']))), rich(e['hint'])]
+              for e in HELP]
+    f_rows = [['<span id="f-%s"></span>%s' % (e['dtag'], link('d-' + e['dtag'], '%d.%s ↩' % (e['num'], e['tag']))),
+               mi(e['step'][0]), rich(e['step'][1])] for e in HELP]
+    return section('help', '🪜 سلّم المساعدة', intro
+                   + '<h3>💡 الدرجة 1: تلميح العلامة</h3>' + table(['النوع.التمرين', 'التلميح'], h_rows, 'help1')
+                   + '<h3>✍️ الدرجة 2: أول خطوة</h3>' + table(['النوع.التمرين', 'أول خطوة', 'ليش؟'], f_rows, 'help2'))
+
+
+def keys():
+    w_rows = [['<span id="k-warm-%d"></span>اليوم %d' % (d, d)] + WARM_KEYS[d] for d in sorted(WARM_KEYS)]
+    t_rows = [['<span id="k-%s"></span>%s' % (skill, link('alg-' + skill, title + ' ↩')), mi(r'\displaystyle ' + ans)]
+              for skill, title, ans in TRY_KEYS]
+    out = '<h3>أجوبة الإحماء</h3>' + table(['اليوم', 'مراجعة 1', 'مراجعة 2'], w_rows, 'answers')
+    for anchor in ('speed42', 'speed51', 'speed52'):
+        lesson, key = SPEED_KEYS[anchor]
+        out += ('<h3 id="k-%s">مفتاح سرعة الاختصار: %s %s</h3>' % (anchor, lesson, link(anchor, '↩'))
+                + table(['#', 'النوع وأول سطر', 'الجواب (للتأكد فقط)'], key, 'answers'))
+    out += ('<h3 id="k-mixed">أجوبة المراجعة المخلوطة %s</h3>' % link('mixed', '↩')
+            + p('للتكاملات: اشتق جوابك؛ إذا رجع السؤال فهو صحيح (قد يختلف بثابت). للمشتقات: قارن حدًا حدًا. '
+                'وإذا ما ضبط، افتح صفحة النوع.', 'small')
+            + table(['#', 'النوع', 'الجواب'], MIXED_KEY, 'answers'))
+    out += '<h3>أجوبة «جرّب» في صناديق الجبر</h3>' + table(['المهارة', 'الجواب'], t_rows, 'answers')
+    return section('keys', '🔑 المفاتيح', out)
 
 
 def appendix():
@@ -213,17 +286,19 @@ def appendix():
     gen = json.loads((ROOT / 'data' / 'generated_items.json').read_text(encoding='utf-8'))
     rows = [['الاختبارات المفهرسة', '18 (6 أولى، 6 ثانية، 6 نهائية) من ثلاثة ملفات 1445–1447'],
             ['أجزاء داخل النطاق في الاختبارات', '%d جزءًا، منها %d فريدًا' % (summ['in_scope_exam_parts'], summ['in_scope_exam_unique'])],
-            ['عناصر المذكرة', '%d مثالًا و %d تمرينًا في 4.2 و 5.1 و 5.2' % (summ['notes_items']['notes_example'], summ['notes_items']['notes_exercise'])],
-            ['تدريبات إضافية من إعداد هذه المذكرة', '%d، كل جواب متحقق بالطريقة نفسها' % len(gen)],
+            ['أمثلة وتمارين مذكرة د. طارق في الأقسام الثلاثة', '%d مثالًا و %d تمرينًا' % (summ['notes_items']['notes_example'], summ['notes_items']['notes_exercise'])],
+            ['في هذه المذكرة', '29 نوعًا، 36 مثالًا محلولًا بالاختصار وبالطريقة الأساسية، و %d تمرينًا بحلول كاملة' % len(HELP)],
+            ['تدريبات إضافية من إعداد هذه المذكرة', '%d، مكتوب عليها «تدريب إضافي»، وكل جواب متحقق بالطريقة نفسها' % len(gen)],
             ['الأسئلة المحجوزة للاختبارين التجريبيين', '%d، بالمعرفات <bdi dir="ltr">%s</bdi>؛ لا تظهر هنا'
              % (len(HOLD['hids']), ', '.join(HOLD['hids']))],
-            ['فحوص البناء', '%d فحصًا ناجحًا لكل صيغة وخطوة وجواب في هذه المذكرة' % len(LOG)]]
+            ['فحوص الحاسوب', '%d فحصًا ناجحًا: كل جواب، وكل قانون، وكل مساواة في الخطوات' % len(LOG)]]
     notes = ul(['<b>K1:</b> المذكرة ص58 وص60 تكتب إشارة مشتقة coth⁻¹ وتكاملها بالعكس؛ الصيغة اللوغاريتمية في المذكرة نفسها (ص57) '
                 'تعطي الموجبة. مفتاح 1445 تبع المذكرة ومفتاح 1446 استخدم الموجبة. اسأل الدكتور.',
                 '<b>K2:</b> بعض الحلول الرسمية تحذف القيمة المطلقة في sech⁻¹ و csch⁻¹ و ln، فتصح على جهة واحدة من المجال.',
-                '<b>K3:</b> خطأ مطبعي في المذكرة ص65 (سطر في مثال x sec⁻¹x) لا يغير الجواب.'])
+                '<b>K3:</b> خطأ مطبعي في المذكرة ص65 (سطر في مثال x sec⁻¹x) لا يغير الجواب.',
+                'سطور «ليش؟» والكلام العربي كتبناها نحن؛ الحاسوب يفحص الرياضيات فقط.'])
     return section('appendix', 'ملحق: المصادر والتحقق', table(['البند', 'القيمة'], rows, 'answers') + notes)
 
 
 def end_sections():
-    return formulas() + decide() + stuck() + errlog() + appendix()
+    return formulas() + decide() + stuck() + errlog() + help_ladder() + keys() + appendix()

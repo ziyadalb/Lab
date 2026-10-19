@@ -18,7 +18,7 @@
 @page { size: A4; margin: 15mm 15mm 17mm 15mm;
   @bottom-center { content: counter(page); font-family: 'Plex Arabic', sans-serif; font-size: 11pt; color: #555; } }
 html { background: var(--paper); }
-body { font-family: 'Plex Arabic', 'DejaVu Sans', sans-serif; font-size: 12pt; line-height: 1.62; color: var(--ink);
+body { font-family: 'Plex Arabic', 'DejaVu Sans', sans-serif; font-size: 12pt; line-height: 1.55; color: var(--ink);
        margin: 0; background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 h1 { font-size: 30pt; margin: 6mm 0 2mm; line-height: 1.3; }
 h2 { font-size: 18pt; margin: 0 0 3mm; padding-bottom: 1.5mm; border-bottom: 2.5px solid var(--accent); color: var(--accent); }
@@ -49,8 +49,8 @@ b { font-weight: 700; }
 .cover .meta { margin-top: auto; font-size: 12pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 2mm; }
 .toc { break-before: page; }
 .toc ol { list-style: none; padding: 0; margin: 0; }
-.toc li a { display: flex; justify-content: space-between; border-bottom: 1px dotted #bbb; color: var(--ink); padding: 0.6mm 0; }
-.toc li.lvl1 { font-weight: 700; margin-top: 2mm; }
+.toc li a { display: flex; justify-content: space-between; border-bottom: 1px dotted #bbb; color: var(--ink); padding: 0.2mm 0; }
+.toc li.lvl1 { font-weight: 700; margin-top: 1.2mm; }
 .toc li.lvl2 { padding-inline-start: 7mm; font-size: 12pt; }
 .toc .pg { font-variant-numeric: tabular-nums; min-width: 10mm; text-align: left; }
 
@@ -101,7 +101,7 @@ table.compact td { padding: 0.6mm 2mm; }
 
 /* drills and writing space */
 .drill { border: 1.5px solid var(--line); border-radius: 2.5mm; padding: 1.5mm 3mm; margin: 2.4mm 0; break-inside: avoid; }
-.drill-head { display: flex; gap: 3mm; align-items: center; }
+.drill-head { display: flex; gap: 2mm 3mm; align-items: center; flex-wrap: wrap; }
 .drill-head .help { margin-inline-start: auto; font-size: 12pt; }
 .write { height: calc(var(--n) * 9.5mm); background: repeating-linear-gradient(to bottom, transparent 0, transparent 9mm, #c8c8c8 9mm, #c8c8c8 9.5mm);
          margin: 1mm 0; }
@@ -110,7 +110,7 @@ table.compact td { padding: 0.6mm 2mm; }
 .chgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 5mm; }
 .ch { border: 1px solid var(--line); border-radius: 2mm; padding: 0.6mm 2.5mm; break-inside: avoid; line-height: 1.5; }
 .ch .md { margin: 0.4mm 0; }
-.ch .write.short { height: 8mm; }
+.ch .write.short { height: 8mm; background: none; border-bottom: 1px solid #c8c8c8; }
 .drill .md { margin: 1mm 0; }
 .fcgrid { display: grid; grid-template-columns: 1fr; gap: 0; }
 .fc { display: grid; grid-template-columns: 62% 38%; border: 1px solid var(--line); border-top: 0; break-inside: avoid; }
@@ -145,9 +145,12 @@ ul { padding-inline-start: 6mm; }
 .algsteps { margin: 1mm 0; padding-inline-start: 7mm; }
 .algsteps li { margin: 1.2mm 0; }
 .algref { color: var(--alg); margin: 1.5mm 0; }
-.memo-inline { margin-top: 2mm; padding: 1mm 3mm; background: var(--memo-tint); border-inline-start: 3px solid var(--memo); border-radius: 1mm; }
-table.steps td:nth-child(1), table.contrast td:nth-child(1) { direction: ltr; text-align: left; }
-table.steps td:nth-child(1) { width: 60%; }
+.memo-inline { margin-top: 2mm; padding: 1mm 3mm; background: var(--memo-tint); border-inline-start: 3px solid var(--memo); border-radius: 1mm; break-inside: avoid; }
+table.contrast td:nth-child(1) { direction: ltr; text-align: left; }
+table.steps td.n { width: 6mm; text-align: center; color: var(--muted); font-weight: 700; padding-inline: 0.8mm; }
+table.steps td:nth-child(2) { direction: ltr; text-align: left; width: 58%; }
+table.steps tr.final td { background: var(--ok-tint); }
+table.steps tr.final td:nth-child(2) { box-shadow: inset 0 0 0 1.5px var(--ok); }
 table.steps tr, table.contrast tr { break-inside: avoid; }
 .chip.k-idea { border-color: var(--idea); } .chip.k-note { background: #f7f7f7; }
 .chip.k-alg { border-color: var(--alg); color: var(--alg); } .chip.k-ok { border-color: var(--ok); color: var(--ok); }
@@ -161,3 +164,26 @@ h4.drills-title { font-size: 15pt; margin: 6mm 0 1mm; padding-bottom: 1mm; borde
 .chapter.flow { break-before: auto; margin-top: 9mm; }
 .fsheet { break-inside: avoid; margin: 2mm 0 4mm; }
 table.errlog td { height: 13mm; }
+
+/* ---------------- guide v2: shortcut steps, help ladder, keys, isolation ---------------- */
+.mi .katex { white-space: nowrap; }                 /* never split an inline formula across lines */
+bdi.tx { unicode-bidi: isolate; direction: ltr; }   /* Latin math typed as text inside Arabic */
+.shortsteps { margin: 1.5mm 0 2mm; padding: 1mm 3mm 1.2mm; border-inline-start: 3px solid var(--accent); background: var(--accent-tint);
+              border-radius: 1.5mm; break-inside: avoid; }
+.shortsteps .sslbl { font-weight: 700; color: var(--accent); }
+.shortsteps ol { margin: 0.5mm 0 0; padding-inline-start: 6mm; }
+.shortsteps li { margin: 0.9mm 0; }
+p:has(+ table.steps), p:has(+ .shortsteps), p:has(+ table.di) { break-after: avoid; }
+.chip.ask { border-color: var(--accent); color: var(--accent); }
+.q > .chip { margin-inline-end: 1.5mm; }
+.ch > b { margin-inline-end: 2mm; }
+p.try { margin: 1.5mm 0 0; padding-top: 1mm; border-top: 1px dashed var(--alg); }
+table.help1 td:first-child, table.help2 td:first-child { width: 17mm; white-space: nowrap; text-align: center; }
+table.help2 td:nth-child(2) { direction: ltr; text-align: left; }
+table.help1 tr, table.help2 tr, table.glossary tr { break-inside: avoid; }
+table.glossary td:first-child { width: 45%; }
+.fsheets table.formula td, .fsheets table.formula th { padding: 0.7mm 2mm; }
+.fsheets .fsheet { margin: 1mm 0 2.5mm; }
+table.help1 td, table.help2 td { padding: 0.5mm 1.5mm; }
+.sol > .drill-head { border-bottom: 1px solid #d5d5d5; padding-bottom: 0.8mm; margin-bottom: 1mm; }
+.sol .drill-head .back { margin-inline-start: auto; }

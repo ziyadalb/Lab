@@ -40,7 +40,7 @@ def _strip(q):
 
 
 def q_tex(item):
-    body = tex(item['q'])
+    body = item.get('qtex') or tex(item['q'])  # qtex: shown as written in the exam (log base 10)
     if item['task'] == 'diff':
         return r'y = ' + body
     if item['task'] == 'defint':

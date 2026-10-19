@@ -107,6 +107,10 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I4 drill 3"
  },
+ "N42-X2-12": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-I4 drill 4"
+ },
  "N42-E2-4": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I5 example"
@@ -115,7 +119,7 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I5 drill 1"
  },
- "N42-X2-12": {
+ "G-39": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I5 drill 2"
  },
@@ -463,15 +467,15 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 2 warm-up"
  },
- "N42-E1-3": {
+ "N42-X2-04": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 2 warm-up"
  },
- "N42-E1-2": {
+ "G-38": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 3 warm-up"
  },
- "N42-X2-04": {
+ "N42-X1-5": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 3 warm-up"
  },
@@ -515,19 +519,19 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed42"
  },
- "N42-X1-5": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 4 warm-up"
- },
  "1445-S2-SE-Q2.2": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 4 warm-up"
  },
- "N51-X06": {
+ "N42-E1-2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "day 4 warm-up"
+ },
+ "1445-S2-FE-Q2.2": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 5 warm-up"
  },
- "1445-S2-SE-Q1.2": {
+ "N51-X06": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 5 warm-up"
  },
@@ -567,13 +571,21 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed51"
  },
+ "N52-X02": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "day 6 warm-up"
+ },
  "1446-S1-FE-Q2.2": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 6 warm-up"
  },
+ "N52-E4-1": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "day 7 warm-up"
+ },
  "N42-X1-6": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 6 warm-up"
+  "location": "day 7 warm-up"
  },
  "N52-X11": {
   "usage": "مستخدم في المذكرة الكاملة",
