@@ -133,9 +133,17 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-D1 ex1 short 1",
+   "f": "asinh(u)",
+   "F": "1/sqrt(u**2+1)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-D1 ex1 short 2",
    "claim": "diff(5*x-1,x) = 5",
    "residual": "0"
   },
@@ -143,7 +151,7 @@
    "kind": "derivative",
    "ok": true,
    "item": "N42-E1-1",
-   "label": "U-D1 ex1 short 2",
+   "label": "U-D1 ex1 short 3",
    "status": "symbolic"
   },
   {
@@ -175,25 +183,40 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-D1 ex2 short 1",
-   "claim": "diff(sqrt(x+2),x) = 1/(2*sqrt(x+2))",
-   "residual": "0"
-  },
-  {
-   "kind": "derivative",
-   "ok": true,
-   "item": "1447-S2-SE-Q1.2",
-   "label": "U-D1 ex2 short 2",
+   "f": "acsch(u)",
+   "F": "-1/(Abs(u)*sqrt(1+u**2))",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-D1 ex2 short 2",
+   "claim": "diff(sqrt(x+2),x) = 1/(2*sqrt(x+2))",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-D1 ex2 short 3",
    "claim": "1+sqrt(x+2)**2 = x+3",
    "residual": "0"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1447-S2-SE-Q1.2",
+   "label": "U-D1 ex2 short 4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1447-S2-SE-Q1.2",
+   "label": "U-D1 ex2 short 5",
+   "status": "symbolic"
   },
   {
    "kind": "arithmetic",
@@ -423,9 +446,17 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-D2 ex short 1",
+   "f": "6**u",
+   "F": "6**u*log(6)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-D2 ex short 2",
    "claim": "diff(acosh(2*x),x) = 2/sqrt(4*x**2-1)",
    "residual": "0"
   },
@@ -433,7 +464,7 @@
    "kind": "derivative",
    "ok": true,
    "item": "N42-E1-4",
-   "label": "U-D2 ex short 2",
+   "label": "U-D2 ex short 3",
    "status": "symbolic"
   },
   {
@@ -654,17 +685,32 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I1 ex1 short 1",
+   "f": "1/sqrt(u**2+a**2)",
+   "F": "asinh(u/a)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I1 ex1 short 2",
    "claim": "4*x**2+25 = (2*x)**2+5**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I1 ex1 short 3",
+   "claim": "diff(2*x,x) = 2",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-E2-3",
-   "label": "U-I1 ex1 short 2",
+   "label": "U-I1 ex1 short 4",
    "status": "symbolic"
   },
   {
@@ -752,9 +798,17 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I1 ex2 short 1",
+   "f": "c*x**(n-1)/sqrt((k*x**n)**2+a**2)",
+   "F": "c*asinh(k*x**n/a)/(n*k)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I1 ex2 short 2",
    "claim": "16*x**6 = (4*x**3)**2",
    "residual": "0"
   },
@@ -762,6 +816,27 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I1 ex2 short 2",
+   "claim": "3**2 = 9",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I1 ex2 short 3",
+   "claim": "5*x**(3-1) = 5*x**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I1 ex2 short 3",
+   "claim": "(4*x**3)**2 = 16*x**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I1 ex2 short 4",
    "claim": "Rational(5,3*4) = Rational(5,12)",
    "residual": "0"
   },
@@ -769,7 +844,7 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-X2-01",
-   "label": "U-I1 ex2 short 3",
+   "label": "U-I1 ex2 short 5",
    "status": "symbolic"
   },
   {
@@ -894,17 +969,39 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I2 ex1 short 1",
+   "f": "1/(a**2-u**2)",
+   "F": "atanh(u/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I2 ex1 short 2",
    "claim": "25-exp(2*x) = 5**2-exp(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I2 ex1 short 3",
+   "claim": "diff(exp(x),x) = exp(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I2 ex1 short 4",
+   "claim": "exp(log(5)) = 5",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-E2-2",
-   "label": "U-I2 ex1 short 2",
+   "label": "U-I2 ex1 short 5",
    "status": "symbolic"
   },
   {
@@ -943,23 +1040,45 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I2 ex2 short 1",
-   "claim": "4-25*cosh(x)**2 = 2**2-(5*cosh(x))**2",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N42-X2-06",
-   "label": "U-I2 ex2 short 2",
+   "f": "1/(a**2-u**2)",
+   "F": "acoth(u/a)/a",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I2 ex2 short 2",
+   "claim": "4-25*cosh(x)**2 = 2**2-(5*cosh(x))**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I2 ex2 short 3",
+   "claim": "diff(5*cosh(x),x) = 5*sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I2 ex2 short 4",
+   "claim": "5*cosh(0) = 5",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-06",
+   "label": "U-I2 ex2 short 5",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I2 ex2 short 5",
    "claim": "Rational(1,5)*Rational(1,2) = Rational(1,10)",
    "residual": "0"
   },
@@ -1078,16 +1197,31 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I3 ex short 1",
-   "claim": "x**4 = (x**2)**2",
+   "f": "1/(u*sqrt(a**2-u**2))",
+   "F": "-asech(Abs(u)/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I3 ex short 2",
+   "claim": "1/(x*sqrt(16-x**4)) = x/(x**2*sqrt(4**2-(x**2)**2))",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I3 ex short 1",
+   "label": "U-I3 ex short 3",
+   "claim": "diff(x**2,x) = 2*x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I3 ex short 3",
    "claim": "4**2 = 16",
    "residual": "0"
   },
@@ -1095,13 +1229,20 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-E2-5",
-   "label": "U-I3 ex short 2",
+   "label": "U-I3 ex short 4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-E2-5",
+   "label": "U-I3 ex short 5",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I3 ex short 2",
+   "label": "U-I3 ex short 5",
    "claim": "Rational(1,2)*(-Rational(1,4)) = -Rational(1,8)",
    "residual": "0"
   },
@@ -1278,25 +1419,40 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I4 ex short 1",
-   "claim": "exp(6*x) = exp(3*x)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S2-SE-Q2.7",
-   "label": "U-I4 ex short 2",
+   "f": "1/sqrt(b**(2*lam*x)+a**2)",
+   "F": "-acsch(b**(lam*x)/a)/(a*lam*log(b))",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I4 ex short 2",
-   "claim": "1/(1*3*log(E)) = Rational(1,3)",
+   "claim": "exp(6*x) = exp(3*x)**2",
    "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I4 ex short 3",
+   "claim": "exp(2*3*x) = exp(6*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I4 ex short 4",
+   "claim": "-1/(1*3*log(E)) = -Rational(1,3)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S2-SE-Q2.7",
+   "label": "U-I4 ex short 5",
+   "status": "symbolic"
   },
   {
    "kind": "arithmetic",
@@ -1426,9 +1582,17 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I5 ex short 1",
+   "f": "1/(sqrt(x)*sqrt(a**2+x))",
+   "F": "2*asinh(sqrt(x)/a)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I5 ex short 2",
    "claim": "2**2 = 4",
    "residual": "0"
   },
@@ -1436,7 +1600,7 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-E2-4",
-   "label": "U-I5 ex short 2",
+   "label": "U-I5 ex short 3",
    "status": "symbolic"
   },
   {
@@ -1554,17 +1718,32 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I6 ex short 2",
+   "f": "x/sqrt(c+x**2)",
+   "F": "sqrt(c+x**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I6 ex short 3",
    "claim": "diff(sqrt(25+x**2),x) = x/sqrt(25+x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I6 ex short 4",
+   "claim": "diff(2*asinh(x/5),x) = 2/sqrt(x**2+25)",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-X2-07",
-   "label": "U-I6 ex short 3",
+   "label": "U-I6 ex short 5",
    "status": "symbolic"
   },
   {
@@ -1665,9 +1844,15 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "functional",
    "ok": true,
    "label": "U-I7 ex short 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I7 ex short 2",
    "claim": "diff(acosh(x),x) = 1/sqrt(x**2-1)",
    "residual": "0"
   },
@@ -1675,7 +1860,7 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-X2-09",
-   "label": "U-I7 ex short 2",
+   "label": "U-I7 ex short 3",
    "status": "symbolic"
   },
   {
@@ -1774,24 +1959,39 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I8 ex1 short 1",
-   "claim": "-Rational(6,2) = -3",
-   "residual": "0"
+   "f": "1/sqrt(u**2-a**2)",
+   "F": "acosh(u/a)",
+   "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I8 ex1 short 2",
-   "claim": "9-18-16 = -25",
+   "claim": "-Rational(6,2*1) = -3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 ex1 short 3",
+   "claim": "(-3)**2+6*(-3)-16 = -25",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 ex1 short 4",
+   "claim": "x**2+6*x-16 = (x+3)**2-5**2",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "1446-S1-SE-Q2.2",
-   "label": "U-I8 ex1 short 3",
+   "label": "U-I8 ex1 short 5",
    "status": "symbolic"
   },
   {
@@ -1886,24 +2086,39 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I8 ex2 short 1",
-   "claim": "-Rational(6,2) = -3",
+   "f": "1/sqrt(u**2+a**2)",
+   "F": "asinh(u/a)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 ex2 short 2",
+   "claim": "-Rational(6,2*1) = -3",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I8 ex2 short 1",
-   "claim": "9-18+13 = 4",
+   "label": "U-I8 ex2 short 3",
+   "claim": "(-3)**2+6*(-3)+13 = 4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 ex2 short 4",
+   "claim": "x**2+6*x+13 = (x+3)**2+2**2",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "1445-S2-SE-Q2.7",
-   "label": "U-I8 ex2 short 2",
+   "label": "U-I8 ex2 short 5",
    "status": "symbolic"
   },
   {
@@ -2054,24 +2269,39 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-I9 ex short 1",
+   "f": "1/(u*sqrt(a**2-u**2))",
+   "F": "-asech(Abs(u)/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 ex short 2",
    "claim": "-Rational(2,2*(-1)) = 1",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I9 ex short 1",
-   "claim": "-1+2+3 = 4",
+   "label": "U-I9 ex short 3",
+   "claim": "-1**2+2*1+3 = 4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 ex short 4",
+   "claim": "-x**2+2*x+3 = 2**2-(x-1)**2",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-E2-8",
-   "label": "U-I9 ex short 2",
+   "label": "U-I9 ex short 5",
    "status": "symbolic"
   },
   {
@@ -2262,16 +2492,29 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "functional",
    "ok": true,
    "label": "U-P1 ex short 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P1 ex short 2",
+   "claim": "diff(3*x-2,x) = 3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P1 ex short 3",
    "claim": "integrate(sinh(x),x) = cosh(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P1 ex short 1",
+   "label": "U-P1 ex short 4",
    "claim": "integrate(cosh(x),x) = sinh(x)",
    "residual": "0"
   },
@@ -2279,7 +2522,7 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "1446-S1-SE-Q2.4",
-   "label": "U-P1 ex short 2",
+   "label": "U-P1 ex short 5",
    "status": "symbolic"
   },
   {
@@ -2443,16 +2686,22 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "functional",
    "ok": true,
    "label": "U-P2 ex short 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 2",
    "claim": "diff(x**2,x) = 2*x",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P2 ex short 1",
+   "label": "U-P2 ex short 2",
    "claim": "diff(2*x,x) = 2",
    "residual": "0"
   },
@@ -2460,21 +2709,35 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P2 ex short 2",
+   "claim": "diff(2,x) = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 3",
    "claim": "integrate(cosh(x),x) = sinh(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P2 ex short 2",
+   "label": "U-P2 ex short 3",
    "claim": "integrate(sinh(x),x) = cosh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 4",
+   "claim": "x**2*sinh(x)-2*x*cosh(x)+2*sinh(x) = x**2*sinh(x)+(-1)*(2*x)*cosh(x)+2*sinh(x)",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "1445-S1-FE-Q2.2",
-   "label": "U-P2 ex short 3",
+   "label": "U-P2 ex short 5",
    "status": "symbolic"
   },
   {
@@ -2675,24 +2938,39 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-P3 ex1 short 1",
-   "claim": "integrate(x**2,x) = x**3/3",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N51-E3",
-   "label": "U-P3 ex1 short 2",
+   "f": "x**n*log(x)",
+   "F": "x**(n+1)/(n+1)*(log(x)-1/(n+1))",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P3 ex1 short 2",
-   "claim": "x**3/3*(log(x)-Rational(1,3)) = x**3*log(x)/3-x**3/9",
+   "claim": "2+1 = 3",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-E3",
+   "label": "U-P3 ex1 short 3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-E3",
+   "label": "U-P3 ex1 short 4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P3 ex1 short 4",
+   "claim": "x**3/3*Rational(1,3) = x**3/9",
    "residual": "0"
   },
   {
@@ -2766,24 +3044,46 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-P3 ex2 short 1",
-   "claim": "integrate(x**(-2),x) = x**(-1)/(-1)",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S1-SE-Q2.5",
-   "label": "U-P3 ex2 short 2",
+   "f": "x**n*log(x)",
+   "F": "x**(n+1)/(n+1)*(log(x)-1/(n+1))",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P3 ex2 short 2",
-   "claim": "x**(-1)/(-1)*(log(x)-1/(-1)) = -(log(x)+1)/x",
+   "claim": "log(x)/x**2 = x**(-2)*log(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P3 ex2 short 2",
+   "claim": "-2+1 = -1",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.5",
+   "label": "U-P3 ex2 short 3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.5",
+   "label": "U-P3 ex2 short 4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P3 ex2 short 4",
+   "claim": "x**(-1)/(-1) = -1/x",
    "residual": "0"
   },
   {
@@ -2909,17 +3209,39 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-P4 ex short 1",
+   "f": "log(Abs(x))",
+   "F": "x*log(Abs(x))-x",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P4 ex short 2",
+   "claim": "diff(log(x),x) = 1/x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P4 ex short 2",
    "claim": "integrate(1,x) = x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P4 ex short 3",
+   "claim": "x*(1/x) = 1",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "N51-X05",
-   "label": "U-P4 ex short 2",
+   "label": "U-P4 ex short 4",
    "status": "symbolic"
   },
   {
@@ -3049,24 +3371,44 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "functional",
    "ok": true,
    "label": "U-P5 ex short 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 ex short 2",
    "claim": "diff(x**4/4*(log(x)-Rational(1,4)),x) = x**3*log(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 ex short 3",
+   "claim": "E**4/4*(log(E)-Rational(1,4)) = 3*E**4/16",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 ex short 4",
+   "claim": "Rational(1,4)*(log(1)-Rational(1,4)) = -Rational(1,16)",
    "residual": "0"
   },
   {
    "kind": "definite integral",
    "ok": true,
    "item": "1445-S1-SE-Q2.3",
-   "label": "U-P5 ex short 2",
+   "label": "U-P5 ex short 5",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P5 ex short 2",
-   "claim": "E**4/4*(1-Rational(1,4))-(Rational(1,4)*(0-Rational(1,4))) = (3*E**4+1)/16",
+   "label": "U-P5 ex short 5",
+   "claim": "3*E**4/16-(-Rational(1,16)) = (3*E**4+1)/16",
    "residual": "0"
   },
   {
@@ -3267,16 +3609,29 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "functional",
    "ok": true,
    "label": "U-P6 ex short 1",
-   "claim": "diff(acosh(x),x) = 1/sqrt(x**2-1)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P6 ex short 2",
+   "claim": "diff(acosh(x),x) = 1/sqrt(x**2-1)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P6 ex short 3",
+   "claim": "diff(x*acosh(x),x)-x/sqrt(x**2-1) = acosh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P6 ex short 4",
    "claim": "diff(sqrt(x**2-1),x) = x/sqrt(x**2-1)",
    "residual": "0"
   },
@@ -3284,7 +3639,7 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "1445-S1-SE-Q2.5",
-   "label": "U-P6 ex short 3",
+   "label": "U-P6 ex short 5",
    "status": "symbolic"
   },
   {
@@ -3407,16 +3762,29 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "functional",
    "ok": true,
    "label": "U-P7 ex short 1",
-   "claim": "diff(atanh(x),x) = 1/(1-x**2)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P7 ex short 2",
+   "claim": "diff(atanh(x),x) = 1/(1-x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P7 ex short 3",
+   "claim": "diff(x**2*atanh(x)/2,x)-x**2/(2*(1-x**2)) = x*atanh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P7 ex short 4",
    "claim": "x**2/(1-x**2) = -1+1/(1-x**2)",
    "residual": "0"
   },
@@ -3424,7 +3792,7 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "1446-S2-FE-Q2.2",
-   "label": "U-P7 ex short 3",
+   "label": "U-P7 ex short 5",
    "status": "symbolic"
   },
   {
@@ -3577,9 +3945,17 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-P8 ex short 1",
+   "f": "exp(a*x)*sin(b*x)",
+   "F": "exp(a*x)*(a*sin(b*x)-b*cos(b*x))/(a**2+b**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 ex short 2",
    "claim": "2**2+1**2 = 5",
    "residual": "0"
   },
@@ -3587,7 +3963,14 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "1447-S2-FE-Q2.3",
-   "label": "U-P8 ex short 2",
+   "label": "U-P8 ex short 3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S2-FE-Q2.3",
+   "label": "U-P8 ex short 4",
    "status": "symbolic"
   },
   {
@@ -3761,16 +4144,24 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-P9 ex short 1",
+   "f": "exp(a*x)*cosh(b*x)",
+   "F": "(exp((a+b)*x)/(a+b)+exp((a-b)*x)/(a-b))/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 ex short 2",
    "claim": "1+2 = 3",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P9 ex short 1",
+   "label": "U-P9 ex short 2",
    "claim": "1-2 = -1",
    "residual": "0"
   },
@@ -3778,13 +4169,20 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "1446-S1-SE-Q2.3",
-   "label": "U-P9 ex short 2",
+   "label": "U-P9 ex short 3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.3",
+   "label": "U-P9 ex short 4",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P9 ex short 2",
+   "label": "U-P9 ex short 4",
    "claim": "(exp(3*x)/3+exp(-x)/(-1))/2 = exp(3*x)/6-exp(-x)/2",
    "residual": "0"
   },
@@ -3931,25 +4329,33 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-P10 ex short 1",
-   "claim": "exp(sqrt(x)) = 2*sqrt(x)*exp(sqrt(x))*diff(sqrt(x),x)",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N51-X15",
-   "label": "U-P10 ex short 2",
+   "f": "exp(sqrt(x))",
+   "F": "2*exp(sqrt(x))*(sqrt(x)-1)",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P10 ex short 2",
-   "claim": "2*(x*exp(x)-exp(x)) = 2*exp(x)*(x-1)",
+   "claim": "exp(sqrt(x)) = 2*sqrt(x)*exp(sqrt(x))*diff(sqrt(x),x)",
    "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P10 ex short 3",
+   "claim": "diff(2*(x-1)*exp(x),x) = 2*x*exp(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X15",
+   "label": "U-P10 ex short 4",
+   "status": "symbolic"
   },
   {
    "kind": "arithmetic",
@@ -4073,50 +4479,127 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T1 ex short 1",
-   "claim": "2*1+1 = 3",
+   "label": "method table",
+   "claim": "cos(x)**2 = 1-sin(x)**2",
    "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N52-E1-1",
-   "label": "U-T1 ex short 2",
-   "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T1 ex short 2",
-   "claim": "integrate(1-x**2,x) = x-x**3/3",
+   "label": "method table",
+   "claim": "sin(x)**2 = 1-cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "csc(x)**2 = 1+cot(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "cot(x)**2 = csc(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cot(x),x) = -csc(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(csc(x),x) = -csc(x)*cot(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-T1 ex step 1",
+   "claim": "cos(x)**3 = cos(x)**2*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T1 ex step 2",
    "claim": "cos(x)**3 = (1-sin(x)**2)*cos(x)",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
-   "label": "U-T1 ex step 2",
+   "label": "U-T1 ex step 3",
    "u": "sin(x)",
    "du": "cos(x)"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T1 ex step 3",
-   "claim": "integrate(1-x**2,x) = x-x**3/3",
+   "label": "U-T1 ex step 4",
+   "claim": "cos(x)**3 = (1-sin(x)**2)*diff(sin(x),x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T1 ex step 5",
+   "claim": "integrate(1-u**2,u) = u-u**3/3",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "N52-E1-1",
-   "label": "U-T1 ex step 4",
+   "label": "U-T1 ex step 6",
    "step": "sin(x)-sin(x)**3/3"
   },
   {
@@ -4269,50 +4752,141 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T2 ex short 1",
-   "claim": "2*2+1 = 5",
+   "label": "method table",
+   "claim": "cos(x)**2 = 1-sin(x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T2 ex short 2",
-   "claim": "integrate(u**4*(1-u**2)**2,u) = u**5/5-2*u**7/7+u**9/9",
+   "label": "method table",
+   "claim": "sin(x)**2 = 1-cos(x)**2",
    "residual": "0"
   },
   {
-   "kind": "antiderivative",
+   "kind": "arithmetic",
    "ok": true,
-   "item": "1446-S1-SE-Q2.6",
-   "label": "U-T2 ex short 3",
-   "status": "symbolic"
+   "label": "method table",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "csc(x)**2 = 1+cot(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "cot(x)**2 = csc(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cot(x),x) = -csc(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(csc(x),x) = -csc(x)*cot(x)",
+   "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-T2 ex step 1",
-   "claim": "sin(x)**4*cos(x)**5 = sin(x)**4*(1-sin(x)**2)**2*cos(x)",
+   "claim": "sin(x)**4*cos(x)**5 = sin(x)**4*cos(x)**4*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T2 ex step 2",
+   "claim": "cos(x)**4 = (1-sin(x)**2)**2",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
-   "label": "U-T2 ex step 2",
+   "label": "U-T2 ex step 3",
    "u": "sin(x)",
    "du": "cos(x)"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T2 ex step 3",
+   "label": "U-T2 ex step 4",
+   "claim": "sin(x)**4*cos(x)**5 = sin(x)**4*(1-sin(x)**2)**2*diff(sin(x),x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T2 ex step 5",
+   "claim": "(1-u**2)**2 = 1-2*u**2+u**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T2 ex step 6",
    "claim": "u**4*(1-2*u**2+u**4) = u**4-2*u**6+u**8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T2 ex step 7",
+   "claim": "integrate(u**4-2*u**6+u**8,u) = u**5/5-2*u**7/7+u**9/9",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "1446-S1-SE-Q2.6",
-   "label": "U-T2 ex step 4",
+   "label": "U-T2 ex step 8",
    "step": "sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9"
   },
   {
@@ -4438,9 +5012,24 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-T3 ex1 short 1",
+   "f": "sin(k*x)**2",
+   "F": "x/2-sin(2*k*x)/(4*k)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T3 ex1 short 2",
+   "claim": "2*1 = 2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T3 ex1 short 2",
    "claim": "4*1 = 4",
    "residual": "0"
   },
@@ -4448,7 +5037,7 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "N52-X13",
-   "label": "U-T3 ex1 short 2",
+   "label": "U-T3 ex1 short 3",
    "status": "symbolic"
   },
   {
@@ -4480,11 +5069,39 @@
    "residual": "0"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T3 ex2 short 2",
+   "claim": "cos(2*x)**4 = Rational(3,8)+cos(4*x)/2+cos(8*x)/8",
+   "residual": "0"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "N52-E1-3",
-   "label": "U-T3 ex2 short 2",
+   "label": "U-T3 ex2 short 3",
    "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E1-3",
+   "label": "U-T3 ex2 short 4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T3 ex2 short 4",
+   "claim": "Rational(1,2)*Rational(1,4) = Rational(1,8)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T3 ex2 short 4",
+   "claim": "Rational(1,8)*Rational(1,8) = Rational(1,64)",
+   "residual": "0"
   },
   {
    "kind": "arithmetic",
@@ -4580,22 +5197,85 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T4 ex short 1",
-   "claim": "2*0+2 = 2",
+   "label": "method table",
+   "claim": "cos(x)**2 = 1-sin(x)**2",
    "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1447-S1-FE-Q2.6",
-   "label": "U-T4 ex short 2",
-   "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T4 ex short 2",
-   "claim": "integrate(x**3,x) = x**4/4",
+   "label": "method table",
+   "claim": "sin(x)**2 = 1-cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "csc(x)**2 = 1+cot(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "cot(x)**2 = csc(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cot(x),x) = -csc(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(csc(x),x) = -csc(x)*cot(x)",
    "residual": "0"
   },
   {
@@ -4609,14 +5289,21 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-T4 ex step 2",
-   "claim": "integrate(x**3,x) = x**4/4",
+   "claim": "tan(x)**3*sec(x)**2 = tan(x)**3*diff(tan(x),x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T4 ex step 3",
+   "claim": "integrate(u**3,u) = u**4/4",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "1447-S1-FE-Q2.6",
-   "label": "U-T4 ex step 3",
+   "label": "U-T4 ex step 4",
    "step": "tan(x)**4/4"
   },
   {
@@ -4691,57 +5378,134 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T5 ex short 1",
-   "claim": "2*1+1 = 3",
+   "label": "method table",
+   "claim": "cos(x)**2 = 1-sin(x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T5 ex short 1",
-   "claim": "3-1 = 2",
+   "label": "method table",
+   "claim": "sin(x)**2 = 1-cos(x)**2",
    "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1447-S2-SE-Q3.3",
-   "label": "U-T5 ex short 2",
-   "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T5 ex short 2",
-   "claim": "integrate(x**2*(x**2-1),x) = x**5/5-x**3/3",
+   "label": "method table",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "csc(x)**2 = 1+cot(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "cot(x)**2 = csc(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cot(x),x) = -csc(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(csc(x),x) = -csc(x)*cot(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-T5 ex step 1",
+   "claim": "sec(x)**3*tan(x)**3 = sec(x)**2*tan(x)**2*sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T5 ex step 2",
    "claim": "sec(x)**3*tan(x)**3 = sec(x)**2*(sec(x)**2-1)*sec(x)*tan(x)",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
-   "label": "U-T5 ex step 2",
+   "label": "U-T5 ex step 3",
    "u": "sec(x)",
    "du": "sec(x)*tan(x)"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T5 ex step 3",
+   "label": "U-T5 ex step 4",
+   "claim": "sec(x)**3*tan(x)**3 = sec(x)**2*(sec(x)**2-1)*diff(sec(x),x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T5 ex step 5",
    "claim": "u**2*(u**2-1) = u**4-u**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T5 ex step 6",
+   "claim": "integrate(u**4-u**2,u) = u**5/5-u**3/3",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "1447-S2-SE-Q3.3",
-   "label": "U-T5 ex step 4",
+   "label": "U-T5 ex step 7",
    "step": "sec(x)**5/5-sec(x)**3/3"
   },
   {
@@ -4882,16 +5646,22 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "functional",
    "ok": true,
    "label": "U-T6 ex1 short 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T6 ex1 short 2",
    "claim": "diff(tan(x)**3/3,x)-tan(x)**2 = tan(x)**4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T6 ex1 short 1",
+   "label": "U-T6 ex1 short 3",
    "claim": "diff(tan(x)-x,x) = tan(x)**2",
    "residual": "0"
   },
@@ -4899,7 +5669,7 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "N52-E3-2",
-   "label": "U-T6 ex1 short 2",
+   "label": "U-T6 ex1 short 4",
    "status": "symbolic"
   },
   {
@@ -4938,17 +5708,31 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "functional",
    "ok": true,
    "label": "U-T6 ex2 short 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T6 ex2 short 2",
    "claim": "diff(sec(x)*tan(x)/2,x)+sec(x)/2 = sec(x)**3",
    "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "U-T6 ex2 short 3",
+   "f": "sec(x)",
+   "F": "log(Abs(sec(x)+tan(x)))",
+   "status": "symbolic"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "N52-E3-1",
-   "label": "U-T6 ex2 short 2",
+   "label": "U-T6 ex2 short 4",
    "status": "symbolic"
   },
   {
@@ -5052,50 +5836,134 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T7 ex short 1",
-   "claim": "2*1+2 = 4",
+   "label": "method table",
+   "claim": "cos(x)**2 = 1-sin(x)**2",
    "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S2-SE-Q2.4",
-   "label": "U-T7 ex short 2",
-   "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T7 ex short 2",
-   "claim": "integrate(x**4*(1+x**2),x) = x**5/5+x**7/7",
+   "label": "method table",
+   "claim": "sin(x)**2 = 1-cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "csc(x)**2 = 1+cot(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "cot(x)**2 = csc(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cot(x),x) = -csc(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(csc(x),x) = -csc(x)*cot(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-T7 ex step 1",
+   "claim": "cot(x)**4*csc(x)**4 = cot(x)**4*csc(x)**2*csc(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T7 ex step 2",
    "claim": "cot(x)**4*csc(x)**4 = cot(x)**4*(1+cot(x)**2)*csc(x)**2",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
-   "label": "U-T7 ex step 2",
+   "label": "U-T7 ex step 3",
    "u": "cot(x)",
    "du": "-csc(x)**2"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T7 ex step 3",
+   "label": "U-T7 ex step 4",
+   "claim": "cot(x)**4*csc(x)**4 = -cot(x)**4*(1+cot(x)**2)*diff(cot(x),x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T7 ex step 5",
    "claim": "u**4*(1+u**2) = u**4+u**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T7 ex step 6",
+   "claim": "-integrate(u**4+u**6,u) = -u**5/5-u**7/7",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "1446-S2-SE-Q2.4",
-   "label": "U-T7 ex step 4",
+   "label": "U-T7 ex step 7",
    "step": "-cot(x)**5/5-cot(x)**7/7"
   },
   {
@@ -5207,16 +6075,24 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "formula",
    "ok": true,
    "label": "U-T8 ex short 1",
+   "f": "sin(m*x)*cos(n*x)",
+   "F": "-(cos((m-n)*x)/(m-n)+cos((m+n)*x)/(m+n))/2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-T8 ex short 2",
    "claim": "7-5 = 2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T8 ex short 1",
+   "label": "U-T8 ex short 2",
    "claim": "7+5 = 12",
    "residual": "0"
   },
@@ -5224,13 +6100,20 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "N52-E5-1",
-   "label": "U-T8 ex short 2",
+   "label": "U-T8 ex short 3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E5-1",
+   "label": "U-T8 ex short 4",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T8 ex short 2",
+   "label": "U-T8 ex short 4",
    "claim": "-(cos(2*x)/2+cos(12*x)/12)/2 = -cos(2*x)/4-cos(12*x)/24",
    "residual": "0"
   },
@@ -5294,7 +6177,7 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "try product-ids",
-   "claim": "sin(6*x)*sin(2*x) = (cos(4*x)-cos(8*x))/2",
+   "claim": "sin(5*x)*sin(x) = (cos(4*x)-cos(6*x))/2",
    "residual": "0"
   },
   {
@@ -5468,7 +6351,7 @@
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "1445-S2-FE-Q2.2",
+   "item": "G-42",
    "label": "day 5 warm-up",
    "status": "symbolic"
   },
@@ -5496,14 +6379,14 @@
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N51-E5",
+   "item": "G-40",
    "label": "speed51",
    "status": "symbolic"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N51-X08",
+   "item": "G-41",
    "label": "speed51",
    "status": "symbolic"
   },
@@ -5545,7 +6428,7 @@
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N52-X02",
+   "item": "G-43",
    "label": "day 6 warm-up",
    "status": "symbolic"
   },
@@ -5559,7 +6442,7 @@
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N52-E4-1",
+   "item": "G-44",
    "label": "day 7 warm-up",
    "status": "symbolic"
   },
@@ -5657,6 +6540,13 @@
   {
    "kind": "antiderivative",
    "ok": true,
+   "item": "G-33",
+   "label": "mixed review",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
    "item": "G-29",
    "label": "mixed review",
    "status": "symbolic"
@@ -5664,21 +6554,21 @@
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "G-30",
-   "label": "mixed review",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-31",
-   "label": "mixed review",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
    "item": "G-32",
+   "label": "mixed review",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-35",
+   "label": "mixed review",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-30",
    "label": "mixed review",
    "status": "symbolic"
   },
@@ -5692,13 +6582,6 @@
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "G-33",
-   "label": "mixed review",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
    "item": "G-34",
    "label": "mixed review",
    "status": "symbolic"
@@ -5706,7 +6589,7 @@
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "G-35",
+   "item": "G-31",
    "label": "mixed review",
    "status": "symbolic"
   },
@@ -6037,6 +6920,90 @@
    "status": "symbolic"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "cos(x)**2 = 1-sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "sin(x)**2 = 1-cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "csc(x)**2 = 1+cot(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "cot(x)**2 = csc(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(cot(x),x) = -csc(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "method table",
+   "claim": "diff(csc(x),x) = -csc(x)*cot(x)",
+   "residual": "0"
+  },
+  {
    "kind": "formula",
    "ok": true,
    "label": "even sin2",
@@ -6129,6 +7096,188 @@
    "f": "cos(m*x)*cos(n*x)",
    "F": "(sin((m-n)*x)/(m-n)+sin((m+n)*x)/(m+n))/2",
    "status": "symbolic"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 1",
+   "claim": "sqrt(x**2+9) != x+3"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 1 right",
+   "claim": "sqrt(9*x**2) = 3*Abs(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 2",
+   "claim": "(1-u**2)**2 != 1-u**4"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 2 right",
+   "claim": "(1-u**2)**2 = 1-2*u**2+u**4",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 3",
+   "claim": "-(2*x-3) != -2*x-3"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 3 right",
+   "claim": "-(2*x-3) = -2*x+3",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 4",
+   "claim": "x**(-2) != -x**2"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 4 right",
+   "claim": "x**(-2) = 1/x**2",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 5",
+   "claim": "exp(x)*exp(2*x) != exp(2*x**2)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 5 right",
+   "claim": "exp(x)*exp(2*x) = exp(3*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 6",
+   "claim": "1/(x**2+4) != 1/x**2+Rational(1,4)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 6 right",
+   "claim": "(x+2)/x**2 = 1/x+2/x**2",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 7",
+   "claim": "Rational(2,3)/Rational(4,5) != Rational(8,15)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 7 right",
+   "claim": "Rational(2,3)/Rational(4,5) = Rational(5,6)",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 8",
+   "claim": "log(x**2+1) != log(x**2)+log(1)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 8 right",
+   "claim": "log(x**2) = 2*log(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 9",
+   "claim": "asinh(x) != 1/sinh(x)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 9 right",
+   "claim": "1/sinh(x) = csch(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 10",
+   "claim": "diff(asinh(3*x),x) != 1/sqrt(9*x**2+1)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 10 right",
+   "claim": "diff(asinh(3*x),x) = 3/sqrt(9*x**2+1)",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 11",
+   "claim": "diff(sin(x)**3/3,x) != sin(x)**2"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 11 right",
+   "claim": "diff(x/2-sin(2*x)/4,x) = sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 12",
+   "claim": "diff(x**2/2*sinh(x),x) != x*cosh(x)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 12 right",
+   "claim": "diff(x*sinh(x)-cosh(x),x) = x*cosh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 13",
+   "claim": "diff(log(x**2),x) != x**(-2)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 13 right",
+   "claim": "diff(-1/x,x) = x**(-2)",
+   "residual": "0"
+  },
+  {
+   "kind": "mistake",
+   "ok": true,
+   "label": "mistake 14",
+   "claim": "diff(3*x*sinh(x),x) != 3*cosh(x)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 14 right",
+   "claim": "diff(3*sinh(x),x) = 3*cosh(x)",
+   "residual": "0"
   }
  ],
  "used": {
@@ -6528,7 +7677,7 @@
   "N42-E1-2": [
    "day 4 warm-up"
   ],
-  "1445-S2-FE-Q2.2": [
+  "G-42": [
    "day 5 warm-up"
   ],
   "N51-X06": [
@@ -6540,10 +7689,10 @@
   "G-22": [
    "speed51"
   ],
-  "N51-E5": [
+  "G-40": [
    "speed51"
   ],
-  "N51-X08": [
+  "G-41": [
    "speed51"
   ],
   "G-17": [
@@ -6561,13 +7710,13 @@
   "G-21": [
    "speed51"
   ],
-  "N52-X02": [
+  "G-43": [
    "day 6 warm-up"
   ],
   "1446-S1-FE-Q2.2": [
    "day 6 warm-up"
   ],
-  "N52-E4-1": [
+  "G-44": [
    "day 7 warm-up"
   ],
   "N42-X1-6": [
@@ -6609,33 +7758,33 @@
   "N42-X1-2": [
    "mixed review"
   ],
+  "G-33": [
+   "mixed review"
+  ],
   "G-29": [
-   "mixed review"
-  ],
-  "G-30": [
-   "mixed review"
-  ],
-  "G-31": [
    "mixed review"
   ],
   "G-32": [
    "mixed review"
   ],
-  "G-37": [
+  "G-35": [
    "mixed review"
   ],
-  "G-33": [
+  "G-30": [
+   "mixed review"
+  ],
+  "G-37": [
    "mixed review"
   ],
   "G-34": [
    "mixed review"
   ],
-  "G-35": [
+  "G-31": [
    "mixed review"
   ]
  },
  "counts": {
-  "total": 862,
-  "ok": 862
+  "total": 1026,
+  "ok": 1026
  }
 }

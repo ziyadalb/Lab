@@ -527,7 +527,7 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 4 warm-up"
  },
- "1445-S2-FE-Q2.2": {
+ "G-42": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 5 warm-up"
  },
@@ -543,11 +543,11 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed51"
  },
- "N51-E5": {
+ "G-40": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed51"
  },
- "N51-X08": {
+ "G-41": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed51"
  },
@@ -571,7 +571,7 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed51"
  },
- "N52-X02": {
+ "G-43": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 6 warm-up"
  },
@@ -579,7 +579,7 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 6 warm-up"
  },
- "N52-E4-1": {
+ "G-44": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "day 7 warm-up"
  },
@@ -635,15 +635,11 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mixed review"
  },
+ "G-33": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
  "G-29": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-30": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-31": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mixed review"
  },
@@ -651,11 +647,15 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mixed review"
  },
- "G-37": {
+ "G-35": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mixed review"
  },
- "G-33": {
+ "G-30": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-37": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mixed review"
  },
@@ -663,7 +663,7 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mixed review"
  },
- "G-35": {
+ "G-31": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mixed review"
  }

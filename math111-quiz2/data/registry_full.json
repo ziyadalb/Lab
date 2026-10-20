@@ -955,9 +955,9 @@
   "near_copies": "",
   "verification": "symbolic",
   "official_check": "symbolic",
-  "usage": "مستخدم في المذكرة الكاملة",
+  "usage": "مرجع إضافي (غير مستخدم في المذكرة)",
   "holdout_id": "",
-  "location": "day 5 warm-up",
+  "location": "",
   "exclusion_reason": ""
  },
  {
@@ -6380,9 +6380,9 @@
   "near_copies": "",
   "verification": "symbolic",
   "official_check": "",
-  "usage": "مستخدم في المذكرة الكاملة",
+  "usage": "مرجع إضافي (غير مستخدم في المذكرة)",
   "holdout_id": "",
-  "location": "speed51",
+  "location": "",
   "exclusion_reason": ""
  },
  {
@@ -6690,9 +6690,9 @@
   "near_copies": "",
   "verification": "symbolic",
   "official_check": "",
-  "usage": "مستخدم في المذكرة الكاملة",
+  "usage": "مرجع إضافي (غير مستخدم في المذكرة)",
   "holdout_id": "",
-  "location": "speed51",
+  "location": "",
   "exclusion_reason": ""
  },
  {
@@ -7372,9 +7372,9 @@
   "near_copies": "",
   "verification": "symbolic",
   "official_check": "",
-  "usage": "مستخدم في المذكرة الكاملة",
+  "usage": "مرجع إضافي (غير مستخدم في المذكرة)",
   "holdout_id": "",
-  "location": "day 7 warm-up",
+  "location": "",
   "exclusion_reason": ""
  },
  {
@@ -7527,9 +7527,9 @@
   "near_copies": "1446-S1-SE-Q2.6 (one_number_changed)",
   "verification": "symbolic",
   "official_check": "",
-  "usage": "مستخدم في المذكرة الكاملة",
+  "usage": "مرجع إضافي (غير مستخدم في المذكرة)",
   "holdout_id": "",
-  "location": "day 6 warm-up",
+  "location": "",
   "exclusion_reason": ""
  },
  {

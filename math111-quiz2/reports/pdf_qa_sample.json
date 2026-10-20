@@ -1,5 +1,5 @@
 {
- "pages": 42,
+ "pages": 43,
  "page_sizes_pt": [
   [
    595,
@@ -31,7 +31,7 @@
  "bookmarks": 35,
  "text_extraction": {
   "tool": "pdftotext (poppler)",
-  "characters": 120574,
+  "characters": 119958,
   "english_found": {
    "Evaluate the following integrals": true,
    "Find dy/dx of the following": true

@@ -12,8 +12,8 @@ Every math line goes through a check (tools/booklet_engine.py); a failed check s
 import re
 
 from booklet import final as _final, prompt, source_label
-from booklet_engine import (ITEMS, BuildError, ans_tex, arith, diff_step_ok, parts_rows, q_tex, same_antiderivative, same_defint,
-                            same_derivative, step_ok, sub_row, use)
+from booklet_engine import (ITEMS, BuildError, ans_tex, arith, diff_step_ok, formula, functional, parts_rows, q_tex,
+                            same_antiderivative, same_defint, same_derivative, step_ok, sub_row, use)
 from html_kit import box, chip, en, lines, link, md, mi, p, table, ul
 from mathlib import rawtex, tex, texsum
 
@@ -104,12 +104,12 @@ def step_cells(it, rows, label):
     return out
 
 
-def steps_table(cells):
+def steps_table(cells, cls=''):
     body = ''.join('<tr class="%s"><td class="n">%d</td><td>%s</td><td>%s</td></tr>'
                    % ('final' if fin else '', k, mi(r'\displaystyle ' + latex), rich(why))
                    for k, (latex, why, fin) in enumerate(cells, 1))
-    return ('<table class="steps"><thead><tr><th>#</th><th>الخطوة</th><th>ليش؟</th></tr></thead><tbody>'
-            + body + '</tbody></table>')
+    return ('<table class="steps%s"><thead><tr><th>#</th><th>الخطوة</th><th>ليش؟</th></tr></thead><tbody>'
+            % (' ' + cls if cls else '') + body + '</tbody></table>')
 
 
 def steps(it, rows, label):
@@ -136,13 +136,20 @@ def final(it, where):
 
 
 def short_steps(it, rows, label):
-    """The shortcut applied to the same example, in short numbered steps.
-    rows: (text, latex, claims). A claim ('=ANS', expr) checks that expr is the item's verified answer
-    (antiderivative up to a constant, derivative, or value); the other claims are exact equalities."""
-    items = ''
-    for k, (text, latex, claims) in enumerate(rows, 1):
+    """The shortcut applied to the same example, as explained numbered steps in the same table as the basic
+    method: the rule, the numbers read from the question, the substitution, the simplification, the answer.
+    rows: (why, latex, claims); every row needs at least one claim:
+      ('=ANS', expr)            expr is the item's verified answer (antiderivative up to a constant, derivative, value)
+      ('=FORMULA', f, F, opts)  a general rule with parameters, checked like the formula sheet (formula(), F' = f)
+      ('=RULE', builder)        a rule with arbitrary functions: builder() must simplify to zero
+      (lhs, rhs[, branch])      an exact equality
+    """
+    cells = []
+    for k, (why, latex, claims) in enumerate(rows, 1):
         tag = '%s short %d' % (label, k)
-        plain = [c for c in claims if c[0] != '=ANS']
+        if not claims:
+            raise BuildError('shortcut step %s has no check' % tag)
+        plain = []
         for c in claims:
             if c[0] == '=ANS':
                 if it['task'] == 'diff':
@@ -151,9 +158,14 @@ def short_steps(it, rows, label):
                     same_defint([c[1]], it, tag)
                 else:
                     same_antiderivative([c[1]], it, tag)
-        m = mi(r'\displaystyle ' + arith(latex, plain, tag)) if latex else ''
-        items += '<li>%s%s</li>' % (rich(text) + (' ' if text and m else ''), m)
-    return '<div class="shortsteps"><div class="sslbl">⚡ بالاختصار:</div><ol>' + items + '</ol></div>'
+            elif c[0] == '=FORMULA':
+                formula(c[1], c[2], label=tag, **(c[3] if len(c) > 3 else {}))
+            elif c[0] == '=RULE':
+                functional(c[1], tag)
+            else:
+                plain.append(c)
+        cells.append((arith(latex, plain, tag), why, k == len(rows)))
+    return p('<b>⚡ بالاختصار، خطوة خطوة:</b>', 'sslbl') + steps_table(cells, 'short')
 
 
 def alg(skill, title=None, rows=None, intro='', try_=None):

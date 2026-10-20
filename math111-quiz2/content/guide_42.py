@@ -2,6 +2,7 @@
 from booklet import sc_lamda, sc_six, sc_square, sc_twins
 from booklet_engine import ITEMS, arith, formula, functional, q_tex, same_value, use
 from guide_kit import Unit, alg, contrast, final, question, rich, short_steps, steps
+from guide_rules import R
 from html_kit import md, mi, p, table, ul
 import sympy as s
 from mathlib import x
@@ -51,9 +52,11 @@ def u_deriv():
     it = ITEMS['N42-E1-1']
     ex = question(it, 'U-D1 example 1')
     ex += short_steps(it, [
-        ('وش داخل الدالة؟', r"u=5x-1,\quad u'=5", [('diff(5*x-1,x)', '5')]),
-        ("صف sinh من جدول التوائم: $\\frac{u'}{\\sqrt{u^2+1}}$. عوّض:", r"y'=\frac{5}{\sqrt{1+(5x-1)^{2}}}",
-         [('=ANS', '5/sqrt(1+(5*x-1)**2)')])], 'U-D1 ex1')
+        ('القانون: صف sinh من جدول التوائم', r"\frac{d}{dx}\sinh^{-1}u=\frac{u'}{\sqrt{u^{2}+1}}", [R('twins sinh')]),
+        ("طلّع $u$ من السؤال: هو ما داخل الدالة. ومشتقته: الـ $5x$ تعطي 5، والرقم $-1$ يختفي", r"u=5x-1,\qquad u'=5",
+         [('diff(5*x-1,x)', '5')]),
+        ("عوّض $u'$ فوق و $u$ تحت في القانون. هذا هو الجواب", r"y'=\frac{5}{\sqrt{(5x-1)^{2}+1}}",
+         [('=ANS', '5/sqrt((5*x-1)**2+1)')])], 'U-D1 ex1')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r"u=5x-1,\qquad u'=5", [('diff(5*x-1,x)', '5')], 'نسمّي ما داخل الدالة $u$. مشتقة $5x-1$: الـ $x$ تعطي 5، والرقم $-1$ يختفي'),
         ('tex', r'\frac{d}{du}\sinh^{-1}u=\frac{1}{\sqrt{u^{2}+1}}', [('diff(asinh(x),x)', '1/sqrt(x**2+1)')], 'من جدول التوائم (صف sinh)'),
@@ -64,9 +67,16 @@ def u_deriv():
     it = ITEMS['1447-S2-SE-Q1.2']
     ex = question(it, 'U-D1 example 2')
     ex += short_steps(it, [
-        ('وش داخل الدالة؟', r"u=\sqrt{x+2},\quad u'=\frac{1}{2\sqrt{x+2}}", [('diff(sqrt(x+2),x)', '1/(2*sqrt(x+2))')]),
-        ("صف csch: $-\\frac{u'}{|u|\\sqrt{1+u^2}}$، و $|u|=\\sqrt{x+2}$، و $1+u^2=x+3$:", r"y'=-\frac{1}{2(x+2)\sqrt{x+3}}",
-         [('1+sqrt(x+2)**2', 'x+3'), ('=ANS', '-1/(2*(x+2)*sqrt(x+3))')])], 'U-D1 ex2')
+        ('القانون: صف csch من جدول التوائم (فيه سالب و $|u|$)', r"\frac{d}{dx}\operatorname{csch}^{-1}u=-\frac{u'}{|u|\sqrt{1+u^{2}}}",
+         [R('twins csch')]),
+        ('طلّع $u$ (ما داخل الدالة) ومشتقته: 1 على ضعف الجذر', r"u=\sqrt{x+2},\qquad u'=\frac{1}{2\sqrt{x+2}}",
+         [('diff(sqrt(x+2),x)', '1/(2*sqrt(x+2))')]),
+        ('جهّز قطع المقام: الجذر موجب فـ $|u|$ هو نفسه، ومربع الجذر = ما تحته (🧮)', r'|u|=\sqrt{x+2},\qquad 1+u^{2}=1+(x+2)=x+3',
+         [('1+sqrt(x+2)**2', 'x+3')]),
+        ('عوّض القطع الثلاث في القانون', r"y'=-\frac{\ \frac{1}{2\sqrt{x+2}}\ }{\sqrt{x+2}\,\sqrt{x+3}}",
+         [('=ANS', '-(1/(2*sqrt(x+2)))/(sqrt(x+2)*sqrt(x+3))')]),
+        ('بسّط: مقام الكسر الصغير ينزل، و $\\sqrt{x+2}\\cdot\\sqrt{x+2}=x+2$ (🧮 تحت)', r"y'=-\frac{1}{2(x+2)\sqrt{x+3}}",
+         [('=ANS', '-1/(2*(x+2)*sqrt(x+3))')])], 'U-D1 ex2')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r"u=\sqrt{x+2},\qquad u'=\frac{1}{2\sqrt{x+2}}", [('diff(sqrt(x+2),x)', '1/(2*sqrt(x+2))')],
          'مشتقة الجذر = 1 على ضعف الجذر، في مشتقة ما تحته (هنا 1)'),
@@ -131,9 +141,11 @@ def u_deriv_rules():
     it = ITEMS['N42-E1-4']
     ex = question(it, 'U-D2 example')
     ex += short_steps(it, [
-        ('الخارج أسية بأساس 6، والداخل:', r"u=\cosh^{-1}(2x),\quad u'=\frac{2}{\sqrt{4x^{2}-1}}",
+        ('القاعدة الكبيرة أولًا: الدالة أسية بأساس 6', r"\frac{d}{dx}6^{u}=6^{u}\cdot\ln6\cdot u'", [R('exp base 6')]),
+        ("طلّع $u$: هو الأس كله. ومشتقته من صف cosh في التوائم، وداخله $2x$ مشتقته 2",
+         r"u=\cosh^{-1}(2x),\qquad u'=\frac{2}{\sqrt{(2x)^{2}-1}}=\frac{2}{\sqrt{4x^{2}-1}}",
          [('diff(acosh(2*x),x)', '2/sqrt(4*x**2-1)', '1+t')]),
-        ("قاعدة الأسية $6^{u}\\cdot\\ln6\\cdot u'$:", r"y'=6^{\cosh^{-1}(2x)}\cdot\ln6\cdot\frac{2}{\sqrt{4x^{2}-1}}",
+        ("عوّض $u$ و $u'$ في القاعدة", r"y'=6^{\cosh^{-1}(2x)}\cdot\ln6\cdot\frac{2}{\sqrt{4x^{2}-1}}",
          [('=ANS', '6**acosh(2*x)*log(6)*2/sqrt(4*x**2-1)')])], 'U-D2 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r"y=6^{u}\ \Rightarrow\ y'=6^{u}\ln6\cdot u'", [('diff(6**acosh(2*x),x)', '6**acosh(2*x)*log(6)*diff(acosh(2*x),x)')],
@@ -183,9 +195,14 @@ def u_six():
     it = ITEMS['N42-E2-3']
     ex = question(it, 'U-I1 example 1')
     ex += short_steps(it, [
-        ('اكتب كمربعات:', r'4x^{2}+25=(2x)^{2}+5^{2}\ \Rightarrow\ u=2x,\ a=5', [('4*x**2+25', '(2*x)**2+5**2')]),
-        ('جذر فيه مجموع ⇐ صف sinh. والضبط: مشتقة $u$ هي 2 والبسط 1 ⇐ نضرب في $\\frac12$:', r'\frac12\sinh^{-1}\frac{2x}{5}+C',
-         [('=ANS', 'asinh(2*x/5)/2')])], 'U-I1 ex1')
+        ('القانون: جذر فيه مجموع مربعين ⇐ صف sinh من الجدول', r'\int\frac{du}{\sqrt{u^{2}+a^{2}}}=\sinh^{-1}\frac{u}{a}+C',
+         [R('six sinh')]),
+        ('اكتب كل حد كمربع (🧮 تحت)، فتطلع $u$ و $a$؛ = سطر 1 في 🧱', r'4x^{2}+25=(2x)^{2}+5^{2}\ \Rightarrow\ u=2x,\ a=5',
+         [('4*x**2+25', '(2*x)**2+5**2')]),
+        ('الضبط: مشتقة $u$ هي 2، والبسط $dx$ ما فيه 2 ⇐ نضرب الجواب في $\\frac12$؛ = السطران 2–3 في 🧱',
+         r'du=2\,dx\ \Rightarrow\ dx=\frac12\,du', [('diff(2*x,x)', '2')]),
+        ('عوّض $u=2x$ و $a=5$ في القانون، واضرب في $\\frac12$', r'\frac12\sinh^{-1}\frac{2x}{5}+C', [('=ANS', 'asinh(2*x/5)/2')])],
+        'U-I1 ex1')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'4x^{2}+25=(2x)^{2}+5^{2}', [('4*x**2+25', '(2*x)**2+5**2')], 'نكتب كل حد كمربع (🧮 تحت)'),
         ('sub', '2*x', '2', 'نسمّي $u=2x$'),
@@ -202,9 +219,14 @@ def u_six():
     it = ITEMS['N42-X2-01']
     ex = question(it, 'U-I1 example 2')
     ex += short_steps(it, [
-        ('اكتب كمربعات:', r'16x^{6}=(4x^{3})^{2},\ 9=3^{2}\ \Rightarrow\ u=4x^{3},\ a=3', [('16*x**6', '(4*x**3)**2')]),
-        ('قاعدة الضبط مع $c=5$ و $n=3$ و $k=4$:', r'\frac{c}{nk}=\frac{5}{3\cdot4}=\frac{5}{12}', [('Rational(5,3*4)', 'Rational(5,12)')]),
-        ('صف sinh × المعامل:', r'\frac{5}{12}\sinh^{-1}\frac{4x^{3}}{3}+C', [('=ANS', '5*asinh(4*x**3/3)/12')])], 'U-I1 ex2')
+        ('القانون: قاعدة الضبط مع صف sinh', r'\int\frac{c\,x^{n-1}}{\sqrt{(kx^{n})^{2}+a^{2}}}dx=\frac{c}{nk}\sinh^{-1}\frac{kx^{n}}{a}+C',
+         [R('adjust')]),
+        ('اكتب ما تحت الجذر كمربعين (🧮 كتابة الحد كمربع)', r'16x^{6}=(4x^{3})^{2},\qquad 9=3^{2}',
+         [('16*x**6', '(4*x**3)**2'), ('3**2', '9')]),
+        ('طلّع الأرقام: $u=kx^n=4x^3$، والبسط $5x^2=c\\,x^{n-1}$', r'k=4,\quad n=3,\quad a=3,\quad c=5',
+         [('5*x**(3-1)', '5*x**2'), ('(4*x**3)**2', '16*x**6')]),
+        ('احسب المعامل؛ = $\\frac{5}{12}$ في السطر 2 من 🧱', r'\frac{c}{nk}=\frac{5}{3\cdot4}=\frac{5}{12}', [('Rational(5,3*4)', 'Rational(5,12)')]),
+        ('عوّض في القانون', r'\frac{5}{12}\sinh^{-1}\frac{4x^{3}}{3}+C', [('=ANS', '5*asinh(4*x**3/3)/12')])], 'U-I1 ex2')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('sub', '4*x**3', '12*x**2', 'نسمّي $u=4x^3$'),
         ('tex', r'x^{2}dx=\frac{du}{12}\ \Rightarrow\ 5\int\frac{x^{2}\,dx}{\sqrt{9+16x^{6}}}=\frac{5}{12}\int\frac{du}{\sqrt{u^{2}+3^{2}}}',
@@ -240,9 +262,14 @@ def u_tanh():
     it = ITEMS['N42-E2-2']
     ex = question(it, 'U-I2 example 1')
     ex += short_steps(it, [
-        ('اكتب كمربعين:', r'25-e^{2x}=5^{2}-\left(e^{x}\right)^{2}\ \Rightarrow\ u=e^{x},\ a=5', [('25-exp(2*x)', '5**2-exp(x)**2')]),
-        ('البسط $e^x$ هو مشتقة $u$ بالضبط. ومذكرة د. طارق تأخذ $e^x<5$، أي $|u|<a$ ⇐ tanh:', r'\frac15\tanh^{-1}\frac{e^{x}}{5}+C',
-         [('=ANS', 'atanh(exp(x)/5)/5')])], 'U-I2 ex1')
+        ('القانون: رقم ناقص مربع بلا جذر، و $|u|<a$ ⇐ صف tanh', r'\int\frac{du}{a^{2}-u^{2}}=\frac1a\tanh^{-1}\frac{u}{a}+C',
+         [R('six tanh')]),
+        ('اكتب المقام كمربعين، فتطلع $u$ و $a$؛ = سطر 1 في 🧱', r'25-e^{2x}=5^{2}-\left(e^{x}\right)^{2}\ \Rightarrow\ u=e^{x},\ a=5',
+         [('25-exp(2*x)', '5**2-exp(x)**2')]),
+        ('البسط $e^x\\,dx$ هو $du$ بالضبط، فلا ضبط ولا معامل', r'du=e^{x}dx', [('diff(exp(x),x)', 'exp(x)')]),
+        ('قارن $u$ مع $a$: مذكرة د. طارق تأخذ $e^x<5$ (أي $x<\\ln5$) ⇐ $|u|<a$ ⇐ tanh', r'e^{x}<5\iff x<\ln5',
+         [('exp(log(5))', '5')]),
+        ('عوّض $u=e^x$ و $a=5$ في القانون', r'\frac15\tanh^{-1}\frac{e^{x}}{5}+C', [('=ANS', 'atanh(exp(x)/5)/5')])], 'U-I2 ex1')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'25-e^{2x}=5^{2}-\left(e^{x}\right)^{2}', [('25-exp(2*x)', '5**2-exp(x)**2')], 'نكتب كمربعين (🧮 كتابة الحد كمربع)'),
         ('sub', 'exp(x)', 'exp(x)', 'نسمّي $u=e^x$، ومشتقتها في البسط'),
@@ -253,8 +280,15 @@ def u_tanh():
     it = ITEMS['N42-X2-06']
     ex = question(it, 'U-I2 example 2')
     ex += short_steps(it, [
-        ('اكتب كمربعين:', r'4-25\cosh^{2}x=2^{2}-(5\cosh x)^{2}\ \Rightarrow\ u=5\cosh x,\ a=2', [('4-25*cosh(x)**2', '2**2-(5*cosh(x))**2')]),
-        ("الضبط: $u'=5\\sinh x$ والبسط $\\sinh x$ ⇐ نضرب في $\\frac15$. والمقارنة: $u\\ge5>2$ ⇐ coth:",
+        ('القانون: نفس الشكل، لكن إذا $|u|>a$ ⇐ صف coth', r'\int\frac{du}{a^{2}-u^{2}}=\frac1a\coth^{-1}\frac{u}{a}+C',
+         [R('six coth')]),
+        ('اكتب المقام كمربعين، فتطلع $u$ و $a$', r'4-25\cosh^{2}x=2^{2}-(5\cosh x)^{2}\ \Rightarrow\ u=5\cosh x,\ a=2',
+         [('4-25*cosh(x)**2', '2**2-(5*cosh(x))**2')]),
+        ('الضبط: مشتقة $u$ فيها 5 والبسط $\\sinh x$ بدونها ⇐ نضرب في $\\frac15$', r'du=5\sinh x\,dx\ \Rightarrow\ \sinh x\,dx=\frac{du}{5}',
+         [('diff(5*cosh(x),x)', '5*sinh(x)')]),
+        ('قارن: أصغر قيمة لـ $\\cosh x$ هي 1 ⇐ $u\\ge5>2$ دائمًا ⇐ coth (= سطر 4 في 🧱)', r'u=5\cosh x\ge5\cosh0=5>2=a',
+         [('5*cosh(0)', '5')]),
+        ('عوّض في القانون واضرب في $\\frac15$: $\\frac15\\cdot\\frac12=\\frac{1}{10}$',
          r'\frac15\cdot\frac12\coth^{-1}\frac{5\cosh x}{2}=\frac{1}{10}\coth^{-1}\frac{5\cosh x}{2}+C',
          [('Rational(1,5)*Rational(1,2)', 'Rational(1,10)'), ('=ANS', 'acoth(5*cosh(x)/2)/10')])], 'U-I2 ex2')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
@@ -289,8 +323,15 @@ def u_sech():
     it = ITEMS['N42-E2-5']
     ex = question(it, 'U-I3 example')
     ex += short_steps(it, [
-        ('اضرب فوق وتحت في $x$ فيصير:', r'u=x^{2},\quad x\,dx=\frac{du}{2},\quad 16=4^{2}\ \Rightarrow\ a=4', [('x**4', '(x**2)**2'), ('4**2', '16')]),
-        ('داخل الجذر ناقص ⇐ صف sech (سالب، و $\\frac1a$):', r'\frac12\cdot\left(-\frac14\right)\operatorname{sech}^{-1}\frac{x^{2}}{4}=-\frac18\operatorname{sech}^{-1}\frac{x^{2}}{4}+C',
+        ('القانون: $u$ خارج الجذر، وداخل الجذر ناقص ⇐ صف sech', r'\int\frac{du}{u\sqrt{a^{2}-u^{2}}}=-\frac1a\operatorname{sech}^{-1}\frac{|u|}{a}+C',
+         [R('six sech')]),
+        ('اضرب فوق وتحت في $x$ حتى يصير خارج الجذر $x^2$ (🧮 تحت)؛ = سطر 1 في 🧱',
+         r'\frac{1}{x\sqrt{16-x^{4}}}=\frac{x}{x^{2}\sqrt{4^{2}-(x^{2})^{2}}}', [('1/(x*sqrt(16-x**4))', 'x/(x**2*sqrt(4**2-(x**2)**2))')]),
+        ('طلّع $u$ و $a$. والبسط $x\\,dx$ نصف $du$ ⇐ نضرب في $\\frac12$', r'u=x^{2},\quad du=2x\,dx\ \Rightarrow\ x\,dx=\frac{du}{2},\quad a=4',
+         [('diff(x**2,x)', '2*x'), ('4**2', '16')]),
+        ('عوّض في القانون، و $|x^2|=x^2$', r'\frac12\cdot\left(-\frac14\right)\operatorname{sech}^{-1}\frac{x^{2}}{4}',
+         [('=ANS', 'Rational(1,2)*(-Rational(1,4))*asech(x**2/4)')]),
+        ('اضرب الكسرين: $\\frac12\\cdot\\left(-\\frac14\\right)=-\\frac18$', r'=-\frac18\operatorname{sech}^{-1}\frac{x^{2}}{4}+C',
          [('Rational(1,2)*(-Rational(1,4))', '-Rational(1,8)'), ('=ANS', '-asech(x**2/4)/8')])], 'U-I3 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'\frac{1}{x\sqrt{16-x^{4}}}=\frac{x}{x^{2}\sqrt{4^{2}-(x^{2})^{2}}}',
@@ -329,9 +370,13 @@ def u_lamda():
     it = ITEMS['1446-S2-SE-Q2.7']
     ex = question(it, 'U-I4 example')
     ex += short_steps(it, [
-        ('اكتب الأسية كمربع:', r'e^{6x}=\left(e^{3x}\right)^{2}\ \Rightarrow\ b=e,\ \lambda=3,\ a=1', [('exp(6*x)', 'exp(3*x)**2')]),
-        ('داخل الجذر $+$ ⇐ csch، والمعامل $-\\frac{1}{a\\lambda\\ln b}$:', r'-\frac{1}{1\cdot3\cdot\ln e}\operatorname{csch}^{-1}e^{3x}=-\frac13\operatorname{csch}^{-1}e^{3x}+C',
-         [('1/(1*3*log(E))', 'Rational(1,3)'), ('=ANS', '-acsch(exp(3*x))/3')])], 'U-I4 ex')
+        ('القانون: أسية تحت الجذر مع $+$ ⇐ صف csch في جدول لامدا',
+         r'\int\frac{dx}{\sqrt{b^{2\lambda x}+a^{2}}}=-\frac{1}{a\lambda\ln b}\operatorname{csch}^{-1}\frac{b^{\lambda x}}{a}+C', [R('lamda csch')]),
+        ('اكتب الأسية كمربع: نصف الأس (🧮 كتابة الحد كمربع)', r'e^{6x}=\left(e^{3x}\right)^{2}', [('exp(6*x)', 'exp(3*x)**2')]),
+        ('طلّع الأرقام: الأساس $e$، و $b^{\\lambda x}=e^{3x}$، و $1=1^2$', r'b=e,\qquad \lambda=3,\qquad a=1', [('exp(2*3*x)', 'exp(6*x)')]),
+        ('احسب المعامل؛ تذكّر $\\ln e=1$', r'-\frac{1}{a\lambda\ln b}=-\frac{1}{1\cdot3\cdot\ln e}=-\frac13', [('-1/(1*3*log(E))', '-Rational(1,3)')]),
+        ('عوّض في القانون، و $\\frac{e^{3x}}{1}=e^{3x}$؛ نفس جواب 🧱 (الضرب في $e^{3x}$)', r'-\frac13\operatorname{csch}^{-1}e^{3x}+C',
+         [('=ANS', '-acsch(exp(3*x))/3')])], 'U-I4 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'\frac{1}{\sqrt{e^{6x}+1}}=\frac{e^{3x}}{e^{3x}\sqrt{(e^{3x})^{2}+1}}',
          [('1/sqrt(exp(6*x)+1)', 'exp(3*x)/(exp(3*x)*sqrt(exp(3*x)**2+1))')], 'نضرب فوق وتحت في $e^{3x}$'),
@@ -363,8 +408,11 @@ def u_sqrt():
     it = ITEMS['N42-E2-4']
     ex = question(it, 'U-I5 example')
     ex += short_steps(it, [
-        ('الشكل $\\frac{1}{\\sqrt x\\sqrt{a^2+x}}$ مع:', r'a^{2}=4\ \Rightarrow\ a=2', [('2**2', '4')]),
-        ('ضعف sinh⁻¹، و $\\sqrt x$ داخلها:', r'2\sinh^{-1}\frac{\sqrt{x}}{2}+C', [('=ANS', '2*asinh(sqrt(x)/2)')])], 'U-I5 ex')
+        ('القانون: $\\sqrt x$ في المقام × جذر فيه $x$ وحدها', r'\int\frac{dx}{\sqrt{x}\sqrt{a^{2}+x}}=2\sinh^{-1}\frac{\sqrt{x}}{a}+C',
+         [R('sqrt sinh')]),
+        ('طلّع $a$: الرقم تحت الجذر هو $a^2$', r'a^{2}=4\ \Rightarrow\ a=2', [('2**2', '4')]),
+        ('عوّض $a=2$. الـ 2 قدّام جات من $\\frac{dx}{\\sqrt x}=2\\,du$ (السطر 2 في 🧱)', r'2\sinh^{-1}\frac{\sqrt{x}}{2}+C',
+         [('=ANS', '2*asinh(sqrt(x)/2)')])], 'U-I5 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('sub', 'sqrt(x)', '1/(2*sqrt(x))', 'نسمّي $u=\\sqrt x$'),
         ('tex', r'\frac{dx}{\sqrt{x}}=2\,du,\qquad 4+x=2^{2}+u^{2}', [('4+sqrt(x)**2', '4+x')], 'لأن $u^2=x$ (🧮 الجذر في نفسه)'),
@@ -394,9 +442,13 @@ def u_split():
     it = ITEMS['N42-X2-07']
     ex = question(it, 'U-I6 example')
     ex += short_steps(it, [
-        ('افصل البسط:', r'\frac{x}{\sqrt{25+x^{2}}}-\frac{2}{\sqrt{25+x^{2}}}', [('(x-2)/sqrt(25+x**2)', 'x/sqrt(25+x**2)-2/sqrt(25+x**2)')]),
-        ('جزء $x$ من جدول الاختصار:', r'\int\frac{x\,dx}{\sqrt{25+x^{2}}}=\sqrt{25+x^{2}}', [('diff(sqrt(25+x**2),x)', 'x/sqrt(25+x**2)')]),
-        ('جزء الرقم صف sinh مع $a=5$، ثم اجمع:', r'\sqrt{25+x^{2}}-2\sinh^{-1}\frac{x}{5}+C', [('=ANS', 'sqrt(25+x**2)-2*asinh(x/5)')])], 'U-I6 ex')
+        ('افصل الكسر: كل حد من البسط على المقام نفسه (انتبه للإشارة)',
+         r'\frac{x-2}{\sqrt{25+x^{2}}}=\frac{x}{\sqrt{25+x^{2}}}-\frac{2}{\sqrt{25+x^{2}}}', [('(x-2)/sqrt(25+x**2)', 'x/sqrt(25+x**2)-2/sqrt(25+x**2)')]),
+        ('قانون جزء $x$ من جدول الاختصار (يطلع من تعويض $w=c+x^2$)', r'\int\frac{x\,dx}{\sqrt{c+x^{2}}}=\sqrt{c+x^{2}}', [R('micro +')]),
+        ('جزء $x$ مع $c=25$', r'\int\frac{x\,dx}{\sqrt{25+x^{2}}}=\sqrt{25+x^{2}}', [('diff(sqrt(25+x**2),x)', 'x/sqrt(25+x**2)')]),
+        ('جزء الرقم: صف sinh مع $a=5$، والـ 2 تطلع قدّام', r'\int\frac{2\,dx}{\sqrt{x^{2}+5^{2}}}=2\sinh^{-1}\frac{x}{5}',
+         [('diff(2*asinh(x/5),x)', '2/sqrt(x**2+25)')]),
+        ('اطرح الجزأين كما في سطر الفصل', r'\sqrt{25+x^{2}}-2\sinh^{-1}\frac{x}{5}+C', [('=ANS', 'sqrt(25+x**2)-2*asinh(x/5)')])], 'U-I6 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'\frac{x-2}{\sqrt{25+x^{2}}}=\frac{x}{\sqrt{25+x^{2}}}-\frac{2}{\sqrt{25+x^{2}}}',
          [('(x-2)/sqrt(25+x**2)', 'x/sqrt(25+x**2)-2/sqrt(25+x**2)')], 'نفصل الكسر (البسط على المقام لكل حد)'),
@@ -425,9 +477,11 @@ def u_invnum():
     it = ITEMS['N42-X2-09']
     ex = question(it, 'U-I7 example')
     ex += short_steps(it, [
-        ('العامل $\\frac{1}{\\sqrt{x^2-1}}$ هو مشتقة الدالة:', r'f^{-1}=\cosh^{-1}x,\quad \left(\cosh^{-1}x\right)'"'"r'=\frac{1}{\sqrt{x^{2}-1}}',
-         [('diff(acosh(x),x)', '1/sqrt(x**2-1)', '1+t')]),
-        ('الدالة × مشتقتها ⇐ مربعها على 2:', r'\frac{\left(\cosh^{-1}x\right)^{2}}{2}+C', [('=ANS', 'acosh(x)**2/2')])], 'U-I7 ex')
+        ('القانون: الدالة × مشتقتها ⇐ مربعها على 2', r'\int f^{-1}\cdot\left(f^{-1}\right)'"'"r'\,dx=\frac{\left(f^{-1}\right)^{2}}{2}+C',
+         [R('g gprime')]),
+        ('تأكد أن العامل $\\frac{1}{\\sqrt{x^2-1}}$ هو مشتقة الدالة (صف cosh في التوائم)',
+         r'f^{-1}=\cosh^{-1}x,\qquad \left(\cosh^{-1}x\right)'"'"r'=\frac{1}{\sqrt{x^{2}-1}}', [('diff(acosh(x),x)', '1/sqrt(x**2-1)', '1+t')]),
+        ('عوّض في القانون؛ = $\\int u\\,du=\\frac{u^2}{2}$ في 🧱', r'\frac{\left(\cosh^{-1}x\right)^{2}}{2}+C', [('=ANS', 'acosh(x)**2/2')])], 'U-I7 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('sub', 'acosh(x)', '1/sqrt(x**2-1)', 'مشتقة $\\cosh^{-1}x$ موجودة في المقام', 'u', '1+t'),
         ('tex', r'=\int u\,du=\frac{u^{2}}{2}', [('integrate(x,x)', 'x**2/2')], 'قاعدة القوة')], 'U-I7 ex')
@@ -452,9 +506,13 @@ def u_square():
     it = ITEMS['1446-S1-SE-Q2.2']
     ex = question(it, 'U-I8 example 1')
     ex += short_steps(it, [
-        ('المركز:', r'h=-\frac{B}{2A}=-\frac{6}{2}=-3', [('-Rational(6,2)', '-3')]),
-        ('قيمة الثلاثي عند المركز:', r'd=Q(-3)=9-18-16=-25=-5^{2}', [('9-18-16', '-25')]),
-        ('الباقي سالب ⇐ cosh مع $u=x+3$ و $a=5$:', r'3\cosh^{-1}\frac{x+3}{5}+C', [('=ANS', '3*acosh((x+3)/5)')])], 'U-I8 ex1')
+        ('القانون: بعد إكمال المربع يصير مربعًا ناقص رقم ⇐ صف cosh', r'\int\frac{du}{\sqrt{u^{2}-a^{2}}}=\cosh^{-1}\frac{u}{a}+C',
+         [R('six cosh')]),
+        ('المركز: $A=1$ معامل $x^2$، و $B=6$ معامل $x$', r'h=-\frac{B}{2A}=-\frac{6}{2\cdot1}=-3', [('-Rational(6,2*1)', '-3')]),
+        ('الباقي: عوّض $x=-3$ في الثلاثي $Q(x)=x^2+6x-16$', r'Q(-3)=(-3)^{2}+6(-3)-16=9-18-16=-25', [('(-3)**2+6*(-3)-16', '-25')]),
+        ('اكتب الثلاثي: $(x-h)^2$ + الباقي. الباقي سالب ⇐ cosh؛ = سطر 1 في 🧱',
+         r'x^{2}+6x-16=(x+3)^{2}-5^{2}\ \Rightarrow\ u=x+3,\ a=5', [('x**2+6*x-16', '(x+3)**2-5**2')]),
+        ('عوّض في القانون، والـ 3 في البسط تضرب الجواب', r'3\cosh^{-1}\frac{x+3}{5}+C', [('=ANS', '3*acosh((x+3)/5)')])], 'U-I8 ex1')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'x^{2}+6x-16=(x+3)^{2}-5^{2}', [('x**2+6*x-16', '(x+3)**2-5**2')], 'إكمال المربع (🧮 تحت)'),
         ('sub', 'x+3', '1', 'نسمّي $u=x+3$'),
@@ -474,8 +532,12 @@ def u_square():
     it = ITEMS['1445-S2-SE-Q2.7']
     ex = question(it, 'U-I8 example 2')
     ex += short_steps(it, [
-        ('المركز والباقي:', r'h=-\frac{6}{2}=-3,\quad d=Q(-3)=9-18+13=4=2^{2}', [('-Rational(6,2)', '-3'), ('9-18+13', '4')]),
-        ('الباقي موجب ⇐ sinh مع $u=x+3$ و $a=2$:', r'\sinh^{-1}\frac{x+3}{2}+C', [('=ANS', 'asinh((x+3)/2)')])], 'U-I8 ex2')
+        ('القانون: مربع زائد رقم ⇐ صف sinh', r'\int\frac{du}{\sqrt{u^{2}+a^{2}}}=\sinh^{-1}\frac{u}{a}+C', [R('six sinh')]),
+        ('المركز: $A=1$ و $B=6$', r'h=-\frac{B}{2A}=-\frac{6}{2\cdot1}=-3', [('-Rational(6,2*1)', '-3')]),
+        ('الباقي: عوّض $x=-3$ في $Q(x)=x^2+6x+13$', r'Q(-3)=(-3)^{2}+6(-3)+13=9-18+13=4', [('(-3)**2+6*(-3)+13', '4')]),
+        ('اكتب الثلاثي: الباقي موجب ⇐ sinh؛ = سطر 1 في 🧱', r'x^{2}+6x+13=(x+3)^{2}+2^{2}\ \Rightarrow\ u=x+3,\ a=2',
+         [('x**2+6*x+13', '(x+3)**2+2**2')]),
+        ('عوّض في القانون', r'\sinh^{-1}\frac{x+3}{2}+C', [('=ANS', 'asinh((x+3)/2)')])], 'U-I8 ex2')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'x^{2}+6x+13=(x+3)^{2}+2^{2}', [('x**2+6*x+13', '(x+3)**2+2**2')], 'إكمال المربع: نصف 6 هو 3، و $13-9=4$'),
         ('sub', 'x+3', '1', 'نسمّي $u=x+3$'),
@@ -510,9 +572,14 @@ def u_square_lin():
     it = ITEMS['N42-E2-8']
     ex = question(it, 'U-I9 example')
     ex += short_steps(it, [
-        ('المركز والباقي:', r'h=-\frac{2}{2\cdot(-1)}=1,\quad d=Q(1)=-1+2+3=4,\quad \sqrt d=2', [('-Rational(2,2*(-1))', '1'), ('-1+2+3', '4')]),
-        ('العامل خارج الجذر $(x-1)=(x-h)$ ✓، ومعامل $x^2$ سالب ⇐ sech، والمعامل $-\\frac{c}{\\sqrt d}=-\\frac12$:',
-         r'-\frac12\operatorname{sech}^{-1}\frac{|x-1|}{2}+C', [('=ANS', '-asech(Abs(x-1)/2)/2')])], 'U-I9 ex')
+        ('القانون: $u$ خارج الجذر، وداخله رقم ناقص مربع ⇐ صف sech',
+         r'\int\frac{du}{u\sqrt{a^{2}-u^{2}}}=-\frac1a\operatorname{sech}^{-1}\frac{|u|}{a}+C', [R('six sech')]),
+        ('المركز: $A=-1$ و $B=2$ (انتبه للسالب)', r'h=-\frac{B}{2A}=-\frac{2}{2\cdot(-1)}=1', [('-Rational(2,2*(-1))', '1')]),
+        ('الباقي: عوّض $x=1$ في $Q(x)=-x^2+2x+3$', r'Q(1)=-1+2+3=4=2^{2}', [('-1**2+2*1+3', '4')]),
+        ('اكتب الثلاثي (🧮 تحت)، وتأكد أن العامل خارج الجذر هو $u$ نفسه ✓',
+         r'-x^{2}+2x+3=2^{2}-(x-1)^{2}\ \Rightarrow\ u=x-1,\ a=2', [('-x**2+2*x+3', '2**2-(x-1)**2')]),
+        ('عوّض في القانون: $-\\frac1a=-\\frac12$، و $|u|=|x-1|$', r'-\frac12\operatorname{sech}^{-1}\frac{|x-1|}{2}+C',
+         [('=ANS', '-asech(Abs(x-1)/2)/2')])], 'U-I9 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'-x^{2}+2x+3=2^{2}-(x-1)^{2}', [('-x**2+2*x+3', '2**2-(x-1)**2')], 'إكمال المربع مع سالب (🧮 تحت)'),
         ('sub', 'x-1', '1', 'نسمّي $u=x-1$، وهو نفسه العامل خارج الجذر'),

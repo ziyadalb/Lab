@@ -1,9 +1,42 @@
 """المذكرة الكاملة — الدرس 5.2: التكاملات المثلثية (اليومان 5–6)."""
-from booklet import sc_even, sc_pascal, sc_prod, sc_reduce
+from booklet import sc_even, sc_prod, sc_reduce
 from booklet_engine import ITEMS, arith, same_value
 from guide_kit import Unit, alg, contrast, final, question, rich, short_steps, steps
+from guide_rules import R
 from guide_42 import box_memo
 from html_kit import md, mi, p, table, ul
+
+# the normal method of types 22, 23, 25, 26 and 28: which piece is kept for du, which u, how the rest is converted
+METHOD_ROWS = {
+    'cos': [mi(r'\cos^{\text{odd}}x'), mi(r'\cos x\,dx'), mi(r'u=\sin x'), mi(r'\cos^{2}x=1-\sin^{2}x')],
+    'sin': [mi(r'\sin^{\text{odd}}x'), mi(r'\sin x\,dx=-du'), mi(r'u=\cos x'), mi(r'\sin^{2}x=1-\cos^{2}x')],
+    'sec': [mi(r'\sec^{\text{even}}x'), mi(r'\sec^{2}x\,dx'), mi(r'u=\tan x'), mi(r'\sec^{2}x=1+\tan^{2}x')],
+    'tan': [mi(r'\tan^{\text{odd}}x') + ' ومعه sec', mi(r'\sec x\tan x\,dx'), mi(r'u=\sec x'), mi(r'\tan^{2}x=\sec^{2}x-1')],
+    'csc': [mi(r'\csc^{\text{even}}x'), mi(r'\csc^{2}x\,dx=-du'), mi(r'u=\cot x'), mi(r'\csc^{2}x=1+\cot^{2}x')],
+    'cot': [mi(r'\cot^{\text{odd}}x') + ' ومعه csc', mi(r'\csc x\cot x\,dx=-du'), mi(r'u=\csc x'), mi(r'\cot^{2}x=\csc^{2}x-1')]}
+METHOD_STEPS = ['<b>احجز</b> قطعة المشتقة (العمود الثاني): هي اللي تصير $du$.',
+                '<b>حوّل</b> الباقي (قوته زوجية) بالمتطابقة في العمود الأخير.',
+                '<b>عوّض</b> $u$ و $du$، وانتبه للسالب إذا كان $du$ بالسالب.',
+                '<b>فك القوس</b> ووزّع (🧮)، ثم <b>كامل</b> كل حد (زِد الأس 1 واقسم عليه)، و<b>ارجع</b> لـ $x$.']
+
+
+def method_table(keys):
+    """The rows of the method table, every identity and derivative in it checked."""
+    arith('', [('cos(x)**2', '1-sin(x)**2'), ('sin(x)**2', '1-cos(x)**2'), ('sec(x)**2', '1+tan(x)**2'),
+               ('tan(x)**2', 'sec(x)**2-1'), ('csc(x)**2', '1+cot(x)**2'), ('cot(x)**2', 'csc(x)**2-1'),
+               ('diff(sin(x),x)', 'cos(x)'), ('diff(cos(x),x)', '-sin(x)'), ('diff(tan(x),x)', 'sec(x)**2'),
+               ('diff(sec(x),x)', 'sec(x)*tan(x)'), ('diff(cot(x),x)', '-csc(x)**2'), ('diff(csc(x),x)', '-csc(x)*cot(x)')], 'method table')
+    return table(['إذا وجدت', 'احجز (تصير du)', 'خذ', 'والباقي يتحوّل بـ'], [METHOD_ROWS[k] for k in keys], 'formula')
+
+
+def method_box(keys, memo):
+    return ('<ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in METHOD_STEPS) + '</ol>'
+            + method_table(keys) + box_memo(rich(memo)))
+
+
+def sc_method():
+    """For the formula sheet: the four steps and the whole table."""
+    return '<ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in METHOD_STEPS) + '</ol>' + method_table(list(METHOD_ROWS)), ''
 
 
 # ---------------------------------------------------------------- 22
@@ -14,22 +47,18 @@ def u_odd_alone():
     U.add('sign', 'العلامة', p(rich('$\\int\\cos^3x\\,dx$ أو $\\int\\sin^5x\\,dx$: قوة <b>فردية</b> لدالة واحدة.'))
           + contrast([(r'\int\cos^{3}x\,dx', 'احجز $\\cos x$، $u=\\sin x$', 'الأس فردي'),
                       (r'\int\cos^{2}x\,dx', 'نصف الزاوية (النوع 24)', 'الأس زوجي')]))
-    U.add('short', '⚡ الاختصار', ul([
-        rich('$\\cos^{2k+1}x$: $u=\\sin x$، والباقي $(1-u^2)^k$، وإشارة $+$.'),
-        rich('$\\sin^{2k+1}x$: $u=\\cos x$، والباقي $(1-u^2)^k$، وإشارة $-$ أمام الكل.')])
-          + box_memo(rich('احجز واحدًا، والباقي زوجي يصير $(1-u^2)$.')))
+    U.add('short', '🧭 الطريقة: 4 خطوات ثابتة', method_box(['cos', 'sin'], 'احجز، حوّل، عوّض، فك وكامل. نفس الخطوات في الأنواع 23 و25 و26 و28.'))
     it = ITEMS['N52-E1-1']
     ex = question(it, 'U-T1 example')
-    ex += short_steps(it, [
-        ('cos أسه فردي ($3=2\\cdot1+1$) ⇐ $u=\\sin x$ وإشارة $+$، والقوس:', r'k=1:\quad (1-u^{2})^{1}', [('2*1+1', '3')]),
-        ('كامل القوس ونرجع $u$:', r'u-\frac{u^{3}}{3}=\sin x-\frac{\sin^{3}x}{3}+C',
-         [('integrate(1-x**2,x)', 'x-x**3/3'), ('=ANS', 'sin(x)-sin(x)**3/3')])], 'U-T1 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('tex', r'\cos^{3}x=\cos^{2}x\cdot\cos x=(1-\sin^{2}x)\cos x', [('cos(x)**3', '(1-sin(x)**2)*cos(x)')],
-         'نحجز $\\cos x$ (مشتقة $\\sin x$) ونحوّل $\\cos^2x$ (🧮)'),
-        ('sub', 'sin(x)', 'cos(x)', 'نسمّي $u=\\sin x$'),
-        ('tex', r'=\int(1-u^{2})\,du=u-\frac{u^{3}}{3}', [('integrate(1-x**2,x)', 'x-x**3/3')], 'تكامل كثيرة حدود'),
-        ('line', 'sin(x)-sin(x)**3/3', 'نرجع $u=\\sin x$')], 'U-T1 ex')
+        ('tex', r'\cos^{3}x=\cos^{2}x\cdot\cos x', [('cos(x)**3', 'cos(x)**2*cos(x)')],
+         '<b>احجز</b> $\\cos x$: أس cos فردي، و $\\cos x\\,dx$ هي $du$ لما $u=\\sin x$'),
+        ('tex', r'\cos^{2}x=1-\sin^{2}x\ \Rightarrow\ \cos^{3}x=(1-\sin^{2}x)\cos x', [('cos(x)**3', '(1-sin(x)**2)*cos(x)')],
+         '<b>حوّل</b> الباقي $\\cos^2x$ (🧮 متطابقات فيثاغورس تحت)'),
+        ('sub', 'sin(x)', 'cos(x)', '<b>عوّض</b>: $u=\\sin x$، و $du=\\cos x\\,dx$'),
+        ('tex', r'\int\cos^{3}x\,dx=\int(1-u^{2})\,du', [('cos(x)**3', '(1-sin(x)**2)*diff(sin(x),x)')], 'التكامل كله بدلالة $u$'),
+        ('tex', r'=u-\frac{u^{3}}{3}', [('integrate(1-u**2,u)', 'u-u**3/3')], '<b>كامل</b> كل حد: $\\int1\\,du=u$ و $\\int u^2du=\\frac{u^3}{3}$'),
+        ('line', 'sin(x)-sin(x)**3/3', '<b>ارجع</b> $u=\\sin x$')], 'U-T1 ex')
     ex += final(it, 'U-T1 example')
     U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.raw(alg('trig-pyth', 'متطابقات فيثاغورس', [
@@ -52,27 +81,27 @@ def u_odd_alone():
 
 # ---------------------------------------------------------------- 23
 def u_pascal():
-    U = Unit('U-T2', 'sin و cos معًا وأحدهما فردي (صف باسكال)', '5.2', 'ص68–69، مثال 2', 5)
-    U.add('idea', 'الفكرة', p(rich('نفس النوع السابق: احجز من الدالة صاحبة الأس الفردي، والباقي قوس يُفك. صف باسكال يعطيك '
-                                   'معاملات القوس بسرعة بدون فك.')))
+    U = Unit('U-T2', 'sin و cos معًا وأحدهما فردي', '5.2', 'ص68–69، مثال 2', 5)
+    U.add('idea', 'الفكرة', p(rich('نفس النوع السابق: احجز من الدالة صاحبة الأس الفردي، وحوّل الباقي. الدالة الثانية تبقى كما هي '
+                                   'وتصير قوة لـ $u$. بعدها فك القوس ووزّع.')))
     U.add('sign', 'العلامة', p(rich('$\\int\\sin^m x\\cos^n x\\,dx$ وأحد الأسين فردي.')))
-    short, memo = sc_pascal()
-    U.add('short', '⚡ الاختصار (يشمل tan/sec و cot/csc في الأنواع القادمة)', short + box_memo(memo))
+    U.add('short', '🧭 الطريقة: نفس الخطوات الأربع (النوع 22)', method_box(['cos', 'sin'], 'احجز من صاحب الأس الفردي، والثانية تصير $u$.'))
     it = ITEMS['1446-S1-SE-Q2.6']
     ex = question(it, 'U-T2 example')
-    ex += short_steps(it, [
-        ('cos أسه فردي ($5=2\\cdot2+1$) ⇐ $u=\\sin x$، وأس البداية $p$ = أس sin:', r'k=2,\quad p=4', [('2*2+1', '5')]),
-        ('صف باسكال رقم 2 هو $1\\ \\ 2\\ \\ 1$ بإشارات $+\\ -\\ +$، والأسس تبدأ من $p+1=5$ وتزيد 2:',
-         r'\frac{u^{5}}{5}-\frac{2u^{7}}{7}+\frac{u^{9}}{9}', [('integrate(u**4*(1-u**2)**2,u)', 'u**5/5-2*u**7/7+u**9/9')]),
-        ('نرجع $u=\\sin x$:', r'\frac{\sin^{5}x}{5}-\frac{2\sin^{7}x}{7}+\frac{\sin^{9}x}{9}+C',
-         [('=ANS', 'sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9')])], 'U-T2 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('tex', r'\sin^{4}x\cos^{5}x=\sin^{4}x\,(1-\sin^{2}x)^{2}\cos x', [('sin(x)**4*cos(x)**5', 'sin(x)**4*(1-sin(x)**2)**2*cos(x)')],
-         'نحجز $\\cos x$ والباقي $\\cos^4x=(1-\\sin^2x)^2$'),
-        ('sub', 'sin(x)', 'cos(x)', 'نسمّي $u=\\sin x$'),
-        ('tex', r'=\int u^{4}(1-2u^{2}+u^{4})\,du=\int\left(u^{4}-2u^{6}+u^{8}\right)du', [('u**4*(1-2*u**2+u**4)', 'u**4-2*u**6+u**8')],
-         'نفك القوس (🧮 فك مربع قوس) ونوزّع $u^4$'),
-        ('line', 'sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9', 'نكامل كل حد ونرجع $u$')], 'U-T2 ex')
+        ('tex', r'\sin^{4}x\cos^{5}x=\sin^{4}x\cos^{4}x\cdot\cos x', [('sin(x)**4*cos(x)**5', 'sin(x)**4*cos(x)**4*cos(x)')],
+         '<b>احجز</b> $\\cos x$: أس cos فردي (5)، وأس sin زوجي (4)'),
+        ('tex', r'\cos^{4}x=\left(\cos^{2}x\right)^{2}=(1-\sin^{2}x)^{2}', [('cos(x)**4', '(1-sin(x)**2)**2')],
+         '<b>حوّل</b> الباقي: $\\cos^4x$ مربع $\\cos^2x$ (🧮 متطابقات فيثاغورس)'),
+        ('sub', 'sin(x)', 'cos(x)', '<b>عوّض</b>: $u=\\sin x$، و $du=\\cos x\\,dx$'),
+        ('tex', r'\int\sin^{4}x\cos^{5}x\,dx=\int u^{4}(1-u^{2})^{2}\,du',
+         [('sin(x)**4*cos(x)**5', 'sin(x)**4*(1-sin(x)**2)**2*diff(sin(x),x)')], 'التكامل كله بدلالة $u$'),
+        ('tex', r'(1-u^{2})^{2}=1-2u^{2}+u^{4}', [('(1-u**2)**2', '1-2*u**2+u**4')], '<b>فك القوس</b> وحده أولًا (🧮 فك مربع قوس)'),
+        ('tex', r'u^{4}(1-2u^{2}+u^{4})=u^{4}-2u^{6}+u^{8}', [('u**4*(1-2*u**2+u**4)', 'u**4-2*u**6+u**8')],
+         'وزّع $u^4$ على كل حد: الأسس تنجمع'),
+        ('tex', r'\int\left(u^{4}-2u^{6}+u^{8}\right)du=\frac{u^{5}}{5}-\frac{2u^{7}}{7}+\frac{u^{9}}{9}',
+         [('integrate(u**4-2*u**6+u**8,u)', 'u**5/5-2*u**7/7+u**9/9')], '<b>كامل</b> كل حد: زِد الأس 1 واقسم عليه'),
+        ('line', 'sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9', '<b>ارجع</b> $u=\\sin x$')], 'U-T2 ex')
     ex += final(it, 'U-T2 example')
     U.add('ex', 'مثال (اختبار سابق)', ex)
     U.raw(alg('frac-exp', 'تكامل أس كسري', [
@@ -82,11 +111,11 @@ def u_pascal():
                                 'إذا الأسان فرديان معًا فاحجز من الأصغر (حدود أقل).']))
     U.add('paper', '✍️ في ورقة الكويز', md(r'\sin^{4}x\cos^{5}x=\sin^{4}x\,(1-\sin^{2}x)^{2}\cos x,\quad u=\sin x,\ du=\cos x\,dx')
           + p('ثم سطر التوزيع وسطر الجواب.'))
-    U.drill('1', '1447-S1-SE-Q2.3', 'G', 'الأسس في الجواب: 3، 5، 7 ومعاملات القوس 1، −2، 1.',
-            first=r'\cos^{5}x=\cos^{2\cdot2+1}x:\quad k=2,\ u=\sin x,\ p=2',
+    U.drill('1', '1447-S1-SE-Q2.3', 'G', 'احجز $\\cos x$، والباقي $\\cos^4x=(1-\\sin^2x)^2$؛ فك القوس (🧮) ثم وزّع $u^2$.',
+            first=r'\sin^{2}x\cos^{5}x=\sin^{2}x\,(1-\sin^{2}x)^{2}\cos x,\quad u=\sin x,\ du=\cos x\,dx',
             claims=[('sin(x)**2*cos(x)**5', 'sin(x)**2*(1-sin(x)**2)**2*cos(x)')])
     U.drill('2', 'N52-X01', 'P', 'الفردي sin ⇐ $u=\\cos x$ وإشارة سالبة أمام الكل.')
-    U.drill('3', 'N52-E2-2', 'I', '$\\sqrt{\\sin x}=u^{1/2}$؛ القاعدة نفسها والأسس كسرية (🧮).')
+    U.drill('3', 'N52-E2-2', 'I', 'نفس الطريقة: احجز $\\cos x$، و $\\sqrt{\\sin x}=u^{1/2}$، والأسس كسرية (🧮).')
     return U
 
 
@@ -100,8 +129,9 @@ def u_even():
     it = ITEMS['N52-X13']
     ex = question(it, 'U-T3 example 1')
     ex += short_steps(it, [
-        ('الأس زوجي ⇐ نصف الزاوية، والزاوية $kx$ مع:', r'k=1,\quad 4k=4', [('4*1', '4')]),
-        ('نصف $x$، ناقص (مع sin) $\\sin$ ضعف الزاوية على $4k$:', r'\frac{x}{2}-\frac{\sin2x}{4}+C', [('=ANS', 'x/2-sin(2*x)/4')])], 'U-T3 ex1')
+        ('القانون: صف $\\sin^2$ في جدول نصف الزاوية', r'\int\sin^{2}kx\,dx=\frac{x}{2}-\frac{\sin2kx}{4k}+C', [R('even sin2')]),
+        ('طلّع $k$: معامل $x$ داخل sin، ثم $2k$ و $4k$', r'k=1,\qquad 2k=2,\qquad 4k=4', [('2*1', '2'), ('4*1', '4')]),
+        ('عوّض؛ = جواب 🧱 (من $\\sin^2x=\\frac{1-\\cos2x}{2}$)', r'\frac{x}{2}-\frac{\sin2x}{4}+C', [('=ANS', 'x/2-sin(2*x)/4')])], 'U-T3 ex1')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'\sin^{2}x=\frac{1-\cos2x}{2}', [('sin(x)**2', '(1-cos(2*x))/2')], 'نصف الزاوية (مذكرة د. طارق ص67)'),
         ('line', 'x/2-sin(2*x)/4', '$\\int\\cos2x\\,dx=\\frac12\\sin2x$')], 'U-T3 ex1')
@@ -110,10 +140,15 @@ def u_even():
     it = ITEMS['N52-E1-3']
     ex = question(it, 'U-T3 example 2')
     ex += short_steps(it, [
-        ('صيغة جاهزة لأس 4 (تطلع من نصف الزاوية مرتين):', r'\cos^{4}\theta=\frac38+\frac12\cos2\theta+\frac18\cos4\theta',
-         [('cos(x)**4', 'Rational(3,8)+cos(2*x)/2+cos(4*x)/8')]),
-        ('مع $\\theta=2x$ كامل حدًا حدًا (كل sin يُقسم على زاويته):', r'\frac{3x}{8}+\frac{\sin4x}{8}+\frac{\sin8x}{64}+C',
-         [('=ANS', '3*x/8+sin(4*x)/8+sin(8*x)/64')])], 'U-T3 ex2')
+        ('القانون: صيغة أس 4 جاهزة (تطلع من نصف الزاوية مرتين؛ = السطور 1–3 في 🧱)',
+         r'\cos^{4}\theta=\frac38+\frac12\cos2\theta+\frac18\cos4\theta', [('cos(x)**4', 'Rational(3,8)+cos(2*x)/2+cos(4*x)/8')]),
+        ('عوّض $\\theta=2x$: كل زاوية تتضاعف', r'\cos^{4}2x=\frac38+\frac12\cos4x+\frac18\cos8x',
+         [('cos(2*x)**4', 'Rational(3,8)+cos(4*x)/2+cos(8*x)/8')]),
+        ('كامل حدًا حدًا: الرقم يعطي $x$، و $\\int\\cos kx\\,dx=\\frac{\\sin kx}{k}$', r'\frac38x+\frac12\cdot\frac{\sin4x}{4}+\frac18\cdot\frac{\sin8x}{8}',
+         [('=ANS', '3*x/8+sin(4*x)/8+sin(8*x)/64')]),
+        ('اضرب الكسور: $\\frac12\\cdot\\frac14=\\frac18$، و $\\frac18\\cdot\\frac18=\\frac{1}{64}$', r'=\frac{3x}{8}+\frac{\sin4x}{8}+\frac{\sin8x}{64}+C',
+         [('Rational(1,2)*Rational(1,4)', 'Rational(1,8)'), ('Rational(1,8)*Rational(1,8)', 'Rational(1,64)'),
+          ('=ANS', '3*x/8+sin(4*x)/8+sin(8*x)/64')])], 'U-T3 ex2')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'\cos^{4}2x=\left(\frac{1+\cos4x}{2}\right)^{2}=\frac14\left(1+2\cos4x+\cos^{2}4x\right)',
          [('cos(2*x)**4', '(1+2*cos(4*x)+cos(4*x)**2)/4')], 'نصف الزاوية مرة، ثم فك المربع'),
@@ -136,18 +171,15 @@ def u_sec_even():
     U.add('idea', 'الفكرة', p(rich('احجز $\\sec^2x$ (مشتقة $\\tan x$)، والباقي من sec يتحول إلى tan بـ $\\sec^2x=1+\\tan^2x$. '
                                    'ثم $u=\\tan x$.')))
     U.add('sign', 'العلامة', p(rich('$\\int\\tan^m x\\sec^n x\\,dx$ و $n$ زوجي (أو sec زوجي وحده).')))
-    U.add('short', '⚡ الاختصار', p(rich('صف $\\sec^{2k+2}x$ في جدول باسكال (النوع 23): $u=\\tan x$، وإشارة $+$، والقوس $(1+u^2)^k$.'))
-          + box_memo('sec زوجي ⇐ u = tan.'))
+    U.add('short', '🧭 الطريقة: نفس الخطوات الأربع (النوع 22)', method_box(['sec'], 'sec زوجي ⇐ احجز $\\sec^2x$، و $u=\\tan x$.'))
     it = ITEMS['1447-S1-FE-Q2.6']
     ex = question(it, 'U-T4 example')
-    ex += short_steps(it, [
-        ('sec زوجي ($\\sec^2=\\sec^{2\\cdot0+2}$) ⇐ $u=\\tan x$، وإشارة $+$، و $p$ = أس tan:', r'k=0,\quad p=3', [('2*0+2', '2')]),
-        ('ما في قوس، فالأس يزيد 1 ونقسم عليه:', r'\frac{u^{4}}{4}=\frac{\tan^{4}x}{4}+C', [('integrate(x**3,x)', 'x**4/4'), ('=ANS', 'tan(x)**4/4')])],
-        'U-T4 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('sub', 'tan(x)', 'sec(x)**2', '$u=\\tan x$، و $\\sec^2x\\,dx=du$ موجودة كما هي'),
-        ('tex', r'=\int u^{3}\,du=\frac{u^{4}}{4}', [('integrate(x**3,x)', 'x**4/4')], 'قاعدة القوة'),
-        ('line', 'tan(x)**4/4', 'نرجع $u$')], 'U-T4 ex')
+        ('sub', 'tan(x)', 'sec(x)**2', '<b>احجز</b> $\\sec^2x$ (أس sec زوجي) و<b>عوّض</b> $u=\\tan x$. هنا ما فيه باقي يتحوّل'),
+        ('tex', r'\int\tan^{3}x\sec^{2}x\,dx=\int u^{3}\,du', [('tan(x)**3*sec(x)**2', 'tan(x)**3*diff(tan(x),x)')],
+         'التكامل كله بدلالة $u$'),
+        ('tex', r'=\frac{u^{4}}{4}', [('integrate(u**3,u)', 'u**4/4')], '<b>كامل</b>: زِد الأس 1 واقسم عليه'),
+        ('line', 'tan(x)**4/4', '<b>ارجع</b> $u=\\tan x$')], 'U-T4 ex')
     ex += final(it, 'U-T4 example')
     U.add('ex', 'مثال (اختبار سابق)', ex)
     U.add('trap', '⚠️ الفخ', p(rich('هذا السؤال ينحل أيضًا بـ $u=\\sec x$ (لأن tan فردي)، ويعطي $\\frac{\\sec^4x}{4}-\\frac{\\sec^2x}{2}$. '
@@ -165,29 +197,29 @@ def u_tan_odd():
     U = Unit('U-T5', 'tan و sec: الـ tan فردي', '5.2', 'ص71–72، الحالة 2', 6)
     U.add('idea', 'الفكرة', p(rich('احجز $\\sec x\\tan x$ (مشتقة $\\sec x$)، والباقي من tan (زوجي) يتحول بـ $\\tan^2x=\\sec^2x-1$. ثم $u=\\sec x$.')))
     U.add('sign', 'العلامة', p(rich('$\\int\\tan^m x\\sec^n x\\,dx$ و $m$ فردي، ومعه sec واحد على الأقل.')))
-    U.add('short', '⚡ الاختصار', p(rich('صف $\\tan^{2k+1}x$ في جدول باسكال (النوع 23): $u=\\sec x$، و $p$ = أس sec ناقص 1، والقوس $(u^2-1)^k$.'))
-          + box_memo('tan فردي ⇐ u = sec، وأس البداية ينقص 1.'))
+    U.add('short', '🧭 الطريقة: نفس الخطوات الأربع (النوع 22)', method_box(['tan'], 'tan فردي ⇐ احجز $\\sec x\\tan x$، و $u=\\sec x$.'))
     it = ITEMS['1447-S2-SE-Q3.3']
     ex = question(it, 'U-T5 example')
-    ex += short_steps(it, [
-        ('tan أسه فردي ($3=2\\cdot1+1$) ⇐ $u=\\sec x$، و $p$ = أس sec ناقص 1:', r'k=1,\quad p=3-1=2', [('2*1+1', '3'), ('3-1', '2')]),
-        ('القوس $(u^2-1)^1$ بإشارات تتناوب والأعلى موجب، والأسس تبدأ من $p+1=3$:',
-         r'\frac{u^{5}}{5}-\frac{u^{3}}{3}=\frac{\sec^{5}x}{5}-\frac{\sec^{3}x}{3}+C',
-         [('integrate(x**2*(x**2-1),x)', 'x**5/5-x**3/3'), ('=ANS', 'sec(x)**5/5-sec(x)**3/3')])], 'U-T5 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('tex', r'\sec^{3}x\tan^{3}x=\sec^{2}x\,(\sec^{2}x-1)\cdot\sec x\tan x',
-         [('sec(x)**3*tan(x)**3', 'sec(x)**2*(sec(x)**2-1)*sec(x)*tan(x)')], 'نحجز $\\sec x\\tan x$ ونحوّل $\\tan^2x$'),
-        ('sub', 'sec(x)', 'sec(x)*tan(x)', 'نسمّي $u=\\sec x$'),
-        ('tex', r'=\int u^{2}(u^{2}-1)\,du=\int\left(u^{4}-u^{2}\right)du', [('u**2*(u**2-1)', 'u**4-u**2')], 'نوزّع'),
-        ('line', 'sec(x)**5/5-sec(x)**3/3', 'نكامل ونرجع $u$')], 'U-T5 ex')
+        ('tex', r'\sec^{3}x\tan^{3}x=\sec^{2}x\tan^{2}x\cdot\sec x\tan x', [('sec(x)**3*tan(x)**3', 'sec(x)**2*tan(x)**2*sec(x)*tan(x)')],
+         '<b>احجز</b> $\\sec x\\tan x$: أس tan فردي، ومعه sec'),
+        ('tex', r'\tan^{2}x=\sec^{2}x-1\ \Rightarrow\ \sec^{2}x\,(\sec^{2}x-1)\cdot\sec x\tan x',
+         [('sec(x)**3*tan(x)**3', 'sec(x)**2*(sec(x)**2-1)*sec(x)*tan(x)')], '<b>حوّل</b> الباقي $\\tan^2x$ إلى sec (🧮 متطابقات فيثاغورس)'),
+        ('sub', 'sec(x)', 'sec(x)*tan(x)', '<b>عوّض</b>: $u=\\sec x$، و $du=\\sec x\\tan x\\,dx$'),
+        ('tex', r'\int\sec^{3}x\tan^{3}x\,dx=\int u^{2}(u^{2}-1)\,du',
+         [('sec(x)**3*tan(x)**3', 'sec(x)**2*(sec(x)**2-1)*diff(sec(x),x)')], 'التكامل كله بدلالة $u$'),
+        ('tex', r'u^{2}(u^{2}-1)=u^{4}-u^{2}', [('u**2*(u**2-1)', 'u**4-u**2')], '<b>وزّع</b> $u^2$ على القوس'),
+        ('tex', r'\int\left(u^{4}-u^{2}\right)du=\frac{u^{5}}{5}-\frac{u^{3}}{3}', [('integrate(u**4-u**2,u)', 'u**5/5-u**3/3')],
+         '<b>كامل</b> كل حد'),
+        ('line', 'sec(x)**5/5-sec(x)**3/3', '<b>ارجع</b> $u=\\sec x$')], 'U-T5 ex')
     ex += final(it, 'U-T5 example')
     U.add('ex', 'مثال (اختبار سابق)', ex)
     U.add('trap', '⚠️ الفخ', p(rich('tan زوجي و sec فردي ⇐ لا هذا ولا ذاك: حوّل كل tan إلى sec ثم سلسلة sec (النوع 27).')))
     U.add('paper', '✍️ في ورقة الكويز', p(rich('سطر الحجز والتحويل، سطر $u=\\sec x$، ثم الجواب.')))
     U.drill('1', 'G-13', 'G', '$\\int(u^2-1)\\,du$.', first=r'\tan^{3}x\sec x=\tan^{2}x\cdot\sec x\tan x=(\sec^{2}x-1)\sec x\tan x',
             claims=[('tan(x)**3*sec(x)', '(sec(x)**2-1)*sec(x)*tan(x)')])
-    U.drill('2', 'N52-E3-4', 'P', '$\\tan^4x=(\\sec^2x-1)^2$، و $p=3-1=2$.')
-    U.drill('3', 'N52-X06', 'I', '$p=5-1=4$، والقوس $(u^2-1)^2$.')
+    U.drill('2', 'N52-E3-4', 'P', 'احجز $\\sec x\\tan x$؛ الباقي $\\tan^4x\\sec^2x=(\\sec^2x-1)^2\\sec^2x$.')
+    U.drill('3', 'N52-X06', 'I', 'احجز $\\sec x\\tan x$؛ الباقي $\\tan^4x\\sec^4x=(u^2-1)^2u^4$.')
     return U
 
 
@@ -202,9 +234,13 @@ def u_reduce():
     it = ITEMS['N52-E3-2']
     ex = question(it, 'U-T6 example 1')
     ex += short_steps(it, [
-        ('سلسلة tan مرتين (الأس ينزل 2 كل مرة):', r'\int\tan^{4}x\,dx=\frac{\tan^{3}x}{3}-\int\tan^{2}x\,dx,\qquad \int\tan^{2}x\,dx=\tan x-x',
-         [('diff(tan(x)**3/3,x)-tan(x)**2', 'tan(x)**4'), ('diff(tan(x)-x,x)', 'tan(x)**2')]),
-        ('الأس زوجي ⇐ النهاية $\\pm x$:', r'\frac{\tan^{3}x}{3}-\tan x+x+C', [('=ANS', 'tan(x)**3/3-tan(x)+x')])], 'U-T6 ex1')
+        ('القانون: سلسلة tan (الأس ينزل 2 كل مرة)', r'\int\tan^{m}x\,dx=\frac{\tan^{m-1}x}{m-1}-\int\tan^{m-2}x\,dx', [R('tan reduce')]),
+        ('مع $m=4$: $m-1=3$، والأس الباقي 2', r'\int\tan^{4}x\,dx=\frac{\tan^{3}x}{3}-\int\tan^{2}x\,dx',
+         [('diff(tan(x)**3/3,x)-tan(x)**2', 'tan(x)**4')]),
+        ('مع $m=2$: $m-1=1$، والأس الباقي 0، و $\\int\\tan^0x\\,dx=\\int1\\,dx=x$', r'\int\tan^{2}x\,dx=\tan x-x',
+         [('diff(tan(x)-x,x)', 'tan(x)**2')]),
+        ('عوّض الثاني في الأول، ووزّع السالب (🧮)؛ = جواب 🧱', r'\frac{\tan^{3}x}{3}-\left(\tan x-x\right)=\frac{\tan^{3}x}{3}-\tan x+x+C',
+         [('=ANS', 'tan(x)**3/3-tan(x)+x')])], 'U-T6 ex1')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'\tan^{4}x=\tan^{2}x\,(\sec^{2}x-1)=\tan^{2}x\sec^{2}x-\tan^{2}x', [('tan(x)**4', 'tan(x)**2*sec(x)**2-tan(x)**2')],
          'نكسر القوة'),
@@ -217,10 +253,12 @@ def u_reduce():
     A = '(sec(x)*tan(x)/2+log(Abs(sec(x)+tan(x)))/2)'
     ex = question(it, 'U-T6 example 2')
     ex += short_steps(it, [
-        ('سلسلة sec مع $n=3$:', r'\int\sec^{3}x\,dx=\frac{\sec x\tan x}{2}+\frac12\int\sec x\,dx',
+        ('القانون: سلسلة sec', r'\int\sec^{n}x\,dx=\frac{\sec^{n-2}x\,\tan x}{n-1}+\frac{n-2}{n-1}\int\sec^{n-2}x\,dx', [R('sec reduce')]),
+        ('مع $n=3$: $n-1=2$ و $n-2=1$', r'\int\sec^{3}x\,dx=\frac{\sec x\tan x}{2}+\frac12\int\sec x\,dx',
          [('diff(sec(x)*tan(x)/2,x)+sec(x)/2', 'sec(x)**3')]),
-        ('و $\\int\\sec x\\,dx=\\ln|\\sec x+\\tan x|$ من الجدول:', r'\frac{\sec x\tan x}{2}+\frac12\ln\left|\sec x+\tan x\right|+C',
-         [('=ANS', A)])], 'U-T6 ex2')
+        ('التكامل الباقي من الجدول', r'\int\sec x\,dx=\ln\left|\sec x+\tan x\right|', [R('sec base')]),
+        ('عوّض؛ = جواب 🧱 (التجزئة ثم حل المعادلة)', r'\frac{\sec x\tan x}{2}+\frac12\ln\left|\sec x+\tan x\right|+C', [('=ANS', A)])],
+        'U-T6 ex2')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('parts', 'sec(x)', 'sec(x)**2', 'sec(x)*tan(x)', 'tan(x)', '$u=\\sec x$ و $dv=\\sec^2x\\,dx$'),
         ('line', 'sec(x)*tan(x)-Integral(sec(x)*tan(x)**2,x)', 'القانون'),
@@ -246,20 +284,21 @@ def u_cotcsc():
     U.add('sign', 'العلامة', p(rich('$\\int\\cot^m x\\csc^n x\\,dx$.'))
           + contrast([(r'\int\cot^{4}x\csc^{4}x\,dx', '$u=\\cot x$', 'csc زوجي'),
                       (r'\int\cot^{5}x\csc^{3}x\,dx', '$u=\\csc x$', 'cot فردي')]))
-    U.add('short', '⚡ الاختصار', p(rich('الصفان الأخيران في جدول باسكال (النوع 23)، والإشارة $-$ أمام الكل في الحالتين.'))
-          + box_memo('مثل tan و sec، وزد سالب.'))
+    U.add('short', '🧭 الطريقة: نفس الخطوات الأربع (النوع 22)', method_box(['csc', 'cot'], 'مثل tan و sec، وزد سالب أمام الكل.'))
     it = ITEMS['1446-S2-SE-Q2.4']
     ex = question(it, 'U-T7 example')
-    ex += short_steps(it, [
-        ('csc زوجي ($4=2\\cdot1+2$) ⇐ $u=\\cot x$، وإشارة $-$ أمام الكل، و $p$ = أس cot:', r'k=1,\quad p=4', [('2*1+2', '4')]),
-        ('القوس $(1+u^2)^1$ كله $+$، والأسس تبدأ من $p+1=5$:', r'-\left(\frac{u^{5}}{5}+\frac{u^{7}}{7}\right)=-\frac{\cot^{5}x}{5}-\frac{\cot^{7}x}{7}+C',
-         [('integrate(x**4*(1+x**2),x)', 'x**5/5+x**7/7'), ('=ANS', '-cot(x)**5/5-cot(x)**7/7')])], 'U-T7 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('tex', r'\cot^{4}x\csc^{4}x=\cot^{4}x\,(1+\cot^{2}x)\csc^{2}x', [('cot(x)**4*csc(x)**4', 'cot(x)**4*(1+cot(x)**2)*csc(x)**2')],
-         'نحجز $\\csc^2x$ ونحوّل الباقي (🧮 متطابقات فيثاغورس)'),
-        ('sub', 'cot(x)', '-csc(x)**2', '$u=\\cot x$، و $\\csc^2x\\,dx=-du$'),
-        ('tex', r'=-\int u^{4}(1+u^{2})\,du=-\int\left(u^{4}+u^{6}\right)du', [('u**4*(1+u**2)', 'u**4+u**6')], 'نوزّع'),
-        ('line', '-cot(x)**5/5-cot(x)**7/7', 'نكامل ونرجع $u$')], 'U-T7 ex')
+        ('tex', r'\cot^{4}x\csc^{4}x=\cot^{4}x\csc^{2}x\cdot\csc^{2}x', [('cot(x)**4*csc(x)**4', 'cot(x)**4*csc(x)**2*csc(x)**2')],
+         '<b>احجز</b> $\\csc^2x$: أس csc زوجي'),
+        ('tex', r'\csc^{2}x=1+\cot^{2}x\ \Rightarrow\ \cot^{4}x\,(1+\cot^{2}x)\csc^{2}x',
+         [('cot(x)**4*csc(x)**4', 'cot(x)**4*(1+cot(x)**2)*csc(x)**2')], '<b>حوّل</b> الباقي $\\csc^2x$ إلى cot (🧮 متطابقات فيثاغورس)'),
+        ('sub', 'cot(x)', '-csc(x)**2', '<b>عوّض</b>: $u=\\cot x$، و $du=-\\csc^2x\\,dx$ ⇐ $\\csc^2x\\,dx=-du$'),
+        ('tex', r'\int\cot^{4}x\csc^{4}x\,dx=-\int u^{4}(1+u^{2})\,du',
+         [('cot(x)**4*csc(x)**4', '-cot(x)**4*(1+cot(x)**2)*diff(cot(x),x)')], 'التكامل بدلالة $u$، والسالب قدّام الكل'),
+        ('tex', r'u^{4}(1+u^{2})=u^{4}+u^{6}', [('u**4*(1+u**2)', 'u**4+u**6')], '<b>وزّع</b> $u^4$'),
+        ('tex', r'-\int\left(u^{4}+u^{6}\right)du=-\frac{u^{5}}{5}-\frac{u^{7}}{7}', [('-integrate(u**4+u**6,u)', '-u**5/5-u**7/7')],
+         '<b>كامل</b> كل حد، والسالب يدخل على الاثنين'),
+        ('line', '-cot(x)**5/5-cot(x)**7/7', '<b>ارجع</b> $u=\\cot x$')], 'U-T7 ex')
     ex += final(it, 'U-T7 example')
     U.add('ex', 'مثال (اختبار سابق)', ex)
     U.add('trap', '⚠️ الفخ', p(rich('$\\frac{d}{dx}\\cot x=-\\csc^2x$ و $\\frac{d}{dx}\\csc x=-\\csc x\\cot x$: السالب في الاثنين.')))
@@ -268,7 +307,7 @@ def u_cotcsc():
             first=r'\csc^{6}x=(1+\cot^{2}x)^{2}\csc^{2}x,\quad u=\cot x,\ du=-\csc^{2}x\,dx',
             claims=[('csc(x)**6', '(1+cot(x)**2)**2*csc(x)**2')])
     U.drill('2', 'N52-X09', 'P', 'cot فردي ⇐ $u=\\csc x$، و $du=-\\csc x\\cot x\\,dx$.')
-    U.drill('3', 'N52-E4-2', 'I', 'مثل التمرين 2 مع $p=5-1=4$.')
+    U.drill('3', 'N52-E4-2', 'I', 'مثل التمرين 2: احجز $\\csc x\\cot x$، والباقي $(u^2-1)^2u^4$، وسالب قدّام الكل.')
     return U
 
 
@@ -282,9 +321,13 @@ def u_prod():
     it = ITEMS['N52-E5-1']
     ex = question(it, 'U-T8 example')
     ex += short_steps(it, [
-        ('اقرأ الزاويتين:', r'm=7,\ n=5:\quad m-n=2,\quad m+n=12', [('7-5', '2'), ('7+5', '12')]),
-        ('صف sin·cos: سالب نصف، وكل cos يُقسم على زاويته:', r'-\frac12\left[\frac{\cos2x}{2}+\frac{\cos12x}{12}\right]=-\frac{\cos2x}{4}-\frac{\cos12x}{24}+C',
-         [('-(cos(2*x)/2+cos(12*x)/12)/2', '-cos(2*x)/4-cos(12*x)/24'), ('=ANS', '-cos(2*x)/4-cos(12*x)/24')])], 'U-T8 ex')
+        ('القانون: صف sin·cos (بشرط $m\\ne\\pm n$)',
+         r'\int\sin mx\cos nx\,dx=-\frac12\left(\frac{\cos(m-n)x}{m-n}+\frac{\cos(m+n)x}{m+n}\right)+C', [R('prod sc')]),
+        ('طلّع الزاويتين: $m$ مع sin و $n$ مع cos، ثم الفرق والمجموع', r'm=7,\ n=5:\qquad m-n=2,\qquad m+n=12', [('7-5', '2'), ('7+5', '12')]),
+        ('عوّض في القانون', r'-\frac12\left(\frac{\cos2x}{2}+\frac{\cos12x}{12}\right)', [('=ANS', '-(cos(2*x)/2+cos(12*x)/12)/2')]),
+        ('وزّع $-\\frac12$: $\\frac12\\cdot\\frac12=\\frac14$ و $\\frac12\\cdot\\frac{1}{12}=\\frac{1}{24}$؛ = جواب 🧱',
+         r'=-\frac{\cos2x}{4}-\frac{\cos12x}{24}+C', [('-(cos(2*x)/2+cos(12*x)/12)/2', '-cos(2*x)/4-cos(12*x)/24'),
+                                                     ('=ANS', '-cos(2*x)/4-cos(12*x)/24')])], 'U-T8 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'\sin7x\cos5x=\frac12\left[\sin2x+\sin12x\right]', [('sin(7*x)*cos(5*x)', '(sin(2*x)+sin(12*x))/2')],
          'متطابقة الضرب (🧮)'),

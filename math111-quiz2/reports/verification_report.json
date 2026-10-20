@@ -3599,11 +3599,885 @@
      }
     ]
    }
+  },
+  {
+   "id": "G-01",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-SPLIT",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-02",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-INVNUM",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-03",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-INVNUM",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     },
+     {
+      "branch": "-t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-04",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-05",
+   "kind": "generated",
+   "task": "defint",
+   "case": "C51-DEF",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "check": "F(b)-F(a) equals stated value",
+      "residual": "0"
+     },
+     {
+      "check": "F'=f on [a,b]",
+      "residual": "0"
+     },
+     {
+      "check": "integrand continuous on [a,b]",
+      "result": "Interval(0, 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-06",
+   "kind": "generated",
+   "task": "defint",
+   "case": "C51-DEF",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "check": "F(b)-F(a) equals stated value",
+      "residual": "0"
+     },
+     {
+      "check": "F'=f on [a,b]",
+      "residual": "0"
+     },
+     {
+      "check": "integrand continuous on [a,b]",
+      "result": "Interval(1, E)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-07",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-XINV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-08",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-SUBPARTS",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-09",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-ODD1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-10",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-ODD1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-11",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-12",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-13",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-TANODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-14",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-15",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-TANH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-16",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-CSCH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-17",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-POLY1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-18",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-POLY2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-19",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-CYC",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-20",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-EXPH",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-21",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-22",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-LN",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-23",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-24",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-TAN0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-25",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-CC-CSCEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-26",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-27",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-EVEN1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-28",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-CC-COTODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-29",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-30",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     },
+     {
+      "branch": "-t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-31",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-POLY1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-32",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-CYC",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-33",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-34",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-TAN0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-35",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-37",
+   "kind": "generated",
+   "task": "defint",
+   "case": "C51-DEF",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "check": "F(b)-F(a) equals stated value",
+      "residual": "0"
+     },
+     {
+      "check": "F'=f on [a,b]",
+      "residual": "0"
+     },
+     {
+      "check": "integrand continuous on [a,b]",
+      "result": "Interval(0, pi)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-38",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-39",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t + 4",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t + 4"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-40",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     },
+     {
+      "branch": "-t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-41",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-INV",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     },
+     {
+      "branch": "-t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-42",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-SUBPARTS",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-43",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-SC-ODD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-44",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-SEC0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
   }
  ],
  "items_summary": {
   "answer": {
-   "symbolic": 155
+   "symbolic": 198
   },
   "official": {
    "symbolic": 55,

@@ -205,3 +205,16 @@ table.help2 td:nth-child(1), table.help2 th:nth-child(1) { width: 15mm; }
 table.help2 td:nth-child(2), table.help2 th:nth-child(2) { width: 60%; }
 table.help2 .mi .katex { white-space: normal; }
 p:has(+ .chgrid) { break-after: avoid; }
+/* ---------------- guide v3: explained shortcut tables, method box, mistakes, quiz day ---------------- */
+p.sslbl { color: var(--accent); margin: 2.5mm 0 0.8mm; break-after: avoid; }
+table.steps.short { border: 2px solid var(--accent); }
+table.steps.short th { background: var(--accent-tint); color: var(--accent); }
+table.steps.short tbody tr:first-child td { background: #f6fafa; }       /* the rule row */
+ol.method { margin: 1mm 0 2mm; padding-inline-start: 7mm; }
+ol.method li { margin: 1mm 0; }
+ul.checks { list-style: none; padding-inline-start: 2mm; }
+ul.checks li { margin: 0.8mm 0; }
+.chapter.flow > p { break-inside: avoid; }                                  /* a speed page intro stays with its questions */
+table.mistakes td:nth-child(1) { direction: ltr; text-align: left; background: var(--warn-tint); width: 33%; }
+table.mistakes td:nth-child(2) { direction: ltr; text-align: left; background: var(--ok-tint); width: 37%; }
+table.mistakes tr { break-inside: avoid; }

@@ -4,27 +4,30 @@ import json
 from pathlib import Path
 
 import booklet as B
-from booklet import sc_dawaran, sc_even, sc_lamda, sc_nisfayn, sc_pascal, sc_prod, sc_qaws, sc_rafeeq, sc_reduce, \
+from booklet import sc_dawaran, sc_even, sc_lamda, sc_nisfayn, sc_prod, sc_qaws, sc_rafeeq, sc_reduce, \
     sc_six, sc_small, sc_square, sc_twins
 from booklet_engine import HOLD, ITEMS, LOG, ans_tex, q_tex
+from guide_52 import sc_method
 from guide_kit import ALG_SEEN, DAYS as UNIT_DAYS, DRILLS_N, HELP, TRY_KEYS, final, pgref, rich
 from html_kit import box, chip, lines, link, md, mi, p, table, ul
 
 ROOT = Path(__file__).resolve().parent.parent
 
 TITLES = {'speed42': 'سرعة الاختصار: 4.2', 'speed51': 'سرعة الاختصار: 5.1', 'speed52': 'سرعة الاختصار: 5.2',
-          'mockA': 'الاختبار التجريبي A', 'mixed': 'المراجعة المخلوطة', 'mockB': 'الاختبار التجريبي B'}
+          'mockA': 'الاختبار التجريبي A', 'mixed': 'المراجعة المخلوطة', 'mockB': 'الاختبار التجريبي B',
+          'quizday': 'يوم الكويز: الليلة، والصباح، وفي القاعة'}
 # a speed drill opens the day after its lesson ends (retrieval after a night); mocks and mixed review close the last days
 DAY_START = {3: ['speed42'], 5: ['speed51'], 7: ['speed52']}
-DAY_END = {6: ['mockA'], 7: ['mixed', 'mockB']}
+DAY_END = {6: ['mockA'], 7: ['mixed', 'mockB', 'quizday']}
 END_TOC = [('formulas', 'ورقة القوانين والاختصارات'), ('decide', 'بطاقة القرار: أي نوع؟'), ('stuck', 'إذا علقت'),
-           ('errlog', 'سجل الأخطاء'), ('help', 'سلّم المساعدة: التلميح وأول خطوة لكل تمرين'),
+           ('mistakes', 'أخطاء الجبر الشائعة: غلط وصح'), ('errlog', 'سجل الأخطاء'), ('help', 'سلّم المساعدة: التلميح وأول خطوة لكل تمرين'),
            ('keys', 'المفاتيح: الإحماء، سرعة الاختصار، المراجعة المخلوطة، «جرّب»'),
            ('appendix', 'ملحق: المصادر والتحقق')]
 
 # two review questions per day: one from yesterday's types, one from an older day (spaced retrieval)
+# (no question here repeats one printed elsewhere in the guide; G-42..G-44 were written for this)
 WARM = {2: ['1445-S2-SE-Q1.1', 'N42-X2-04'], 3: ['G-38', 'N42-X1-5'], 4: ['1445-S2-SE-Q2.2', 'N42-E1-2'],
-        5: ['1445-S2-FE-Q2.2', 'N51-X06'], 6: ['N52-X02', '1446-S1-FE-Q2.2'], 7: ['N52-E4-1', 'N42-X1-6']}
+        5: ['G-42', 'N51-X06'], 6: ['G-43', '1446-S1-FE-Q2.2'], 7: ['G-44', 'N42-X1-6']}
 
 SPEED = {
     'speed42': ('4.2', [('N42-X2-13', 'النوع 10: $h=-3$، $d=-9$ ⇐ cosh، $a=3$'),
@@ -39,8 +42,8 @@ SPEED = {
                         ('1447-S2-SE-Q3.4', 'النوع 11: $h=2$، $d=2$، معامل $x^2$ سالب ⇐ sech، $a=\\sqrt2$')]),
     'speed51': ('5.1', [('N51-X01', 'النوع 12: $p=2$، $G_1=\\sinh x$'),
                         ('G-22', 'النوع 14: $n=4$'),
-                        ('N51-E5', 'النوع 17: الرفيق'),
-                        ('N51-X08', 'النوع 17: الرفيق'),
+                        ('G-40', 'النوع 17: الرفيق'),
+                        ('G-41', 'النوع 17: الرفيق'),
                         ('G-17', 'النوع 12: $p=1$، $G_1=-e^{-x}$'),
                         ('G-18', 'النوع 13: جدول DI'),
                         ('G-19', 'النوع 19: $a=3$، $b=1$'),
@@ -55,9 +58,10 @@ SPEED = {
                         ('G-27', 'النوع 24: نصف الزاوية'),
                         ('G-28', 'النوع 28: cot فردي ⇐ $u=\\csc x$')])}
 
+# derivatives first, as in the quiz; the integrals interleaved so that their order does not give away the lesson
 MIXED = [('1445-S2-FE-Q1.3', 'النوعان 1 و 2'), ('1446-S2-SE-Q1.1', 'النوع 1 + 4.1'), ('N42-E1-8', 'النوع 2: قسمة'),
-         ('N42-X1-2', 'النوع 2: ضرب'), ('G-29', 'النوع 10'), ('G-30', 'النوع 5'), ('G-31', 'النوع 12'), ('G-32', 'النوع 19'),
-         ('G-37', 'النوع 16'), ('G-33', 'النوع 23'), ('G-34', 'النوع 27'), ('G-35', 'النوع 29')]
+         ('N42-X1-2', 'النوع 2: ضرب'), ('G-33', 'النوع 23'), ('G-29', 'النوع 10'), ('G-32', 'النوع 19'), ('G-35', 'النوع 29'),
+         ('G-30', 'النوع 5'), ('G-37', 'النوع 16'), ('G-34', 'النوع 27'), ('G-31', 'النوع 12')]
 
 WARM_KEYS = {}     # day -> answers of the two review questions (printed in the keys section)
 SPEED_KEYS = {}    # speed page -> rows of its key (printed in the keys section)
@@ -74,7 +78,7 @@ def unit_minutes(uid):
 
 
 def day_extras(d):
-    return [(a, TITLES[a]) for a in DAY_START.get(d, []) + DAY_END.get(d, [])]
+    return [(a, TITLES[a]) for a in DAY_START.get(d, []) + DAY_END.get(d, []) if a != 'quizday']
 
 
 def day_schedule(d):
@@ -102,7 +106,7 @@ def day_schedule(d):
         elif a == 'mixed':
             add(45, '45 دقيقة', 'المراجعة المخلوطة (12 سؤالًا بدون عناوين)')
     if d == 7:
-        add(20, '20 دقيقة', 'اقرأ ورقة القوانين وسجل أخطائك كله')
+        add(20, '20 دقيقة', 'اقرأ ورقة القوانين، وسجل أخطائك كله، وصفحة «يوم الكويز»')
     add(5, '5 دقائق', 'سجّل أخطاء اليوم في سجل الأخطاء')
     return rows, total
 
@@ -122,9 +126,9 @@ def question_used(it, where):
 
 
 def warmup(d):
-    learned = [n for dd in sorted(UNIT_DAYS) if dd < d for _, n, _ in UNIT_DAYS[dd]]
-    body = p('اكتب على ورقة جانبية، بدون ما تفتح المذكرة: اسم كل نوع درسته واختصاره في سطر'
-             + (' (الأنواع 1–%d؛ تأكد من الأسماء في ' % max(learned) + link('toc', 'المحتويات') + ' بعد ما تكتب).' if learned else '.'))
+    prev = [n for _, n, _ in UNIT_DAYS.get(d - 1, [])]
+    body = p('اكتب على ورقة جانبية، بدون ما تفتح المذكرة: اسم كل نوع من <b>أنواع أمس</b> (%d–%d) واختصاره أو أول خطوة فيه، '
+             'سطر لكل نوع. بعدها تأكد من ' % (min(prev), max(prev)) + link('toc', 'المحتويات') + ' ومن صفحات الأنواع.')
     if d in WARM:
         qs, keys = '', []
         for k, item_id in enumerate(WARM[d], 1):
@@ -148,7 +152,7 @@ def speed_page(anchor):
         key.append([str(k), rich(hint), mi(r'\displaystyle ' + ans_tex(it, with_lhs=False).lstrip('= '))])
         final(it, anchor)
     SPEED_KEYS[anchor] = (lesson, key)
-    hint = {'4.2': '$u$ و $a$، أو $h$ و $d$', '5.1': '$u$ و $dv$، أو $p$، أو $a$ و $b$', '5.2': '$u$ وأس البداية $p$، أو $m$ و $n$'}[lesson]
+    hint = {'4.2': '$u$ و $a$، أو $h$ و $d$', '5.1': '$u$ و $dv$، أو $p$، أو $a$ و $b$', '5.2': 'القطعة اللي تحجزها و $u$، أو $m$ و $n$'}[lesson]
     page = (p(rich('لا تحل. اكتب تحت كل سؤال <b>رقم النوع</b> و<b>أول سطر</b> فقط (مثل ' + hint + '). '
                    'الهدف أن تعرف النوع والبداية في ثوانٍ. المفتاح في ') + link('k-' + anchor, 'المفاتيح ص ' + pgref('k-' + anchor)) + '.')
             + '<div class="chgrid">' + qs + '</div>')
@@ -192,7 +196,7 @@ def day_start(d):
 def after_day(d):
     out = ''
     for a in DAY_END.get(d, []):
-        out += mixed_page() if a == 'mixed' else mock_box(a[-1])
+        out += mixed_page() if a == 'mixed' else quiz_day() if a == 'quizday' else mock_box(a[-1])
     return out
 
 
@@ -200,7 +204,7 @@ def formulas():
     parts = []
     for title, fns in [('4.2', [sc_twins, sc_six, sc_lamda, sc_square]),
                        ('5.1', [sc_qaws, sc_rafeeq, sc_dawaran, sc_nisfayn, sc_small]),
-                       ('5.2', [sc_pascal, sc_even, sc_reduce, sc_prod])]:
+                       ('5.2', [sc_method, sc_even, sc_reduce, sc_prod])]:
         inner = p('<b>الخطي و DI:</b> ' + rich('$\\int(px+q)\\,g\\,dx=(px+q)G_1-pG_2$؛ ومع $x^2$ أو $x^3$ جدول DI.')) if title == '5.1' else ''
         for fn in fns:
             short, _ = fn(sheet=True) if fn is sc_rafeeq else fn()
@@ -237,7 +241,7 @@ def stuck():
     body = ul(['<b>ما عرفت النوع؟</b> ' + link('decide', 'بطاقة القرار') + '. اقرأ المطلوب (المشتقة أم التكامل) وشكل المقام أولًا.',
                '<b>عرفت النوع وما عرفت تبدأ؟</b> اكتب سطر «في ورقة الكويز» من صفحة النوع: غالبًا $u$ و $du$، أو $u$ و $dv$.',
                '<b>عرفت النوع ونسيت الاختصار؟</b> استخدم 🧱 الطريقة الأساسية في صفحة النوع، أو ' + link('formulas', 'ورقة القوانين') + '.',
-               '<b>الجبر وقفك؟</b> صناديق 🧮: ' + skills + '.',
+               '<b>الجبر وقفك؟</b> صناديق 🧮: ' + skills + '. وشوف ' + link('mistakes', 'أخطاء الجبر الشائعة') + '.',
                '<b>جوابك يختلف عن الحل؟</b> اشتق جوابك. إذا رجع السؤال فهو صحيح (قد يختلف بثابت). وإلا ابحث عن الإشارة أو المعامل.',
                '<b>tanh⁻¹ أم coth⁻¹؟</b> قارن $|u|$ مع $a$.',
                '<b>نسيت الإشارة في sin و cos؟</b> $\\int\\sin=-\\cos$ و $\\int\\cos=\\sin$؛ و sinh و cosh بدون سالب.',
@@ -249,13 +253,15 @@ def stuck():
 def errlog():
     rows = [['', '', '', ''] for _ in range(14)]
     intro = p('كل غلطة تكتبها هنا مرة واحدة. نوع الغلطة: <b>فهم</b> (ما فهمت الفكرة)، <b>اختيار</b> (اخترت النوع الغلط)، '
-              '<b>استرجاع</b> (نسيت القانون أو البداية)، <b>جبر</b> (حساب أو إشارة). راجع هذه الصفحة كل صباح ويوم 26.')
+              '<b>استرجاع</b> (نسيت القانون أو البداية)، <b>جبر</b> (حساب أو إشارة). راجع هذه الصفحة كل صباح ويوم 26. '
+              'وأغلاط الجبر المعروفة تجدها في ' + link('mistakes', 'أخطاء الجبر الشائعة') + '.')
     return section('errlog', '📒 سجل الأخطاء', intro + table(['التمرين (والصفحة)', 'وش صار', 'نوع الغلطة', 'الصح'], rows, 'errlog'))
 
 
 def help_ladder():
     intro = (p('لكل تمرين ثلاث درجات مساعدة. <b>افتح درجة وحدة بس</b>، ثم ارجع للتمرين واكتب خطوتك التالية بنفسك. '
                'إذا علقت مرة ثانية، افتح الدرجة اللي بعدها.')
+             + p('الرقم في أول عمود: <b>12.3</b> = النوع 12، التمرين 3. اضغطه يرجعك للتمرين.', 'small')
              + ul(['<b>💡 الدرجة 1: تلميح العلامة</b> — الجدول الأول هنا.',
                    '<b>✍️ الدرجة 2: أول خطوة</b> — الجدول الثاني هنا. في التمرين الموجّه هي الخطوة اللي بعد البداية الجاهزة.',
                    '<b>✅ الدرجة 3: الحل الكامل</b> — في الصفحة اللي بعد تمارين النوع.']))
@@ -264,8 +270,8 @@ def help_ladder():
     f_rows = [['<span id="f-%s"></span>%s' % (e['dtag'], link('d-' + e['dtag'], '%d.%s ↩' % (e['num'], e['tag']))),
                mi(e['step'][0]), rich(e['step'][1])] for e in HELP]
     return section('help', '🪜 سلّم المساعدة', intro
-                   + '<h3>💡 الدرجة 1: تلميح العلامة</h3>' + table(['النوع.التمرين', 'التلميح'], h_rows, 'help1')
-                   + '<h3>✍️ الدرجة 2: أول خطوة</h3>' + table(['النوع.التمرين', 'أول خطوة', 'ليش؟'], f_rows, 'help2'))
+                   + '<h3>💡 الدرجة 1: تلميح العلامة</h3>' + table(['رقم', 'التلميح'], h_rows, 'help1')
+                   + '<h3>✍️ الدرجة 2: أول خطوة</h3>' + table(['رقم', 'أول خطوة', 'ليش؟'], f_rows, 'help2'))
 
 
 def keys():
@@ -291,7 +297,8 @@ def appendix():
     rows = [['الاختبارات المفهرسة', '18 (6 أولى، 6 ثانية، 6 نهائية) من ثلاثة ملفات 1445–1447'],
             ['أجزاء داخل النطاق في الاختبارات', '%d جزءًا، منها %d فريدًا' % (summ['in_scope_exam_parts'], summ['in_scope_exam_unique'])],
             ['أمثلة وتمارين مذكرة د. طارق في الأقسام الثلاثة', '%d مثالًا و %d تمرينًا' % (summ['notes_items']['notes_example'], summ['notes_items']['notes_exercise'])],
-            ['في هذه المذكرة', '29 نوعًا، 36 مثالًا محلولًا بالاختصار وبالطريقة الأساسية، و %d تمرينًا بحلول كاملة' % len(HELP)],
+            ['في هذه المذكرة', '29 نوعًا، و36 مثالًا: 31 بالاختصار خطوة خطوة ثم بالطريقة الأساسية، و5 (أنواع الحجز في 5.2) '
+             'بالطريقة الأساسية فقط، و %d تمرينًا بحلول كاملة' % len(HELP)],
             ['تدريبات إضافية من إعداد هذه المذكرة', '%d، مكتوب عليها «تدريب إضافي»، وكل جواب متحقق بالطريقة نفسها' % len(gen)],
             ['الأسئلة المحجوزة للاختبارين التجريبيين', '%d، بالمعرفات <bdi dir="ltr">%s</bdi>؛ لا تظهر هنا'
              % (len(HOLD['hids']), ', '.join(HOLD['hids']))],
@@ -300,9 +307,83 @@ def appendix():
                 'تعطي الموجبة. مفتاح 1445 تبع مذكرة د. طارق ومفتاح 1446 استخدم الموجبة. اسأل الدكتور.',
                 '<b>K2:</b> بعض الحلول الرسمية تحذف القيمة المطلقة في sech⁻¹ و csch⁻¹ و ln، فتصح على جهة واحدة من المجال.',
                 '<b>K3:</b> خطأ مطبعي في مذكرة د. طارق ص65 (سطر في مثال x sec⁻¹x) لا يغير الجواب.',
-                'سطور «ليش؟» والكلام العربي كتبناها نحن؛ الحاسوب يفحص الرياضيات فقط.'])
+                'سطور «ليش؟» والكلام العربي كتبناها نحن؛ الحاسوب يفحص الرياضيات فقط. وفي صفحة أخطاء الجبر يفحص أيضًا أن كل «غلط» غلط فعلًا.'])
     return section('appendix', 'ملحق: المصادر والتحقق', table(['البند', 'القيمة'], rows, 'answers') + notes)
 
 
+# common algebra mistakes: (wrong latex, right latex, why, (wrong lhs, wrong rhs) that must differ, right claims)
+MISTAKES = [
+    (r'\sqrt{x^{2}+9}=x+3', r'\sqrt{9x^{2}}=3|x|', 'الجذر يتوزع على الضرب فقط، ما يتوزع على الجمع',
+     ('sqrt(x**2+9)', 'x+3'), [('sqrt(9*x**2)', '3*Abs(x)')]),
+    (r'(1-u^{2})^{2}=1-u^{4}', r'(1-u^{2})^{2}=1-2u^{2}+u^{4}', 'لا تنسَ الحد الأوسط $2ab$',
+     ('(1-u**2)**2', '1-u**4'), [('(1-u**2)**2', '1-2*u**2+u**4')]),
+    (r'-(2x-3)=-2x-3', r'-(2x-3)=-2x+3', 'السالب يقلب إشارة <b>كل</b> حد داخل القوس',
+     ('-(2*x-3)', '-2*x-3'), [('-(2*x-3)', '-2*x+3')]),
+    (r'x^{-2}=-x^{2}', r'x^{-2}=\frac{1}{x^{2}}', 'الأس السالب مقلوب، مو إشارة سالبة',
+     ('x**(-2)', '-x**2'), [('x**(-2)', '1/x**2')]),
+    (r'e^{x}\cdot e^{2x}=e^{2x^{2}}', r'e^{x}\cdot e^{2x}=e^{3x}', 'في الضرب الأسس <b>تنجمع</b>',
+     ('exp(x)*exp(2*x)', 'exp(2*x**2)'), [('exp(x)*exp(2*x)', 'exp(3*x)')]),
+    (r'\frac{1}{x^{2}+4}=\frac{1}{x^{2}}+\frac14', r'\frac{x+2}{x^{2}}=\frac{1}{x}+\frac{2}{x^{2}}', 'نفصل البسط فقط؛ المقام ما ينفصل (النوع 8)',
+     ('1/(x**2+4)', '1/x**2+Rational(1,4)'), [('(x+2)/x**2', '1/x+2/x**2')]),
+    (r'\frac{2/3}{4/5}=\frac{8}{15}', r'\frac{2/3}{4/5}=\frac23\cdot\frac54=\frac56', 'القسمة على كسر = ضرب في مقلوبه',
+     ('Rational(2,3)/Rational(4,5)', 'Rational(8,15)'), [('Rational(2,3)/Rational(4,5)', 'Rational(5,6)')]),
+    (r'\ln(x^{2}+1)=\ln x^{2}+\ln1', r'\ln\left(x^{2}\right)=2\ln|x|', 'ln يفك الضرب والقوة، ما يفك الجمع',
+     ('log(x**2+1)', 'log(x**2)+log(1)'), [('log(x**2)', '2*log(x)', 't')]),
+    (r'\sinh^{-1}x=\frac{1}{\sinh x}', r'\frac{1}{\sinh x}=\operatorname{csch}x', 'الأس $-1$ على اسم الدالة معناه معكوس، مو مقلوب',
+     ('asinh(x)', '1/sinh(x)'), [('1/sinh(x)', 'csch(x)')]),
+    (r"\frac{d}{dx}\sinh^{-1}(3x)=\frac{1}{\sqrt{9x^{2}+1}}", r"\frac{d}{dx}\sinh^{-1}(3x)=\frac{3}{\sqrt{9x^{2}+1}}", "لا تنسَ $u'$ (قاعدة السلسلة)",
+     ('diff(asinh(3*x),x)', '1/sqrt(9*x**2+1)'), [('diff(asinh(3*x),x)', '3/sqrt(9*x**2+1)')]),
+    (r'\int\sin^{2}x\,dx=\frac{\sin^{3}x}{3}', r'\int\sin^{2}x\,dx=\frac{x}{2}-\frac{\sin2x}{4}', 'قاعدة القوة تحتاج مشتقة الداخل بجانبها (النوع 24)',
+     ('diff(sin(x)**3/3,x)', 'sin(x)**2'), [('diff(x/2-sin(2*x)/4,x)', 'sin(x)**2')]),
+    (r'\int x\cosh x\,dx=\frac{x^{2}}{2}\sinh x', r'\int x\cosh x\,dx=x\sinh x-\cosh x', 'التكامل ما يتوزع على الضرب: تجزئة (النوع 12)',
+     ('diff(x**2/2*sinh(x),x)', 'x*cosh(x)'), [('diff(x*sinh(x)-cosh(x),x)', 'x*cosh(x)')]),
+    (r'\int\frac{dx}{x^{2}}=\ln x^{2}', r'\int x^{-2}dx=\frac{x^{-1}}{-1}=-\frac1x', 'ln فقط مع $\\frac1x$؛ غيره قاعدة القوة',
+     ('diff(log(x**2),x)', 'x**(-2)'), [('diff(-1/x,x)', 'x**(-2)')]),
+    (r'\int3\cosh x\,dx=3x\sinh x', r'\int3\cosh x\,dx=3\sinh x', 'الثابت يطلع برّا كما هو، ما يصير $3x$',
+     ('diff(3*x*sinh(x),x)', '3*cosh(x)'), [('diff(3*sinh(x),x)', '3*cosh(x)')]),
+]
+
+
+def differs(lhs, rhs, label):
+    """A printed mistake must really be wrong: the two sides differ at sample points."""
+    from booklet_engine import _record
+    from mathlib import P, u, x
+    d = P(lhs) - P(rhs)
+    vals = [abs(complex(d.subs({x: v, u: v}).evalf())) for v in (0.7, 1.9)]
+    _record('mistake', max(vals) > 1e-6, label=label, claim='%s != %s' % (lhs, rhs))
+
+
+def mistakes():
+    from booklet_engine import arith
+    rows = []
+    for k, (wrong, right, why, (wl, wr), claims) in enumerate(MISTAKES, 1):
+        differs(wl, wr, 'mistake %d' % k)
+        rows.append([mi(r'\displaystyle ' + wrong), mi(r'\displaystyle ' + arith(right, claims, 'mistake %d right' % k)), rich(why)])
+    return section('mistakes', '❌ أخطاء الجبر الشائعة',
+                   p('هذي الأغلاط تتكرر في الكويز. اقرأ الصف كاملًا: الغلط، ثم الصح، ثم ليش. كل «صح» فحصه الحاسوب، وكل «غلط» تأكد أنه غلط فعلًا.')
+                   + table(['✗ غلط', '✓ صح', 'ليش؟'], rows, 'mistakes'))
+
+
+def quiz_day():
+    plan = table(['الوقت', 'وش تسوي'], [
+        ['أول دقيقتين', 'اقرأ الأسئلة الخمسة، واكتب جنب كل سؤال رقم نوعه (من ' + link('decide', 'بطاقة القرار') + ' في راسك).'],
+        ['8 دقائق', 'سؤال المشتقة (غالبًا الأول): سطر $u$ و $u\'$، ثم القانون، ثم الجواب.'],
+        ['40 دقيقة', 'التكاملات الأربعة، حوالي 10 دقائق لكل واحد. ابدأ بالأسهل عليك.'],
+        ['آخر 10 دقائق', 'راجع: $+C$، والإشارات، و $|u|$. واشتق جواب تكامل واحد على الأقل وتأكد أنه يرجع السؤال.']], 'compact')
+    body = (box('note', '🌙 الليلة قبل الكويز (الاثنين 26 أكتوبر)', ul([
+                'اقرأ ' + link('formulas', 'ورقة القوانين') + ' مرة، ثم ' + link('errlog', 'سجل أخطائك') + ' و' + link('mistakes', 'أخطاء الجبر الشائعة') + '.',
+                'لا تبدأ أسئلة جديدة. ونم بدري: النوم يثبّت اللي ذاكرته.',
+                'جهّز: قلمين، وممحاة، وبطاقتك الجامعية، وساعة إذا كانت مسموحة.']))
+            + box('note', '☀️ صباح الكويز', ul([
+                'اقرأ ورقة القوانين مرة واحدة (15 دقيقة تقريبًا).',
+                'اكتب من ذاكرتك على ورقة: جدول التوائم، وجدول التكاملات الستة، والقانون $\\int u\\,dv=uv-\\int v\\,du$. ثم قارن.']))
+            + box('short', '⏱️ في القاعة: 60 دقيقة و5 أسئلة', plan)
+            + box('warn', '🆘 إذا علقت داخل القاعة', ul([
+                'اكتب أول سطر على الأقل ($u$ و $du$، أو $u$ و $dv$): قد يعطيك جزءًا من الدرجة، وغالبًا يفتح لك الباقي.',
+                'اترك مكانًا وانتقل للسؤال اللي بعده، وارجع له في الآخر.',
+                'لا تمسح شغلك: إذا غلطت اشطب بخط واحد واكتب الصح جنبه.'])))
+    return section('quizday', '🎯 ' + TITLES['quizday'], rich(body), 'flow')
+
+
 def end_sections():
-    return formulas() + decide() + stuck() + errlog() + help_ladder() + keys() + appendix()
+    return formulas() + decide() + stuck() + mistakes() + errlog() + help_ladder() + keys() + appendix()

@@ -1,40 +1,705 @@
 [
- {"id": "G-01", "kind": "generated", "task": "int", "q": "raw:(2*x+3)/sqrt(x**2+9)", "answer": ["2*sqrt(x**2+9)", "3*asinh(x/3)"], "branches": ["x"], "case": "C42-I-SPLIT", "section": "4.2", "note": "split numerator"},
- {"id": "G-02", "kind": "generated", "task": "int", "q": "raw:asinh(x)**2/sqrt(1+x**2)", "answer": ["asinh(x)**3/3"], "branches": ["x"], "case": "C42-I-INVNUM", "section": "4.2", "note": "u = sinh^-1 x"},
- {"id": "G-03", "kind": "generated", "task": "int", "q": "raw:atanh(x)/(1-x**2)", "answer": ["atanh(x)**2/2"], "branches": ["t/(1+t)", "-t/(1+t)"], "case": "C42-I-INVNUM", "section": "4.2", "note": "u = tanh^-1 x, |x|<1"},
- {"id": "G-04", "kind": "generated", "task": "int", "q": "raw:1/sqrt(9*x**2+36*x+45)", "answer": ["asinh(x+2)/3"], "branches": ["x"], "case": "C42-CS", "section": "4.2", "note": "leading coefficient 9"},
- {"id": "G-05", "kind": "generated", "task": "defint", "q": "raw:x*exp(x)", "answer": ["1"], "bounds": ["0", "1"], "antiderivative": ["(x-1)*exp(x)"], "branches": [], "case": "C51-DEF", "section": "5.1", "note": ""},
- {"id": "G-06", "kind": "generated", "task": "defint", "q": "raw:log(x)", "answer": ["1"], "bounds": ["1", "E"], "antiderivative": ["x*log(x)", "-x"], "branches": [], "case": "C51-DEF", "section": "5.1", "note": ""},
- {"id": "G-07", "kind": "generated", "task": "int", "q": "raw:x*atan(x)", "answer": ["x**2*atan(x)/2", "-x/2", "atan(x)/2"], "branches": ["x"], "case": "C51-XINV", "section": "5.1", "note": ""},
- {"id": "G-08", "kind": "generated", "task": "int", "q": "raw:cos(sqrt(x))", "answer": ["2*sqrt(x)*sin(sqrt(x))", "2*cos(sqrt(x))"], "branches": ["t"], "case": "C51-SUBPARTS", "section": "5.1", "note": "t = sqrt(x)"},
- {"id": "G-09", "kind": "generated", "task": "int", "q": "raw:sin(x)**3", "answer": ["-cos(x)", "cos(x)**3/3"], "branches": ["x"], "case": "C52-ODD1", "section": "5.2", "note": ""},
- {"id": "G-10", "kind": "generated", "task": "int", "q": "raw:cos(x)**5", "answer": ["sin(x)", "-2*sin(x)**3/3", "sin(x)**5/5"], "branches": ["x"], "case": "C52-ODD1", "section": "5.2", "note": ""},
- {"id": "G-11", "kind": "generated", "task": "int", "q": "raw:sec(x)**4", "answer": ["tan(x)", "tan(x)**3/3"], "branches": ["t/(1+t)"], "case": "C52-TS-SECEVEN", "section": "5.2", "note": ""},
- {"id": "G-12", "kind": "generated", "task": "int", "q": "raw:tan(x)**3*sec(x)**6", "answer": ["tan(x)**4/4", "tan(x)**6/3", "tan(x)**8/8"], "branches": ["t/(1+t)"], "case": "C52-TS-SECEVEN", "section": "5.2", "note": ""},
- {"id": "G-13", "kind": "generated", "task": "int", "q": "raw:tan(x)**3*sec(x)", "answer": ["sec(x)**3/3", "-sec(x)"], "branches": ["t/(1+t)"], "case": "C52-TS-TANODD", "section": "5.2", "note": ""},
- {"id": "G-14", "kind": "generated", "task": "int", "q": "raw:cos(3*x)*cos(x)", "answer": ["sin(2*x)/4", "sin(4*x)/8"], "branches": ["x"], "case": "C52-PROD", "section": "5.2", "note": ""},
- {"id": "G-15", "kind": "generated", "task": "int", "q": "raw:exp(2*x)/(9-exp(4*x))", "answer": ["atanh(exp(2*x)/3)/6"], "branches": ["-t"], "case": "C42-I-TANH", "section": "4.2", "note": "e^{2x} < 3"},
- {"id": "G-16", "kind": "generated", "task": "int", "q": "raw:1/(x*sqrt(x**4+9))", "answer": ["-acsch(x**2/3)/6"], "branches": ["t", "-t"], "case": "C42-I-CSCH", "section": "4.2", "note": "x^2 >= 0 so no |.| needed"},
- {"id": "G-17", "kind": "generated", "task": "int", "q": "raw:x*exp(-x)", "answer": ["-x*exp(-x)", "-exp(-x)"], "branches": ["x"], "case": "C51-POLY1", "section": "5.1", "note": ""},
- {"id": "G-18", "kind": "generated", "task": "int", "q": "raw:x**2*sin(x)", "answer": ["-x**2*cos(x)", "2*x*sin(x)", "2*cos(x)"], "branches": ["x"], "case": "C51-POLY2", "section": "5.1", "note": ""},
- {"id": "G-19", "kind": "generated", "task": "int", "q": "raw:exp(3*x)*cos(x)", "answer": ["3*exp(3*x)*cos(x)/10", "exp(3*x)*sin(x)/10"], "branches": ["x"], "case": "C51-CYC", "section": "5.1", "note": ""},
- {"id": "G-20", "kind": "generated", "task": "int", "q": "raw:exp(2*x)*sinh(x)", "answer": ["exp(3*x)/6", "-exp(x)/2"], "branches": ["x"], "case": "C51-EXPH", "section": "5.1", "note": ""},
- {"id": "G-21", "kind": "generated", "task": "int", "q": "raw:asinh(x)", "answer": ["x*asinh(x)", "-sqrt(1+x**2)"], "branches": ["x"], "case": "C51-INV", "section": "5.1", "note": ""},
- {"id": "G-22", "kind": "generated", "task": "int", "q": "raw:x**4*log(Abs(x))", "answer": ["x**5*log(Abs(x))/5", "-x**5/25"], "branches": ["t", "-t"], "case": "C51-LN", "section": "5.1", "note": ""},
- {"id": "G-23", "kind": "generated", "task": "int", "q": "raw:sin(x)**3*cos(x)**2", "answer": ["-cos(x)**3/3", "cos(x)**5/5"], "branches": ["x"], "case": "C52-SC-ODD", "section": "5.2", "note": ""},
- {"id": "G-24", "kind": "generated", "task": "int", "q": "raw:tan(x)**2", "answer": ["tan(x)", "-x"], "branches": ["t/(1+t)"], "case": "C52-TS-TAN0", "section": "5.2", "note": ""},
- {"id": "G-25", "kind": "generated", "task": "int", "q": "raw:csc(x)**4", "answer": ["-cot(x)", "-cot(x)**3/3"], "branches": ["t/(1+t)"], "case": "C52-CC-CSCEVEN", "section": "5.2", "note": ""},
- {"id": "G-26", "kind": "generated", "task": "int", "q": "raw:sin(5*x)*cos(2*x)", "answer": ["-cos(3*x)/6", "-cos(7*x)/14"], "branches": ["x"], "case": "C52-PROD", "section": "5.2", "note": ""},
- {"id": "G-27", "kind": "generated", "task": "int", "q": "raw:cos(3*x)**2", "answer": ["x/2", "sin(6*x)/12"], "branches": ["x"], "case": "C52-EVEN1", "section": "5.2", "note": ""},
- {"id": "G-28", "kind": "generated", "task": "int", "q": "raw:cot(x)**3*csc(x)**3", "answer": ["-csc(x)**5/5", "csc(x)**3/3"], "branches": ["t/(1+t)"], "case": "C52-CC-COTODD", "section": "5.2", "note": ""},
- {"id": "G-29", "kind": "generated", "task": "int", "q": "raw:1/sqrt(x**2-8*x+25)", "answer": ["asinh((x-4)/3)"], "branches": ["x"], "case": "C42-CS", "section": "4.2", "note": ""},
- {"id": "G-30", "kind": "generated", "task": "int", "q": "raw:1/(x*sqrt(1-x**6))", "answer": ["-asech(Abs(x)**3)/3"], "branches": ["t/(1+t)", "-t/(1+t)"], "case": "C42-I-HIDDEN", "section": "4.2", "note": ""},
- {"id": "G-31", "kind": "generated", "task": "int", "q": "raw:x*sinh(2*x)", "answer": ["x*cosh(2*x)/2", "-sinh(2*x)/4"], "branches": ["x"], "case": "C51-POLY1", "section": "5.1", "note": ""},
- {"id": "G-32", "kind": "generated", "task": "int", "q": "raw:exp(-x)*sin(2*x)", "answer": ["-exp(-x)*sin(2*x)/5", "-2*exp(-x)*cos(2*x)/5"], "branches": ["x"], "case": "C51-CYC", "section": "5.1", "note": ""},
- {"id": "G-33", "kind": "generated", "task": "int", "q": "raw:sin(x)**2*cos(x)**3", "answer": ["sin(x)**3/3", "-sin(x)**5/5"], "branches": ["x"], "case": "C52-SC-ODD", "section": "5.2", "note": ""},
- {"id": "G-34", "kind": "generated", "task": "int", "q": "raw:tan(x)**3", "answer": ["tan(x)**2/2", "log(Abs(cos(x)))"], "branches": ["t/(1+t)"], "case": "C52-TS-TAN0", "section": "5.2", "note": ""},
- {"id": "G-35", "kind": "generated", "task": "int", "q": "raw:sin(3*x)*sin(x)", "answer": ["sin(2*x)/4", "-sin(4*x)/8"], "branches": ["x"], "case": "C52-PROD", "section": "5.2", "note": ""},
- {"id": "G-37", "kind": "generated", "task": "defint", "q": "raw:x*sin(x)", "answer": ["pi"], "bounds": ["0", "pi"], "antiderivative": ["-x*cos(x)", "sin(x)"], "branches": [], "case": "C51-DEF", "section": "5.1", "note": ""},
- {"id": "G-38", "kind": "generated", "task": "int", "q": "raw:1/sqrt(x**2-2*x+10)", "answer": ["asinh((x-1)/3)"], "branches": ["x"], "case": "C42-CS", "section": "4.2", "note": "warm-up, day 3"},
- {"id": "G-39", "kind": "generated", "task": "int", "q": "raw:1/(sqrt(x)*sqrt(x-4))", "answer": ["2*acosh(sqrt(x)/2)"], "branches": ["4+t"], "case": "C42-I-HIDDEN", "section": "4.2", "note": "u = sqrt(x), x > 4"}
+ {
+  "id": "G-01",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:(2*x+3)/sqrt(x**2+9)",
+  "answer": [
+   "2*sqrt(x**2+9)",
+   "3*asinh(x/3)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-I-SPLIT",
+  "section": "4.2",
+  "note": "split numerator"
+ },
+ {
+  "id": "G-02",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:asinh(x)**2/sqrt(1+x**2)",
+  "answer": [
+   "asinh(x)**3/3"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-I-INVNUM",
+  "section": "4.2",
+  "note": "u = sinh^-1 x"
+ },
+ {
+  "id": "G-03",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:atanh(x)/(1-x**2)",
+  "answer": [
+   "atanh(x)**2/2"
+  ],
+  "branches": [
+   "t/(1+t)",
+   "-t/(1+t)"
+  ],
+  "case": "C42-I-INVNUM",
+  "section": "4.2",
+  "note": "u = tanh^-1 x, |x|<1"
+ },
+ {
+  "id": "G-04",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/sqrt(9*x**2+36*x+45)",
+  "answer": [
+   "asinh(x+2)/3"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-CS",
+  "section": "4.2",
+  "note": "leading coefficient 9"
+ },
+ {
+  "id": "G-05",
+  "kind": "generated",
+  "task": "defint",
+  "q": "raw:x*exp(x)",
+  "answer": [
+   "1"
+  ],
+  "bounds": [
+   "0",
+   "1"
+  ],
+  "antiderivative": [
+   "(x-1)*exp(x)"
+  ],
+  "branches": [],
+  "case": "C51-DEF",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-06",
+  "kind": "generated",
+  "task": "defint",
+  "q": "raw:log(x)",
+  "answer": [
+   "1"
+  ],
+  "bounds": [
+   "1",
+   "E"
+  ],
+  "antiderivative": [
+   "x*log(x)",
+   "-x"
+  ],
+  "branches": [],
+  "case": "C51-DEF",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-07",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x*atan(x)",
+  "answer": [
+   "x**2*atan(x)/2",
+   "-x/2",
+   "atan(x)/2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-XINV",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-08",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cos(sqrt(x))",
+  "answer": [
+   "2*sqrt(x)*sin(sqrt(x))",
+   "2*cos(sqrt(x))"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "C51-SUBPARTS",
+  "section": "5.1",
+  "note": "t = sqrt(x)"
+ },
+ {
+  "id": "G-09",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sin(x)**3",
+  "answer": [
+   "-cos(x)",
+   "cos(x)**3/3"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-ODD1",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-10",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cos(x)**5",
+  "answer": [
+   "sin(x)",
+   "-2*sin(x)**3/3",
+   "sin(x)**5/5"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-ODD1",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-11",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sec(x)**4",
+  "answer": [
+   "tan(x)",
+   "tan(x)**3/3"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-SECEVEN",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-12",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(x)**3*sec(x)**6",
+  "answer": [
+   "tan(x)**4/4",
+   "tan(x)**6/3",
+   "tan(x)**8/8"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-SECEVEN",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-13",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(x)**3*sec(x)",
+  "answer": [
+   "sec(x)**3/3",
+   "-sec(x)"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-TANODD",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-14",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cos(3*x)*cos(x)",
+  "answer": [
+   "sin(2*x)/4",
+   "sin(4*x)/8"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-PROD",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-15",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:exp(2*x)/(9-exp(4*x))",
+  "answer": [
+   "atanh(exp(2*x)/3)/6"
+  ],
+  "branches": [
+   "-t"
+  ],
+  "case": "C42-I-TANH",
+  "section": "4.2",
+  "note": "e^{2x} < 3"
+ },
+ {
+  "id": "G-16",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/(x*sqrt(x**4+9))",
+  "answer": [
+   "-acsch(x**2/3)/6"
+  ],
+  "branches": [
+   "t",
+   "-t"
+  ],
+  "case": "C42-I-CSCH",
+  "section": "4.2",
+  "note": "x^2 >= 0 so no |.| needed"
+ },
+ {
+  "id": "G-17",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x*exp(-x)",
+  "answer": [
+   "-x*exp(-x)",
+   "-exp(-x)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-POLY1",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-18",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x**2*sin(x)",
+  "answer": [
+   "-x**2*cos(x)",
+   "2*x*sin(x)",
+   "2*cos(x)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-POLY2",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-19",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:exp(3*x)*cos(x)",
+  "answer": [
+   "3*exp(3*x)*cos(x)/10",
+   "exp(3*x)*sin(x)/10"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-CYC",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-20",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:exp(2*x)*sinh(x)",
+  "answer": [
+   "exp(3*x)/6",
+   "-exp(x)/2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-EXPH",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-21",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:asinh(x)",
+  "answer": [
+   "x*asinh(x)",
+   "-sqrt(1+x**2)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-INV",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-22",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x**4*log(Abs(x))",
+  "answer": [
+   "x**5*log(Abs(x))/5",
+   "-x**5/25"
+  ],
+  "branches": [
+   "t",
+   "-t"
+  ],
+  "case": "C51-LN",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-23",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sin(x)**3*cos(x)**2",
+  "answer": [
+   "-cos(x)**3/3",
+   "cos(x)**5/5"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-SC-ODD",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-24",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(x)**2",
+  "answer": [
+   "tan(x)",
+   "-x"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-TAN0",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-25",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:csc(x)**4",
+  "answer": [
+   "-cot(x)",
+   "-cot(x)**3/3"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-CC-CSCEVEN",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-26",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sin(5*x)*cos(2*x)",
+  "answer": [
+   "-cos(3*x)/6",
+   "-cos(7*x)/14"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-PROD",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-27",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cos(3*x)**2",
+  "answer": [
+   "x/2",
+   "sin(6*x)/12"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-EVEN1",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-28",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cot(x)**3*csc(x)**3",
+  "answer": [
+   "-csc(x)**5/5",
+   "csc(x)**3/3"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-CC-COTODD",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-29",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/sqrt(x**2-8*x+25)",
+  "answer": [
+   "asinh((x-4)/3)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-CS",
+  "section": "4.2",
+  "note": ""
+ },
+ {
+  "id": "G-30",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/(x*sqrt(1-x**6))",
+  "answer": [
+   "-asech(Abs(x)**3)/3"
+  ],
+  "branches": [
+   "t/(1+t)",
+   "-t/(1+t)"
+  ],
+  "case": "C42-I-HIDDEN",
+  "section": "4.2",
+  "note": ""
+ },
+ {
+  "id": "G-31",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x*sinh(2*x)",
+  "answer": [
+   "x*cosh(2*x)/2",
+   "-sinh(2*x)/4"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-POLY1",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-32",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:exp(-x)*sin(2*x)",
+  "answer": [
+   "-exp(-x)*sin(2*x)/5",
+   "-2*exp(-x)*cos(2*x)/5"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-CYC",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-33",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sin(x)**2*cos(x)**3",
+  "answer": [
+   "sin(x)**3/3",
+   "-sin(x)**5/5"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-SC-ODD",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-34",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(x)**3",
+  "answer": [
+   "tan(x)**2/2",
+   "log(Abs(cos(x)))"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-TAN0",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-35",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sin(3*x)*sin(x)",
+  "answer": [
+   "sin(2*x)/4",
+   "-sin(4*x)/8"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-PROD",
+  "section": "5.2",
+  "note": ""
+ },
+ {
+  "id": "G-37",
+  "kind": "generated",
+  "task": "defint",
+  "q": "raw:x*sin(x)",
+  "answer": [
+   "pi"
+  ],
+  "bounds": [
+   "0",
+   "pi"
+  ],
+  "antiderivative": [
+   "-x*cos(x)",
+   "sin(x)"
+  ],
+  "branches": [],
+  "case": "C51-DEF",
+  "section": "5.1",
+  "note": ""
+ },
+ {
+  "id": "G-38",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/sqrt(x**2-2*x+10)",
+  "answer": [
+   "asinh((x-1)/3)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-CS",
+  "section": "4.2",
+  "note": "warm-up, day 3"
+ },
+ {
+  "id": "G-39",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/(sqrt(x)*sqrt(x-4))",
+  "answer": [
+   "2*acosh(sqrt(x)/2)"
+  ],
+  "branches": [
+   "4+t"
+  ],
+  "case": "C42-I-HIDDEN",
+  "section": "4.2",
+  "note": "u = sqrt(x), x > 4"
+ },
+ {
+  "id": "G-40",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:atanh(x)",
+  "answer": [
+   "x*atanh(x)",
+   "log(1-x**2)/2"
+  ],
+  "branches": [
+   "t/(1+t)",
+   "-t/(1+t)"
+  ],
+  "case": "C51-INV",
+  "section": "5.1",
+  "note": "speed 5.1 (in place of a second copy of the integral of tan^-1 x)"
+ },
+ {
+  "id": "G-41",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:acos(x)",
+  "answer": [
+   "x*acos(x)",
+   "-sqrt(1-x**2)"
+  ],
+  "branches": [
+   "t/(1+t)",
+   "-t/(1+t)"
+  ],
+  "case": "C51-INV",
+  "section": "5.1",
+  "note": "speed 5.1 (in place of a second copy of the integral of sin^-1 x)"
+ },
+ {
+  "id": "G-42",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sin(sqrt(x))",
+  "answer": [
+   "-2*sqrt(x)*cos(sqrt(x))",
+   "2*sin(sqrt(x))"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "C51-SUBPARTS",
+  "section": "5.1",
+  "note": "warm-up, day 5 (t = sqrt(x))"
+ },
+ {
+  "id": "G-43",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sin(x)**4*cos(x)**3",
+  "answer": [
+   "sin(x)**5/5",
+   "-sin(x)**7/7"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-SC-ODD",
+  "section": "5.2",
+  "note": "warm-up, day 6"
+ },
+ {
+  "id": "G-44",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(x)**2*sec(x)",
+  "answer": [
+   "sec(x)*tan(x)/2",
+   "-log(Abs(sec(x)+tan(x)))/2"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-SEC0",
+  "section": "5.2",
+  "note": "warm-up, day 7 (tan^2 = sec^2 - 1, then the sec chain)"
+ }
 ]
