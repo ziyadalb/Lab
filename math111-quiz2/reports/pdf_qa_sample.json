@@ -1,5 +1,5 @@
 {
- "pages": 44,
+ "pages": 42,
  "page_sizes_pt": [
   [
    595,
@@ -25,13 +25,13 @@
  },
  "min_arabic_pt": 12.0,
  "min_text_pt_excluding_math_and_page_numbers": 12.0,
- "internal_links": 171,
+ "internal_links": 169,
  "named_destinations": 91,
  "html_links": 167,
  "bookmarks": 35,
  "text_extraction": {
   "tool": "pdftotext (poppler)",
-  "characters": 116941,
+  "characters": 120574,
   "english_found": {
    "Evaluate the following integrals": true,
    "Find dy/dx of the following": true
@@ -50,8 +50,8 @@
   }
  },
  "math": {
-  "produced": 596,
-  "rendered": 596,
+  "produced": 601,
+  "rendered": 601,
   "mismatched": 0,
   "katex_errors": 0
  },

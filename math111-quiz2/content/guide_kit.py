@@ -12,7 +12,7 @@ Every math line goes through a check (tools/booklet_engine.py); a failed check s
 import re
 
 from booklet import final as _final, prompt, source_label
-from booklet_engine import (ITEMS, BuildError, arith, diff_step_ok, parts_rows, q_tex, same_antiderivative, same_defint,
+from booklet_engine import (ITEMS, BuildError, ans_tex, arith, diff_step_ok, parts_rows, q_tex, same_antiderivative, same_defint,
                             same_derivative, step_ok, sub_row, use)
 from html_kit import box, chip, en, lines, link, md, mi, p, table, ul
 from mathlib import rawtex, tex, texsum
@@ -80,7 +80,7 @@ def step_cells(it, rows, label):
         if kind == 'parts':
             _, u, dv, du, v, why = row[:6]
             latex = parts_rows(u, dv, du, v, tag, branch=row[6] if len(row) > 6 else None)
-            latex = r'\begin{array}{l}\displaystyle ' + latex.replace('\\\\', '\\\\ \\displaystyle ') + r'\end{array}'
+            latex = r'\begin{array}{l}\displaystyle ' + latex.replace('\\\\', '\\\\[6pt] \\displaystyle ') + r'\end{array}'
         elif kind == 'sub':
             _, u, du, why = row[:4]
             latex = sub_row(u, du, tag, var=row[4] if len(row) > 4 else 'u', branch=row[5] if len(row) > 5 else None)
@@ -120,9 +120,15 @@ def steps(it, rows, label):
     return steps_table(cells)
 
 
+def answer_box(it, where):
+    """Check the answer and print it in the green box (derivatives start with y' =)."""
+    html = _final(it, where)
+    return md("y' = " + ans_tex(it), 'ans') if it['task'] == 'diff' else html
+
+
 def final(it, where):
     """Check the answer; print it in the answer box unless the last step row already shows it."""
-    html = _final(it, where)
+    html = answer_box(it, where)
     if it['id'] in FINAL_ROW:
         FINAL_ROW.discard(it['id'])
         return ''
@@ -234,7 +240,7 @@ class Unit:
                 step_ok(m, it, where + ' middle')
                 mid_tex.append('= ' + rawtex(m) + ('' if 'Integral' in m else ' + C'))
             sol += md(mid_tex[-1])
-        answer = _final(it, where)
+        answer = answer_box(it, where)
         if not (cells and cells[-1][2] and not mids):
             sol += answer
         self.sols.append('<div class="sol" id="s-%s"><div class="drill-head"><b>تمرين %s</b> %s %s</div>%s</div>'
@@ -252,7 +258,7 @@ class Unit:
         from guide_checks import CHECKS
         head = ('<div class="unit-head" id="%s"><span class="num">%d</span><h3>%s</h3>%s%s%s</div>'
                 % (self.uid, self.num, self.title, chip(self.section, 'sec'),
-                   chip(self.pages if self.pages.startswith('من') else 'المذكرة ' + self.pages, 'pg'),
+                   chip(self.pages if self.pages.startswith('من') else 'مذكرة د. طارق: ' + self.pages, 'pg'),
                    chip('اليوم %d' % self.day, 'day')))
         idea = [inner for kind, _, inner in self.parts if kind == 'idea']
         oks = [inner for kind, _, inner in self.parts if kind == 'ok']

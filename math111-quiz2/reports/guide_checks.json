@@ -559,7 +559,7 @@
    "kind": "derivative step",
    "ok": true,
    "item": "N42-X1-1",
-   "label": "U-D2 drill 2 middle",
+   "label": "U-D2 drill 2 step 2",
    "step": "3**x*log(3)/sqrt(1+3**(2*x))*sqrt(x)+asinh(3**x)/(2*sqrt(x))"
   },
   {
@@ -2359,31 +2359,17 @@
    "residual": "0"
   },
   {
-   "kind": "parts_du",
+   "kind": "arithmetic",
    "ok": true,
    "label": "U-P1 drill 1 step 1",
-   "u": "x",
-   "du": "1"
-  },
-  {
-   "kind": "parts_v",
-   "ok": true,
-   "label": "U-P1 drill 1 step 1",
-   "dv": "cos(x)",
-   "v": "sin(x)"
+   "claim": "x*sin(x)-1*(-cos(x)) = x*sin(x)+cos(x)",
+   "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "N51-E1",
    "label": "U-P1 drill 1 step 2",
-   "step": "x*sin(x)-Integral(sin(x),x)"
-  },
-  {
-   "kind": "step",
-   "ok": true,
-   "item": "N51-E1",
-   "label": "U-P1 drill 1 step 3",
    "step": "x*sin(x)+cos(x)"
   },
   {
@@ -2441,6 +2427,13 @@
    "item": "N51-X04",
    "label": "U-P1 drill 3 step 2",
    "step": "(x+1)*tan(x)-Integral(tan(x),x)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P1 drill 3 step 3",
+   "claim": "diff(-log(cos(x)),x) = tan(x)",
+   "residual": "0"
   },
   {
    "kind": "antiderivative",
@@ -2653,11 +2646,11 @@
    "residual": "0"
   },
   {
-   "kind": "step",
+   "kind": "arithmetic",
    "ok": true,
-   "item": "N51-X02",
    "label": "U-P2 drill 3 step 2",
-   "step": "-(x**2-1)*cos(2*x)/2+2*x*sin(2*x)/4+2*cos(2*x)/8"
+   "claim": "(x**2-1)*(-cos(2*x)/2)-2*x*(-sin(2*x)/4)+2*cos(2*x)/8 = -(x**2-1)*cos(2*x)/2+x*sin(2*x)/2+cos(2*x)/4",
+   "residual": "0"
   },
   {
    "kind": "step",
@@ -2836,31 +2829,17 @@
    "residual": "0"
   },
   {
-   "kind": "parts_du",
+   "kind": "arithmetic",
    "ok": true,
    "label": "U-P3 drill 1 step 1",
-   "u": "log(Abs(x))",
-   "du": "1/x"
-  },
-  {
-   "kind": "parts_v",
-   "ok": true,
-   "label": "U-P3 drill 1 step 1",
-   "dv": "x",
-   "v": "x**2/2"
+   "claim": "x**2/2*log(x)-x**2/2*Rational(1,2) = x**2*log(x)/2-x**2/4",
+   "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "1445-S2-SE-Q2.5",
    "label": "U-P3 drill 1 step 2",
-   "step": "x**2*log(Abs(x))/2-Integral(x/2,x)"
-  },
-  {
-   "kind": "step",
-   "ok": true,
-   "item": "1445-S2-SE-Q2.5",
-   "label": "U-P3 drill 1 step 3",
    "step": "x**2*log(Abs(x))/2-x**2/4"
   },
   {
@@ -3755,7 +3734,7 @@
    "kind": "step",
    "ok": true,
    "item": "N51-X12",
-   "label": "U-P8 drill 3 middle",
+   "label": "U-P8 drill 3 step 2",
    "step": "exp(5*x)*(5*cos(2*x)+2*sin(2*x))/29"
   },
   {
@@ -3883,7 +3862,14 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P9 drill 1 step 1",
-   "claim": "exp(3*x)*sinh(x) = (exp(4*x)-exp(2*x))/2",
+   "claim": "Rational(1,2)*exp(4*x)/4 = exp(4*x)/8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 drill 1 step 1",
+   "claim": "Rational(1,2)*exp(2*x)/2 = exp(2*x)/4",
    "residual": "0"
   },
   {
@@ -4580,7 +4566,7 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-T3 drill 2 step 2",
+   "label": "U-T3 drill 2 step 3",
    "claim": "diff(sin(2*x)**3/6,x) = sin(2*x)**2*cos(2*x)",
    "residual": "0"
   },
@@ -6649,7 +6635,7 @@
   ]
  },
  "counts": {
-  "total": 864,
-  "ok": 864
+  "total": 862,
+  "ok": 862
  }
 }

@@ -1,0 +1,348 @@
+{
+ "checks": [
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q1 step 1",
+   "claim": "diff(sinh(sqrt(x**2+1)),x) = cosh(sqrt(x**2+1))*2*x/(2*sqrt(x**2+1))",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q1 step 2",
+   "claim": "diff(acosh(exp(x)),x) = exp(x)/sqrt(exp(2*x)-1)",
+   "residual": "0"
+  },
+  {
+   "kind": "derivative step",
+   "ok": true,
+   "item": "1447-S1-SE-Q1.1",
+   "label": "mock A q1 step 3",
+   "step": "x*cosh(sqrt(x**2+1))/sqrt(x**2+1)+exp(x)/sqrt(exp(2*x)-1)"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1447-S1-SE-Q1.1",
+   "label": "mock A q1",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q2 step 1",
+   "claim": "sqrt(4*x**2+8*x+20) = 2*sqrt(x**2+2*x+5)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q2 step 2",
+   "claim": "x**2+2*x+5 = (x+1)**2+2**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q2 step 3",
+   "claim": "2/sqrt(4*x**2+8*x+20) = 1/sqrt((x+1)**2+2**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1445-S2-FE-Q2.1",
+   "label": "mock A q2 step 4",
+   "step": "asinh((x+1)/2)"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S2-FE-Q2.1",
+   "label": "mock A q2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q3 step 1",
+   "claim": "integrate(cos(3*x),x) = sin(3*x)/3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q3 step 1",
+   "claim": "integrate(sin(3*x)/3,x) = -cos(3*x)/9",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q3 step 1",
+   "claim": "integrate(-cos(3*x)/9,x) = -sin(3*x)/27",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q3 step 2",
+   "claim": "x**2*sin(3*x)/3-2*x*(-cos(3*x)/9)+2*(-sin(3*x)/27) = x**2*sin(3*x)/3+2*x*cos(3*x)/9-2*sin(3*x)/27",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1447-S1-FE-Q2.2",
+   "label": "mock A q3 step 3",
+   "step": "x**2*sin(3*x)/3+2*x*cos(3*x)/9-2*sin(3*x)/27"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S1-FE-Q2.2",
+   "label": "mock A q3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q4 step 1",
+   "claim": "exp(x/2)*sinh(3*x) = (exp(7*x/2)-exp(-5*x/2))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1446-S2-SE-Q2.5",
+   "label": "mock A q4 step 2",
+   "step": "exp(7*x/2)/7+exp(-5*x/2)/5"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S2-SE-Q2.5",
+   "label": "mock A q4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q5 step 1",
+   "claim": "sin(x)**5*cos(x)**6 = (1-cos(x)**2)**2*cos(x)**6*sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "mock A q5 step 2",
+   "u": "cos(x)",
+   "du": "-sin(x)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock A q5 step 3",
+   "claim": "u**6*(1-2*u**2+u**4) = u**6-2*u**8+u**10",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1445-S2-FE-Q2.6",
+   "label": "mock A q5 step 4",
+   "step": "-cos(x)**7/7+2*cos(x)**9/9-cos(x)**11/11"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S2-FE-Q2.6",
+   "label": "mock A q5",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock B q1 step 1",
+   "claim": "diff(csch(2/x),x) = -csch(2/x)*coth(2/x)*(-2/x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock B q1 step 2",
+   "claim": "diff(atanh(exp(5*x)),x) = 5*exp(5*x)/(1-exp(10*x))",
+   "residual": "0"
+  },
+  {
+   "kind": "derivative step",
+   "ok": true,
+   "item": "1446-S1-SE-Q1.1",
+   "label": "mock B q1 step 3",
+   "step": "2*csch(2/x)*coth(2/x)/x**2+5*exp(5*x)/(1-exp(10*x))"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q1.1",
+   "label": "mock B q1",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock B q2 step 1",
+   "claim": "cos(4*x)*cos(7*x) = (cos(3*x)+cos(11*x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N52-X12",
+   "label": "mock B q2 step 2",
+   "step": "sin(3*x)/6+sin(11*x)/22"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X12",
+   "label": "mock B q2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "mock B q3 step 1",
+   "u": "cos(x)",
+   "du": "-sin(x)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock B q3 step 2",
+   "claim": "sin(x)/(4-cos(x)**2) = -diff(cos(x),x)/(2**2-cos(x)**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1445-S1-SE-Q2.7",
+   "label": "mock B q3 step 3",
+   "step": "-atanh(cos(x)/2)/2"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S1-SE-Q2.7",
+   "label": "mock B q3",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock B q4 step 1",
+   "claim": "tan(x)**2*sec(x)**4 = tan(x)**2*(1+tan(x)**2)*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "mock B q4 step 2",
+   "u": "tan(x)",
+   "du": "sec(x)**2"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mock B q4 step 3",
+   "claim": "x**2*(1+x**2) = x**2+x**4",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1445-S2-SE-Q2.3",
+   "label": "mock B q4 step 4",
+   "step": "tan(x)**3/3+tan(x)**5/5"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S2-SE-Q2.3",
+   "label": "mock B q4",
+   "status": "symbolic"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "mock B q5 step 1",
+   "u": "asech(x)",
+   "du": "-1/(x*sqrt(1-x**2))"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "mock B q5 step 1",
+   "dv": "x",
+   "v": "x**2/2"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1447-S2-SE-Q3.1",
+   "label": "mock B q5 step 2",
+   "step": "x**2*asech(x)/2+Integral(x/(2*sqrt(1-x**2)),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1447-S2-SE-Q3.1",
+   "label": "mock B q5 step 3",
+   "step": "x**2*asech(x)/2-sqrt(1-x**2)/2"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S2-SE-Q3.1",
+   "label": "mock B q5",
+   "status": "symbolic"
+  }
+ ],
+ "used": {
+  "1447-S1-SE-Q1.1": [
+   "mock A"
+  ],
+  "1445-S2-FE-Q2.1": [
+   "mock A"
+  ],
+  "1447-S1-FE-Q2.2": [
+   "mock A"
+  ],
+  "1446-S2-SE-Q2.5": [
+   "mock A"
+  ],
+  "1445-S2-FE-Q2.6": [
+   "mock A"
+  ],
+  "1446-S1-SE-Q1.1": [
+   "mock B"
+  ],
+  "N52-X12": [
+   "mock B"
+  ],
+  "1445-S1-SE-Q2.7": [
+   "mock B"
+  ],
+  "1445-S2-SE-Q2.3": [
+   "mock B"
+  ],
+  "1447-S2-SE-Q3.1": [
+   "mock B"
+  ]
+ },
+ "counts": {
+  "total": 44,
+  "ok": 44
+ }
+}

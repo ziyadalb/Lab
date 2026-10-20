@@ -31,7 +31,7 @@ def u_odd_alone():
         ('tex', r'=\int(1-u^{2})\,du=u-\frac{u^{3}}{3}', [('integrate(1-x**2,x)', 'x-x**3/3')], 'تكامل كثيرة حدود'),
         ('line', 'sin(x)-sin(x)**3/3', 'نرجع $u=\\sin x$')], 'U-T1 ex')
     ex += final(it, 'U-T1 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.raw(alg('trig-pyth', 'متطابقات فيثاغورس', [
         (r'\sin^{2}x+\cos^{2}x=1', [('sin(x)**2+cos(x)**2', '1')], 'الأساس:'),
         (r'\cos^{2}x=1-\sin^{2}x,\qquad \sin^{2}x=1-\cos^{2}x', [('cos(x)**2', '1-sin(x)**2')], 'ننقل حدًا للطرف الثاني:'),
@@ -103,10 +103,10 @@ def u_even():
         ('الأس زوجي ⇐ نصف الزاوية، والزاوية $kx$ مع:', r'k=1,\quad 4k=4', [('4*1', '4')]),
         ('نصف $x$، ناقص (مع sin) $\\sin$ ضعف الزاوية على $4k$:', r'\frac{x}{2}-\frac{\sin2x}{4}+C', [('=ANS', 'x/2-sin(2*x)/4')])], 'U-T3 ex1')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('tex', r'\sin^{2}x=\frac{1-\cos2x}{2}', [('sin(x)**2', '(1-cos(2*x))/2')], 'نصف الزاوية (ص67)'),
+        ('tex', r'\sin^{2}x=\frac{1-\cos2x}{2}', [('sin(x)**2', '(1-cos(2*x))/2')], 'نصف الزاوية (مذكرة د. طارق ص67)'),
         ('line', 'x/2-sin(2*x)/4', '$\\int\\cos2x\\,dx=\\frac12\\sin2x$')], 'U-T3 ex1')
     ex += final(it, 'U-T3 example 1')
-    U.add('ex', 'مثال 1 (تمرين المذكرة)', ex)
+    U.add('ex', 'مثال 1 (تمرين من مذكرة د. طارق)', ex)
     it = ITEMS['N52-E1-3']
     ex = question(it, 'U-T3 example 2')
     ex += short_steps(it, [
@@ -122,7 +122,7 @@ def u_even():
          'نجمع: $\\frac14+\\frac18=\\frac38$'),
         ('line', '3*x/8+sin(4*x)/8+sin(8*x)/64', 'نكامل كل حد')], 'U-T3 ex2')
     ex += final(it, 'U-T3 example 2')
-    U.add('ex', 'مثال 2: أس 4 (من المذكرة)', ex)
+    U.add('ex', 'مثال 2: أس 4 (من مذكرة د. طارق)', ex)
     U.add('trap', '⚠️ الفخ', p(rich('$\\int\\sin^2x\\,dx\\ne\\frac{\\sin^3x}{3}$ لأن مشتقة $\\sin x$ غير موجودة بجانبه.')))
     U.add('paper', '✍️ في ورقة الكويز', md(r'\sin^{2}x=\frac{1-\cos2x}{2}') + p('ثم كامل حدًا حدًا.'))
     U.drill('1', 'N52-X14', 'G', 'زائد مع cos.', first=r'\cos^{2}x=\frac{1+\cos2x}{2}', claims=[('cos(x)**2', '(1+cos(2*x))/2')])
@@ -212,7 +212,7 @@ def u_reduce():
         ('tex', r'\tan^{2}x=\sec^{2}x-1', [('tan(x)**2', 'sec(x)**2-1')], 'مرة ثانية'),
         ('line', 'tan(x)**3/3-tan(x)+x', '$\\int(\\sec^2x-1)dx=\\tan x-x$')], 'U-T6 ex1')
     ex += final(it, 'U-T6 example 1')
-    U.add('ex', 'مثال 1 (من المذكرة)', ex)
+    U.add('ex', 'مثال 1 (من مذكرة د. طارق)', ex)
     it = ITEMS['N52-E3-1']
     A = '(sec(x)*tan(x)/2+log(Abs(sec(x)+tan(x)))/2)'
     ex = question(it, 'U-T6 example 2')
@@ -229,7 +229,7 @@ def u_reduce():
         ('tex', r'2I=\sec x\tan x+\ln|\sec x+\tan x|', [('2*%s' % A, 'sec(x)*tan(x)+log(Abs(sec(x)+tan(x)))')], 'نجمع $I$ ونقسم على 2')],
         'U-T6 ex2')
     ex += final(it, 'U-T6 example 2')
-    U.add('ex', 'مثال 2: sec³ (من المذكرة)', ex)
+    U.add('ex', 'مثال 2: sec³ (من مذكرة د. طارق)', ex)
     U.raw(alg('cyclic-eq'))
     U.add('trap', '⚠️ الفخ', p(rich('لا تنسَ الحد الأخير: $+x$ أو $-x$ مع الأس الزوجي، و $\\ln|\\sec x|$ مع الفردي.')))
     U.add('paper', '✍️ في ورقة الكويز', md(r'\int\tan^{4}x\,dx=\int\tan^{2}x\,(\sec^{2}x-1)\,dx=\frac{\tan^{3}x}{3}-\int\tan^{2}x\,dx'))
@@ -290,8 +290,8 @@ def u_prod():
          'متطابقة الضرب (🧮)'),
         ('line', '-cos(2*x)/4-cos(12*x)/24', '$\\int\\sin kx\\,dx=-\\frac1k\\cos kx$')], 'U-T8 ex')
     ex += final(it, 'U-T8 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
-    U.raw(alg('product-ids', 'متطابقات الضرب (المذكرة ص74)', [
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
+    U.raw(alg('product-ids', 'متطابقات الضرب (مذكرة د. طارق ص74)', [
         (r'\sin A\cos B=\frac12\left[\sin(A-B)+\sin(A+B)\right]', [('sin(7*x)*cos(5*x)', '(sin(2*x)+sin(12*x))/2')], 'sin × cos:'),
         (r'\sin A\sin B=\frac12\left[\cos(A-B)-\cos(A+B)\right]', [('sin(4*x)*sin(3*x)', '(cos(x)-cos(7*x))/2')], 'sin × sin:'),
         (r'\cos A\cos B=\frac12\left[\cos(A-B)+\cos(A+B)\right]', [('cos(3*x)*cos(x)', '(cos(2*x)+cos(4*x))/2')], 'cos × cos:'),

@@ -1,5 +1,5 @@
 {
- "pages": 157,
+ "pages": 159,
  "page_sizes_pt": [
   [
    595,
@@ -12,23 +12,23 @@
   "CAAAAA+IBMPlexSansArabic-SemiBold": "ttf",
   "DAAAAA+IBMPlexSansArabic-Bold": "ttf",
   "EAAAAA+IBMPlexSansArabic-Bold": "ttf",
-  "F101": "type3 (embedded glyph procedures)",
   "F102": "type3 (embedded glyph procedures)",
   "F105": "type3 (embedded glyph procedures)",
-  "F108": "type3 (embedded glyph procedures)",
-  "F119": "type3 (embedded glyph procedures)",
+  "F116": "type3 (embedded glyph procedures)",
+  "F120": "type3 (embedded glyph procedures)",
   "F125": "type3 (embedded glyph procedures)",
-  "F138": "type3 (embedded glyph procedures)",
-  "F139": "type3 (embedded glyph procedures)",
-  "F1391": "type3 (embedded glyph procedures)",
-  "F141": "type3 (embedded glyph procedures)",
-  "F1517": "type3 (embedded glyph procedures)",
-  "F1552": "type3 (embedded glyph procedures)",
+  "F126": "type3 (embedded glyph procedures)",
+  "F128": "type3 (embedded glyph procedures)",
   "F74": "type3 (embedded glyph procedures)",
   "F75": "type3 (embedded glyph procedures)",
   "F76": "type3 (embedded glyph procedures)",
+  "F769": "type3 (embedded glyph procedures)",
+  "F797": "type3 (embedded glyph procedures)",
+  "F832": "type3 (embedded glyph procedures)",
   "F84": "type3 (embedded glyph procedures)",
   "F88": "type3 (embedded glyph procedures)",
+  "F98": "type3 (embedded glyph procedures)",
+  "F99": "type3 (embedded glyph procedures)",
   "FAAAAA+IBMPlexSansArabic-Regular": "ttf",
   "GAAAAA+DejaVuSans": "ttf",
   "IAAAAA+KaTeX_Main-Regular": "ttf",
@@ -48,7 +48,7 @@
  "bookmarks": 122,
  "text_extraction": {
   "tool": "pdftotext (poppler)",
-  "characters": 579168,
+  "characters": 590010,
   "english_found": {
    "Evaluate the following integrals": true,
    "Find dy/dx of the following": true
@@ -67,8 +67,8 @@
   }
  },
  "math": {
-  "produced": 2489,
-  "rendered": 2489,
+  "produced": 2503,
+  "rendered": 2503,
   "mismatched": 0,
   "katex_errors": 0
  },

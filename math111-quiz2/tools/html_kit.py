@@ -44,7 +44,8 @@ def link(href, text, cls=''):
 
 
 def lines(n, cls='write'):
-    return '<div class="%s" style="--n:%d"></div>' % (cls, n)
+    """Writing space: n ruled lines drawn as real borders (crisp in the PDF at any zoom)."""
+    return '<div class="%s" style="--n:%d">%s</div>' % (cls, n, '<i></i>' * n)
 
 
 def chip(text, cls=''):

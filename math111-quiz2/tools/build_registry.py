@@ -43,8 +43,14 @@ def main(transcription):
     items = {i['id']: i for i in json.loads((ROOT / 'data' / 'items.json').read_text(encoding='utf-8'))}
     ver = {r['id']: r for r in json.loads((ROOT / 'reports' / 'verification_report_items.json').read_text())['items']}
     hold = json.loads((ROOT / 'data' / 'holdout_ids.json').read_text())
-    usage_file = ROOT / 'data' / 'usage.json'
-    usage = json.loads(usage_file.read_text(encoding='utf-8')) if usage_file.exists() else {}
+    usage = {}
+    for name in ('usage.json', 'usage_guide.json'):      # the full guide's usage replaces the sample's
+        f = ROOT / 'data' / name
+        if f.exists():
+            usage.update(json.loads(f.read_text(encoding='utf-8')))
+    sys.path.insert(0, str(ROOT / 'content'))
+    from mock_sols import MOCKS                           # where each held question sits in the mocks file
+    mock_at = {i: 'الاختبار التجريبي %s، السؤال %d' % (w, k) for w, ids in MOCKS.items() for k, i in enumerate(ids, 1)}
     T = json.loads(Path(transcription).read_text(encoding='utf-8'))
     trans = {r['A']: r for r in T['الأسئلة المدرجة'][1:]}
     trans_ex = {r['A']: r for r in T['المستبعدة'][1:]}
@@ -132,12 +138,13 @@ def main(transcription):
         in_scope = it is not None and it['section'] in ('4.2', '5.1', '5.2')
         if r['id'] in held:
             r['usage'], r['holdout_id'] = 'محجوز', held[r['id']]
+            usage[r['id']] = dict(usage='محجوز', location=mock_at.get(r['id'], ''))
         elif r['id'] in hold['avoid']:
             r['usage'], r['holdout_id'] = 'معلق مؤقتًا: قريب جدًا من سؤال محجوز (لا يستخدم قبل المحاكاة)', ''
         elif it is not None and it.get('scope') == 'contrast':
             r['usage'], r['holdout_id'] = 'مرجع إضافي (صف مقارنة فقط؛ 3.4 خارج النطاق)', ''
         elif in_scope:
-            r['usage'], r['holdout_id'] = usage.get(r['id'], {}).get('usage', 'مرجع إضافي (لم يُستخدم في العينة بعد)'), ''
+            r['usage'], r['holdout_id'] = usage.get(r['id'], {}).get('usage', 'مرجع إضافي (غير مستخدم في المذكرة)'), ''
         else:
             r['usage'], r['holdout_id'] = 'مستبعد (خارج النطاق المثبت)', ''
         r['location'] = usage.get(r['id'], {}).get('location', '')

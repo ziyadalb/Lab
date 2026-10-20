@@ -187,3 +187,21 @@ table.glossary td:first-child { width: 45%; }
 table.help1 td, table.help2 td { padding: 0.5mm 1.5mm; }
 .sol > .drill-head { border-bottom: 1px solid #d5d5d5; padding-bottom: 0.8mm; margin-bottom: 1mm; }
 .sol .drill-head .back { margin-inline-start: auto; }
+/* mock exams */
+.chapter.exam .mq { border: 1.5px solid var(--line); border-radius: 2.5mm; padding: 1.5mm 3mm; margin: 3mm 0; break-inside: avoid; }
+.mq-head { font-weight: 700; font-size: 13pt; }
+.chapter.stop { min-height: 120mm; }
+.chapter.stop .box { margin-top: 30mm; font-size: 14pt; }
+/* ruled writing lines as real borders */
+.write, .write.tight, .write.short { height: auto; background: none; }
+.write > i { display: block; height: 9.5mm; border-bottom: 1px solid #b9b9b9; }
+.write.tight > i { height: 7.5mm; }
+.ch .write.short { border-bottom: none; }
+.ch .write.short > i { height: 8mm; }
+.box.ex .q { break-after: avoid; }
+.unit .box.note { break-inside: auto; }
+table.help2 { table-layout: fixed; }
+table.help2 td:nth-child(1), table.help2 th:nth-child(1) { width: 15mm; }
+table.help2 td:nth-child(2), table.help2 th:nth-child(2) { width: 60%; }
+table.help2 .mi .katex { white-space: normal; }
+p:has(+ .chgrid) { break-after: avoid; }

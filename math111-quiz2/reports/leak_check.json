@@ -1,7 +1,7 @@
 {
  "document": "src/booklet.katex.html",
  "pdf": "out/sample/MATH111_Quiz2_Shortcuts_Sample.pdf",
- "formulas_scanned": 596,
+ "formulas_scanned": 601,
  "held_checked": 10,
  "avoid_checked": 7,
  "used_items": 54,

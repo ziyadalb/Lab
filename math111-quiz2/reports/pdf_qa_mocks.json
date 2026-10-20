@@ -1,0 +1,73 @@
+{
+ "pages": 16,
+ "page_sizes_pt": [
+  [
+   595,
+   842
+  ]
+ ],
+ "fonts": {
+  "AAAAAA+IBMPlexSansArabic-Regular": "ttf",
+  "BAAAAA+IBMPlexSansArabic-SemiBold": "ttf",
+  "CAAAAA+IBMPlexSansArabic-SemiBold": "ttf",
+  "DAAAAA+IBMPlexSansArabic-Bold": "ttf",
+  "EAAAAA+IBMPlexSansArabic-Bold": "ttf",
+  "F40": "type3 (embedded glyph procedures)",
+  "F46": "type3 (embedded glyph procedures)",
+  "FAAAAA+IBMPlexSansArabic-Regular": "ttf",
+  "GAAAAA+KaTeX_Math-Italic": "ttf",
+  "HAAAAA+KaTeX_Main-Regular": "ttf",
+  "IAAAAA+KaTeX_Size2-Regular": "ttf",
+  "JAAAAA+KaTeX_Size3-Regular": "ttf",
+  "KAAAAA+KaTeX_Size1-Regular": "ttf",
+  "MAAAAA+DejaVuSans": "ttf"
+ },
+ "min_arabic_pt": 12.0,
+ "min_text_pt_excluding_math_and_page_numbers": 12.0,
+ "internal_links": 0,
+ "named_destinations": 0,
+ "html_links": 0,
+ "bookmarks": 9,
+ "text_extraction": {
+  "tool": "pdftotext (poppler)",
+  "characters": 28139,
+  "english_found": {
+   "Evaluate the following integrals": true,
+   "Find dy/dx of the following": true
+  },
+  "arabic_found": {
+   "الاختصار": false,
+   "العلامة": false,
+   "مثال من سؤال حقيقي": false,
+   "سلّم المساعدة": false
+  },
+  "arabic_found_in_logical_order": {
+   "الاختصار": false,
+   "العلامة": false,
+   "مثال من سؤال حقيقي": false,
+   "سلّم المساعدة": false
+  }
+ },
+ "math": {
+  "produced": 83,
+  "rendered": 83,
+  "mismatched": 0,
+  "katex_errors": 0
+ },
+ "overflowing_formulas": 0,
+ "fonts_loaded_in_browser": [
+  [
+   "Plex Arabic",
+   true
+  ],
+  [
+   "KaTeX_Main",
+   true
+  ],
+  [
+   "KaTeX_Math",
+   true
+  ]
+ ],
+ "failures": []
+}

@@ -1216,7 +1216,8 @@
   "domain": "all real x",
   "case": "C51-EXPH",
   "section": "5.1",
-  "note": ""
+  "note": "",
+  "qtex": "e^{x/2}\\sinh 3x"
  },
  {
   "id": "1446-S2-FE-Q2.2",

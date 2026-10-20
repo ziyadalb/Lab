@@ -1,0 +1,18 @@
+{
+ "out": "out/mocks/MATH111_Quiz2_Mock_Exams.pdf",
+ "fonts": [
+  [
+   "Plex Arabic",
+   true
+  ],
+  [
+   "KaTeX_Main",
+   true
+  ],
+  [
+   "KaTeX_Math",
+   true
+  ]
+ ],
+ "overflow": []
+}

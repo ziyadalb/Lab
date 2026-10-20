@@ -23,7 +23,7 @@ def source_label(it):
         return 'اختبار سابق %s، %s، %s، س%s، ص%d' % (y, SEM[s_], EXAM[e], q[1:].replace('.', ' جزء '),
                                                    it['src']['pdf_page'])
     kind = 'مثال' if it['kind'] == 'notes_example' else 'تمرين'
-    return '%s المذكرة %s، ص%d' % (kind, it['src']['number'], it['src']['pdf_page'])
+    return '%s مذكرة د. طارق %s، ص%d' % (kind, it['src']['number'], it['src']['pdf_page'])
 
 
 def prompt(it):
@@ -402,7 +402,7 @@ def sc_small():
             formula('log(x**2+a**2)', 'x*log(x**2+a**2)-2*x+2*a*atan(x/a)', var='x', branches=('x',), pos=('a',), label='small ln quad'),
             formula('x**3*sqrt(x**2+c)', '(x**2+c)**Rational(5,2)/5-c*(x**2+c)**Rational(3,2)/3', var='x', branches=('t',), real=('c',), label='small root')]
     notes = ['تمرين (5)', 'تمرين (16)', 'تمرين (15)', 'مثال 4', 'تمرين (17)']
-    short = table(['التكامل', 'الجواب (+C)', 'في المذكرة ص64–66'], [frow(z, n) for z, n in zip(rows, notes)], 'formula')
+    short = table(['التكامل', 'الجواب (+C)', 'في مذكرة د. طارق ص64–66'], [frow(z, n) for z, n in zip(rows, notes)], 'formula')
     memo = p('خمس حالات قصيرة: يكفي أن تتعرف شكلها وتعرف أن لها جوابًا جاهزًا.')
     return short, memo
 

@@ -1,6 +1,6 @@
 """المذكرة الكاملة — الدرس 4.2: الدوال الزائدية العكسية (الأيام 1–3)."""
 from booklet import sc_lamda, sc_six, sc_square, sc_twins
-from booklet_engine import ITEMS, arith, formula, functional, same_value
+from booklet_engine import ITEMS, arith, formula, functional, q_tex, same_value, use
 from guide_kit import Unit, alg, contrast, final, question, rich, short_steps, steps
 from html_kit import md, mi, p, table, ul
 import sympy as s
@@ -33,14 +33,14 @@ def u_deriv():
                        ('atanh(x)', 'log((1+x)/(1-x))/2', 't/(1+t)'), ('acoth(x)', 'log((x+1)/(x-1))/2', '1+t'),
                        ('asech(x)', 'log((1+sqrt(1-x**2))/x)', 't/(1+t)'), ('acsch(x)', 'log(1/x+sqrt(1+x**2)/Abs(x))', 't')]:
         same_value(f_, F_, 'log form ' + f_, branch=br)
-    defs = table(['الدالة', 'تُعرَّف عند', 'الصيغة اللوغاريتمية (ص57)'], [
+    defs = table(['الدالة', 'تُعرَّف عند', 'الصيغة اللوغاريتمية (مذكرة د. طارق ص57)'], [
         [mi(r'\sinh^{-1}x'), 'كل ' + mi('x'), mi(r'\ln\left(x+\sqrt{x^{2}+1}\right)')],
         [mi(r'\cosh^{-1}x'), mi(r'x\ge1'), mi(r'\ln\left(x+\sqrt{x^{2}-1}\right)')],
         [mi(r'\tanh^{-1}x'), mi(r'|x|<1'), mi(r'\frac12\ln\frac{1+x}{1-x}')],
         [mi(r'\coth^{-1}x'), mi(r'|x|>1'), mi(r'\frac12\ln\frac{x+1}{x-1}')],
         [mi(r'\operatorname{sech}^{-1}x'), mi(r'0<x\le1'), mi(r'\ln\frac{1+\sqrt{1-x^{2}}}{x}')],
         [mi(r'\operatorname{csch}^{-1}x'), mi(r'x\ne0'), mi(r'\ln\left(\frac1x+\frac{\sqrt{1+x^{2}}}{|x|}\right)')]], 'formula compact')
-    U.add('note', 'تذكير: من 4.1 ومن تعريف الدوال (ص56–57)',
+    U.add('note', 'تذكير: من 4.1 ومن تعريف الدوال (مذكرة د. طارق ص56–57)',
           p('مشتقات الدوال الزائدية العادية (تحتاجها مع العكسية في نفس السؤال):')
           + table(['المشتقة', 'تساوي'], [frow(z) for z in d41], 'formula compact')
           + p(rich('الإشارة السالبة مع coth و sech و csch فقط.'), 'small')
@@ -59,7 +59,7 @@ def u_deriv():
         ('tex', r'\frac{d}{du}\sinh^{-1}u=\frac{1}{\sqrt{u^{2}+1}}', [('diff(asinh(x),x)', '1/sqrt(x**2+1)')], 'من جدول التوائم (صف sinh)'),
         ('line', '5/sqrt(1+(5*x-1)**2)', "نضرب في $u'=5$ ونرجع $u=5x-1$")], 'U-D1 ex1')
     ex += final(it, 'U-D1 example 1')
-    U.add('ex', 'مثال 1 (من المذكرة)', ex)
+    U.add('ex', 'مثال 1 (من مذكرة د. طارق)', ex)
 
     it = ITEMS['1447-S2-SE-Q1.2']
     ex = question(it, 'U-D1 example 2')
@@ -89,7 +89,7 @@ def u_deriv():
     U.add('trap', '⚠️ الفخ', ul([
         rich("أكثر غلطة: نسيان الضرب في $u'$."),
         rich('في csch⁻¹ إذا كان $u$ قد يكون سالبًا اكتب $|u|$. أحد المفاتيح الرسمية أسقطها فصار جوابه صحيحًا لـ $x>0$ فقط.'),
-        '<b>تنبيه coth⁻¹:</b> المذكرة ص58 ومفتاح 1445 كتبا مشتقة coth⁻¹ بإشارة سالبة، والحساب الصحيح (ومفتاح 1446) موجبة '
+        '<b>تنبيه coth⁻¹:</b> مذكرة د. طارق ص58 ومفتاح 1445 كتبا مشتقة coth⁻¹ بإشارة سالبة، والحساب الصحيح (ومفتاح 1446) موجبة '
         '— مثل tanh⁻¹ تمامًا. <b>اسأل الدكتور أي إشارة يعتمد</b>، واكتب في الكويز ما يقوله.']))
     U.add('paper', '✍️ في ورقة الكويز', p(rich("سطر $u$ و $u'$، ثم سطر الصيغة بالتعويض، ثم سطر التبسيط:"))
           + md(r"u=\sqrt{x+2},\ u'=\frac{1}{2\sqrt{x+2}}\ \Rightarrow\ y'=-\frac{u'}{|u|\sqrt{1+u^{2}}}=-\frac{1}{2(x+2)\sqrt{x+3}}"))
@@ -126,7 +126,7 @@ def u_deriv_rules():
     functional(lambda: s.simplify(s.diff(f / g, x) - (s.diff(f, x) * g - f * s.diff(g, x)) / g ** 2), 'quotient rule')
     rules = table(['المشتقة', 'تساوي'], [frow(z) for z in r], 'formula compact')
     rules += md(r"(f\,g)'=f'\,g+f\,g',\qquad \left(\frac{f}{g}\right)'=\frac{f'\,g-f\,g'}{g^{2}}")
-    rules += p(rich('في الاختبارات $\\log$ بدون أساس = أساس 10 (والمذكرة تكتب $\\ln$ للطبيعي).'), 'small')
+    rules += p(rich('في الاختبارات $\\log$ بدون أساس = أساس 10 (ومذكرة د. طارق تكتب $\\ln$ للطبيعي).'), 'small')
     U.add('short', '⚡ القواعد اللي تحيط بالدالة العكسية', rules)
     it = ITEMS['N42-E1-4']
     ex = question(it, 'U-D2 example')
@@ -142,7 +142,7 @@ def u_deriv_rules():
          'صف cosh من التوائم مع داخل $2x$ (مشتقته 2)'),
         ('line', '6**acosh(2*x)*log(6)*2/sqrt(4*x**2-1)', "قاعدة الأسية: $6^{u}\\cdot\\ln6\\cdot u'$")], 'U-D2 ex')
     ex += final(it, 'U-D2 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.raw(alg('pow-pow', 'أس فوق أس', [
         (r'\left(3^{x^{2}-1}\right)^{2}=3^{2(x^{2}-1)}=3^{2x^{2}-2}', [('(3**(x**2-1))**2', '3**(2*x**2-2)')],
          'عند تربيع أسية نضرب الأسين (تحتاجه في التمرين 3):'),
@@ -156,7 +156,7 @@ def u_deriv_rules():
         rich('رتّب: القاعدة الخارجية أولًا، ثم الداخل. لا تشتق الدالة العكسية وتنسى الأسية.'),
         rich('$\\ln|\\tanh 4x|$: مشتقتها $\\frac{4\\operatorname{sech}^{2}4x}{\\tanh4x}$ — البسط مشتقة الداخل كاملة.'),
         'إشارة coth⁻¹ (تنبيه النوع 1). مثال صحيح الإشارة من مفتاح 1446:'])
-          + question(it2, 'U-D2 trap') + final(it2, 'U-D2 trap'))
+          + md(q_tex(use(it2['id'], 'U-D2 trap'))) + final(it2, 'U-D2 trap'))
     U.add('paper', '✍️ في ورقة الكويز', p(rich("اكتب $u$ و $u'$ في سطر، ثم القاعدة الكبيرة، ثم الجواب.")))
     U.drill('1', 'N42-E1-6', 'G', 'قاعدة القوة أولًا، ثم اشتق ما داخل القوس حدًا حدًا.',
             first=r"y'=5\left(\operatorname{sech}^{-1}(3x)+7^{x}\right)^{4}\cdot\left(\operatorname{sech}^{-1}(3x)+7^{x}\right)'",
@@ -193,7 +193,7 @@ def u_six():
          [('1/sqrt((2*x)**2+5**2)', 'Rational(1,2)*diff(2*x,x)/sqrt((2*x)**2+5**2)')], 'نعوّض $dx$ فيظهر $\\frac12$'),
         ('line', 'asinh(2*x/5)/2', 'صف sinh: $\\sinh^{-1}\\frac{u}{a}$، ثم نرجع $u=2x$')], 'U-I1 ex1')
     ex += final(it, 'U-I1 example 1')
-    U.add('ex', 'مثال 1 (من المذكرة)', ex)
+    U.add('ex', 'مثال 1 (من مذكرة د. طارق)', ex)
     U.raw(alg('squares', 'كتابة الحد كمربع', [
         (r'4x^{2}=(2x)^{2}', [('4*x**2', '(2*x)**2')], 'جذر المعامل، ونصف الأس:'),
         (r'16x^{6}=(4x^{3})^{2}', [('16*x**6', '(4*x**3)**2')], 'جذر 16 = 4، ونصف 6 = 3:'),
@@ -211,8 +211,8 @@ def u_six():
          [('5*x**2/sqrt(9+16*x**6)', 'Rational(5,12)*diff(4*x**3,x)/sqrt((4*x**3)**2+3**2)')], 'البسط $5x^2dx=\\frac{5}{12}du$'),
         ('line', '5*asinh(4*x**3/3)/12', 'صف sinh ونرجع $u$')], 'U-I1 ex2')
     ex += final(it, 'U-I1 example 2')
-    U.add('ex', 'مثال 2: البسط مضاعف للمشتقة (من المذكرة)', ex)
-    U.add('trap', '⚠️ الفخ', ul([rich('cosh⁻¹ يصح بشرط $u>a$ فقط، كما تشترط المذكرة.'),
+    U.add('ex', 'مثال 2: البسط مضاعف للمشتقة (من مذكرة د. طارق)', ex)
+    U.add('trap', '⚠️ الفخ', ul([rich('cosh⁻¹ يصح بشرط $u>a$ فقط، كما تشترط مذكرة د. طارق.'),
                                 rich('لا تنسَ $\\frac{1}{a}$ في صفوف tanh و coth و sech و csch (صفّا الجذر وحده بدونها).'),
                                 rich('إذا كان في البسط $x$ وتحت الجذر $x^2$ فقط (لا $x^4$ أو أعلى)، فهو تعويض عادي: $w$ = ما تحت الجذر (الصف الثاني في جدول العلامة).')]))
     U.add('paper', '✍️ في ورقة الكويز', p(rich('سطر: $u=\\ldots,\\ du=\\ldots$. سطر: التكامل بدلالة $u$. سطر: الجواب.')))
@@ -241,15 +241,15 @@ def u_tanh():
     ex = question(it, 'U-I2 example 1')
     ex += short_steps(it, [
         ('اكتب كمربعين:', r'25-e^{2x}=5^{2}-\left(e^{x}\right)^{2}\ \Rightarrow\ u=e^{x},\ a=5', [('25-exp(2*x)', '5**2-exp(x)**2')]),
-        ('البسط $e^x$ هو مشتقة $u$ بالضبط. والمذكرة تأخذ $e^x<5$، أي $|u|<a$ ⇐ tanh:', r'\frac15\tanh^{-1}\frac{e^{x}}{5}+C',
+        ('البسط $e^x$ هو مشتقة $u$ بالضبط. ومذكرة د. طارق تأخذ $e^x<5$، أي $|u|<a$ ⇐ tanh:', r'\frac15\tanh^{-1}\frac{e^{x}}{5}+C',
          [('=ANS', 'atanh(exp(x)/5)/5')])], 'U-I2 ex1')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'25-e^{2x}=5^{2}-\left(e^{x}\right)^{2}', [('25-exp(2*x)', '5**2-exp(x)**2')], 'نكتب كمربعين (🧮 كتابة الحد كمربع)'),
         ('sub', 'exp(x)', 'exp(x)', 'نسمّي $u=e^x$، ومشتقتها في البسط'),
         ('tex', r'=\int\frac{du}{5^{2}-u^{2}}', [('exp(x)/(25-exp(2*x))', 'diff(exp(x),x)/(5**2-exp(x)**2)')], 'التكامل بدلالة $u$'),
-        ('line', 'atanh(exp(x)/5)/5', 'المذكرة تأخذ الجهة $e^x<5$ ⇐ tanh⁻¹، و $\\frac1a=\\frac15$')], 'U-I2 ex1')
+        ('line', 'atanh(exp(x)/5)/5', 'مذكرة د. طارق تأخذ الجهة $e^x<5$ ⇐ tanh⁻¹، و $\\frac1a=\\frac15$')], 'U-I2 ex1')
     ex += final(it, 'U-I2 example 1') + p(rich('إذا كان $e^x>5$ يصير الجواب $\\frac15\\coth^{-1}\\frac{e^x}{5}$.'), 'small')
-    U.add('ex', 'مثال 1 (من المذكرة)', ex)
+    U.add('ex', 'مثال 1 (من مذكرة د. طارق)', ex)
     it = ITEMS['N42-X2-06']
     ex = question(it, 'U-I2 example 2')
     ex += short_steps(it, [
@@ -260,14 +260,14 @@ def u_tanh():
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('tex', r'4-25\cosh^{2}x=2^{2}-(5\cosh x)^{2}', [('4-25*cosh(x)**2', '2**2-(5*cosh(x))**2')], 'مربعان'),
         ('sub', '5*cosh(x)', '5*sinh(x)', 'نسمّي $u=5\\cosh x$'),
-        ('tex', r'\begin{array}{l}\sinh x\,dx=\frac{du}{5}\\ \displaystyle\int\frac{\sinh x\,dx}{4-25\cosh^{2}x}=\frac15\int\frac{du}{2^{2}-u^{2}}\end{array}',
+        ('tex', r'\begin{array}{l}\sinh x\,dx=\frac{du}{5}\\[7pt] \displaystyle\int\frac{\sinh x\,dx}{4-25\cosh^{2}x}=\frac15\int\frac{du}{2^{2}-u^{2}}\end{array}',
          [('sinh(x)/(4-25*cosh(x)**2)', 'Rational(1,5)*diff(5*cosh(x),x)/(2**2-(5*cosh(x))**2)')], 'البسط $\\sinh x\\,dx$'),
         ('tex', r'u=5\cosh x\ge5>2=a', [], 'لأن $\\cosh x\\ge1$ دائمًا ⇐ $|u|>a$ ⇐ coth⁻¹'),
         ('line', 'acoth(5*cosh(x)/2)/10', '$\\frac15\\cdot\\frac12\\coth^{-1}\\frac{u}{2}$')], 'U-I2 ex2')
     ex += final(it, 'U-I2 example 2')
-    U.add('ex', 'مثال 2: لماذا coth هنا؟ (من المذكرة)', ex)
+    U.add('ex', 'مثال 2: لماذا coth هنا؟ (من مذكرة د. طارق)', ex)
     U.add('trap', '⚠️ الفخ', ul([rich('لا تختار tanh تلقائيًا: افحص $|u|$ و $a$.'),
-                                'المذكرة ص60 كتبت صيغة coth⁻¹ بإشارة سالبة؛ الحساب يعطي موجبة (تنبيه النوع 1).']))
+                                'مذكرة د. طارق ص60 كتبت صيغة coth⁻¹ بإشارة سالبة؛ الحساب يعطي موجبة (تنبيه النوع 1).']))
     U.add('paper', '✍️ في ورقة الكويز', p(rich('سطر $u$ و $du$، وسطر يبيّن المقارنة ($u\\ge5>2$)، ثم الجواب.')))
     U.drill('1', 'N42-X2-03', 'G', 'قرب الصفر $|u|$ صغير ⇐ tanh. المعامل: $\\frac{1}{12}\\cdot\\frac16$.',
             first=r'9x^{8}=(3x^{4})^{2},\quad 36=6^{2},\quad u=3x^{4},\ du=12x^{3}dx',
@@ -296,12 +296,12 @@ def u_sech():
         ('tex', r'\frac{1}{x\sqrt{16-x^{4}}}=\frac{x}{x^{2}\sqrt{4^{2}-(x^{2})^{2}}}',
          [('1/(x*sqrt(16-x**4))', 'x/(x**2*sqrt(4**2-(x**2)**2))')], 'نضرب فوق وتحت في $x$ (🧮 تحت)'),
         ('sub', 'x**2', '2*x', 'نسمّي $u=x^2$'),
-        ('tex', r'\begin{array}{l}x\,dx=\frac{du}{2}\\ \displaystyle\int\frac{x\,dx}{x^{2}\sqrt{16-x^{4}}}=\frac12\int\frac{du}{u\sqrt{4^{2}-u^{2}}}\end{array}',
+        ('tex', r'\begin{array}{l}x\,dx=\frac{du}{2}\\[7pt] \displaystyle\int\frac{x\,dx}{x^{2}\sqrt{16-x^{4}}}=\frac12\int\frac{du}{u\sqrt{4^{2}-u^{2}}}\end{array}',
          [('x/(x**2*sqrt(4**2-(x**2)**2))', 'Rational(1,2)*diff(x**2,x)/(x**2*sqrt(4**2-(x**2)**2))')], 'التكامل بدلالة $u$'),
         ('line', '-asech(x**2/4)/8', 'صف sech: $\\frac12\\cdot\\left(-\\frac14\\right)\\operatorname{sech}^{-1}\\frac{|u|}{4}$، و $|x^2|=x^2$')],
         'U-I3 ex')
     ex += final(it, 'U-I3 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.raw(alg('times-x', 'الضرب فوق وتحت', [
         (r'\frac{1}{x\sqrt{16-x^{4}}}\cdot\frac{x}{x}=\frac{x}{x^{2}\sqrt{16-x^{4}}}',
          [('1/(x*sqrt(16-x**4))*x/x', 'x/(x**2*sqrt(16-x**4))')], 'نضرب في $\\frac{x}{x}=1$ فلا تتغير القيمة:'),
@@ -336,7 +336,7 @@ def u_lamda():
         ('tex', r'\frac{1}{\sqrt{e^{6x}+1}}=\frac{e^{3x}}{e^{3x}\sqrt{(e^{3x})^{2}+1}}',
          [('1/sqrt(exp(6*x)+1)', 'exp(3*x)/(exp(3*x)*sqrt(exp(3*x)**2+1))')], 'نضرب فوق وتحت في $e^{3x}$'),
         ('sub', 'exp(3*x)', '3*exp(3*x)', 'نسمّي $u=e^{3x}$'),
-        ('tex', r'\begin{array}{l}e^{3x}dx=\frac{du}{3}\\ \displaystyle\int\frac{e^{3x}dx}{e^{3x}\sqrt{e^{6x}+1}}=\frac13\int\frac{du}{u\sqrt{u^{2}+1}}\end{array}',
+        ('tex', r'\begin{array}{l}e^{3x}dx=\frac{du}{3}\\[7pt] \displaystyle\int\frac{e^{3x}dx}{e^{3x}\sqrt{e^{6x}+1}}=\frac13\int\frac{du}{u\sqrt{u^{2}+1}}\end{array}',
          [('exp(3*x)/(exp(3*x)*sqrt(exp(3*x)**2+1))', 'Rational(1,3)*diff(exp(3*x),x)/(exp(3*x)*sqrt(exp(3*x)**2+1))')], 'التكامل بدلالة $u$'),
         ('line', '-acsch(exp(3*x))/3', 'صف csch مع $a=1$، و $u=e^{3x}>0$')], 'U-I4 ex')
     ex += final(it, 'U-I4 example')
@@ -371,7 +371,7 @@ def u_sqrt():
         ('tex', r'=2\int\frac{du}{\sqrt{u^{2}+2^{2}}}', [('1/(sqrt(x)*sqrt(4+x))', '2*diff(sqrt(x),x)/sqrt(sqrt(x)**2+2**2)')], 'التكامل بدلالة $u$'),
         ('line', '2*asinh(sqrt(x)/2)', 'صف sinh ونرجع $u=\\sqrt x$')], 'U-I5 ex')
     ex += final(it, 'U-I5 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.raw(alg('root-self'))
     U.add('trap', '⚠️ الفخ', ul([rich('لا تنسَ الـ 2: $\\frac{dx}{\\sqrt x}=2\\,du$.'),
                                 rich('المفتاح الرسمي لسؤال 1445 أعطى أيضًا $2\\cosh^{-1}\\sqrt{x+1}$، وهو جواب صحيح آخر.')]))
@@ -403,7 +403,7 @@ def u_split():
         ('line', 'sqrt(25+x**2)-Integral(2/sqrt(25+x**2),x)', 'الجزء الأول: $\\int\\frac{x}{\\sqrt{c+x^2}}dx=\\sqrt{c+x^2}$'),
         ('line', 'sqrt(25+x**2)-2*asinh(x/5)', 'الجزء الثاني: صف sinh مع $a=5$')], 'U-I6 ex')
     ex += final(it, 'U-I6 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.add('trap', '⚠️ الفخ', p(rich('انتبه للإشارة عند الفصل: $\\frac{x-2}{\\ldots}=\\frac{x}{\\ldots}-\\frac{2}{\\ldots}$.')))
     U.add('paper', '✍️ في ورقة الكويز', p('سطر الفصل، ثم جواب كل جزء، ثم اجمع.'))
     U.drill('1', 'G-01', 'G', 'الجزء الأول تعويض $w=x^2+9$، والثاني صف sinh مع $a=3$.',
@@ -417,7 +417,7 @@ def u_split():
 def u_invnum():
     U = Unit('U-I7', 'دالة عكسية ومشتقتها في السؤال', '4.2', 'ص62، تمرين 9', 3)
     U.add('idea', 'الفكرة', p(rich('إذا شفت دالة عكسية <b>ومشتقتها</b> في نفس التكامل، هذا تعويض بسيط: $u$ = الدالة العكسية.')))
-    U.add('sign', 'العلامة', contrast([(r'\int\frac{\cosh^{-1}x}{\sqrt{x^{2}-1}}dx', 'تعويض $u=\\cosh^{-1}x$', 'المقام مشتقة $\\cosh^{-1}x$'),
+    U.add('sign', 'العلامة', contrast([(r'\int\frac{\cosh^{-1}x}{\sqrt{x^{2}-1}}dx', 'تعويض $u=\\cosh^{-1}x$', 'مشتقة $\\cosh^{-1}x$ (وهي $\\frac{1}{\\sqrt{x^2-1}}$) موجودة في السؤال'),
                                        (r'\int\cosh^{-1}x\,dx', 'تجزئة (اليوم 4)', 'الدالة وحدها بلا مشتقتها')]))
     U.add('short', '⚡ الاختصار', md(r'\int f^{-1}\cdot\left(f^{-1}\right)'"'"r'\,dx=\frac{\left(f^{-1}\right)^{2}}{2}+C')
           + box_memo('الدالة × مشتقتها ⇐ مربع الدالة على 2.'))
@@ -425,14 +425,14 @@ def u_invnum():
     it = ITEMS['N42-X2-09']
     ex = question(it, 'U-I7 example')
     ex += short_steps(it, [
-        ('المقام $\\frac{1}{\\sqrt{x^2-1}}$ هو مشتقة الدالة:', r'f^{-1}=\cosh^{-1}x,\quad \left(\cosh^{-1}x\right)'"'"r'=\frac{1}{\sqrt{x^{2}-1}}',
+        ('العامل $\\frac{1}{\\sqrt{x^2-1}}$ هو مشتقة الدالة:', r'f^{-1}=\cosh^{-1}x,\quad \left(\cosh^{-1}x\right)'"'"r'=\frac{1}{\sqrt{x^{2}-1}}',
          [('diff(acosh(x),x)', '1/sqrt(x**2-1)', '1+t')]),
         ('الدالة × مشتقتها ⇐ مربعها على 2:', r'\frac{\left(\cosh^{-1}x\right)^{2}}{2}+C', [('=ANS', 'acosh(x)**2/2')])], 'U-I7 ex')
     ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
         ('sub', 'acosh(x)', '1/sqrt(x**2-1)', 'مشتقة $\\cosh^{-1}x$ موجودة في المقام', 'u', '1+t'),
         ('tex', r'=\int u\,du=\frac{u^{2}}{2}', [('integrate(x,x)', 'x**2/2')], 'قاعدة القوة')], 'U-I7 ex')
     ex += final(it, 'U-I7 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.add('trap', '⚠️ الفخ', p(rich('$(\\cosh^{-1}x)^2$ تعني مربع الدالة، وليست $\\cosh^{-1}(x^2)$.')))
     U.add('paper', '✍️ في ورقة الكويز', p(rich('سطر $u$ و $du$، ثم $\\int u\\,du$، ثم الجواب.')))
     U.drill('1', 'G-02', 'G', '$\\int u^2du=\\frac{u^3}{3}$.', first=r'u=\sinh^{-1}x,\quad du=\frac{dx}{\sqrt{1+x^{2}}}',
@@ -520,8 +520,8 @@ def u_square_lin():
          'التكامل بدلالة $u$'),
         ('line', '-asech(Abs(x-1)/2)/2', 'صف sech مع $a=2$ و $|u|$')], 'U-I9 ex')
     ex += final(it, 'U-I9 example')
-    ex += p(rich('المذكرة كتبت الجواب بدون $|\\,|$ فصار صحيحًا لـ $x>1$ فقط.'), 'small')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    ex += p(rich('مذكرة د. طارق كتبت الجواب بدون $|\\,|$ فصار صحيحًا لـ $x>1$ فقط.'), 'small')
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.raw(alg('neg-square', 'إكمال المربع ومعامل x² سالب', [
         (r'-x^{2}+2x+3=-\left(x^{2}-2x\right)+3', [('-x**2+2*x+3', '-(x**2-2*x)+3')], 'نُخرج السالب من حدّي $x$:'),
         (r'x^{2}-2x=(x-1)^{2}-1', [('x**2-2*x', '(x-1)**2-1')], 'نكمّل المربع داخل القوس:'),

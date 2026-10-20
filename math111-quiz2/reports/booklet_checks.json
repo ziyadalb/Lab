@@ -502,7 +502,7 @@
    "ok": true,
    "label": "micro ln -",
    "f": "x/(c-x**2)",
-   "F": "-log(c-x**2)/2",
+   "F": "-log(Abs(c-x**2))/2",
    "status": "symbolic"
   },
   {

@@ -64,7 +64,9 @@ def u_parts_linear():
     U.drill('2', '1446-S2-SE-Q2.3', 'P', '$p=2$، $G_1=\\sinh x$، $G_2=\\cosh x$.')
     U.drill('3', 'N51-X04', 'I', '$G_1=\\tan x$، و $G_2=\\int\\tan x\\,dx=-\\ln|\\cos x|$.',
             sol_rows=[('parts', 'x+1', 'sec(x)**2', '1', 'tan(x)', 'كثيرة الحدود $u$'),
-                      ('line', '(x+1)*tan(x)-Integral(tan(x),x)', 'القانون')])
+                      ('line', '(x+1)*tan(x)-Integral(tan(x),x)', 'القانون'),
+                      ('tex', r'-\int\tan x\,dx=-\left(-\ln|\cos x|\right)=+\ln|\cos x|', [('diff(-log(cos(x)),x)', 'tan(x)')],
+                       '$\\int\\tan x\\,dx=-\\ln|\\cos x|$، وسالب في سالب = موجب')])
     return U
 
 
@@ -130,7 +132,7 @@ def u_qaws():
         ('line', 'x**3*log(Abs(x))/3-Integral(x**2/3,x)', '$v\\,du=\\frac{x^3}{3}\\cdot\\frac1x=\\frac{x^2}{3}$ (🧮)'),
         ('line', 'x**3*log(Abs(x))/3-x**3/9', '$\\int\\frac{x^2}{3}dx=\\frac{x^3}{9}$')], 'U-P3 ex1')
     ex += final(it, 'U-P3 example 1')
-    U.add('ex', 'مثال 1 (من المذكرة)', ex)
+    U.add('ex', 'مثال 1 (من مذكرة د. طارق)', ex)
     U.raw(alg('pow-rules', 'قواعد الأسس', [
         (r'\frac{x^{3}}{3}\cdot\frac{1}{x}=\frac{x^{3-1}}{3}=\frac{x^{2}}{3}', [('x**3/3*(1/x)', 'x**2/3')], 'القسمة على $x$ تنقص الأس 1:'),
         (r'x^{-2}=\frac{1}{x^{2}}', [('x**(-2)', '1/x**2')], 'الأس السالب = مقلوب:'),
@@ -180,7 +182,7 @@ def u_ln_alone():
         ('line', 'x*log(Abs(x))-Integral(1,x)', '$v\\,du=x\\cdot\\frac1x=1$'),
         ('line', 'x*log(Abs(x))-x', '$\\int1\\,dx=x$')], 'U-P4 ex')
     ex += final(it, 'U-P4 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.raw(alg('poly-div', 'قسمة بسيطة: درجة البسط = درجة المقام', [
         (r'\frac{2x^{2}}{1+x^{2}}=\frac{2(1+x^{2})-2}{1+x^{2}}=2-\frac{2}{1+x^{2}}', [('2*x**2/(1+x**2)', '2-2/(1+x**2)')],
          'نكتب البسط بدلالة المقام ونطرح الفرق (تحتاجه في التمرين 2):'),
@@ -284,7 +286,7 @@ def u_xinv():
     U.add('ex', 'مثال (اختبار سابق)', ex)
     U.raw(alg('poly-div'))
     U.add('trap', '⚠️ الفخ', ul(['لا تنسَ نصف (½) قبل التكامل الباقي.',
-                                rich('المذكرة ص65 فيها سطر مطبعي: $\\sqrt{1-x^2}$ بدل $\\sqrt{x^2-1}$ في مثال $x\\sec^{-1}x$؛ الجواب النهائي صحيح.')]))
+                                rich('في مذكرة د. طارق ص65 خطأ مطبعي: $\\sqrt{1-x^2}$ بدل $\\sqrt{x^2-1}$ في مثال $x\\sec^{-1}x$؛ الجواب النهائي صحيح.')]))
     U.add('paper', '✍️ في ورقة الكويز', md(r'u=\tanh^{-1}x,\ dv=x\,dx,\ du=\frac{dx}{1-x^{2}},\ v=\frac{x^{2}}{2}'))
     U.drill('1', 'G-07', 'G', '$\\frac{x^2}{1+x^2}=1-\\frac{1}{1+x^2}$.',
             first=r'u=\tan^{-1}x,\ dv=x\,dx,\ du=\frac{dx}{1+x^{2}},\ v=\frac{x^{2}}{2}', claims=[('diff(atan(x),x)', '1/(1+x**2)')])
@@ -356,7 +358,7 @@ def u_nisfayn():
         (r'e^{x}\cdot e^{-2x}=e^{x-2x}=e^{-x}', [('exp(x)*exp(-2*x)', 'exp(-x)')], 'ومع أس سالب:'),
         (r'\cosh u=\frac{e^{u}+e^{-u}}{2},\qquad \sinh u=\frac{e^{u}-e^{-u}}{2}', [('cosh(x)', '(exp(x)+exp(-x))/2'), ('sinh(x)', '(exp(x)-exp(-x))/2')],
          'التعريف من 4.1:')]))
-    U.add('trap', '⚠️ الفخ', ul([rich('إذا $a=b$ أو $a=-b$ يصير أحد الأسين صفرًا: حدّه $\\frac12$ وتكامله $\\frac{x}{2}$ (التمرين 3).'),
+    U.add('trap', '⚠️ الفخ', ul([rich('إذا $a=b$ أو $a=-b$ يصير أحد الأسين صفرًا: حدّه ثابت ($\\frac12$ أو $-\\frac12$) وتكامله $\\pm\\frac{x}{2}$ (التمرين 3).'),
                                 rich('مع sinh بين الحدين سالب.')]))
     U.add('paper', '✍️ في ورقة الكويز', p('سطر التعريف، ثم سطر الضرب، ثم الجواب. هكذا حلّ المفتاح الرسمي.'))
     U.drill('1', 'N51-X13', 'G', 'sinh ⇐ بين الحدين سالب.', first=r'a=3,\ b=1:\quad \frac12\left[\frac{e^{4x}}{4}-\frac{e^{2x}}{2}\right]',
@@ -389,7 +391,7 @@ def u_subparts():
         ('tex', r'=2\left(t\,e^{t}-e^{t}\right)=2(t-1)e^{t}', [('diff(2*(x-1)*exp(x),x)', '2*x*exp(x)')], 'النوع 12 مع $p=2$: $G_1=G_2=e^t$'),
         ('line', '2*exp(sqrt(x))*(sqrt(x)-1)', 'نرجع $t=\\sqrt x$')], 'U-P10 ex')
     ex += final(it, 'U-P10 example')
-    U.add('ex', 'مثال (من المذكرة)', ex)
+    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
     U.add('trap', '⚠️ الفخ', ul([rich('لا تنسَ $dx=2t\\,dt$؛ هي اللي تعطي حد $t$ للتجزئة.'),
                                 rich('$x^3dx=x^2\\cdot x\\,dx$: نكتب $x^2=w-c$ و $x\\,dx=\\frac{dw}{2}$.')]))
     U.add('paper', '✍️ في ورقة الكويز', p(rich('سطر التعويض ($t$ و $dx$)، ثم التجزئة، ثم الرجوع لـ $x$.')))
