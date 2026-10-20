@@ -1,22 +1,12 @@
 """المذكرة الكاملة — الدرس 5.1: التكامل بالتجزئة (الأيام 3–5)."""
 from booklet import di_table, sc_dawaran, sc_nisfayn, sc_qaws, sc_rafeeq
 from booklet_engine import ITEMS, arith, formula, functional, same_value
-from guide_kit import Unit, alg, contrast, final, question, rich, short_steps, steps
+from guide_kit import Unit, alg, contrast, final, pgref, question, rich, short_steps, steps
 from guide_rules import R
 from guide_42 import box_memo, frow
-from html_kit import md, mi, p, table, ul
+from html_kit import link, md, mi, p, table, ul
 import sympy as s
 from mathlib import x
-
-
-def int_table(label):
-    rows = [formula('exp(k*x)', 'exp(k*x)/k', var='x', branches=('x',), pos=('k',), label=label + ' e'),
-            formula('sin(k*x)', '-cos(k*x)/k', var='x', branches=('x',), pos=('k',), label=label + ' sin'),
-            formula('cos(k*x)', 'sin(k*x)/k', var='x', branches=('x',), pos=('k',), label=label + ' cos'),
-            formula('sinh(k*x)', 'cosh(k*x)/k', var='x', branches=('x',), pos=('k',), label=label + ' sinh'),
-            formula('cosh(k*x)', 'sinh(k*x)/k', var='x', branches=('x',), pos=('k',), label=label + ' cosh'),
-            formula('sec(x)**2', 'tan(x)', var='x', branches=('t/(1+t)',), label=label + ' sec2')]
-    return table(['التكامل', 'الجواب (+C)'], [frow(z) for z in rows], 'formula compact')
 
 
 # ---------------------------------------------------------------- 12
@@ -29,7 +19,9 @@ def u_parts_linear():
     U.add('sign', 'العلامة', p(rich('حد مثل $(px+q)$ مضروب في $e^{kx}$ أو $\\sin kx$ أو $\\cos kx$ أو $\\sinh kx$ أو $\\cosh kx$ أو $\\sec^2x$.'))
           + contrast([(r'\int x\cosh x\,dx', 'تجزئة', '$x$ ليست مشتقة شيء داخل cosh'),
                       (r'\int x\cosh(x^{2})\,dx', 'تعويض $u=x^2$', '$x$ موجودة كمشتقة لـ $x^2$ (تقريبًا)')]))
-    U.add('note', 'تذكير: تكاملات تحتاجها', int_table('G parts table')
+    U.add('note', 'تذكير: تكاملات تحتاجها', p(rich('التجزئة تنتهي دائمًا بتكاملات من الجدول الأساسي ($e^{kx}$ و $\\sin kx$ و $\\cos kx$ '
+                                                 'و $\\sinh kx$ و $\\cosh kx$ و $\\sec^2x$). الجدول وشرح التعويض في ')
+                                            + link('pq3', '📚 ق3 ص ' + pgref('pq3')) + '.')
           + p(rich('مع sin الإشارة سالبة: $\\int\\sin x\\,dx=-\\cos x$. مع sinh موجبة: $\\int\\sinh x\\,dx=\\cosh x$.'), 'small'))
     G1, G2, g = s.Function('G_1')(x), s.Function('G_2')(x), s.Function('g')(x)
     pp, qq = s.symbols('p q', real=True)

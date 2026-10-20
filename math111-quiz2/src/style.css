@@ -218,3 +218,13 @@ ul.checks li { margin: 0.8mm 0; }
 table.mistakes td:nth-child(1) { direction: ltr; text-align: left; background: var(--warn-tint); width: 33%; }
 table.mistakes td:nth-child(2) { direction: ltr; text-align: left; background: var(--ok-tint); width: 37%; }
 table.mistakes tr { break-inside: avoid; }
+/* ---------------- guide v4: prerequisite pages ---------------- */
+.chip.pq { border-color: #6a4c93; color: #6a4c93; background: #f6f1fb; }
+.chip.pq a { border-bottom: none; color: inherit; }
+.prereq > h2 { color: #6a4c93; border-bottom-color: #6a4c93; }
+.pq-head { display: flex; gap: 2mm; flex-wrap: wrap; margin: -1mm 0 2mm; }
+table.pick td:nth-child(5) { width: 24%; }
+.pq-head { break-after: avoid; }
+.prereq > .box.note { break-inside: avoid; }
+.prereq p:has(+ .md), .prereq .md:has(+ table.steps) { break-after: avoid; }
+.fsheets p:has(+ .fsheet), .fsheets h3 { break-after: avoid; }

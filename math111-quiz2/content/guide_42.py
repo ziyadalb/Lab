@@ -1,9 +1,9 @@
 """المذكرة الكاملة — الدرس 4.2: الدوال الزائدية العكسية (الأيام 1–3)."""
 from booklet import sc_lamda, sc_six, sc_square, sc_twins
 from booklet_engine import ITEMS, arith, formula, functional, q_tex, same_value, use
-from guide_kit import Unit, alg, contrast, final, question, rich, short_steps, steps
+from guide_kit import Unit, alg, contrast, final, pgref, question, rich, short_steps, steps
 from guide_rules import R
-from html_kit import md, mi, p, table, ul
+from html_kit import link, md, mi, p, table, ul
 import sympy as s
 from mathlib import x
 
@@ -24,12 +24,6 @@ def u_deriv():
           + contrast([(r'y=\sinh^{-1}(5x-1)', 'جدول التوائم × $u\'$', 'دالة عكسية: الأس $-1$ اسم وليس قوة'),
                       (r'y=\sinh(5x-1)', 'من 4.1: $\\cosh(5x-1)\\cdot5$', 'دالة عادية، ليست عكسية'),
                       (r'\int\frac{dx}{\sqrt{1+x^{2}}}', 'تكامل (النوع 3)', 'المطلوب تكامل، ليس مشتقة')]))
-    d41 = [formula('sinh(u)', 'cosh(u)', 'diff', branches=('x',), uprime=True, label='G 4.1 sinh'),
-           formula('cosh(u)', 'sinh(u)', 'diff', branches=('x',), uprime=True, label='G 4.1 cosh'),
-           formula('tanh(u)', 'sech(u)**2', 'diff', branches=('x',), uprime=True, label='G 4.1 tanh'),
-           formula('coth(u)', '-csch(u)**2', 'diff', branches=('t',), uprime=True, label='G 4.1 coth'),
-           formula('sech(u)', '-sech(u)*tanh(u)', 'diff', branches=('x',), uprime=True, label='G 4.1 sech'),
-           formula('csch(u)', '-csch(u)*coth(u)', 'diff', branches=('t',), uprime=True, label='G 4.1 csch')]
     for f_, F_, br in [('asinh(x)', 'log(x+sqrt(x**2+1))', None), ('acosh(x)', 'log(x+sqrt(x**2-1))', '1+t'),
                        ('atanh(x)', 'log((1+x)/(1-x))/2', 't/(1+t)'), ('acoth(x)', 'log((x+1)/(x-1))/2', '1+t'),
                        ('asech(x)', 'log((1+sqrt(1-x**2))/x)', 't/(1+t)'), ('acsch(x)', 'log(1/x+sqrt(1+x**2)/Abs(x))', 't')]:
@@ -42,9 +36,8 @@ def u_deriv():
         [mi(r'\operatorname{sech}^{-1}x'), mi(r'0<x\le1'), mi(r'\ln\frac{1+\sqrt{1-x^{2}}}{x}')],
         [mi(r'\operatorname{csch}^{-1}x'), mi(r'x\ne0'), mi(r'\ln\left(\frac1x+\frac{\sqrt{1+x^{2}}}{|x|}\right)')]], 'formula compact')
     U.add('note', 'تذكير: من 4.1 ومن تعريف الدوال (مذكرة د. طارق ص56–57)',
-          p('مشتقات الدوال الزائدية العادية (تحتاجها مع العكسية في نفس السؤال):')
-          + table(['المشتقة', 'تساوي'], [frow(z) for z in d41], 'formula compact')
-          + p(rich('الإشارة السالبة مع coth و sech و csch فقط.'), 'small')
+          p(rich('مشتقات الدوال الزائدية <b>العادية</b> (sinh و cosh و tanh…) تحتاجها مع العكسية في نفس السؤال. جدولها وشرحها في ')
+            + link('pq1', '📚 ق1 ص ' + pgref('pq1')) + '.')
           + p('الدوال العكسية الست ومجالها (للمعرفة، لا يُسأل عنها مباشرة في الاختبارات السابقة):') + defs)
     short, memo = sc_twins()
     U.add('short', '⚡ الاختصار: جدول التوائم', short + box_memo(memo))

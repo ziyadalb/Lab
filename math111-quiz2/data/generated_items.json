@@ -701,5 +701,20 @@
   "case": "C52-TS-SEC0",
   "section": "5.2",
   "note": "warm-up, day 7 (tan^2 = sec^2 - 1, then the sec chain)"
+ },
+ {
+  "id": "G-45",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/sqrt(9*x**2+16)",
+  "answer": [
+   "asinh(3*x/4)/3"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-I-SINH",
+  "section": "4.2",
+  "note": "warm-up, day 2 (type 3)"
  }
 ]

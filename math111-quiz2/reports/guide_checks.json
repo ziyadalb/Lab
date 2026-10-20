@@ -1,9 +1,86 @@
 {
  "checks": [
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 definition",
+   "claim": "sinh(x) = (exp(x)-exp(-x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 definition",
+   "claim": "cosh(x) = (exp(x)+exp(-x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 definition",
+   "claim": "tanh(x) = sinh(x)/cosh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 definition",
+   "claim": "coth(x) = cosh(x)/sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 definition",
+   "claim": "sech(x) = 1/cosh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 definition",
+   "claim": "csch(x) = 1/sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 identities",
+   "claim": "cosh(x)**2-sinh(x)**2 = 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 identities",
+   "claim": "1-tanh(x)**2 = sech(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 identities",
+   "claim": "coth(x)**2-1 = csch(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 values",
+   "claim": "sinh(0) = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 values",
+   "claim": "cosh(0) = 1",
+   "residual": "0"
+  },
+  {
    "kind": "formula",
    "ok": true,
-   "label": "G 4.1 sinh",
+   "label": "pq1 d sinh",
    "f": "sinh(u)",
    "F": "cosh(u)",
    "status": "symbolic"
@@ -11,7 +88,7 @@
   {
    "kind": "formula",
    "ok": true,
-   "label": "G 4.1 cosh",
+   "label": "pq1 d cosh",
    "f": "cosh(u)",
    "F": "sinh(u)",
    "status": "symbolic"
@@ -19,7 +96,7 @@
   {
    "kind": "formula",
    "ok": true,
-   "label": "G 4.1 tanh",
+   "label": "pq1 d tanh",
    "f": "tanh(u)",
    "F": "sech(u)**2",
    "status": "symbolic"
@@ -27,7 +104,7 @@
   {
    "kind": "formula",
    "ok": true,
-   "label": "G 4.1 coth",
+   "label": "pq1 d coth",
    "f": "coth(u)",
    "F": "-csch(u)**2",
    "status": "symbolic"
@@ -35,7 +112,7 @@
   {
    "kind": "formula",
    "ok": true,
-   "label": "G 4.1 sech",
+   "label": "pq1 d sech",
    "f": "sech(u)",
    "F": "-sech(u)*tanh(u)",
    "status": "symbolic"
@@ -43,10 +120,548 @@
   {
    "kind": "formula",
    "ok": true,
-   "label": "G 4.1 csch",
+   "label": "pq1 d csch",
    "f": "csch(u)",
    "F": "-csch(u)*coth(u)",
    "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq1 int sinh",
+   "f": "sinh(u)",
+   "F": "cosh(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq1 int cosh",
+   "f": "cosh(u)",
+   "F": "sinh(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq1 int sech2",
+   "f": "sech(u)**2",
+   "F": "tanh(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq1 int sech tanh",
+   "f": "sech(u)*tanh(u)",
+   "F": "-sech(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 ex1 step 1",
+   "claim": "diff(4*x**2,x) = 8*x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 ex1 step 2",
+   "claim": "diff(cosh(4*x**2),x) = sinh(4*x**2)*diff(4*x**2,x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 ex1 step 3",
+   "claim": "diff(cosh(4*x**2),x) = 8*x*sinh(4*x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 ex2 step 1",
+   "claim": "sinh(x) = (exp(x)-exp(-x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 ex2 step 2",
+   "claim": "exp(x)*sinh(x) = (exp(x)*exp(x)-exp(x)*exp(-x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 ex2 step 3",
+   "claim": "exp(x)*sinh(x) = (exp(2*x)-1)/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 try 1",
+   "claim": "diff(sinh(5*x),x) = 5*cosh(5*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq1 try 2",
+   "claim": "cosh(2*x) = (exp(2*x)+exp(-2*x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 power",
+   "f": "u**n",
+   "F": "n*u**(n-1)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 sqrt",
+   "f": "sqrt(u)",
+   "F": "1/(2*sqrt(u))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 exp",
+   "f": "exp(u)",
+   "F": "exp(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 a^u",
+   "f": "a**u",
+   "F": "a**u*log(a)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 ln",
+   "f": "log(Abs(u))",
+   "F": "1/u",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 sin",
+   "f": "sin(u)",
+   "F": "cos(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 cos",
+   "f": "cos(u)",
+   "F": "-sin(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 tan",
+   "f": "tan(u)",
+   "F": "sec(u)**2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 sec",
+   "f": "sec(u)",
+   "F": "sec(u)*tan(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 cot",
+   "f": "cot(u)",
+   "F": "-csc(u)**2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq2 csc",
+   "f": "csc(u)",
+   "F": "-csc(u)*cot(u)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq2 ex1 step 1",
+   "claim": "cos(3*x) = cos(3*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq2 ex1 step 2",
+   "claim": "diff(cos(3*x),x) = -3*sin(3*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq2 ex1 step 3",
+   "claim": "diff(log(cos(3*x)),x) = -3*sin(3*x)/cos(3*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq2 ex1 step 4",
+   "claim": "-3*sin(3*x)/cos(3*x) = -3*tan(3*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq2 ex2 step 1",
+   "claim": "diff(x**2,x) = 2*x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq2 ex2 step 2",
+   "claim": "diff(2**(x**2),x) = 2**(x**2)*log(2)*2*x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq2 try 1",
+   "claim": "diff(exp(sin(x)),x) = cos(x)*exp(sin(x))",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq2 try 2",
+   "claim": "diff(sqrt(x**2+1),x) = x/sqrt(x**2+1)",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 power",
+   "f": "x**n",
+   "F": "x**(n+1)/(n+1)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 1/x",
+   "f": "1/x",
+   "F": "log(Abs(x))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 e",
+   "f": "exp(k*x)",
+   "F": "exp(k*x)/k",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 sin",
+   "f": "sin(k*x)",
+   "F": "-cos(k*x)/k",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 cos",
+   "f": "cos(k*x)",
+   "F": "sin(k*x)/k",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 sinh",
+   "f": "sinh(k*x)",
+   "F": "cosh(k*x)/k",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 cosh",
+   "f": "cosh(k*x)",
+   "F": "sinh(k*x)/k",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 sec2",
+   "f": "sec(x)**2",
+   "F": "tan(x)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 csc2",
+   "f": "csc(x)**2",
+   "F": "-cot(x)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 sec tan",
+   "f": "sec(x)*tan(x)",
+   "F": "sec(x)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 tan",
+   "f": "tan(x)",
+   "F": "log(Abs(sec(x)))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq3 sec",
+   "f": "sec(x)",
+   "F": "log(Abs(sec(x)+tan(x)))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 pick",
+   "claim": "diff(sin(3*x)/3,x) = cos(3*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 pick",
+   "claim": "diff((x**2+1)**6/12,x) = x*(x**2+1)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 pick",
+   "claim": "diff((1+sin(x))**4/4,x) = cos(x)*(1+sin(x))**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 pick",
+   "claim": "diff(log(1+exp(x)),x) = exp(x)/(1+exp(x))",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 pick",
+   "claim": "diff(log(x)**2/2,x) = log(x)/x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 ex1 step 1",
+   "claim": "x**2+1 = x**2+1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 ex1 step 2",
+   "claim": "diff(x**2+1,x)/2 = x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 ex1 step 3",
+   "claim": "x*(x**2+1)**5 = Rational(1,2)*(x**2+1)**5*diff(x**2+1,x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 ex1 step 4",
+   "claim": "integrate(u**5,u)/2 = u**6/12",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 ex1 step 5",
+   "claim": "diff((x**2+1)**6/12,x) = x*(x**2+1)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 ex2 step 1",
+   "claim": "diff(3*x,x) = 3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 ex2 step 2",
+   "claim": "cos(3*x) = Rational(1,3)*cos(3*x)*diff(3*x,x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 ex2 step 3",
+   "claim": "diff(sin(3*x)/3,x) = cos(3*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 try 1",
+   "claim": "diff((x**3+2)**5/15,x) = x**2*(x**3+2)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq3 try 2",
+   "claim": "diff(exp(5*x)/5,x) = exp(5*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq4 d asin",
+   "f": "asin(u)",
+   "F": "1/sqrt(1-u**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq4 d acos",
+   "f": "acos(u)",
+   "F": "-1/sqrt(1-u**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq4 d atan",
+   "f": "atan(u)",
+   "F": "1/(1+u**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq4 d asec (u > 1)",
+   "f": "asec(u)",
+   "F": "1/(u*sqrt(u**2-1))",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq4 int asin",
+   "f": "1/sqrt(a**2-u**2)",
+   "F": "asin(u/a)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq4 int atan",
+   "f": "1/(a**2+u**2)",
+   "F": "atan(u/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "pq4 int asec (u > a)",
+   "f": "1/(u*sqrt(u**2-a**2))",
+   "F": "asec(u/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq4 ex1 step 1",
+   "claim": "diff(x**2,x) = 2*x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq4 ex1 step 2",
+   "claim": "diff(atan(x**2),x) = 2*x/(1+x**4)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq4 ex2 step 1",
+   "claim": "9+x**2 = 3**2+x**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq4 ex2 step 2",
+   "claim": "diff(atan(x/3)/3,x) = 1/(9+x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq4 x/(1+x^2)",
+   "claim": "diff(log(1+x**2)/2,x) = x/(1+x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq4 try 1",
+   "claim": "diff(asin(3*x),x) = 3/sqrt(1-9*x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq4 try 2",
+   "claim": "diff(asin(x/4),x) = 1/sqrt(16-x**2)",
+   "residual": "0"
   },
   {
    "kind": "identity",
@@ -2438,54 +3053,6 @@
    "status": "symbolic"
   },
   {
-   "kind": "formula",
-   "ok": true,
-   "label": "G parts table e",
-   "f": "exp(k*x)",
-   "F": "exp(k*x)/k",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G parts table sin",
-   "f": "sin(k*x)",
-   "F": "-cos(k*x)/k",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G parts table cos",
-   "f": "cos(k*x)",
-   "F": "sin(k*x)/k",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G parts table sinh",
-   "f": "sinh(k*x)",
-   "F": "cosh(k*x)/k",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G parts table cosh",
-   "f": "cosh(k*x)",
-   "F": "sinh(k*x)/k",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G parts table sec2",
-   "f": "sec(x)**2",
-   "F": "tan(x)",
-   "status": "symbolic"
-  },
-  {
    "kind": "functional",
    "ok": true,
    "label": "G linear rule",
@@ -4479,6 +5046,153 @@
   {
    "kind": "arithmetic",
    "ok": true,
+   "label": "algebra trig-pyth",
+   "claim": "sin(x)**2+cos(x)**2 = 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "algebra trig-pyth",
+   "claim": "cos(x)**2 = 1-sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "algebra trig-pyth",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "algebra trig-pyth",
+   "claim": "csc(x)**2 = 1+cot(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "try trig-pyth",
+   "claim": "sin(x)**4 = (1-cos(x)**2)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 extra",
+   "claim": "cos(2*x) = 2*cos(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 extra",
+   "claim": "cos(x)**2 = (1+cos(2*x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 extra",
+   "claim": "cos(-x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 extra",
+   "claim": "sin(pi) = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 identity",
+   "claim": "sin(2*x) = 2*sin(x)*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 identity",
+   "claim": "cos(2*x) = 1-2*sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 identity",
+   "claim": "sin(x)**2 = (1-cos(2*x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 identity",
+   "claim": "sin(-x)+sin(x) = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 identity",
+   "claim": "cos(pi) = -1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 ex1 step 1",
+   "claim": "sin(x)*cos(x) = sin(2*x)/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 ex1 step 2",
+   "claim": "sin(x)**2*cos(x)**2 = sin(2*x)**2/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 ex1 step 3",
+   "claim": "sin(x)**2*cos(x)**2 = (1-cos(4*x))/8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 ex2 step 1",
+   "claim": "tan(x)**3 = tan(x)*tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 ex2 step 2",
+   "claim": "tan(x)**3 = tan(x)*(sec(x)**2-1)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 try 1",
+   "claim": "sin(4*x)**2 = (1-cos(8*x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "pq5 try 2",
+   "claim": "cot(x)**2 = csc(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
    "label": "method table",
    "claim": "cos(x)**2 = 1-sin(x)**2",
    "residual": "0"
@@ -4608,41 +5322,6 @@
    "item": "N52-E1-1",
    "label": "U-T1 example",
    "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra trig-pyth",
-   "claim": "sin(x)**2+cos(x)**2 = 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra trig-pyth",
-   "claim": "cos(x)**2 = 1-sin(x)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra trig-pyth",
-   "claim": "sec(x)**2 = 1+tan(x)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra trig-pyth",
-   "claim": "csc(x)**2 = 1+cot(x)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try trig-pyth",
-   "claim": "sin(x)**4 = (1-cos(x)**2)**2",
-   "residual": "0"
   },
   {
    "kind": "arithmetic",
@@ -6246,7 +6925,7 @@
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N42-X2-04",
+   "item": "G-45",
    "label": "day 2 warm-up",
    "status": "symbolic"
   },
@@ -6258,9 +6937,9 @@
    "status": "symbolic"
   },
   {
-   "kind": "derivative",
+   "kind": "antiderivative",
    "ok": true,
-   "item": "N42-X1-5",
+   "item": "N42-X2-04",
    "label": "day 3 warm-up",
    "status": "symbolic"
   },
@@ -7632,13 +8311,13 @@
   "1445-S2-SE-Q1.1": [
    "day 2 warm-up"
   ],
-  "N42-X2-04": [
+  "G-45": [
    "day 2 warm-up"
   ],
   "G-38": [
    "day 3 warm-up"
   ],
-  "N42-X1-5": [
+  "N42-X2-04": [
    "day 3 warm-up"
   ],
   "N42-X2-13": [
@@ -7784,7 +8463,7 @@
   ]
  },
  "counts": {
-  "total": 1026,
-  "ok": 1026
+  "total": 1119,
+  "ok": 1119
  }
 }

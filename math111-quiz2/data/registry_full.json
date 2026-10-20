@@ -5698,9 +5698,9 @@
   "near_copies": "",
   "verification": "symbolic",
   "official_check": "",
-  "usage": "مستخدم في المذكرة الكاملة",
+  "usage": "مرجع إضافي (غير مستخدم في المذكرة)",
   "holdout_id": "",
-  "location": "day 3 warm-up",
+  "location": "",
   "exclusion_reason": ""
  },
  {
@@ -5855,7 +5855,7 @@
   "official_check": "",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "day 2 warm-up",
+  "location": "day 3 warm-up",
   "exclusion_reason": ""
  },
  {

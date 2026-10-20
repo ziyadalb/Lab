@@ -8,6 +8,7 @@ from booklet import sc_dawaran, sc_even, sc_lamda, sc_nisfayn, sc_prod, sc_qaws,
     sc_six, sc_small, sc_square, sc_twins
 from booklet_engine import HOLD, ITEMS, LOG, ans_tex, q_tex
 from guide_52 import sc_method
+import guide_prereq as PQ
 from guide_kit import ALG_SEEN, DAYS as UNIT_DAYS, DRILLS_N, HELP, TRY_KEYS, final, pgref, rich
 from html_kit import box, chip, lines, link, md, mi, p, table, ul
 
@@ -16,9 +17,13 @@ ROOT = Path(__file__).resolve().parent.parent
 TITLES = {'speed42': 'سرعة الاختصار: 4.2', 'speed51': 'سرعة الاختصار: 5.1', 'speed52': 'سرعة الاختصار: 5.2',
           'mockA': 'الاختبار التجريبي A', 'mixed': 'المراجعة المخلوطة', 'mockB': 'الاختبار التجريبي B',
           'quizday': 'يوم الكويز: الليلة، والصباح، وفي القاعة'}
-# a speed drill opens the day after its lesson ends (retrieval after a night); mocks and mixed review close the last days
-DAY_START = {3: ['speed42'], 5: ['speed51'], 7: ['speed52']}
+TITLES.update({a: '📚 ' + t for a, t in PQ.TITLES.items()})
+# a speed drill comes after its lesson ends (5.1 and 5.2: the next morning; 4.2 ends on day 3 with type 11, so its
+# speed drill follows it the same day); mocks and mixed review close the last days
+DAY_START = {5: ['speed51'], 7: ['speed52']}
 DAY_END = {6: ['mockA'], 7: ['mixed', 'mockB', 'quizday']}
+# pages printed just before a type: the prerequisite pages before the first type that needs them, and speed 4.2
+BEFORE_UNIT = {'U-D1': ['pq1', 'pq2'], 'U-I1': ['pq3'], 'U-P1': ['speed42', 'pq4'], 'U-T1': ['pq5']}
 END_TOC = [('formulas', 'ورقة القوانين والاختصارات'), ('decide', 'بطاقة القرار: أي نوع؟'), ('stuck', 'إذا علقت'),
            ('mistakes', 'أخطاء الجبر الشائعة: غلط وصح'), ('errlog', 'سجل الأخطاء'), ('help', 'سلّم المساعدة: التلميح وأول خطوة لكل تمرين'),
            ('keys', 'المفاتيح: الإحماء، سرعة الاختصار، المراجعة المخلوطة، «جرّب»'),
@@ -26,7 +31,7 @@ END_TOC = [('formulas', 'ورقة القوانين والاختصارات'), ('d
 
 # two review questions per day: one from yesterday's types, one from an older day (spaced retrieval)
 # (no question here repeats one printed elsewhere in the guide; G-42..G-44 were written for this)
-WARM = {2: ['1445-S2-SE-Q1.1', 'N42-X2-04'], 3: ['G-38', 'N42-X1-5'], 4: ['1445-S2-SE-Q2.2', 'N42-E1-2'],
+WARM = {2: ['1445-S2-SE-Q1.1', 'G-45'], 3: ['G-38', 'N42-X2-04'], 4: ['1445-S2-SE-Q2.2', 'N42-E1-2'],
         5: ['G-42', 'N51-X06'], 6: ['G-43', '1446-S1-FE-Q2.2'], 7: ['G-44', 'N42-X1-6']}
 
 SPEED = {
@@ -78,7 +83,12 @@ def unit_minutes(uid):
 
 
 def day_extras(d):
-    return [(a, TITLES[a]) for a in DAY_START.get(d, []) + DAY_END.get(d, []) if a != 'quizday']
+    inner = [a for uid, _, _ in UNIT_DAYS.get(d, []) for a in BEFORE_UNIT.get(uid, [])]
+    return [(a, TITLES[a]) for a in DAY_START.get(d, []) + inner + DAY_END.get(d, []) if a != 'quizday']
+
+
+def extra_minutes(a):
+    return PQ.MINUTES[a] if a in PQ.MINUTES else 10
 
 
 def day_schedule(d):
@@ -90,12 +100,16 @@ def day_schedule(d):
         rows.append([label, what])
     if d == 1:
         add(5, '5 دقائق', 'اقرأ صفحة «كيف تستخدم المذكرة»')
-        add(5, '5 دقائق', '🔁 الإحماء تحت: مشتقات 4.1 من ذاكرتك')
+        add(5, '5 دقائق', '🔁 الإحماء تحت: مشتقات sinh و cosh و tanh من ذاكرتك')
     else:
         add(5, '5 دقائق', '🔁 الإحماء تحت: اكتب الاختصارات من ذاكرتك، وابدأ سؤالي المراجعة')
     for a in DAY_START.get(d, []):
         add(10, '10 دقائق', '⚡ %s: رقم النوع وأول سطر فقط' % TITLES[a])
     for uid, num, title in UNIT_DAYS.get(d, []):
+        for a in BEFORE_UNIT.get(uid, []):
+            m = extra_minutes(a)
+            add(m, '%d دقائق' % m if m <= 10 else '%d دقيقة' % m,
+                '⚡ %s: رقم النوع وأول سطر فقط' % TITLES[a] if a.startswith('speed') else TITLES[a] + ': اقرأ، وحل «جرّب»')
         m = unit_minutes(uid)
         add(m + 5, '%d دقيقة + 5 راحة' % m, 'النوع %d: %s' % (num, title))
     for a in DAY_END.get(d, []):
@@ -193,6 +207,10 @@ def day_start(d):
     return ''.join(speed_page(a) for a in DAY_START.get(d, []))
 
 
+def before_unit(uid):
+    return ''.join(speed_page(a) if a.startswith('speed') else PQ.HTML[a] for a in BEFORE_UNIT.get(uid, []))
+
+
 def after_day(d):
     out = ''
     for a in DAY_END.get(d, []):
@@ -211,7 +229,7 @@ def formulas():
             inner += '<div class="fsheet">' + short + '</div>'
         parts.append('<h3>%s</h3>' % title + inner)
     return section('formulas', '📋 ورقة القوانين والاختصارات',
-                   p('اقرأها يوم 26 ومرة صباح الكويز. لا تُدخلها معك القاعة.', 'small') + ''.join(parts), 'fsheets')
+                   p('اقرأها يوم 26 ومرة صباح الكويز. لا تُدخلها معك القاعة.', 'small') + ''.join(parts) + PQ.sheet(), 'fsheets')
 
 
 DECIDE = [
@@ -288,6 +306,9 @@ def keys():
                 'وإذا ما ضبط، افتح صفحة النوع.', 'small')
             + table(['#', 'النوع', 'الجواب'], MIXED_KEY, 'answers'))
     out += '<h3>أجوبة «جرّب» في صناديق الجبر</h3>' + table(['المهارة', 'الجواب'], t_rows, 'answers')
+    pq_rows = [['<span id="k-%s"></span>%s' % (a, link(a, PQ.SHORT[a] + ' ↩'))] + [mi(r'\displaystyle ' + x) for x in ans]
+               for a, ans in PQ.KEYS]
+    out += '<h3>أجوبة «جرّب» في صفحات 📚 من الدروس السابقة</h3>' + table(['الصفحة', 'جرّب 1', 'جرّب 2'], pq_rows, 'answers')
     return section('keys', '🔑 المفاتيح', out)
 
 
@@ -298,7 +319,7 @@ def appendix():
             ['أجزاء داخل النطاق في الاختبارات', '%d جزءًا، منها %d فريدًا' % (summ['in_scope_exam_parts'], summ['in_scope_exam_unique'])],
             ['أمثلة وتمارين مذكرة د. طارق في الأقسام الثلاثة', '%d مثالًا و %d تمرينًا' % (summ['notes_items']['notes_example'], summ['notes_items']['notes_exercise'])],
             ['في هذه المذكرة', '29 نوعًا، و36 مثالًا: 31 بالاختصار خطوة خطوة ثم بالطريقة الأساسية، و5 (أنواع الحجز في 5.2) '
-             'بالطريقة الأساسية فقط، و %d تمرينًا بحلول كاملة' % len(HELP)],
+             'بالطريقة الأساسية فقط، و %d تمرينًا بحلول كاملة، و5 صفحات «📚 من الدروس السابقة»' % len(HELP)],
             ['تدريبات إضافية من إعداد هذه المذكرة', '%d، مكتوب عليها «تدريب إضافي»، وكل جواب متحقق بالطريقة نفسها' % len(gen)],
             ['الأسئلة المحجوزة للاختبارين التجريبيين', '%d، بالمعرفات <bdi dir="ltr">%s</bdi>؛ لا تظهر هنا'
              % (len(HOLD['hids']), ', '.join(HOLD['hids']))],

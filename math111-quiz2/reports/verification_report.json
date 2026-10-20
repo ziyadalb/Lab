@@ -4473,11 +4473,30 @@
      }
     ]
    }
+  },
+  {
+   "id": "G-45",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-SINH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
   }
  ],
  "items_summary": {
   "answer": {
-   "symbolic": 198
+   "symbolic": 199
   },
   "official": {
    "symbolic": 55,

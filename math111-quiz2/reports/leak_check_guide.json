@@ -1,7 +1,7 @@
 {
  "document": "src/guide.katex.html",
  "pdf": "out/guide/MATH111_Quiz2_Guide.pdf",
- "formulas_scanned": 2745,
+ "formulas_scanned": 3070,
  "held_checked": 10,
  "avoid_checked": 7,
  "used_items": 167,
@@ -20,12 +20,22 @@
   {
    "check": "same shape in a formula",
    "item": "H03",
-   "formula": "\\sin^2x+\\cos^2x=1"
+   "formula": "\\displaystyle \\sin^{2}x+\\cos^{2}x=1"
   },
   {
    "check": "same shape in a formula",
    "item": "H03",
-   "formula": "\\displaystyle \\sin^{2}x+\\cos^{2}x=1"
+   "formula": "\\sin^{2}x\\cos^{2}x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\sin^{2}x\\cos^{2}x=\\left(\\frac12\\sin2x\\right)^{2}=\\frac14\\sin^{2}2x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\sin^2x+\\cos^2x=1"
   },
   {
    "check": "same shape in a formula",
@@ -111,6 +121,11 @@
    "check": "same shape in a formula",
    "item": "H03",
    "formula": "\\int \\sin^{2} x \\cos^{3} x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
+   "formula": "\\displaystyle \\sin^{2}x+\\cos^{2}x=1,\\quad \\sec^{2}x=1+\\tan^{2}x,\\quad \\csc^{2}x=1+\\cot^{2}x"
   },
   {
    "check": "same shape in a formula",
