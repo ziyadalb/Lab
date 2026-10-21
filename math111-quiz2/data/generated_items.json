@@ -716,5 +716,506 @@
   "case": "C42-I-SINH",
   "section": "4.2",
   "note": "warm-up, day 2 (type 3)"
+ },
+ {
+  "id": "G-46",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:(2*x**3-5)**4",
+  "answer": [
+   "24*x**2*(2*x**3-5)**3"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A2",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-47",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:exp(x**2+1)",
+  "answer": [
+   "2*x*exp(x**2+1)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A2",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-48",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:log(Abs(x**2+3*x))",
+  "answer": [
+   "(2*x+3)/(x**2+3*x)"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-A2",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-49",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:x**3*exp(2*x)",
+  "answer": [
+   "3*x**2*exp(2*x)",
+   "2*x**3*exp(2*x)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A2",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-50",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:tan(5*x)+sqrt(x**2+1)",
+  "answer": [
+   "5*sec(5*x)**2",
+   "x/sqrt(x**2+1)"
+  ],
+  "branches": [
+   "t/(20*(1+t))"
+  ],
+  "case": "PRE-A2",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-51",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:cosh(5*x**2)",
+  "answer": [
+   "10*x*sinh(5*x**2)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A3",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-52",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:tanh(exp(x))",
+  "answer": [
+   "exp(x)*sech(exp(x))**2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A3",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-53",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:sech(3*x)",
+  "answer": [
+   "-3*sech(3*x)*tanh(3*x)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A3",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-54",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cosh(4*x)",
+  "answer": [
+   "sinh(4*x)/4"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A3",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-55",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x*sinh(x**2)",
+  "answer": [
+   "cosh(x**2)/2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A3",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-56",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:3*x**2-4*x+1/x**2",
+  "answer": [
+   "x**3",
+   "-2*x**2",
+   "-1/x"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-A4",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-57",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:exp(-2*x)",
+  "answer": [
+   "-exp(-2*x)/2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A4",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-58",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x*sqrt(x**2+4)",
+  "answer": [
+   "(x**2+4)**Rational(3,2)/3"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A4",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-59",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cos(x)/(2+sin(x))",
+  "answer": [
+   "log(2+sin(x))"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A4",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-60",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/(3*x+2)",
+  "answer": [
+   "log(Abs(3*x+2))/3"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-A4",
+  "section": "4.2",
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "G-61",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:asin(2*x)",
+  "answer": [
+   "2/sqrt(1-4*x**2)"
+  ],
+  "branches": [
+   "t/(2*(1+t))"
+  ],
+  "case": "PRE-B1",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-62",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:atan(exp(x))",
+  "answer": [
+   "exp(x)/(1+exp(2*x))"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-B1",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-63",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:x*log(x)",
+  "answer": [
+   "log(x)",
+   "1"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-B1",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-64",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/(16+x**2)",
+  "answer": [
+   "atan(x/4)/4"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-B1",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-65",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:x*atan(x)",
+  "answer": [
+   "atan(x)",
+   "x/(1+x**2)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-B1",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-66",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cos(5*x)",
+  "answer": [
+   "sin(5*x)/5"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-B2",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-67",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sinh(2*x)",
+  "answer": [
+   "cosh(2*x)/2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-B2",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-68",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x**(-4)",
+  "answer": [
+   "-1/(3*x**3)"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-B2",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-69",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x/sqrt(x**2-1)",
+  "answer": [
+   "sqrt(x**2-1)"
+  ],
+  "branches": [
+   "1+t"
+  ],
+  "case": "PRE-B2",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-70",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:x/(4+x**2)",
+  "answer": [
+   "log(4+x**2)/2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-B2",
+  "section": "5.1",
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "G-71",
+  "kind": "generated",
+  "task": "diff",
+  "q": "raw:sec(x**2)",
+  "answer": [
+   "2*x*sec(x**2)*tan(x**2)"
+  ],
+  "branches": [
+   "t/(2*(1+t))"
+  ],
+  "case": "PRE-C1",
+  "section": "5.2",
+  "note": "prerequisite part (before lesson 5.2)"
+ },
+ {
+  "id": "G-72",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sec(3*x)**2",
+  "answer": [
+   "tan(3*x)/3"
+  ],
+  "branches": [
+   "t/(4*(1+t))"
+  ],
+  "case": "PRE-C1",
+  "section": "5.2",
+  "note": "prerequisite part (before lesson 5.2)"
+ },
+ {
+  "id": "G-73",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:csc(x)*cot(x)",
+  "answer": [
+   "-csc(x)"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "PRE-C1",
+  "section": "5.2",
+  "note": "prerequisite part (before lesson 5.2)"
+ },
+ {
+  "id": "G-74",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sin(x)**6*cos(x)",
+  "answer": [
+   "sin(x)**7/7"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-C3",
+  "section": "5.2",
+  "note": "prerequisite part (before lesson 5.2)"
+ },
+ {
+  "id": "G-75",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:cos(x)**5*sin(x)",
+  "answer": [
+   "-cos(x)**6/6"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-C3",
+  "section": "5.2",
+  "note": "prerequisite part (before lesson 5.2)"
+ },
+ {
+  "id": "G-76",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(x)**4*sec(x)**2",
+  "answer": [
+   "tan(x)**5/5"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "PRE-C3",
+  "section": "5.2",
+  "note": "prerequisite part (before lesson 5.2)"
+ },
+ {
+  "id": "G-77",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sec(x)**4*tan(x)",
+  "answer": [
+   "sec(x)**4/4"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "PRE-C3",
+  "section": "5.2",
+  "note": "prerequisite part (before lesson 5.2)"
+ },
+ {
+  "id": "G-78",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sqrt(sin(x))*cos(x)",
+  "answer": [
+   "2*sin(x)**Rational(3,2)/3"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "PRE-C3",
+  "section": "5.2",
+  "note": "prerequisite part (before lesson 5.2)"
  }
 ]

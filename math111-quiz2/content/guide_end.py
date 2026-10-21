@@ -22,8 +22,8 @@ TITLES.update({a: '📚 ' + t for a, t in PQ.TITLES.items()})
 # speed drill follows it the same day); mocks and mixed review close the last days
 DAY_START = {5: ['speed51'], 7: ['speed52']}
 DAY_END = {6: ['mockA'], 7: ['mixed', 'mockB', 'quizday']}
-# pages printed just before a type: the prerequisite pages before the first type that needs them, and speed 4.2
-BEFORE_UNIT = {'U-D1': ['pq1', 'pq2'], 'U-I1': ['pq3'], 'U-P1': ['speed42', 'pq4'], 'U-T1': ['pq5']}
+# pages printed just before a type: the «before the lesson» chapter before the lesson's first type, and speed 4.2
+BEFORE_UNIT = {'U-D1': ['pre42'], 'U-P1': ['speed42', 'pre51'], 'U-T1': ['pre52']}
 END_TOC = [('formulas', 'ورقة القوانين والاختصارات'), ('decide', 'بطاقة القرار: أي نوع؟'), ('stuck', 'إذا علقت'),
            ('mistakes', 'أخطاء الجبر الشائعة: غلط وصح'), ('errlog', 'سجل الأخطاء'), ('help', 'سلّم المساعدة: التلميح وأول خطوة لكل تمرين'),
            ('keys', 'المفاتيح: الإحماء، سرعة الاختصار، المراجعة المخلوطة، «جرّب»'),
@@ -87,10 +87,6 @@ def day_extras(d):
     return [(a, TITLES[a]) for a in DAY_START.get(d, []) + inner + DAY_END.get(d, []) if a != 'quizday']
 
 
-def extra_minutes(a):
-    return PQ.MINUTES[a] if a in PQ.MINUTES else 10
-
-
 def day_schedule(d):
     rows, total = [], 0
 
@@ -107,9 +103,11 @@ def day_schedule(d):
         add(10, '10 دقائق', '⚡ %s: رقم النوع وأول سطر فقط' % TITLES[a])
     for uid, num, title in UNIT_DAYS.get(d, []):
         for a in BEFORE_UNIT.get(uid, []):
-            m = extra_minutes(a)
-            add(m, '%d دقائق' % m if m <= 10 else '%d دقيقة' % m,
-                '⚡ %s: رقم النوع وأول سطر فقط' % TITLES[a] if a.startswith('speed') else TITLES[a] + ': اقرأ، وحل «جرّب»')
+            if a.startswith('speed'):
+                add(10, '10 دقائق', '⚡ %s: رقم النوع وأول سطر فقط' % TITLES[a])
+                continue
+            for m, what in PQ.schedule_rows(a):
+                add(m, '%d دقائق' % m if m <= 10 else '%d دقيقة' % m, what)
         m = unit_minutes(uid)
         add(m + 5, '%d دقيقة + 5 راحة' % m, 'النوع %d: %s' % (num, title))
     for a in DAY_END.get(d, []):
@@ -283,9 +281,9 @@ def help_ladder():
              + ul(['<b>💡 الدرجة 1: تلميح العلامة</b> — الجدول الأول هنا.',
                    '<b>✍️ الدرجة 2: أول خطوة</b> — الجدول الثاني هنا. في التمرين الموجّه هي الخطوة اللي بعد البداية الجاهزة.',
                    '<b>✅ الدرجة 3: الحل الكامل</b> — في الصفحة اللي بعد تمارين النوع.']))
-    h_rows = [['<span id="h-%s"></span>%s' % (e['dtag'], link('d-' + e['dtag'], '%d.%s ↩' % (e['num'], e['tag']))), rich(e['hint'])]
+    h_rows = [['<span id="h-%s"></span>%s' % (e['dtag'], link('d-' + e['dtag'], '%s.%s ↩' % (e['num'], e['tag']))), rich(e['hint'])]
               for e in HELP]
-    f_rows = [['<span id="f-%s"></span>%s' % (e['dtag'], link('d-' + e['dtag'], '%d.%s ↩' % (e['num'], e['tag']))),
+    f_rows = [['<span id="f-%s"></span>%s' % (e['dtag'], link('d-' + e['dtag'], '%s.%s ↩' % (e['num'], e['tag']))),
                mi(e['step'][0]), rich(e['step'][1])] for e in HELP]
     return section('help', '🪜 سلّم المساعدة', intro
                    + '<h3>💡 الدرجة 1: تلميح العلامة</h3>' + table(['رقم', 'التلميح'], h_rows, 'help1')
@@ -306,9 +304,9 @@ def keys():
                 'وإذا ما ضبط، افتح صفحة النوع.', 'small')
             + table(['#', 'النوع', 'الجواب'], MIXED_KEY, 'answers'))
     out += '<h3>أجوبة «جرّب» في صناديق الجبر</h3>' + table(['المهارة', 'الجواب'], t_rows, 'answers')
-    pq_rows = [['<span id="k-%s"></span>%s' % (a, link(a, PQ.SHORT[a] + ' ↩'))] + [mi(r'\displaystyle ' + x) for x in ans]
-               for a, ans in PQ.KEYS]
-    out += '<h3>أجوبة «جرّب» في صفحات 📚 من الدروس السابقة</h3>' + table(['الصفحة', 'جرّب 1', 'جرّب 2'], pq_rows, 'answers')
+    for ch, k_rows in PQ.KEYS:
+        out += ('<h3 id="k-%s">أجوبة الاختبار السريع: قبل درس %s %s</h3>' % (ch, PQ.LESSON[ch], link(ch, '↩'))
+                + table(['#', 'الجواب', 'الجزء'], k_rows, 'answers'))
     return section('keys', '🔑 المفاتيح', out)
 
 
@@ -319,7 +317,7 @@ def appendix():
             ['أجزاء داخل النطاق في الاختبارات', '%d جزءًا، منها %d فريدًا' % (summ['in_scope_exam_parts'], summ['in_scope_exam_unique'])],
             ['أمثلة وتمارين مذكرة د. طارق في الأقسام الثلاثة', '%d مثالًا و %d تمرينًا' % (summ['notes_items']['notes_example'], summ['notes_items']['notes_exercise'])],
             ['في هذه المذكرة', '29 نوعًا، و36 مثالًا: 31 بالاختصار خطوة خطوة ثم بالطريقة الأساسية، و5 (أنواع الحجز في 5.2) '
-             'بالطريقة الأساسية فقط، و %d تمرينًا بحلول كاملة، و5 صفحات «📚 من الدروس السابقة»' % len(HELP)],
+             'بالطريقة الأساسية فقط، و %d تمرينًا بحلول كاملة، و10 أجزاء «📚 قبل الدرس» في 3 فصول' % len(HELP)],
             ['تدريبات إضافية من إعداد هذه المذكرة', '%d، مكتوب عليها «تدريب إضافي»، وكل جواب متحقق بالطريقة نفسها' % len(gen)],
             ['الأسئلة المحجوزة للاختبارين التجريبيين', '%d، بالمعرفات <bdi dir="ltr">%s</bdi>؛ لا تظهر هنا'
              % (len(HOLD['hids']), ', '.join(HOLD['hids']))],

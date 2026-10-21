@@ -27,11 +27,11 @@ COUNTER = [0]
 
 # study day of every unit, balanced so that every day stays within about three hours (day 1 also has the
 # three prerequisite pages, so types 5 and 11 move one day later)
-DAY_OF = {'U-D1': 1, 'U-D2': 1, 'U-I1': 1, 'U-I2': 1, 'U-I3': 2,
+DAY_OF = {'U-D1': 1, 'U-D2': 1, 'U-I1': 1, 'U-I2': 2, 'U-I3': 2,
           'U-I4': 2, 'U-I5': 2, 'U-I6': 2, 'U-I7': 2, 'U-I8': 2, 'U-I9': 3,
-          'U-P1': 3, 'U-P2': 3, 'U-P3': 3, 'U-P4': 3, 'U-P5': 4,
+          'U-P1': 3, 'U-P2': 3, 'U-P3': 3, 'U-P4': 4, 'U-P5': 4,
           'U-P6': 4, 'U-P7': 4, 'U-P8': 4, 'U-P9': 4, 'U-P10': 4,
-          'U-T1': 5, 'U-T2': 5, 'U-T3': 5, 'U-T4': 5, 'U-T5': 5,
+          'U-T1': 5, 'U-T2': 5, 'U-T3': 5, 'U-T4': 5, 'U-T5': 6,
           'U-T6': 6, 'U-T7': 6, 'U-T8': 6}
 # where to read in Dr. Tariq's notes: the explanation pages, then the page of the exercises used here
 PAGES = {'U-D2': 'ص59، تمارين ص62', 'U-I1': 'ص59–60، تمارين ص62', 'U-I2': 'ص60، تمارين ص62', 'U-I3': 'ص60–61، تمارين ص62',
@@ -42,12 +42,15 @@ PAGES = {'U-D2': 'ص59، تمارين ص62', 'U-I1': 'ص59–60، تمارين �
          'U-T3': 'ص67–70، تمارين ص76', 'U-T4': 'ص70–71', 'U-T5': 'ص71–72، تمارين ص76', 'U-T6': 'ص70–73، تمارين ص76',
          'U-T7': 'ص73، تمارين ص76', 'U-T8': 'ص74–75، تمارين ص76'}
 # the prerequisite pages (guide_prereq.py) each type relies on, shown as links in the type's header
-NEEDS = {'U-D1': ['pq1', 'pq2'], 'U-D2': ['pq2', 'pq1'], 'U-I1': ['pq3'], 'U-I2': ['pq3'], 'U-I3': ['pq3'], 'U-I4': ['pq3'],
-         'U-I5': ['pq3'], 'U-I6': ['pq3'], 'U-I7': ['pq3', 'pq2'], 'U-I8': ['pq3'], 'U-I9': ['pq3'],
-         'U-P1': ['pq3', 'pq1'], 'U-P2': ['pq3', 'pq1'], 'U-P3': ['pq3', 'pq2'], 'U-P4': ['pq3', 'pq4'], 'U-P5': ['pq3'],
-         'U-P6': ['pq4', 'pq3'], 'U-P7': ['pq4', 'pq3'], 'U-P8': ['pq3'], 'U-P9': ['pq1', 'pq3'], 'U-P10': ['pq3'],
-         'U-T1': ['pq5', 'pq3'], 'U-T2': ['pq5', 'pq3'], 'U-T3': ['pq5'], 'U-T4': ['pq5', 'pq3'], 'U-T5': ['pq5', 'pq3'],
-         'U-T6': ['pq5', 'pq3'], 'U-T7': ['pq5', 'pq3'], 'U-T8': ['pq5']}
+NEEDS = {'U-D1': ['P-A2', 'P-A3'], 'U-D2': ['P-A2', 'P-A1'], 'U-I1': ['P-A4', 'P-A1'], 'U-I2': ['P-A4', 'P-A1'],
+         'U-I3': ['P-A4', 'P-A1'], 'U-I4': ['P-A4', 'P-A1'], 'U-I5': ['P-A4', 'P-A1'], 'U-I6': ['P-A4'], 'U-I7': ['P-A4', 'P-A2'],
+         'U-I8': ['P-A4', 'P-A1'], 'U-I9': ['P-A4', 'P-A1'],
+         'U-P1': ['P-B2'], 'U-P2': ['P-B2', 'P-B3'], 'U-P3': ['P-B1', 'P-A1'], 'U-P4': ['P-B1', 'P-B3'], 'U-P5': ['P-B3'],
+         'U-P6': ['P-B1', 'P-B2'], 'U-P7': ['P-B1', 'P-B3'], 'U-P8': ['P-B2', 'P-B3'], 'U-P9': ['P-A3', 'P-B3'], 'U-P10': ['P-A4', 'P-B2'],
+         'U-T1': ['P-C3', 'P-C2'], 'U-T2': ['P-C3', 'P-C2'], 'U-T3': ['P-C1'], 'U-T4': ['P-C3', 'P-C1'], 'U-T5': ['P-C3', 'P-C1'],
+         'U-T6': ['P-C1'], 'U-T7': ['P-C3', 'P-C1'], 'U-T8': ['P-C1']}
+NEED_LABEL = {'P-A1': 'أ1', 'P-A2': 'أ2', 'P-A3': 'أ3', 'P-A4': 'أ4', 'P-B1': 'ب1', 'P-B2': 'ب2', 'P-B3': 'ب3',
+              'P-C1': 'ج1', 'P-C2': 'ج2', 'P-C3': 'ج3'}
 # writing space in lines of 7.5 mm: a start needs a few lines, a full solution more (5.1 solutions are longest)
 WRITE = {'G': {'4.2': 3, '5.1': 3, '5.2': 3}, 'P': {'4.2': 4, '5.1': 4, '5.2': 4}, 'I': {'4.2': 5, '5.1': 7, '5.2': 6}}
 ASK = {'diff': 'المطلوب: المشتقة', 'int': 'المطلوب: احسب التكامل', 'defint': 'المطلوب: احسب التكامل المحدد'}
@@ -211,6 +214,7 @@ class Unit:
         COUNTER[0] += 1
         day, pages = DAY_OF.get(uid, day), PAGES.get(uid, pages)
         self.uid, self.num, self.title, self.section, self.pages, self.day = uid, COUNTER[0], title, section, pages, day
+        self.ref = 'النوع %d' % self.num
         self.parts, self.drills, self.sols = [], [], []
         DAYS.setdefault(day, []).append((uid, self.num, title))
 
@@ -274,13 +278,16 @@ class Unit:
             raise BuildError('exercise %s has no first step for the help ladder' % dtag)
         HELP.append(dict(dtag=dtag, num=self.num, tag=tag, hint=hint, step=step, guided=level == 'G'))
 
-    def html(self):
-        from guide_checks import CHECKS
-        needs = ''.join(chip(link(a, '📚 ق%s ص ' % a[-1] + pgref(a)), 'pq') for a in NEEDS.get(self.uid, []))
-        head = ('<div class="unit-head" id="%s"><span class="num">%d</span><h3>%s</h3>%s%s%s%s</div>'
+    def head_html(self):
+        needs = ''.join(chip(link(a, '📚 %s ص ' % NEED_LABEL.get(a, a) + pgref(a)), 'pq') for a in NEEDS.get(self.uid, []))
+        return ('<div class="unit-head" id="%s"><span class="num">%d</span><h3>%s</h3>%s%s%s%s</div>'
                 % (self.uid, self.num, self.title, chip(self.section, 'sec'),
                    chip(self.pages if self.pages.startswith('من') else 'مذكرة د. طارق: ' + self.pages, 'pg'),
                    chip('اليوم %d' % self.day, 'day'), needs))
+
+    def html(self):
+        from guide_checks import CHECKS
+        head = self.head_html()
         idea = [inner for kind, _, inner in self.parts if kind == 'idea']
         oks = [inner for kind, _, inner in self.parts if kind == 'ok']
         out = []
@@ -302,8 +309,8 @@ class Unit:
                 inner += check
                 label = '✍️ في ورقة الكويز و ✔ تأكد'
             out.append(box(kind, label, inner))
-        drills = '<h4 class="drills-title">تمارين النوع %d</h4>' % self.num + ''.join(self.drills)
-        sols = ('<section class="sols"><h4>حلول تمارين النوع %d: %s</h4>' % (self.num, self.title)
+        drills = '<h4 class="drills-title">تمارين %s</h4>' % self.ref + ''.join(self.drills)
+        sols = ('<section class="sols"><h4>حلول تمارين %s: %s</h4>' % (self.ref, self.title)
                 + p('حاولت؟ قارن حلك سطرًا سطرًا. إذا اختلف جوابك، سجّل الغلطة في سجل الأخطاء آخر المذكرة.', 'small')
                 + ''.join(self.sols) + '</section>')
         return '<article class="unit">' + head + ''.join(out) + drills + sols + '</article>'

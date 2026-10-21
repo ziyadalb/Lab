@@ -39,8 +39,14 @@ def _strip(q):
     return q[4:] if q.startswith('raw:') else q
 
 
+def _integrand(item):
+    """Integrand LaTeX, in parentheses when it is a sum (so the dx covers every term)."""
+    body = tex(item['q'])
+    return r'\left(%s\right)' % body if item['task'] != 'diff' and isinstance(P(item['q'][4:] if item['q'].startswith('raw:') else item['q'], evaluate=False), s.Add) else body
+
+
 def q_tex(item):
-    body = item.get('qtex') or tex(item['q'])  # qtex: shown as written in the exam (log base 10)
+    body = item.get('qtex') or _integrand(item)  # qtex: shown as written in the exam (log base 10)
     if item['task'] == 'diff':
         return r'y = ' + body
     if item['task'] == 'defint':
@@ -55,7 +61,7 @@ def ans_tex(item, with_lhs=False):
         return (r'\frac{dy}{dx} = ' if with_lhs else '') + body
     if item['task'] == 'defint':
         return ('= ' if not with_lhs else '') + body
-    return (r'\int %s\,dx = ' % tex(item['q']) if with_lhs else '= ') + body + ' + C'
+    return (r'\int %s\,dx = ' % _integrand(item) if with_lhs else '= ') + body + ' + C'
 
 
 def branches_of(item):

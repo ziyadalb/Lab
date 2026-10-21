@@ -37,7 +37,7 @@ def u_deriv():
         [mi(r'\operatorname{csch}^{-1}x'), mi(r'x\ne0'), mi(r'\ln\left(\frac1x+\frac{\sqrt{1+x^{2}}}{|x|}\right)')]], 'formula compact')
     U.add('note', 'تذكير: من 4.1 ومن تعريف الدوال (مذكرة د. طارق ص56–57)',
           p(rich('مشتقات الدوال الزائدية <b>العادية</b> (sinh و cosh و tanh…) تحتاجها مع العكسية في نفس السؤال. جدولها وشرحها في ')
-            + link('pq1', '📚 ق1 ص ' + pgref('pq1')) + '.')
+            + link('P-A3', '📚 أ3 ص ' + pgref('P-A3')) + '.')
           + p('الدوال العكسية الست ومجالها (للمعرفة، لا يُسأل عنها مباشرة في الاختبارات السابقة):') + defs)
     short, memo = sc_twins()
     U.add('short', '⚡ الاختصار: جدول التوائم', short + box_memo(memo))

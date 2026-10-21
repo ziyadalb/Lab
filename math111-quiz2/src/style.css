@@ -228,3 +228,12 @@ table.pick td:nth-child(5) { width: 24%; }
 .prereq > .box.note { break-inside: avoid; }
 .prereq p:has(+ .md), .prereq .md:has(+ table.steps) { break-after: avoid; }
 .fsheets p:has(+ .fsheet), .fsheets h3 { break-after: avoid; }
+/* v5: «قبل الدرس» chapters */
+.toc li.lvl3 { padding-inline-start: 14mm; font-size: 12pt; color: #444; }
+.unit-head.pre { border-bottom-color: #6a4c93; }
+.unit-head.pre .num { background: #6a4c93; }
+ol.explain { padding-inline-start: 6mm; margin: 1mm 0; }
+ol.explain li { margin-bottom: 2mm; break-inside: avoid; }
+ol.explain li .katex-display { margin: 1mm 0; }
+.prereq-unit .box.ex { break-inside: avoid; }
+section.chapter.flow[id^="speed"] { break-before: page; }   /* a speed page never ends with one question on the next page */

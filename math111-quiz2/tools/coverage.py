@@ -37,7 +37,7 @@ def main():
                 by_unit[m.group(1)][key].append(iid)
                 case_units[allit[iid]['case']].add(m.group(1))
     in_scope = [i for i in items.values() if i['section'] in ('4.2', '5.1', '5.2') and i.get('scope') != 'contrast']
-    cases = sorted({i['case'] for i in in_scope} | {i['case'] for i in gen.values()})
+    cases = sorted({i['case'] for i in in_scope} | {i['case'] for i in gen.values() if i['case'].startswith('C')})  # PRE-*: «قبل الدرس» drills
     held = hold['held_items']
 
     out = ['# بيان التغطية', '',

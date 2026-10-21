@@ -20,8 +20,8 @@ def u_parts_linear():
           + contrast([(r'\int x\cosh x\,dx', 'تجزئة', '$x$ ليست مشتقة شيء داخل cosh'),
                       (r'\int x\cosh(x^{2})\,dx', 'تعويض $u=x^2$', '$x$ موجودة كمشتقة لـ $x^2$ (تقريبًا)')]))
     U.add('note', 'تذكير: تكاملات تحتاجها', p(rich('التجزئة تنتهي دائمًا بتكاملات من الجدول الأساسي ($e^{kx}$ و $\\sin kx$ و $\\cos kx$ '
-                                                 'و $\\sinh kx$ و $\\cosh kx$ و $\\sec^2x$). الجدول وشرح التعويض في ')
-                                            + link('pq3', '📚 ق3 ص ' + pgref('pq3')) + '.')
+                                                 'و $\\sinh kx$ و $\\cosh kx$ و $\\sec^2x$). الجدول وأمثلته وتمارينه في ')
+                                            + link('P-B2', '📚 ب2 ص ' + pgref('P-B2')) + '.')
           + p(rich('مع sin الإشارة سالبة: $\\int\\sin x\\,dx=-\\cos x$. مع sinh موجبة: $\\int\\sinh x\\,dx=\\cosh x$.'), 'small'))
     G1, G2, g = s.Function('G_1')(x), s.Function('G_2')(x), s.Function('g')(x)
     pp, qq = s.symbols('p q', real=True)
