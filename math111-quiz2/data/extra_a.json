@@ -1,0 +1,102 @@
+[
+ {
+  "id": "M-05",
+  "kind": "musa",
+  "task": "diff",
+  "q": "raw:exp(2*x**5+3*x)",
+  "answer": [
+   "(10*x**4+3)*exp(2*x**5+3*x)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A2",
+  "section": "4.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 13,
+   "number": "Q1"
+  },
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "M-06",
+  "kind": "musa",
+  "task": "diff",
+  "q": "raw:exp(sinh(3*x**5))",
+  "answer": [
+   "15*x**4*cosh(3*x**5)*exp(sinh(3*x**5))"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A3",
+  "section": "4.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 47,
+   "number": "Q1(1)"
+  },
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "M-07",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:x**2*cosh(x**3)",
+  "answer": [
+   "sinh(x**3)/3"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A3",
+  "section": "4.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 50,
+   "number": "Q1(2)"
+  },
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "M-08",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:exp(4*x)/(exp(4*x)+3)**3",
+  "answer": [
+   "-1/(8*(exp(4*x)+3)**2)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-A4",
+  "section": "4.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 17,
+   "number": "(4)"
+  },
+  "note": "prerequisite part (before lesson 4.2)"
+ },
+ {
+  "id": "M-09",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:(x**2+1)/(x**3+3*x+7)",
+  "answer": [
+   "log(Abs(x**3+3*x+7))/3"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-A4",
+  "section": "4.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 9,
+   "number": "Q1"
+  },
+  "note": "prerequisite part (before lesson 4.2)"
+ }
+]
