@@ -126,6 +126,8 @@ def main():
         items = json.loads((ROOT / 'data' / 'items.json').read_text(encoding='utf-8'))
         items += json.loads((ROOT / 'data' / 'generated_items.json').read_text(encoding='utf-8'))
         items += json.loads((ROOT / 'data' / 'musa_items.json').read_text(encoding='utf-8'))
+        for f in sorted((ROOT / 'data').glob('extra_*.json')):
+            items += json.loads(f.read_text(encoding='utf-8'))
         with mp.Pool(max(2, mp.cpu_count())) as pool:
             rows = pool.map(run_item, items, chunksize=1)
         report['items'] = rows

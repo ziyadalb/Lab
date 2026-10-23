@@ -3411,99 +3411,52 @@
    "status": "symbolic"
   },
   {
-   "kind": "formula",
-   "ok": true,
-   "label": "square sinh",
-   "f": "c/sqrt(A*(x-h)**2+d)",
-   "F": "c*asinh(sqrt(A)*(x-h)/sqrt(d))/sqrt(A)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "square cosh (d stands for -d)",
-   "f": "c/sqrt(A*(x-h)**2-d)",
-   "F": "c*acosh(sqrt(A)*(x-h)/sqrt(d))/sqrt(A)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "square csch",
-   "f": "c/((x-h)*sqrt(A*(x-h)**2+d))",
-   "F": "-c*acsch(sqrt(A)*Abs(x-h)/sqrt(d))/sqrt(d)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "square sech",
-   "f": "c/((x-h)*sqrt(d-A*(x-h)**2))",
-   "F": "-c*asech(sqrt(A)*Abs(x-h)/sqrt(d))/sqrt(d)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "U-I8 ex1 short 1",
-   "f": "1/sqrt(u**2-a**2)",
-   "F": "acosh(u/a)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I8 ex1 short 2",
-   "claim": "-Rational(6,2*1) = -3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I8 ex1 short 3",
-   "claim": "(-3)**2+6*(-3)-16 = -25",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I8 ex1 short 4",
-   "claim": "x**2+6*x-16 = (x+3)**2-5**2",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S1-SE-Q2.2",
-   "label": "U-I8 ex1 short 5",
-   "status": "symbolic"
-  },
-  {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I8 ex1 step 1",
-   "claim": "x**2+6*x-16 = (x+3)**2-5**2",
+   "claim": "x**2+6*x-16 = x**2+6*x+9-9-16",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 ex1 step 2",
+   "claim": "x**2+6*x+9-9-16 = (x+3)**2-25",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 ex1 step 3",
+   "claim": "(x+3)**2-25 = (x+3)**2-5**2",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
-   "label": "U-I8 ex1 step 2",
+   "label": "U-I8 ex1 step 4",
    "u": "x+3",
    "du": "1"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I8 ex1 step 3",
+   "label": "U-I8 ex1 step 5",
    "claim": "3/sqrt((x+3)**2-5**2) = 3/sqrt(x**2+6*x-16)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 ex1 step 6",
+   "claim": "diff(3*acosh(x/5),x) = 3/sqrt(x**2-25)",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "1446-S1-SE-Q2.2",
-   "label": "U-I8 ex1 step 4",
+   "label": "U-I8 ex1 step 7",
    "step": "3*acosh((x+3)/5)"
   },
   {
@@ -3516,113 +3469,56 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "algebra complete-square",
-   "claim": "Rational(6,2) = 3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra complete-square",
-   "claim": "3**2 = 9",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra complete-square",
-   "claim": "x**2+6*x-16 = x**2+6*x+9-9-16",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra complete-square",
-   "claim": "x**2+6*x+9 = (x+3)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra complete-square",
-   "claim": "(x+3)**2 = x**2+6*x+9",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra complete-square",
-   "claim": "-9-16 = -25",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra complete-square",
-   "claim": "x**2+6*x-16 = (x+3)**2-5**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try complete-square",
-   "claim": "x**2-10*x+21 = (x-5)**2-4",
-   "residual": "0"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "U-I8 ex2 short 1",
-   "f": "1/sqrt(u**2+a**2)",
-   "F": "asinh(u/a)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I8 ex2 short 2",
+   "label": "U-I8 ex1 short 1",
    "claim": "-Rational(6,2*1) = -3",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I8 ex2 short 3",
-   "claim": "(-3)**2+6*(-3)+13 = 4",
+   "label": "U-I8 ex1 short 2",
+   "claim": "(-3)**2+6*(-3)-16 = -25",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I8 ex2 short 4",
-   "claim": "x**2+6*x+13 = (x+3)**2+2**2",
+   "label": "U-I8 ex1 short 3",
+   "claim": "x**2+6*x-16 = (x+3)**2-5**2",
    "residual": "0"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "1445-S2-SE-Q2.7",
-   "label": "U-I8 ex2 short 5",
+   "item": "1446-S1-SE-Q2.2",
+   "label": "U-I8 ex1 short 4",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I8 ex2 step 1",
-   "claim": "x**2+6*x+13 = (x+3)**2+2**2",
+   "claim": "x**2+6*x+13 = x**2+6*x+9-9+13",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 ex2 step 2",
+   "claim": "x**2+6*x+9-9+13 = (x+3)**2+2**2",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
-   "label": "U-I8 ex2 step 2",
+   "label": "U-I8 ex2 step 3",
    "u": "x+3",
    "du": "1"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I8 ex2 step 3",
+   "label": "U-I8 ex2 step 4",
    "claim": "1/sqrt((x+3)**2+2**2) = 1/sqrt(x**2+6*x+13)",
    "residual": "0"
   },
@@ -3630,7 +3526,7 @@
    "kind": "step",
    "ok": true,
    "item": "1445-S2-SE-Q2.7",
-   "label": "U-I8 ex2 step 4",
+   "label": "U-I8 ex2 step 5",
    "step": "asinh((x+3)/2)"
   },
   {
@@ -3643,36 +3539,8 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "algebra factor-root",
-   "claim": "9*x**2+36*x+45 = 9*(x**2+4*x+5)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra factor-root",
-   "claim": "sqrt(9*(x**2+4*x+5)) = 3*sqrt(x**2+4*x+5)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try factor-root",
-   "claim": "sqrt(16*x**2-32*x+80) = 4*sqrt(x**2-2*x+5)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
    "label": "U-I8 drill 1 first",
-   "claim": "-Rational(-4,2) = 2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I8 drill 1 first",
-   "claim": "4-8 = -4",
+   "claim": "x**2-4*x = x**2-4*x+4-4",
    "residual": "0"
   },
   {
@@ -3683,11 +3551,25 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "substitution",
    "ok": true,
    "label": "U-I8 drill 1 step 1",
-   "claim": "diff(acosh((x-2)/2),x) = 1/sqrt((x-2)**2-4)",
+   "u": "x-2",
+   "du": "1"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 drill 1 step 2",
+   "claim": "1/sqrt((x-2)**2-2**2) = 1/sqrt(x**2-4*x)",
    "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1447-S1-FE-Q2.1",
+   "label": "U-I8 drill 1 step 3",
+   "step": "acosh((x-2)/2)"
   },
   {
    "kind": "antiderivative",
@@ -3700,22 +3582,36 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I8 drill 2 step 1",
-   "claim": "1-2+10 = 9",
+   "claim": "x**2+2*x+10 = x**2+2*x+1-1+10",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I8 drill 2 step 2",
-   "claim": "x**2+2*x+10 = (x+1)**2+3**2",
+   "claim": "x**2+2*x+1-1+10 = (x+1)**2+3**2",
    "residual": "0"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "U-I8 drill 2 step 3",
+   "u": "x+1",
+   "du": "1"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I8 drill 2 step 3",
-   "claim": "5/sqrt(x**2+2*x+10) = 5/sqrt((x+1)**2+3**2)",
+   "label": "U-I8 drill 2 step 4",
+   "claim": "5/sqrt((x+1)**2+3**2) = 5/sqrt(x**2+2*x+10)",
    "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N42-X2-14",
+   "label": "U-I8 drill 2 step 5",
+   "step": "5*asinh((x+1)/3)"
   },
   {
    "kind": "antiderivative",
@@ -3728,22 +3624,43 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I8 drill 3 step 1",
-   "claim": "sqrt(9*x**2+36*x+45) = 3*sqrt(x**2+4*x+5)",
+   "claim": "9*x**2+36*x+45 = 9*(x**2+4*x+5)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I8 drill 3 step 2",
-   "claim": "x**2+4*x+5 = (x+2)**2+1",
+   "claim": "sqrt(9*(x**2+4*x+5)) = 3*sqrt(x**2+4*x+5)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I8 drill 3 step 3",
-   "claim": "1/sqrt(9*x**2+36*x+45) = Rational(1,3)/sqrt((x+2)**2+1)",
+   "claim": "x**2+4*x+5 = (x+2)**2+1**2",
    "residual": "0"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "U-I8 drill 3 step 4",
+   "u": "x+2",
+   "du": "1"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I8 drill 3 step 5",
+   "claim": "1/(3*sqrt((x+2)**2+1)) = 1/sqrt(9*x**2+36*x+45)",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "G-04",
+   "label": "U-I8 drill 3 step 6",
+   "step": "asinh(x+2)/3"
   },
   {
    "kind": "antiderivative",
@@ -3756,20 +3673,34 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I9 ex step 1",
-   "claim": "-x**2+2*x+3 = 2**2-(x-1)**2",
+   "claim": "-x**2+2*x+3 = -(x**2-2*x)+3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 ex step 2",
+   "claim": "x**2-2*x = (x-1)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 ex step 3",
+   "claim": "-((x-1)**2-1)+3 = 2**2-(x-1)**2",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
-   "label": "U-I9 ex step 2",
+   "label": "U-I9 ex step 4",
    "u": "x-1",
    "du": "1"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I9 ex step 3",
+   "label": "U-I9 ex step 5",
    "claim": "1/((x-1)*sqrt(-x**2+2*x+3)) = diff(x-1,x)/((x-1)*sqrt(2**2-(x-1)**2))",
    "residual": "0"
   },
@@ -3777,7 +3708,7 @@
    "kind": "step",
    "ok": true,
    "item": "N42-E2-8",
-   "label": "U-I9 ex step 4",
+   "label": "U-I9 ex step 6",
    "step": "-asech(Abs(x-1)/2)/2"
   },
   {
@@ -3788,31 +3719,23 @@
    "status": "symbolic"
   },
   {
-   "kind": "formula",
-   "ok": true,
-   "label": "U-I9 ex short 1",
-   "f": "1/(u*sqrt(a**2-u**2))",
-   "F": "-asech(Abs(u)/a)/a",
-   "status": "symbolic"
-  },
-  {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I9 ex short 2",
+   "label": "U-I9 ex short 1",
    "claim": "-Rational(2,2*(-1)) = 1",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I9 ex short 3",
+   "label": "U-I9 ex short 2",
    "claim": "-1**2+2*1+3 = 4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I9 ex short 4",
+   "label": "U-I9 ex short 3",
    "claim": "-x**2+2*x+3 = 2**2-(x-1)**2",
    "residual": "0"
   },
@@ -3820,35 +3743,14 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "N42-E2-8",
-   "label": "U-I9 ex short 5",
+   "label": "U-I9 ex short 4",
    "status": "symbolic"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "algebra neg-square",
-   "claim": "-x**2+2*x+3 = -(x**2-2*x)+3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra neg-square",
-   "claim": "x**2-2*x = (x-1)**2-1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra neg-square",
-   "claim": "-((x-1)**2-1)+3 = 4-(x-1)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try neg-square",
-   "claim": "-x**2-4*x+5 = 9-(x+2)**2",
+   "label": "U-I9 ex short 4",
+   "claim": "-1/sqrt(4) = -Rational(1,2)",
    "residual": "0"
   },
   {
@@ -3925,20 +3827,27 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I9 drill 3 step 1",
-   "claim": "3-x**2-2*x = 4-(x+1)**2",
+   "claim": "3-x**2-2*x = -(x**2+2*x)+3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 drill 3 step 2",
+   "claim": "-((x+1)**2-1)+3 = 4-(x+1)**2",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
-   "label": "U-I9 drill 3 step 2",
+   "label": "U-I9 drill 3 step 3",
    "u": "x+1",
    "du": "1"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I9 drill 3 step 3",
+   "label": "U-I9 drill 3 step 4",
    "claim": "3/((x+1)*sqrt(3-x**2-2*x)) = 3*diff(x+1,x)/((x+1)*sqrt(2**2-(x+1)**2))",
    "residual": "0"
   },
@@ -3946,7 +3855,7 @@
    "kind": "step",
    "ok": true,
    "item": "N42-X2-16",
-   "label": "U-I9 drill 3 step 4",
+   "label": "U-I9 drill 3 step 5",
    "step": "-3*asech(Abs(x+1)/2)/2"
   },
   {
@@ -11114,7 +11023,7 @@
   ]
  },
  "counts": {
-  "total": 1486,
-  "ok": 1486
+  "total": 1474,
+  "ok": 1474
  }
 }

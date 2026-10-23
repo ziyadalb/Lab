@@ -59,7 +59,7 @@ ASK = {'diff': 'المطلوب: المشتقة', 'int': 'المطلوب: احس�
 DAY_NAME = {1: '20 أكتوبر ✓', 2: '21–22 أكتوبر ✓', 3: 'الجمعة 23', 4: 'السبت 24', 5: 'الأحد 25', 6: 'الاثنين 26', 7: 'إذا بقي وقت'}
 # lesson colour class of each section (unit header band and the lesson map)
 LESSON_CLS = {'4.2': 'l42', '5.1': 'l51', '5.2': 'l52'}
-MAPS_READY = {'5.1'}   # lessons whose map page is built (every type of the lesson has its one-line summary)
+MAPS_READY = {'4.2', '5.1'}   # lessons whose map page is built (every type of the lesson has its one-line summary)
 
 
 def unit_minutes(uid):

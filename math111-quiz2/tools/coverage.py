@@ -18,6 +18,9 @@ def main():
     items = {i['id']: i for i in json.loads((ROOT / 'data' / 'items.json').read_text(encoding='utf-8'))}
     gen = {i['id']: i for i in json.loads((ROOT / 'data' / 'generated_items.json').read_text(encoding='utf-8'))}
     musa = {i['id']: i for i in json.loads((ROOT / 'data' / 'musa_items.json').read_text(encoding='utf-8'))}
+    for f in sorted((ROOT / 'data').glob('extra_*.json')):
+        for i in json.loads(f.read_text(encoding='utf-8')):
+            (gen if i['kind'] == 'generated' else musa)[i['id']] = i
     allit = dict(items, **gen, **musa)
     usage = json.loads((ROOT / 'data' / 'usage_guide.json').read_text(encoding='utf-8'))
     hold = json.loads((ROOT / 'data' / 'holdout_ids.json').read_text())

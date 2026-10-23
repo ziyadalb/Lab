@@ -14,6 +14,9 @@ ITEMS = {i['id']: i for i in json.loads((ROOT / 'data' / 'items.json').read_text
 ITEMS.update({i['id']: i for i in json.loads((ROOT / 'data' / 'generated_items.json').read_text(encoding='utf-8'))})
 # questions from Dr. Musa Ajjal's 1448/1449 notes (cited by page; the notes themselves are not in this repository)
 ITEMS.update({i['id']: i for i in json.loads((ROOT / 'data' / 'musa_items.json').read_text(encoding='utf-8'))})
+# more questions (generated or from Dr. Musa's notes) kept in separate files, one per batch of work
+for _f in sorted((ROOT / 'data').glob('extra_*.json')):
+    ITEMS.update({i['id']: i for i in json.loads(_f.read_text(encoding='utf-8'))})
 HOLD = json.loads((ROOT / 'data' / 'holdout_ids.json').read_text())
 BLOCKED = set(HOLD['held_items']) | set(HOLD['avoid']) | {c for v in HOLD['held_copies'].values() for c in v}
 LOG = []          # every check performed while rendering
@@ -148,7 +151,8 @@ def parts_rows(u, dv, du, v, label, branch=None):
 def sub_row(u_of_x, du_claim, label, var='u', branch=None):
     U, DU = P(u_of_x), P(du_claim)
     _record('substitution', _zero(s.diff(U, x) - DU, branch), label=label, u=u_of_x, du=du_claim)
-    return r'%s = %s \qquad d%s = %s\,dx' % (var, tex(u_of_x), var, tex(du_claim))
+    dx = r'dx' if DU == 1 else r'-dx' if DU == -1 else tex(du_claim) + r'\,dx'
+    return r'%s = %s \qquad d%s = %s' % (var, tex(u_of_x), var, dx)
 
 
 def eq_chain(lhs_latex, rhs_list):
