@@ -3753,6 +3753,41 @@
    "status": "symbolic"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 ex step 1",
+   "claim": "-x**2+2*x+3 = 2**2-(x-1)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "U-I9 ex step 2",
+   "u": "x-1",
+   "du": "1"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 ex step 3",
+   "claim": "1/((x-1)*sqrt(-x**2+2*x+3)) = diff(x-1,x)/((x-1)*sqrt(2**2-(x-1)**2))",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N42-E2-8",
+   "label": "U-I9 ex step 4",
+   "step": "-asech(Abs(x-1)/2)/2"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-E2-8",
+   "label": "U-I9 example",
+   "status": "symbolic"
+  },
+  {
    "kind": "formula",
    "ok": true,
    "label": "U-I9 ex short 1",
@@ -3791,41 +3826,6 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I9 ex step 1",
-   "claim": "-x**2+2*x+3 = 2**2-(x-1)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "substitution",
-   "ok": true,
-   "label": "U-I9 ex step 2",
-   "u": "x-1",
-   "du": "1"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I9 ex step 3",
-   "claim": "1/((x-1)*sqrt(-x**2+2*x+3)) = diff(x-1,x)/((x-1)*sqrt(2**2-(x-1)**2))",
-   "residual": "0"
-  },
-  {
-   "kind": "step",
-   "ok": true,
-   "item": "N42-E2-8",
-   "label": "U-I9 ex step 4",
-   "step": "-asech(Abs(x-1)/2)/2"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N42-E2-8",
-   "label": "U-I9 example",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
    "label": "algebra neg-square",
    "claim": "-x**2+2*x+3 = -(x**2-2*x)+3",
    "residual": "0"
@@ -3855,22 +3855,29 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I9 drill 1 first",
-   "claim": "9-18+13 = 4",
+   "claim": "x**2+6*x+13 = (x+3)**2+2**2",
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I9 drill 1 first",
-   "claim": "x**2+6*x+13 = (x+3)**2+4",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
+   "kind": "substitution",
    "ok": true,
    "label": "U-I9 drill 1 step 1",
-   "claim": "-1/sqrt(4) = -Rational(1,2)",
+   "u": "x+3",
+   "du": "1"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 drill 1 step 2",
+   "claim": "1/((x+3)*sqrt(x**2+6*x+13)) = diff(x+3,x)/((x+3)*sqrt((x+3)**2+2**2))",
    "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1447-S2-FE-Q2.6",
+   "label": "U-I9 drill 1 step 3",
+   "step": "-acsch(Abs(x+3)/2)/2"
   },
   {
    "kind": "antiderivative",
@@ -3883,15 +3890,29 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I9 drill 2 step 1",
-   "claim": "9-18+25 = 16",
+   "claim": "x**2+6*x+25 = (x+3)**2+4**2",
    "residual": "0"
+  },
+  {
+   "kind": "substitution",
+   "ok": true,
+   "label": "U-I9 drill 2 step 2",
+   "u": "x+3",
+   "du": "1"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I9 drill 2 step 2",
-   "claim": "-Rational(2,4) = -Rational(1,2)",
+   "label": "U-I9 drill 2 step 3",
+   "claim": "2/((x+3)*sqrt(x**2+6*x+25)) = 2*diff(x+3,x)/((x+3)*sqrt((x+3)**2+4**2))",
    "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N42-X2-15",
+   "label": "U-I9 drill 2 step 4",
+   "step": "-acsch(Abs(x+3)/4)/2"
   },
   {
    "kind": "antiderivative",
@@ -3908,11 +3929,25 @@
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "substitution",
    "ok": true,
    "label": "U-I9 drill 3 step 2",
-   "claim": "-3/sqrt(4) = -Rational(3,2)",
+   "u": "x+1",
+   "du": "1"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I9 drill 3 step 3",
+   "claim": "3/((x+1)*sqrt(3-x**2-2*x)) = 3*diff(x+1,x)/((x+1)*sqrt(2**2-(x+1)**2))",
    "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N42-X2-16",
+   "label": "U-I9 drill 3 step 4",
+   "step": "-3*asech(Abs(x+1)/2)/2"
   },
   {
    "kind": "antiderivative",
@@ -4115,22 +4150,29 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "P-B1 drill 2 step 1",
-   "claim": "exp(x)**2 = exp(2*x)",
+   "claim": "diff(x**3+atan(2*x),x) = 3*x**2+2/(1+4*x**2)",
    "residual": "0"
   },
   {
    "kind": "derivative step",
    "ok": true,
-   "item": "G-62",
+   "item": "M-02",
    "label": "P-B1 drill 2 step 2",
-   "step": "exp(x)/(1+exp(2*x))"
+   "step": "(3*x**2+2/(1+4*x**2))/(x**3+atan(2*x))"
   },
   {
    "kind": "derivative",
    "ok": true,
-   "item": "G-62",
+   "item": "M-02",
    "label": "P-B1 drill 2",
    "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "P-B1 drill 3 step 1",
+   "claim": "diff(sqrt(x),x) = 1/(2*sqrt(x))",
+   "residual": "0"
   },
   {
    "kind": "arithmetic",
@@ -4140,16 +4182,23 @@
    "residual": "0"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "P-B1 drill 3 step 2",
+   "claim": "diff(sqrt(x)*log(x),x) = log(x)/(2*sqrt(x))+sqrt(x)/x",
+   "residual": "0"
+  },
+  {
    "kind": "derivative step",
    "ok": true,
-   "item": "G-63",
-   "label": "P-B1 drill 3 step 2",
-   "step": "log(x)+1"
+   "item": "M-01",
+   "label": "P-B1 drill 3 step 3",
+   "step": "log(Abs(x))/(2*sqrt(x))+1/sqrt(x)"
   },
   {
    "kind": "derivative",
    "ok": true,
-   "item": "G-63",
+   "item": "M-01",
    "label": "P-B1 drill 3",
    "status": "symbolic"
   },
@@ -4357,27 +4406,27 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "P-B2 drill 1 first",
-   "claim": "diff(5*x,x) = 5",
+   "claim": "diff(8*x+1,x) = 8",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "P-B2 drill 1 step 1",
-   "claim": "cos(5*x) = Rational(1,5)*cos(5*x)*diff(5*x,x)",
+   "claim": "exp(8*x+1) = Rational(1,8)*exp(8*x+1)*diff(8*x+1,x)",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
-   "item": "G-66",
+   "item": "M-03",
    "label": "P-B2 drill 1 step 2",
-   "step": "sin(5*x)/5"
+   "step": "exp(8*x+1)/8"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "G-66",
+   "item": "M-03",
    "label": "P-B2 drill 1",
    "status": "symbolic"
   },
@@ -4462,27 +4511,20 @@
    "kind": "substitution",
    "ok": true,
    "label": "P-B2 drill 5 step 1",
-   "u": "4+x**2",
-   "du": "2*x"
+   "u": "x**2+2*sin(x)",
+   "du": "2*x+2*cos(x)"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "P-B2 drill 5 step 2",
-   "claim": "x/(4+x**2) = Rational(1,2)*diff(4+x**2,x)/(4+x**2)",
+   "claim": "(x+cos(x))/(x**2+2*sin(x)) = Rational(1,2)*diff(x**2+2*sin(x),x)/(x**2+2*sin(x))",
    "residual": "0"
-  },
-  {
-   "kind": "step",
-   "ok": true,
-   "item": "G-70",
-   "label": "P-B2 drill 5 step 3",
-   "step": "log(4+x**2)/2"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "G-70",
+   "item": "M-04",
    "label": "P-B2 drill 5",
    "status": "symbolic"
   },
@@ -4753,46 +4795,6 @@
    "residual": "0"
   },
   {
-   "kind": "functional",
-   "ok": true,
-   "label": "G linear rule",
-   "residual": "0"
-  },
-  {
-   "kind": "functional",
-   "ok": true,
-   "label": "U-P1 ex short 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P1 ex short 2",
-   "claim": "diff(3*x-2,x) = 3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P1 ex short 3",
-   "claim": "integrate(sinh(x),x) = cosh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P1 ex short 4",
-   "claim": "integrate(cosh(x),x) = sinh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S1-SE-Q2.4",
-   "label": "U-P1 ex short 5",
-   "status": "symbolic"
-  },
-  {
    "kind": "parts_du",
    "ok": true,
    "label": "U-P1 ex step 1",
@@ -4818,6 +4820,13 @@
    "ok": true,
    "item": "1446-S1-SE-Q2.4",
    "label": "U-P1 ex step 3",
+   "step": "(3*x-2)*cosh(x)-3*Integral(cosh(x),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.4",
+   "label": "U-P1 ex step 4",
    "step": "(3*x-2)*cosh(x)-3*sinh(x)"
   },
   {
@@ -4825,6 +4834,48 @@
    "ok": true,
    "item": "1446-S1-SE-Q2.4",
    "label": "U-P1 example",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P1 ex short 1",
+   "claim": "diff(3*x-2,x) = 3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P1 ex short 1",
+   "claim": "diff(3,x) = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P1 ex short 2",
+   "claim": "integrate(sinh(x),x) = cosh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P1 ex short 2",
+   "claim": "integrate(cosh(x),x) = sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P1 ex short 3",
+   "claim": "(3*x-2)*cosh(x)-3*sinh(x) = (3*x-2)*cosh(x)+(-1)*3*sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.4",
+   "label": "U-P1 ex short 4",
    "status": "symbolic"
   },
   {
@@ -4858,22 +4909,22 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P1 drill 1 first",
-   "claim": "integrate(cos(x),x) = sin(x)",
+   "claim": "diff(x,x) = 1",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P1 drill 1 first",
-   "claim": "integrate(sin(x),x) = -cos(x)",
+   "claim": "integrate(cos(x),x) = sin(x)",
    "residual": "0"
   },
   {
-   "kind": "arithmetic",
+   "kind": "step",
    "ok": true,
+   "item": "N51-E1",
    "label": "U-P1 drill 1 step 1",
-   "claim": "x*sin(x)-1*(-cos(x)) = x*sin(x)+cos(x)",
-   "residual": "0"
+   "step": "x*sin(x)-Integral(sin(x),x)"
   },
   {
    "kind": "step",
@@ -4909,6 +4960,20 @@
    "item": "1446-S2-SE-Q2.3",
    "label": "U-P1 drill 2 step 2",
    "step": "(2*x-1)*sinh(x)-Integral(2*sinh(x),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1446-S2-SE-Q2.3",
+   "label": "U-P1 drill 2 step 3",
+   "step": "(2*x-1)*sinh(x)-2*Integral(sinh(x),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1446-S2-SE-Q2.3",
+   "label": "U-P1 drill 2 step 4",
+   "step": "(2*x-1)*sinh(x)-2*cosh(x)"
   },
   {
    "kind": "antiderivative",
@@ -4950,61 +5015,6 @@
    "ok": true,
    "item": "N51-X04",
    "label": "U-P1 drill 3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "functional",
-   "ok": true,
-   "label": "U-P2 ex short 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P2 ex short 2",
-   "claim": "diff(x**2,x) = 2*x",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P2 ex short 2",
-   "claim": "diff(2*x,x) = 2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P2 ex short 2",
-   "claim": "diff(2,x) = 0",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P2 ex short 3",
-   "claim": "integrate(cosh(x),x) = sinh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P2 ex short 3",
-   "claim": "integrate(sinh(x),x) = cosh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P2 ex short 4",
-   "claim": "x**2*sinh(x)-2*x*cosh(x)+2*sinh(x) = x**2*sinh(x)+(-1)*(2*x)*cosh(x)+2*sinh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1445-S1-FE-Q2.2",
-   "label": "U-P2 ex short 5",
    "status": "symbolic"
   },
   {
@@ -5054,6 +5064,13 @@
    "ok": true,
    "item": "1445-S1-FE-Q2.2",
    "label": "U-P2 ex step 5",
+   "step": "x**2*sinh(x)-2*x*cosh(x)+Integral(2*cosh(x),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1445-S1-FE-Q2.2",
+   "label": "U-P2 ex step 6",
    "step": "x**2*sinh(x)-2*x*cosh(x)+2*sinh(x)"
   },
   {
@@ -5061,6 +5078,55 @@
    "ok": true,
    "item": "1445-S1-FE-Q2.2",
    "label": "U-P2 example",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 1",
+   "claim": "diff(x**2,x) = 2*x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 1",
+   "claim": "diff(2*x,x) = 2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 1",
+   "claim": "diff(2,x) = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 2",
+   "claim": "integrate(cosh(x),x) = sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 2",
+   "claim": "integrate(sinh(x),x) = cosh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 ex short 3",
+   "claim": "x**2*sinh(x)-2*x*cosh(x)+2*sinh(x) = x**2*sinh(x)+(-1)*(2*x)*cosh(x)+2*sinh(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S1-FE-Q2.2",
+   "label": "U-P2 ex short 4",
    "status": "symbolic"
   },
   {
@@ -5134,10 +5200,17 @@
    "residual": "0"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P2 drill 2 step 2",
+   "claim": "diff(x**3*exp(x)-3*x**2*exp(x)+6*x*exp(x)-6*exp(x),x) = x**3*exp(x)",
+   "residual": "0"
+  },
+  {
    "kind": "step",
    "ok": true,
    "item": "N51-X03",
-   "label": "U-P2 drill 2 step 2",
+   "label": "U-P2 drill 2 step 3",
    "step": "(x**3-3*x**2+6*x-6)*exp(x)"
   },
   {
@@ -5197,6 +5270,41 @@
    "status": "symbolic"
   },
   {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "U-P3 ex1 step 1",
+   "u": "log(Abs(x))",
+   "du": "1/x"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P3 ex1 step 1",
+   "dv": "x**2",
+   "v": "x**3/3"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-E3",
+   "label": "U-P3 ex1 step 2",
+   "step": "x**3*log(Abs(x))/3-Integral(x**2/3,x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-E3",
+   "label": "U-P3 ex1 step 3",
+   "step": "x**3*log(Abs(x))/3-x**3/9"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-E3",
+   "label": "U-P3 example 1",
+   "status": "symbolic"
+  },
+  {
    "kind": "formula",
    "ok": true,
    "label": "qaws (symbolic real n)",
@@ -5241,41 +5349,6 @@
    "residual": "0"
   },
   {
-   "kind": "parts_du",
-   "ok": true,
-   "label": "U-P3 ex1 step 1",
-   "u": "log(Abs(x))",
-   "du": "1/x"
-  },
-  {
-   "kind": "parts_v",
-   "ok": true,
-   "label": "U-P3 ex1 step 1",
-   "dv": "x**2",
-   "v": "x**3/3"
-  },
-  {
-   "kind": "step",
-   "ok": true,
-   "item": "N51-E3",
-   "label": "U-P3 ex1 step 2",
-   "step": "x**3*log(Abs(x))/3-Integral(x**2/3,x)"
-  },
-  {
-   "kind": "step",
-   "ok": true,
-   "item": "N51-E3",
-   "label": "U-P3 ex1 step 3",
-   "step": "x**3*log(Abs(x))/3-x**3/9"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N51-E3",
-   "label": "U-P3 example 1",
-   "status": "symbolic"
-  },
-  {
    "kind": "arithmetic",
    "ok": true,
    "label": "algebra pow-rules",
@@ -5311,49 +5384,6 @@
    "residual": "0"
   },
   {
-   "kind": "formula",
-   "ok": true,
-   "label": "U-P3 ex2 short 1",
-   "f": "x**n*log(x)",
-   "F": "x**(n+1)/(n+1)*(log(x)-1/(n+1))",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P3 ex2 short 2",
-   "claim": "log(x)/x**2 = x**(-2)*log(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P3 ex2 short 2",
-   "claim": "-2+1 = -1",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S1-SE-Q2.5",
-   "label": "U-P3 ex2 short 3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S1-SE-Q2.5",
-   "label": "U-P3 ex2 short 4",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P3 ex2 short 4",
-   "claim": "x**(-1)/(-1) = -1/x",
-   "residual": "0"
-  },
-  {
    "kind": "parts_du",
    "ok": true,
    "label": "U-P3 ex2 step 1",
@@ -5379,6 +5409,13 @@
    "ok": true,
    "item": "1446-S1-SE-Q2.5",
    "label": "U-P3 ex2 step 3",
+   "step": "-log(x)/x+Integral(1/x**2,x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.5",
+   "label": "U-P3 ex2 step 4",
    "step": "-log(x)/x-1/x"
   },
   {
@@ -5392,15 +5429,22 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P3 drill 1 first",
-   "claim": "diff(x**2/2*(log(x)-Rational(1,2)),x) = x*log(x)",
+   "claim": "diff(log(x),x) = 1/x",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P3 drill 1 step 1",
-   "claim": "x**2/2*log(x)-x**2/2*Rational(1,2) = x**2*log(x)/2-x**2/4",
+   "label": "U-P3 drill 1 first",
+   "claim": "integrate(x,x) = x**2/2",
    "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1445-S2-SE-Q2.5",
+   "label": "U-P3 drill 1 step 1",
+   "step": "x**2*log(Abs(x))/2-Integral(x/2,x)"
   },
   {
    "kind": "step",
@@ -5410,6 +5454,13 @@
    "step": "x**2*log(Abs(x))/2-x**2/4"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P3 drill 1 step 3",
+   "claim": "x**2/2*(log(x)-Rational(1,2)) = x**2*log(x)/2-x**2/4",
+   "residual": "0"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "1445-S2-SE-Q2.5",
@@ -5417,17 +5468,45 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "parts_du",
    "ok": true,
    "label": "U-P3 drill 2 step 1",
-   "claim": "x**(-3)/(-3)*(log(x)-1/(-3)) = -log(x)/(3*x**3)-1/(9*x**3)",
-   "residual": "0"
+   "u": "log(Abs(x))",
+   "du": "1/x"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P3 drill 2 step 1",
+   "dv": "x**(-4)",
+   "v": "-1/(3*x**3)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X07",
+   "label": "U-P3 drill 2 step 2",
+   "step": "-log(Abs(x))/(3*x**3)-Integral(-1/(3*x**4),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X07",
+   "label": "U-P3 drill 2 step 3",
+   "step": "-log(Abs(x))/(3*x**3)+Integral(1/(3*x**4),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X07",
+   "label": "U-P3 drill 2 step 4",
+   "step": "-log(Abs(x))/(3*x**3)-1/(9*x**3)"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P3 drill 2 step 2",
-   "claim": "-1/(3*x**3)*(log(x)+Rational(1,3)) = -log(x)/(3*x**3)-1/(9*x**3)",
+   "label": "U-P3 drill 2 step 5",
+   "claim": "x**(-3)/(-3)*(log(x)-1/(-3)) = -log(x)/(3*x**3)-1/(9*x**3)",
    "residual": "0"
   },
   {
@@ -5438,77 +5517,38 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "parts_du",
    "ok": true,
    "label": "U-P3 drill 3 step 1",
-   "claim": "x**4/4*(log(2*x)-Rational(1,4)) = x**4*log(2*x)/4-x**4/16",
-   "residual": "0"
+   "u": "log(Abs(2*x))",
+   "du": "1/x"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P3 drill 3 step 1",
+   "dv": "x**3",
+   "v": "x**4/4"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1447-S1-SE-Q2.7",
+   "label": "U-P3 drill 3 step 2",
+   "step": "x**4*log(Abs(2*x))/4-Integral(x**3/4,x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1447-S1-SE-Q2.7",
+   "label": "U-P3 drill 3 step 3",
+   "step": "x**4*log(Abs(2*x))/4-x**4/16"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "1447-S1-SE-Q2.7",
    "label": "U-P3 drill 3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G small ln",
-   "f": "log(Abs(x))",
-   "F": "x*log(Abs(x))-x",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G small ln2",
-   "f": "log(Abs(x))**2",
-   "F": "x*log(Abs(x))**2-2*x*log(Abs(x))+2*x",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G small ln quad",
-   "f": "log(x**2+a**2)",
-   "F": "x*log(x**2+a**2)-2*x+2*a*atan(x/a)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "U-P4 ex short 1",
-   "f": "log(Abs(x))",
-   "F": "x*log(Abs(x))-x",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P4 ex short 2",
-   "claim": "diff(log(x),x) = 1/x",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P4 ex short 2",
-   "claim": "integrate(1,x) = x",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P4 ex short 3",
-   "claim": "x*(1/x) = 1",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N51-X05",
-   "label": "U-P4 ex short 4",
    "status": "symbolic"
   },
   {
@@ -5571,34 +5611,27 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P4 drill 1 first",
-   "claim": "diff(log(x)**2,x) = 2*log(x)/x",
+   "claim": "diff(log(3*x),x) = 1/x",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
-   "item": "N51-X16",
+   "item": "G-79",
    "label": "U-P4 drill 1 step 1",
-   "step": "x*log(Abs(x))**2-Integral(2*log(Abs(x)),x)"
+   "step": "x*log(Abs(3*x))-Integral(1,x)"
   },
   {
    "kind": "step",
    "ok": true,
-   "item": "N51-X16",
+   "item": "G-79",
    "label": "U-P4 drill 1 step 2",
-   "step": "x*log(Abs(x))**2-2*(x*log(Abs(x))-x)"
-  },
-  {
-   "kind": "step",
-   "ok": true,
-   "item": "N51-X16",
-   "label": "U-P4 drill 1 step 3",
-   "step": "x*log(Abs(x))**2-2*x*log(Abs(x))+2*x"
+   "step": "x*log(Abs(3*x))-x"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N51-X16",
+   "item": "G-79",
    "label": "U-P4 drill 1",
    "status": "symbolic"
   },
@@ -5606,8 +5639,8 @@
    "kind": "parts_du",
    "ok": true,
    "label": "U-P4 drill 2 step 1",
-   "u": "log(1+x**2)",
-   "du": "2*x/(1+x**2)"
+   "u": "log(Abs(x))**2",
+   "du": "2*log(Abs(x))/x"
   },
   {
    "kind": "parts_v",
@@ -5619,64 +5652,114 @@
   {
    "kind": "step",
    "ok": true,
-   "item": "N51-E4",
+   "item": "N51-X16",
    "label": "U-P4 drill 2 step 2",
+   "step": "x*log(Abs(x))**2-Integral(2*log(Abs(x)),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X16",
+   "label": "U-P4 drill 2 step 3",
+   "step": "x*log(Abs(x))**2-2*(x*log(Abs(x))-x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X16",
+   "label": "U-P4 drill 2 step 4",
+   "step": "x*log(Abs(x))**2-2*x*log(Abs(x))+2*x"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X16",
+   "label": "U-P4 drill 2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "U-P4 drill 3 step 1",
+   "u": "log(1+x**2)",
+   "du": "2*x/(1+x**2)"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P4 drill 3 step 1",
+   "dv": "1",
+   "v": "x"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-E4",
+   "label": "U-P4 drill 3 step 2",
    "step": "x*log(1+x**2)-Integral(2*x**2/(1+x**2),x)"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "N51-E4",
-   "label": "U-P4 drill 2 step 3",
+   "label": "U-P4 drill 3 step 3",
    "step": "x*log(1+x**2)-Integral(2-2/(1+x**2),x)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-E4",
+   "label": "U-P4 drill 3 step 4",
+   "step": "x*log(1+x**2)-2*x+2*atan(x)"
   },
   {
    "kind": "antiderivative",
    "ok": true,
    "item": "N51-E4",
-   "label": "U-P4 drill 2",
+   "label": "U-P4 drill 3",
    "status": "symbolic"
   },
   {
-   "kind": "functional",
+   "kind": "parts_du",
    "ok": true,
-   "label": "U-P5 ex short 1",
-   "residual": "0"
+   "label": "U-P4 drill 4 step 1",
+   "u": "log(x**2+4)",
+   "du": "2*x/(x**2+4)"
   },
   {
-   "kind": "arithmetic",
+   "kind": "parts_v",
    "ok": true,
-   "label": "U-P5 ex short 2",
-   "claim": "diff(x**4/4*(log(x)-Rational(1,4)),x) = x**3*log(x)",
-   "residual": "0"
+   "label": "U-P4 drill 4 step 1",
+   "dv": "1",
+   "v": "x"
   },
   {
-   "kind": "arithmetic",
+   "kind": "step",
    "ok": true,
-   "label": "U-P5 ex short 3",
-   "claim": "E**4/4*(log(E)-Rational(1,4)) = 3*E**4/16",
-   "residual": "0"
+   "item": "G-80",
+   "label": "U-P4 drill 4 step 2",
+   "step": "x*log(x**2+4)-Integral(2*x**2/(x**2+4),x)"
   },
   {
-   "kind": "arithmetic",
+   "kind": "step",
    "ok": true,
-   "label": "U-P5 ex short 4",
-   "claim": "Rational(1,4)*(log(1)-Rational(1,4)) = -Rational(1,16)",
-   "residual": "0"
+   "item": "G-80",
+   "label": "U-P4 drill 4 step 3",
+   "step": "x*log(x**2+4)-Integral(2-8/(x**2+4),x)"
   },
   {
-   "kind": "definite integral",
+   "kind": "step",
    "ok": true,
-   "item": "1445-S1-SE-Q2.3",
-   "label": "U-P5 ex short 5",
+   "item": "G-80",
+   "label": "U-P4 drill 4 step 4",
+   "step": "x*log(x**2+4)-2*x+4*atan(x/2)"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-80",
+   "label": "U-P4 drill 4",
    "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P5 ex short 5",
-   "claim": "3*E**4/16-(-Rational(1,16)) = (3*E**4+1)/16",
-   "residual": "0"
   },
   {
    "kind": "arithmetic",
@@ -5744,6 +5827,20 @@
   {
    "kind": "arithmetic",
    "ok": true,
+   "label": "algebra ln-values",
+   "claim": "sin(pi/2) = 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "algebra ln-values",
+   "claim": "cos(pi/2) = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
    "label": "try ln-values",
    "claim": "log(E**3) = 3",
    "residual": "0"
@@ -5766,7 +5863,21 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P5 drill 1 step 1",
-   "claim": "(1-1)*E-(0-1)*1 = 1",
+   "claim": "(1-1)*E = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 drill 1 step 2",
+   "claim": "(0-1)*exp(0) = -1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 drill 1 step 3",
+   "claim": "0-(-1) = 1",
    "residual": "0"
   },
   {
@@ -5780,133 +5891,105 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P5 drill 2 step 1",
-   "claim": "diff(x*log(x)-x,x) = log(x)",
+   "claim": "diff(x*sin(x)+cos(x),x) = x*cos(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P5 drill 2 step 2",
-   "claim": "(E*log(E)-E)-(1*log(1)-1) = 1",
+   "claim": "pi/2*sin(pi/2)+cos(pi/2) = pi/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 drill 2 step 3",
+   "claim": "0*sin(0)+cos(0) = 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 drill 2 step 4",
+   "claim": "pi/2-1 = pi/2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "definite integral",
+   "ok": true,
+   "item": "G-81",
+   "label": "U-P5 drill 2",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 drill 3 step 1",
+   "claim": "diff(x*log(x)-x,x) = log(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 drill 3 step 2",
+   "claim": "E*log(E)-E = 0",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 drill 3 step 3",
+   "claim": "1*log(1)-1 = -1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P5 drill 3 step 4",
+   "claim": "0-(-1) = 1",
    "residual": "0"
   },
   {
    "kind": "definite integral",
    "ok": true,
    "item": "G-06",
-   "label": "U-P5 drill 2",
+   "label": "U-P5 drill 3",
    "status": "symbolic"
   },
   {
-   "kind": "functional",
+   "kind": "arithmetic",
    "ok": true,
-   "label": "rafeeq identity",
-   "residual": "0"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "micro +",
-   "f": "x/sqrt(c+x**2)",
-   "F": "sqrt(c+x**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "micro -",
-   "f": "x/sqrt(c-x**2)",
-   "F": "-sqrt(c-x**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "micro ln +",
-   "f": "x/(c+x**2)",
-   "F": "log(c+x**2)/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "micro ln -",
-   "f": "x/(c-x**2)",
-   "F": "-log(Abs(c-x**2))/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r asin",
-   "f": "asin(x)",
-   "F": "x*asin(x)+sqrt(1-x**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r atan",
-   "f": "atan(x)",
-   "F": "x*atan(x)-log(1+x**2)/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r asec",
-   "f": "asec(x)",
-   "F": "x*asec(x)-acosh(x)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r acosh",
-   "f": "acosh(x)",
-   "F": "x*acosh(x)-sqrt(x**2-1)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r atanh",
-   "f": "atanh(x)",
-   "F": "x*atanh(x)+log(1-x**2)/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "functional",
-   "ok": true,
-   "label": "U-P6 ex short 1",
+   "label": "U-P5 drill 4 step 1",
+   "claim": "diff(x**3*log(x)/3-x**3/9,x) = x**2*log(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P6 ex short 2",
-   "claim": "diff(acosh(x),x) = 1/sqrt(x**2-1)",
+   "label": "U-P5 drill 4 step 2",
+   "claim": "E**3*log(E)/3-E**3/9 = 2*E**3/9",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P6 ex short 3",
-   "claim": "diff(x*acosh(x),x)-x/sqrt(x**2-1) = acosh(x)",
+   "label": "U-P5 drill 4 step 3",
+   "claim": "log(1)/3-Rational(1,9) = -Rational(1,9)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P6 ex short 4",
-   "claim": "diff(sqrt(x**2-1),x) = x/sqrt(x**2-1)",
+   "label": "U-P5 drill 4 step 4",
+   "claim": "2*E**3/9+Rational(1,9) = (2*E**3+1)/9",
    "residual": "0"
   },
   {
-   "kind": "antiderivative",
+   "kind": "definite integral",
    "ok": true,
-   "item": "1445-S1-SE-Q2.5",
-   "label": "U-P6 ex short 5",
+   "item": "G-82",
+   "label": "U-P5 drill 4",
    "status": "symbolic"
   },
   {
@@ -5931,10 +6014,17 @@
    "step": "x*acosh(x)-Integral(x/sqrt(x**2-1),x)"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P6 ex step 3",
+   "claim": "diff(sqrt(x**2-1),x) = x/sqrt(x**2-1)",
+   "residual": "0"
+  },
+  {
    "kind": "step",
    "ok": true,
    "item": "1445-S1-SE-Q2.5",
-   "label": "U-P6 ex step 3",
+   "label": "U-P6 ex step 4",
    "step": "x*acosh(x)-sqrt(x**2-1)"
   },
   {
@@ -5959,10 +6049,17 @@
    "step": "x*atan(x)-Integral(x/(1+x**2),x)"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P6 drill 1 step 2",
+   "claim": "diff(log(1+x**2)/2,x) = x/(1+x**2)",
+   "residual": "0"
+  },
+  {
    "kind": "step",
    "ok": true,
    "item": "1446-S2-SE-Q2.8",
-   "label": "U-P6 drill 1 step 2",
+   "label": "U-P6 drill 1 step 3",
    "step": "x*atan(x)-log(1+x**2)/2"
   },
   {
@@ -5994,6 +6091,20 @@
    "step": "x*asin(x)-Integral(x/sqrt(1-x**2),x)"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P6 drill 2 step 3",
+   "claim": "diff(-sqrt(1-x**2),x) = x/sqrt(1-x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1447-S1-SE-Q2.5",
+   "label": "U-P6 drill 2 step 4",
+   "step": "x*asin(x)+sqrt(1-x**2)"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "1447-S1-SE-Q2.5",
@@ -6022,44 +6133,17 @@
    "step": "x*asec(x)-Integral(1/sqrt(x**2-1),x)"
   },
   {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X09",
+   "label": "U-P6 drill 3 step 3",
+   "step": "x*asec(x)-acosh(x)"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "N51-X09",
    "label": "U-P6 drill 3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "functional",
-   "ok": true,
-   "label": "U-P7 ex short 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P7 ex short 2",
-   "claim": "diff(atanh(x),x) = 1/(1-x**2)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P7 ex short 3",
-   "claim": "diff(x**2*atanh(x)/2,x)-x**2/(2*(1-x**2)) = x*atanh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P7 ex short 4",
-   "claim": "x**2/(1-x**2) = -1+1/(1-x**2)",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S2-FE-Q2.2",
-   "label": "U-P7 ex short 5",
    "status": "symbolic"
   },
   {
@@ -6095,6 +6179,13 @@
    "ok": true,
    "item": "1446-S2-FE-Q2.2",
    "label": "U-P7 ex step 4",
+   "step": "x**2*atanh(x)/2-(-x/2+atanh(x)/2)"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1446-S2-FE-Q2.2",
+   "label": "U-P7 ex step 5",
    "step": "x**2*atanh(x)/2+x/2-atanh(x)/2"
   },
   {
@@ -6161,6 +6252,20 @@
    "step": "x**2*acsch(x)/2+Integral(x/(2*sqrt(1+x**2)),x)"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P7 drill 2 step 3",
+   "claim": "diff(sqrt(1+x**2)/2,x) = x/(2*sqrt(1+x**2))",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X10",
+   "label": "U-P7 drill 2 step 4",
+   "step": "x**2*acsch(x)/2+sqrt(1+x**2)/2"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "N51-X10",
@@ -6189,55 +6294,24 @@
    "step": "x**2*asec(x)/2-Integral(x/(2*sqrt(x**2-1)),x)"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P7 drill 3 step 3",
+   "claim": "diff(sqrt(x**2-1)/2,x) = x/(2*sqrt(x**2-1))",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-E6",
+   "label": "U-P7 drill 3 step 4",
+   "step": "x**2*asec(x)/2-sqrt(x**2-1)/2"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "N51-E6",
    "label": "U-P7 drill 3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "dawaran sin",
-   "f": "exp(a*x)*sin(b*x)",
-   "F": "exp(a*x)*(a*sin(b*x)-b*cos(b*x))/(a**2+b**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "dawaran cos",
-   "f": "exp(a*x)*cos(b*x)",
-   "F": "exp(a*x)*(a*cos(b*x)+b*sin(b*x))/(a**2+b**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "U-P8 ex short 1",
-   "f": "exp(a*x)*sin(b*x)",
-   "F": "exp(a*x)*(a*sin(b*x)-b*cos(b*x))/(a**2+b**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P8 ex short 2",
-   "claim": "2**2+1**2 = 5",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1447-S2-FE-Q2.3",
-   "label": "U-P8 ex short 3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1447-S2-FE-Q2.3",
-   "label": "U-P8 ex short 4",
    "status": "symbolic"
   },
   {
@@ -6304,6 +6378,44 @@
    "status": "symbolic"
   },
   {
+   "kind": "formula",
+   "ok": true,
+   "label": "dawaran sin",
+   "f": "exp(a*x)*sin(b*x)",
+   "F": "exp(a*x)*(a*sin(b*x)-b*cos(b*x))/(a**2+b**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "dawaran cos",
+   "f": "exp(a*x)*cos(b*x)",
+   "F": "exp(a*x)*(a*cos(b*x)+b*sin(b*x))/(a**2+b**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "U-P8 ex short 1",
+   "f": "exp(a*x)*sin(b*x)",
+   "F": "exp(a*x)*(a*sin(b*x)-b*cos(b*x))/(a**2+b**2)",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 ex short 2",
+   "claim": "2**2+1**2 = 5",
+   "residual": "0"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S2-FE-Q2.3",
+   "label": "U-P8 ex short 3",
+   "status": "symbolic"
+  },
+  {
    "kind": "arithmetic",
    "ok": true,
    "label": "algebra cyclic-eq",
@@ -6335,14 +6447,63 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P8 drill 1 first",
-   "claim": "1**2+1**2 = 2",
+   "claim": "diff(cos(x),x) = -sin(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
+   "label": "U-P8 drill 1 first",
+   "claim": "integrate(exp(x),x) = exp(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-E7",
    "label": "U-P8 drill 1 step 1",
-   "claim": "diff(exp(x)*(cos(x)+sin(x))/2,x) = exp(x)*cos(x)",
+   "step": "exp(x)*cos(x)+Integral(exp(x)*sin(x),x)"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "U-P8 drill 1 step 2",
+   "u": "sin(x)",
+   "du": "cos(x)"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P8 drill 1 step 2",
+   "dv": "exp(x)",
+   "v": "exp(x)"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 drill 1 step 3",
+   "claim": "exp(x)*cos(x)+exp(x)*sin(x)-(exp(x)*(cos(x)+sin(x))/2) = (exp(x)*(cos(x)+sin(x))/2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 drill 1 step 4",
+   "claim": "2*(exp(x)*(cos(x)+sin(x))/2) = exp(x)*cos(x)+exp(x)*sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-E7",
+   "label": "U-P8 drill 1 step 5",
+   "step": "exp(x)*(cos(x)+sin(x))/2"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 drill 1 step 6",
+   "claim": "exp(x)/2*(cos(x)+sin(x)) = (exp(x)*(cos(x)+sin(x))/2)",
    "residual": "0"
   },
   {
@@ -6353,17 +6514,66 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "parts_du",
    "ok": true,
    "label": "U-P8 drill 2 step 1",
-   "claim": "2**2+3**2 = 13",
+   "u": "sin(3*x)",
+   "du": "3*cos(3*x)"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P8 drill 2 step 1",
+   "dv": "exp(2*x)",
+   "v": "exp(2*x)/2"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X11",
+   "label": "U-P8 drill 2 step 2",
+   "step": "exp(2*x)*sin(3*x)/2-Integral(3*exp(2*x)*cos(3*x)/2,x)"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "U-P8 drill 2 step 3",
+   "u": "cos(3*x)",
+   "du": "-3*sin(3*x)"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P8 drill 2 step 3",
+   "dv": "exp(2*x)",
+   "v": "exp(2*x)/2"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 drill 2 step 4",
+   "claim": "exp(2*x)*sin(3*x)/2-Rational(3,4)*exp(2*x)*cos(3*x)-Rational(9,4)*(exp(2*x)*(2*sin(3*x)-3*cos(3*x))/13) = (exp(2*x)*(2*sin(3*x)-3*cos(3*x))/13)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P8 drill 2 step 2",
-   "claim": "diff(exp(2*x)*(2*sin(3*x)-3*cos(3*x))/13,x) = exp(2*x)*sin(3*x)",
+   "label": "U-P8 drill 2 step 5",
+   "claim": "Rational(13,4)*(exp(2*x)*(2*sin(3*x)-3*cos(3*x))/13) = exp(2*x)*sin(3*x)/2-Rational(3,4)*exp(2*x)*cos(3*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X11",
+   "label": "U-P8 drill 2 step 6",
+   "step": "exp(2*x)*(2*sin(3*x)-3*cos(3*x))/13"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 drill 2 step 7",
+   "claim": "exp(2*x)/(2**2+3**2)*(2*sin(3*x)-3*cos(3*x)) = (exp(2*x)*(2*sin(3*x)-3*cos(3*x))/13)",
    "residual": "0"
   },
   {
@@ -6374,18 +6584,67 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
+   "kind": "parts_du",
    "ok": true,
    "label": "U-P8 drill 3 step 1",
-   "claim": "5**2+2**2 = 29",
-   "residual": "0"
+   "u": "cos(2*x)",
+   "du": "-2*sin(2*x)"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P8 drill 3 step 1",
+   "dv": "exp(5*x)",
+   "v": "exp(5*x)/5"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "N51-X12",
    "label": "U-P8 drill 3 step 2",
+   "step": "exp(5*x)*cos(2*x)/5+Integral(2*exp(5*x)*sin(2*x)/5,x)"
+  },
+  {
+   "kind": "parts_du",
+   "ok": true,
+   "label": "U-P8 drill 3 step 3",
+   "u": "sin(2*x)",
+   "du": "2*cos(2*x)"
+  },
+  {
+   "kind": "parts_v",
+   "ok": true,
+   "label": "U-P8 drill 3 step 3",
+   "dv": "exp(5*x)",
+   "v": "exp(5*x)/5"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 drill 3 step 4",
+   "claim": "exp(5*x)*cos(2*x)/5+Rational(2,25)*exp(5*x)*sin(2*x)-Rational(4,25)*(exp(5*x)*(5*cos(2*x)+2*sin(2*x))/29) = (exp(5*x)*(5*cos(2*x)+2*sin(2*x))/29)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 drill 3 step 5",
+   "claim": "Rational(29,25)*(exp(5*x)*(5*cos(2*x)+2*sin(2*x))/29) = exp(5*x)*cos(2*x)/5+Rational(2,25)*exp(5*x)*sin(2*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X12",
+   "label": "U-P8 drill 3 step 6",
    "step": "exp(5*x)*(5*cos(2*x)+2*sin(2*x))/29"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P8 drill 3 step 7",
+   "claim": "exp(5*x)/(5**2+2**2)*(5*cos(2*x)+2*sin(2*x)) = (exp(5*x)*(5*cos(2*x)+2*sin(2*x))/29)",
+   "residual": "0"
   },
   {
    "kind": "antiderivative",
@@ -6393,65 +6652,6 @@
    "item": "N51-X12",
    "label": "U-P8 drill 3",
    "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "nisfayn cosh",
-   "f": "exp(a*x)*cosh(b*x)",
-   "F": "(exp((a+b)*x)/(a+b)+exp((a-b)*x)/(a-b))/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "nisfayn sinh",
-   "f": "exp(a*x)*sinh(b*x)",
-   "F": "(exp((a+b)*x)/(a+b)-exp((a-b)*x)/(a-b))/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "U-P9 ex short 1",
-   "f": "exp(a*x)*cosh(b*x)",
-   "F": "(exp((a+b)*x)/(a+b)+exp((a-b)*x)/(a-b))/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P9 ex short 2",
-   "claim": "1+2 = 3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P9 ex short 2",
-   "claim": "1-2 = -1",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S1-SE-Q2.3",
-   "label": "U-P9 ex short 3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S1-SE-Q2.3",
-   "label": "U-P9 ex short 4",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P9 ex short 4",
-   "claim": "(exp(3*x)/3+exp(-x)/(-1))/2 = exp(3*x)/6-exp(-x)/2",
-   "residual": "0"
   },
   {
    "kind": "arithmetic",
@@ -6468,10 +6668,31 @@
    "residual": "0"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 ex step 3",
+   "claim": "(exp(3*x)+exp(-x))/2 = exp(3*x)/2+exp(-x)/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 ex step 4",
+   "claim": "integrate(exp(3*x)/2,x) = exp(3*x)/6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 ex step 4",
+   "claim": "integrate(exp(-x)/2,x) = -exp(-x)/2",
+   "residual": "0"
+  },
+  {
    "kind": "step",
    "ok": true,
    "item": "1446-S1-SE-Q2.3",
-   "label": "U-P9 ex step 3",
+   "label": "U-P9 ex step 5",
    "step": "exp(3*x)/6-exp(-x)/2"
   },
   {
@@ -6520,28 +6741,28 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P9 drill 1 first",
-   "claim": "(exp(4*x)/4-exp(2*x)/2)/2 = exp(4*x)/8-exp(2*x)/4",
+   "claim": "exp(3*x)*sinh(x) = (exp(4*x)-exp(2*x))/2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P9 drill 1 step 1",
-   "claim": "Rational(1,2)*exp(4*x)/4 = exp(4*x)/8",
+   "claim": "integrate(exp(4*x)/2,x) = exp(4*x)/8",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P9 drill 1 step 1",
-   "claim": "Rational(1,2)*exp(2*x)/2 = exp(2*x)/4",
+   "label": "U-P9 drill 1 step 2",
+   "claim": "integrate(exp(2*x)/2,x) = exp(2*x)/4",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "N51-X13",
-   "label": "U-P9 drill 1 step 2",
+   "label": "U-P9 drill 1 step 3",
    "step": "exp(4*x)/8-exp(2*x)/4"
   },
   {
@@ -6555,8 +6776,29 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P9 drill 2 step 1",
-   "claim": "(exp(6*x)/6+exp(-4*x)/(-4))/2 = exp(6*x)/12-exp(-4*x)/8",
+   "claim": "exp(x)*cosh(5*x) = (exp(6*x)+exp(-4*x))/2",
    "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 drill 2 step 2",
+   "claim": "integrate(exp(6*x)/2,x) = exp(6*x)/12",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 drill 2 step 2",
+   "claim": "integrate(exp(-4*x)/2,x) = -exp(-4*x)/8",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X14",
+   "label": "U-P9 drill 2 step 3",
+   "step": "exp(6*x)/12-exp(-4*x)/8"
   },
   {
    "kind": "antiderivative",
@@ -6573,55 +6815,31 @@
    "residual": "0"
   },
   {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 drill 3 step 2",
+   "claim": "integrate(Rational(1,2),x) = x/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P9 drill 3 step 2",
+   "claim": "integrate(exp(-2*x)/2,x) = -exp(-2*x)/4",
+   "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "1445-S1-SE-Q2.1",
+   "label": "U-P9 drill 3 step 3",
+   "step": "x/2-exp(-2*x)/4"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "1445-S1-SE-Q2.1",
    "label": "U-P9 drill 3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G small e sqrt",
-   "f": "exp(sqrt(x))",
-   "F": "2*exp(sqrt(x))*(sqrt(x)-1)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "G small root",
-   "f": "x**3*sqrt(x**2+c)",
-   "F": "(x**2+c)**Rational(5,2)/5-c*(x**2+c)**Rational(3,2)/3",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "U-P10 ex short 1",
-   "f": "exp(sqrt(x))",
-   "F": "2*exp(sqrt(x))*(sqrt(x)-1)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P10 ex short 2",
-   "claim": "exp(sqrt(x)) = 2*sqrt(x)*exp(sqrt(x))*diff(sqrt(x),x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-P10 ex short 3",
-   "claim": "diff(2*(x-1)*exp(x),x) = 2*x*exp(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N51-X15",
-   "label": "U-P10 ex short 4",
    "status": "symbolic"
   },
   {
@@ -6642,14 +6860,28 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P10 ex step 3",
-   "claim": "diff(2*(x-1)*exp(x),x) = 2*x*exp(x)",
+   "claim": "diff(2*x,x) = 2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P10 ex step 3",
+   "claim": "integrate(exp(x),x) = exp(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P10 ex step 4",
+   "claim": "diff(2*x*exp(x)-2*exp(x),x) = 2*x*exp(x)",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
    "item": "N51-X15",
-   "label": "U-P10 ex step 4",
+   "label": "U-P10 ex step 5",
    "step": "2*exp(sqrt(x))*(sqrt(x)-1)"
   },
   {
@@ -6670,6 +6902,13 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-P10 drill 1 step 1",
+   "claim": "integrate(cos(x),x) = sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-P10 drill 1 step 2",
    "claim": "diff(2*x*sin(x)+2*cos(x),x) = 2*x*cos(x)",
    "residual": "0"
   },
@@ -6677,7 +6916,7 @@
    "kind": "step",
    "ok": true,
    "item": "G-08",
-   "label": "U-P10 drill 1 step 2",
+   "label": "U-P10 drill 1 step 3",
    "step": "2*sqrt(x)*sin(sqrt(x))+2*cos(sqrt(x))"
   },
   {
@@ -6709,6 +6948,13 @@
    "residual": "0"
   },
   {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X17",
+   "label": "U-P10 drill 2 step 4",
+   "step": "(x**2-1)**Rational(5,2)/5+(x**2-1)**Rational(3,2)/3"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "N51-X17",
@@ -6735,6 +6981,13 @@
    "label": "U-P10 drill 3 step 3",
    "claim": "integrate((w**Rational(3,2)-2*w**Rational(1,2))/4,w) = w**Rational(5,2)/10-w**Rational(3,2)/3",
    "residual": "0"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-X18",
+   "label": "U-P10 drill 3 step 4",
+   "step": "(x**4+2)**Rational(5,2)/10-(x**4+2)**Rational(3,2)/3"
   },
   {
    "kind": "antiderivative",
@@ -9377,20 +9630,6 @@
    "status": "symbolic"
   },
   {
-   "kind": "derivative",
-   "ok": true,
-   "item": "1445-S2-SE-Q1.1",
-   "label": "day 2 warm-up",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-45",
-   "label": "day 2 warm-up",
-   "status": "symbolic"
-  },
-  {
    "kind": "antiderivative",
    "ok": true,
    "item": "G-38",
@@ -9577,20 +9816,6 @@
    "ok": true,
    "item": "1446-S1-FE-Q2.2",
    "label": "day 6 warm-up",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-44",
-   "label": "day 7 warm-up",
-   "status": "symbolic"
-  },
-  {
-   "kind": "derivative",
-   "ok": true,
-   "item": "N42-X1-6",
-   "label": "day 7 warm-up",
    "status": "symbolic"
   },
   {
@@ -9910,84 +10135,6 @@
    "status": "symbolic"
   },
   {
-   "kind": "functional",
-   "ok": true,
-   "label": "rafeeq identity",
-   "residual": "0"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "micro +",
-   "f": "x/sqrt(c+x**2)",
-   "F": "sqrt(c+x**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "micro -",
-   "f": "x/sqrt(c-x**2)",
-   "F": "-sqrt(c-x**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "micro ln +",
-   "f": "x/(c+x**2)",
-   "F": "log(c+x**2)/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "micro ln -",
-   "f": "x/(c-x**2)",
-   "F": "-log(Abs(c-x**2))/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r asin",
-   "f": "asin(x)",
-   "F": "x*asin(x)+sqrt(1-x**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r atan",
-   "f": "atan(x)",
-   "F": "x*atan(x)-log(1+x**2)/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r asec",
-   "f": "asec(x)",
-   "F": "x*asec(x)-acosh(x)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r acosh",
-   "f": "acosh(x)",
-   "F": "x*acosh(x)-sqrt(x**2-1)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "r atanh",
-   "f": "atanh(x)",
-   "F": "x*atanh(x)+log(1-x**2)/2",
-   "status": "symbolic"
-  },
-  {
    "kind": "formula",
    "ok": true,
    "label": "dawaran sin",
@@ -10001,62 +10148,6 @@
    "label": "dawaran cos",
    "f": "exp(a*x)*cos(b*x)",
    "F": "exp(a*x)*(a*cos(b*x)+b*sin(b*x))/(a**2+b**2)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "nisfayn cosh",
-   "f": "exp(a*x)*cosh(b*x)",
-   "F": "(exp((a+b)*x)/(a+b)+exp((a-b)*x)/(a-b))/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "nisfayn sinh",
-   "f": "exp(a*x)*sinh(b*x)",
-   "F": "(exp((a+b)*x)/(a+b)-exp((a-b)*x)/(a-b))/2",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "small ln",
-   "f": "log(Abs(x))",
-   "F": "x*log(Abs(x))-x",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "small ln2",
-   "f": "log(Abs(x))**2",
-   "F": "x*log(Abs(x))**2-2*x*log(Abs(x))+2*x",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "small e sqrt",
-   "f": "exp(sqrt(x))",
-   "F": "2*exp(sqrt(x))*(sqrt(x)-1)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "small ln quad",
-   "f": "log(x**2+a**2)",
-   "F": "x*log(x**2+a**2)-2*x+2*a*atan(x/a)",
-   "status": "symbolic"
-  },
-  {
-   "kind": "formula",
-   "ok": true,
-   "label": "small root",
-   "f": "x**3*sqrt(x**2+c)",
-   "F": "(x**2+c)**Rational(5,2)/5-c*(x**2+c)**Rational(3,2)/3",
    "status": "symbolic"
   },
   {
@@ -10607,10 +10698,10 @@
   "G-61": [
    "P-B1 drill 1"
   ],
-  "G-62": [
+  "M-02": [
    "P-B1 drill 2"
   ],
-  "G-63": [
+  "M-01": [
    "P-B1 drill 3"
   ],
   "G-64": [
@@ -10619,7 +10710,7 @@
   "G-65": [
    "P-B1 drill 5"
   ],
-  "G-66": [
+  "M-03": [
    "P-B2 drill 1"
   ],
   "G-67": [
@@ -10631,7 +10722,7 @@
   "G-69": [
    "P-B2 drill 4"
   ],
-  "G-70": [
+  "M-04": [
    "P-B2 drill 5"
   ],
   "1446-S1-SE-Q2.4": [
@@ -10676,11 +10767,17 @@
   "N51-X05": [
    "U-P4 example"
   ],
-  "N51-X16": [
+  "G-79": [
    "U-P4 drill 1"
   ],
-  "N51-E4": [
+  "N51-X16": [
    "U-P4 drill 2"
+  ],
+  "N51-E4": [
+   "U-P4 drill 3"
+  ],
+  "G-80": [
+   "U-P4 drill 4"
   ],
   "1445-S1-SE-Q2.3": [
    "U-P5 example"
@@ -10688,8 +10785,14 @@
   "G-05": [
    "U-P5 drill 1"
   ],
-  "G-06": [
+  "G-81": [
    "U-P5 drill 2"
+  ],
+  "G-06": [
+   "U-P5 drill 3"
+  ],
+  "G-82": [
+   "U-P5 drill 4"
   ],
   "1445-S1-SE-Q2.5": [
    "U-P6 example"
@@ -10868,12 +10971,6 @@
   "G-14": [
    "U-T8 drill 3"
   ],
-  "1445-S2-SE-Q1.1": [
-   "day 2 warm-up"
-  ],
-  "G-45": [
-   "day 2 warm-up"
-  ],
   "G-38": [
    "day 3 warm-up"
   ],
@@ -10955,12 +11052,6 @@
   "1446-S1-FE-Q2.2": [
    "day 6 warm-up"
   ],
-  "G-44": [
-   "day 7 warm-up"
-  ],
-  "N42-X1-6": [
-   "day 7 warm-up"
-  ],
   "N52-X11": [
    "speed52"
   ],
@@ -11023,7 +11114,7 @@
   ]
  },
  "counts": {
-  "total": 1469,
-  "ok": 1469
+  "total": 1486,
+  "ok": 1486
  }
 }

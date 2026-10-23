@@ -1,0 +1,83 @@
+[
+ {
+  "id": "M-01",
+  "kind": "musa",
+  "task": "diff",
+  "q": "raw:sqrt(x)*log(Abs(x))",
+  "answer": [
+   "log(Abs(x))/(2*sqrt(x))",
+   "1/sqrt(x)"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-B1",
+  "section": "5.1",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 3,
+   "number": "Q1"
+  },
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "M-02",
+  "kind": "musa",
+  "task": "diff",
+  "q": "raw:log(Abs(x**3+atan(2*x)))",
+  "answer": [
+   "(3*x**2+2/(1+4*x**2))/(x**3+atan(2*x))"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-B1",
+  "section": "5.1",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 38,
+   "number": "Q2(3)"
+  },
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "M-03",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:exp(8*x+1)",
+  "answer": [
+   "exp(8*x+1)/8"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "PRE-B2",
+  "section": "5.1",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 16,
+   "number": "(1)"
+  },
+  "note": "prerequisite part (before lesson 5.1)"
+ },
+ {
+  "id": "M-04",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:(x+cos(x))/(x**2+2*sin(x))",
+  "answer": [
+   "log(Abs(x**2+2*sin(x)))/2"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "PRE-B2",
+  "section": "5.1",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 9,
+   "number": "Q2"
+  },
+  "note": "prerequisite part (before lesson 5.1)"
+ }
+]

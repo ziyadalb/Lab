@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parent.parent
 ITEMS = {i['id']: i for i in json.loads((ROOT / 'data' / 'items.json').read_text(encoding='utf-8'))}
 # extra practice written in this project (verified like the real items; labelled in the documents)
 ITEMS.update({i['id']: i for i in json.loads((ROOT / 'data' / 'generated_items.json').read_text(encoding='utf-8'))})
+# questions from Dr. Musa Ajjal's 1448/1449 notes (cited by page; the notes themselves are not in this repository)
+ITEMS.update({i['id']: i for i in json.loads((ROOT / 'data' / 'musa_items.json').read_text(encoding='utf-8'))})
 HOLD = json.loads((ROOT / 'data' / 'holdout_ids.json').read_text())
 BLOCKED = set(HOLD['held_items']) | set(HOLD['avoid']) | {c for v in HOLD['held_copies'].values() for c in v}
 LOG = []          # every check performed while rendering

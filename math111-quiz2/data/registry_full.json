@@ -1296,9 +1296,9 @@
   "near_copies": "",
   "verification": "symbolic",
   "official_check": "symbolic",
-  "usage": "مستخدم في المذكرة الكاملة",
+  "usage": "مستخدم في كرّاسة الاختصارات",
   "holdout_id": "",
-  "location": "day 2 warm-up",
+  "location": "drill I1",
   "exclusion_reason": ""
  },
  {
@@ -5729,9 +5729,9 @@
   "near_copies": "",
   "verification": "symbolic",
   "official_check": "",
-  "usage": "مستخدم في المذكرة الكاملة",
+  "usage": "مرجع إضافي (غير مستخدم في المذكرة)",
   "holdout_id": "",
-  "location": "day 7 warm-up",
+  "location": "",
   "exclusion_reason": ""
  },
  {
@@ -6351,7 +6351,7 @@
   "official_check": "",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "U-P4 drill 2",
+  "location": "U-P4 drill 3",
   "exclusion_reason": ""
  },
  {
@@ -6940,7 +6940,7 @@
   "official_check": "",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "U-P4 drill 1",
+  "location": "U-P4 drill 2",
   "exclusion_reason": ""
  },
  {

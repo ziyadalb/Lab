@@ -18,6 +18,8 @@ EXAM = {'SE': 'الاختبار الثاني', 'FE': 'النهائي'}
 def source_label(it):
     if it['kind'] == 'generated':
         return 'تدريب إضافي (من إعداد هذه المذكرة، جوابه متحقق)'
+    if it['kind'] == 'musa':
+        return 'مذكرة د. موسى عجال (1448/1449)، %s، ص%d' % (it['src']['number'], it['src']['pdf_page'])
     if it['kind'] == 'exam':
         y, s_, e, q = it['id'].split('-')
         return 'اختبار سابق %s، %s، %s، س%s، ص%d' % (y, SEM[s_], EXAM[e], q[1:].replace('.', ' جزء '),

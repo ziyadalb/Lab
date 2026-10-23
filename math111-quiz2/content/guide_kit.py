@@ -18,6 +18,8 @@ from html_kit import box, chip, en, lines, link, md, mi, p, table, ul
 from mathlib import rawtex, tex, texsum
 
 DAYS = {}          # day number -> list of (uid, number, title)
+GIST = {}          # uid -> (number, title, what you see, first step, rule): the one-line summary, reused by the lesson maps
+LESSON_OF_UID = {} # uid -> lesson (4.2, 5.1, 5.2)
 DRILLS_N = {}      # uid -> number of exercises (for the time plan of the day)
 ALG_SEEN = {}      # algebra skill -> title (first, detailed explanation carries the anchor)
 HELP = []          # one entry per exercise: the two lighter help levels, printed at the end of the guide
@@ -25,8 +27,7 @@ TRY_KEYS = []      # algebra try-its: (skill, title, answer latex)
 FINAL_ROW = set()  # items whose last step row already shows the final answer
 COUNTER = [0]
 
-# study day of every unit, balanced so that every day stays within about three hours (day 1 also has the
-# three prerequisite pages, so types 5 and 11 move one day later)
+# study day of every unit (days 1-2 are done; days 3-6 are the four days left before the quiz)
 DAY_OF = {'U-D1': 1, 'U-D2': 1, 'U-I1': 1, 'U-I2': 2, 'U-I3': 2,
           'U-I4': 2, 'U-I5': 2, 'U-I6': 2, 'U-I7': 2, 'U-I8': 2, 'U-I9': 3,
           'U-P1': 3, 'U-P2': 3, 'U-P3': 3, 'U-P4': 4, 'U-P5': 4,
@@ -54,6 +55,16 @@ NEED_LABEL = {'P-A1': 'أ1', 'P-A2': 'أ2', 'P-A3': 'أ3', 'P-A4': 'أ4', 'P-B1'
 # writing space in lines of 7.5 mm: a start needs a few lines, a full solution more (5.1 solutions are longest)
 WRITE = {'G': {'4.2': 3, '5.1': 3, '5.2': 3}, 'P': {'4.2': 4, '5.1': 4, '5.2': 4}, 'I': {'4.2': 5, '5.1': 7, '5.2': 6}}
 ASK = {'diff': 'المطلوب: المشتقة', 'int': 'المطلوب: احسب التكامل', 'defint': 'المطلوب: احسب التكامل المحدد'}
+# the date shown for each study day (days 1 and 2 are already done)
+DAY_NAME = {1: '20 أكتوبر ✓', 2: '21–22 أكتوبر ✓', 3: 'الجمعة 23', 4: 'السبت 24', 5: 'الأحد 25', 6: 'الاثنين 26', 7: 'إذا بقي وقت'}
+# lesson colour class of each section (unit header band and the lesson map)
+LESSON_CLS = {'4.2': 'l42', '5.1': 'l51', '5.2': 'l52'}
+MAPS_READY = {'5.1'}   # lessons whose map page is built (every type of the lesson has its one-line summary)
+
+
+def unit_minutes(uid):
+    """Study time of one type: 10 minutes for the explanation and 5 per exercise (plus a 5-minute break)."""
+    return 10 + 5 * DRILLS_N.get(uid, 3)
 
 
 def rich(text):
@@ -68,8 +79,14 @@ def pgref(anchor):
 
 def question(it, where, allow_held=False):
     use(it['id'], where, allow_held=allow_held)
-    return ('<div class="q">' + chip(source_label(it), 'src') + chip(ASK[it['task']], 'ask') + en(prompt(it))
-            + md(q_tex(it)) + '</div>')
+    return '<div class="q">' + chip(source_label(it), 'src') + en(prompt(it)) + md(q_tex(it)) + '</div>'
+
+
+def drill_question(it, where):
+    """An exercise: just the question (its English instruction is printed once above the list, its source with the
+    solution)."""
+    use(it['id'], where)
+    return '<div class="q">' + md(q_tex(it)) + '</div>'
 
 
 def _flat(latex):
@@ -176,7 +193,8 @@ def short_steps(it, rows, label):
             else:
                 plain.append(c)
         cells.append((arith(latex, plain, tag), why, k == len(rows)))
-    return p('<b>⚡ بالاختصار، خطوة خطوة:</b>', 'sslbl') + steps_table(cells, 'short')
+    return (p('<b>⚡ الطريقة السريعة:</b> نفس خطوات 🧱 فوق، مختصرة. استعملها لتتأكد من جوابك.', 'sslbl')
+            + steps_table(cells, 'short'))
 
 
 def alg(skill, title=None, rows=None, intro='', try_=None):
@@ -216,6 +234,8 @@ class Unit:
         self.uid, self.num, self.title, self.section, self.pages, self.day = uid, COUNTER[0], title, section, pages, day
         self.ref = 'النوع %d' % self.num
         self.parts, self.drills, self.sols = [], [], []
+        self.gist_html = ''
+        LESSON_OF_UID[uid] = section
         DAYS.setdefault(day, []).append((uid, self.num, title))
 
     def add(self, kind, label, inner):
@@ -223,6 +243,16 @@ class Unit:
 
     def raw(self, html):
         self.parts.append(('raw', None, html))
+
+    def prev(self, text):
+        """One line in the type card: how this type differs from the one before it."""
+        self.parts.append(('prev', None, text))
+
+    def gist(self, see, first, rule):
+        """The one-line summary at the end of the type (also a row of the lesson map)."""
+        GIST[self.uid] = (self.num, self.title, see, first, rule)
+        self.gist_html = box('gist', '📌 الخلاصة', '<div class="gist-row"><span>' + rich('<b>إذا شفت:</b> ' + see) + '</span><span>'
+                             + rich('<b>أول خطوة:</b> ' + first) + '</span><span>' + rich('<b>ثم:</b> ' + rule) + '</span></div>')
 
     def drill(self, tag, item_id, level, hint, first=None, claims=(), mids=(), sol_rows=None, extra_lines=0):
         from guide_sols import SOLS
@@ -233,12 +263,9 @@ class Unit:
         lvl = {'G': 'موجّه', 'P': 'ناقص الخطوات', 'I': 'لحالك'}[level]
         dtag = '%s-%s' % (self.uid, tag)
         DRILLS_N[self.uid] = DRILLS_N.get(self.uid, 0) + 1
-        help_links = ' · '.join([link('h-' + dtag, '💡 تلميح ص ' + pgref('h-' + dtag)),
-                                 link('f-' + dtag, '✍️ أول خطوة ص ' + pgref('f-' + dtag)),
-                                 link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag))])
         head = ('<div class="drill-head" id="d-%s"><b>تمرين %s</b> %s<span class="help">%s</span></div>'
-                % (dtag, tag, chip(lvl, 'lvl'), help_links))
-        body = question(it, where)
+                % (dtag, tag, chip(lvl, 'lvl'), link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag), 'btn')))
+        body = drill_question(it, where)
         first_tex = arith(first, claims, where + ' first') if first else None
         n = WRITE[level][self.section] + extra_lines
         if level == 'G':
@@ -247,7 +274,7 @@ class Unit:
             body += p('اكتب سطر المعطيات ثم الجواب:') + lines(n, 'write tight')
         else:
             body += lines(n, 'write tight')
-        self.drills.append('<div class="drill">' + head + body + '</div>')
+        self.drills.append((prompt(it), '<div class="drill">' + head + body + '</div>'))
         # level 3: the full explained solution, on the page after the exercises
         sol = ''
         if first_tex:
@@ -267,8 +294,9 @@ class Unit:
         answer = answer_box(it, where)
         if not (cells and cells[-1][2] and not mids):
             sol += answer
-        self.sols.append('<div class="sol" id="s-%s"><div class="drill-head"><b>تمرين %s</b> %s %s</div>%s</div>'
-                         % (dtag, tag, mi(r'\displaystyle ' + q_tex(it)), link('d-' + dtag, 'ارجع للتمرين', 'back'), sol))
+        self.sols.append('<div class="sol" id="s-%s"><div class="drill-head"><b>تمرين %s</b> %s %s</div>%s%s</div>'
+                         % (dtag, tag, mi(r'\displaystyle ' + q_tex(it)), link('d-' + dtag, '↩ ارجع للتمرين', 'back btn'),
+                            p(source_label(it), 'srcline'), sol))
         # levels 1 and 2 go to the help ladder at the end of the guide
         if cells:
             step = (cells[0][0], cells[0][1])
@@ -279,41 +307,57 @@ class Unit:
         HELP.append(dict(dtag=dtag, num=self.num, tag=tag, hint=hint, step=step, guided=level == 'G'))
 
     def head_html(self):
-        needs = ''.join(chip(link(a, '📚 %s ص ' % NEED_LABEL.get(a, a) + pgref(a)), 'pq') for a in NEEDS.get(self.uid, []))
-        return ('<div class="unit-head" id="%s"><span class="num">%d</span><h3>%s</h3>%s%s%s%s</div>'
-                % (self.uid, self.num, self.title, chip(self.section, 'sec'),
-                   chip(self.pages if self.pages.startswith('من') else 'مذكرة د. طارق: ' + self.pages, 'pg'),
-                   chip('اليوم %d' % self.day, 'day'), needs))
+        needs = '، '.join(link(a, '📚 %s (ص ' % NEED_LABEL.get(a, a) + pgref(a) + ')') for a in NEEDS.get(self.uid, []))
+        meta = ' · '.join(x for x in ['درس ' + self.section, DAY_NAME.get(self.day, ''), '⏱️ %d دقيقة' % unit_minutes(self.uid),
+                                      ('تحتاج: ' + needs) if needs else ''] if x)
+        if self.section in MAPS_READY:
+            meta += ' · ' + link('map-' + self.section, '🗺️ خريطة الدرس')
+        return ('<div class="unit-head %s" id="%s"><span class="num">%d</span><h3>%s</h3></div><p class="unit-meta">%s</p>'
+                % (LESSON_CLS.get(self.section, ''), self.uid, self.num, self.title, meta))
 
     def html(self):
         from guide_checks import CHECKS
         head = self.head_html()
         idea = [inner for kind, _, inner in self.parts if kind == 'idea']
         oks = [inner for kind, _, inner in self.parts if kind == 'ok']
+        traps = [inner for kind, _, inner in self.parts if kind == 'trap']
+        prev = [inner for kind, _, inner in self.parts if kind == 'prev']
         out = []
         for kind, label, inner in self.parts:
-            if kind in ('idea', 'ok'):
+            if kind in ('idea', 'ok', 'trap', 'prev'):
                 continue
             if kind == 'raw':
                 out.append(inner)
                 continue
-            if kind == 'sign' and idea:     # one card: why it works, then how to recognise it
-                inner = _lead('<b>💡 الفكرة:</b>', idea[0]) + _lead('<b>🔎 العلامة:</b>', inner)
-                label = 'الفكرة والعلامة'
-            if kind == 'paper':             # what to write, then a quick check of the answer
+            if kind == 'sign':              # one card: why it works, how to recognise it, how it differs from the type before
+                inner = ((_lead('<b>💡 الفكرة:</b>', idea[0]) if idea else '') + _lead('<b>🔎 العلامة:</b>', inner)
+                         + ''.join(p('<b>🔗 الفرق عن النوع اللي قبله:</b> ' + rich(t), 'prevline') for t in prev))
+                kind, label = 'idea', '🎯 وش هذا النوع'
+            if kind == 'paper':             # before you hand in: the trap, what to write, a quick check
                 check = _lead('<b>✔ تأكد:</b>', ''.join(oks)) if oks else ''
                 if self.uid in CHECKS:
                     check += p('<b>✔ تأكد:</b> ' + rich(CHECKS[self.uid]))
                 elif not oks:
                     raise BuildError('unit %s has no quick check' % self.uid)
-                inner += check
-                label = '✍️ في ورقة الكويز و ✔ تأكد'
+                trap = ''.join(_lead('<b>⚠️ انتبه:</b>', t) for t in traps)
+                inner = trap + _lead('<b>✍️ في ورقة الكويز:</b>', inner) + check
+                label = '✔ قبل ما تسلّم'
             out.append(box(kind, label, inner))
-        drills = '<h4 class="drills-title">تمارين %s</h4>' % self.ref + ''.join(self.drills)
+        first_prompt = self.drills[0][0] if self.drills else ''
+        drills = ('<h4 class="drills-title">تمارين %s</h4>' % self.ref + (en(first_prompt) if first_prompt else '')
+                  + ''.join(html.replace('<div class="q">', '<div class="q">' + en(pr), 1) if pr != first_prompt else html
+                            for pr, html in self.drills))
+        src = p('المصدر: ' + (self.pages if self.pages.startswith('من') else 'مذكرة د. طارق، ' + self.pages), 'srcline')
         sols = ('<section class="sols"><h4>حلول تمارين %s: %s</h4>' % (self.ref, self.title)
                 + p('حاولت؟ قارن حلك سطرًا سطرًا. إذا اختلف جوابك، سجّل الغلطة في سجل الأخطاء آخر المذكرة.', 'small')
                 + ''.join(self.sols) + '</section>')
-        return '<article class="unit">' + head + ''.join(out) + drills + sols + '</article>'
+        return '<article class="unit">' + head + ''.join(out) + self.gist_html + src + drills + sols + '</article>'
+
+
+def method(steps_, memo=None):
+    """A fixed list of steps in words (the way to solve a type), with an optional memory line."""
+    return ('<ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in steps_) + '</ol>'
+            + ('<div class="memo-inline"><b>كيف أتذكّره:</b> ' + rich(memo) + '</div>' if memo else ''))
 
 
 def contrast(rows):

@@ -17,13 +17,14 @@ ROOT = Path(__file__).resolve().parent.parent
 def main():
     items = {i['id']: i for i in json.loads((ROOT / 'data' / 'items.json').read_text(encoding='utf-8'))}
     gen = {i['id']: i for i in json.loads((ROOT / 'data' / 'generated_items.json').read_text(encoding='utf-8'))}
-    allit = dict(items, **gen)
+    musa = {i['id']: i for i in json.loads((ROOT / 'data' / 'musa_items.json').read_text(encoding='utf-8'))}
+    allit = dict(items, **gen, **musa)
     usage = json.loads((ROOT / 'data' / 'usage_guide.json').read_text(encoding='utf-8'))
     hold = json.loads((ROOT / 'data' / 'holdout_ids.json').read_text())
     pages = json.loads((ROOT / 'out' / 'guide' / 'toc.json').read_text())
     html = (ROOT / 'src' / 'guide.html').read_text(encoding='utf-8')
     units = {m.group(1): (int(m.group(2)), re.sub('<[^>]+>', '', m.group(3)))
-             for m in re.finditer(r'<div class="unit-head" id="(U-[A-Z0-9]+)"><span class="num">(\d+)</span><h3>(.*?)</h3>', html)}
+             for m in re.finditer(r'<div class="unit-head[^"]*" id="(U-[A-Z0-9]+)"><span class="num">(\d+)</span><h3>(.*?)</h3>', html)}
     n_guide = pymupdf.open(ROOT / 'out' / 'guide' / 'MATH111_Quiz2_Guide.pdf').page_count
     n_mocks = pymupdf.open(ROOT / 'out' / 'mocks' / 'MATH111_Quiz2_Mock_Exams.pdf').page_count
 

@@ -5119,11 +5119,173 @@
      }
     ]
    }
+  },
+  {
+   "id": "G-79",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-LN0",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-80",
+   "kind": "generated",
+   "task": "int",
+   "case": "C51-LN0",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-81",
+   "kind": "generated",
+   "task": "defint",
+   "case": "C51-DEF",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "check": "F(b)-F(a) equals stated value",
+      "residual": "0"
+     },
+     {
+      "check": "F'=f on [a,b]",
+      "residual": "0"
+     },
+     {
+      "check": "integrand continuous on [a,b]",
+      "result": "Interval(0, pi/2)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-82",
+   "kind": "generated",
+   "task": "defint",
+   "case": "C51-DEF",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "check": "F(b)-F(a) equals stated value",
+      "residual": "0"
+     },
+     {
+      "check": "F'=f on [a,b]",
+      "residual": "0"
+     },
+     {
+      "check": "integrand continuous on [a,b]",
+      "result": "Interval(1, E)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-01",
+   "kind": "musa",
+   "task": "diff",
+   "case": "PRE-B1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-02",
+   "kind": "musa",
+   "task": "diff",
+   "case": "PRE-B1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-03",
+   "kind": "musa",
+   "task": "int",
+   "case": "PRE-B2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-04",
+   "kind": "musa",
+   "task": "int",
+   "case": "PRE-B2",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
   }
  ],
  "items_summary": {
   "answer": {
-   "symbolic": 232
+   "symbolic": 240
   },
   "official": {
    "symbolic": 55,

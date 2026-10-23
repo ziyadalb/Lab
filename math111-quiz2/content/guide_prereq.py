@@ -10,7 +10,7 @@ Every rule, example row, exercise answer and quick-check answer is checked while
 """
 from booklet_engine import ITEMS, arith, formula
 from guide_kit import DRILLS_N, HELP, WRITE, Unit, alg, pgref, rich, steps_table
-from html_kit import box, chip, lines, link, md, mi, p, table, ul
+from html_kit import box, chip, en, lines, link, md, mi, p, table, ul
 
 LESSON = {'pre42': '4.2', 'pre51': '5.1', 'pre52': '5.2'}
 TITLES = {'pre42': 'قبل درس 4.2: الأساسيات اللي تحتاجها', 'pre51': 'قبل درس 5.1: الأساسيات اللي تحتاجها',
@@ -79,21 +79,18 @@ class PreUnit(Unit):
         lvl = {'G': 'موجّه', 'P': 'ناقص الخطوات', 'I': 'لحالك'}[level]
         DRILLS_N[self.uid] = DRILLS_N.get(self.uid, 0) + 1
         cells = _cells(rows, where)
-        help_links = ' · '.join([link('h-' + dtag, '💡 تلميح ص ' + pgref('h-' + dtag)),
-                                 link('f-' + dtag, '✍️ أول خطوة ص ' + pgref('f-' + dtag)),
-                                 link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag))])
         head = ('<div class="drill-head" id="d-%s"><b>تمرين %s</b> %s<span class="help">%s</span></div>'
-                % (dtag, tag, chip(lvl, 'lvl'), help_links))
-        body = ('<div class="q">' + chip('تدريب إضافي (من إعداد هذه المذكرة، جوابه متحقق)', 'src') + chip('المطلوب: ' + ask, 'ask')
-                + p(rich(instruction)) + md(q_latex) + '</div>')
+                % (dtag, tag, chip(lvl, 'lvl'), link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag), 'btn')))
+        body = '<div class="q">' + p(rich(instruction)) + md(q_latex) + '</div>'
         n = max(2, WRITE[level][self.section] - 1)
         if level == 'G':
             body += p('البداية جاهزة؛ أكمل:') + md(cells[0][0]) + lines(n, 'write tight')
         else:
             body += lines(n, 'write tight')
-        self.drills.append('<div class="drill">' + head + body + '</div>')
-        self.sols.append('<div class="sol" id="s-%s"><div class="drill-head"><b>تمرين %s</b> %s %s</div>%s</div>'
-                         % (dtag, tag, mi(r'\displaystyle ' + q_latex), link('d-' + dtag, 'ارجع للتمرين', 'back'), steps_table(cells)))
+        self.drills.append(('', '<div class="drill">' + head + body + '</div>'))
+        self.sols.append('<div class="sol" id="s-%s"><div class="drill-head"><b>تمرين %s</b> %s %s</div>%s%s</div>'
+                         % (dtag, tag, mi(r'\displaystyle ' + q_latex), link('d-' + dtag, '↩ ارجع للتمرين', 'back btn'),
+                            p('تدريب إضافي (من إعداد هذه المذكرة، جوابه متحقق)', 'srcline'), steps_table(cells)))
         step = cells[1] if level == 'G' and len(cells) > 1 else cells[0]
         HELP.append(dict(dtag=dtag, num=self.num, tag=tag, hint=hint, step=(step[0], step[1]), guided=level == 'G'))
 
@@ -101,7 +98,10 @@ class PreUnit(Unit):
         out = [self.head_html()]
         for kind, label, inner in self.parts:
             out.append(inner if kind == 'raw' else box(kind, label, inner))
-        drills = '<h4 class="drills-title">تمارين %s: اكتب الحل بنفسك</h4>' % self.ref + ''.join(self.drills)
+        first = next((pr for pr, _ in self.drills if pr), '')
+        drills = ('<h4 class="drills-title">تمارين %s: اكتب الحل بنفسك</h4>' % self.ref + (en(first) if first else '')
+                  + ''.join(html.replace('<div class="q">', '<div class="q">' + en(pr), 1) if pr and pr != first else html
+                            for pr, html in self.drills))
         sols = ('<section class="sols"><h4>حلول تمارين %s: %s</h4>' % (self.ref, self.title)
                 + p('حاولت؟ قارن حلك سطرًا سطرًا. إذا اختلف جوابك، سجّل الغلطة في سجل الأخطاء آخر المذكرة.', 'small')
                 + ''.join(self.sols) + '</section>')
@@ -485,12 +485,16 @@ def part_b1():
     U.add('ok', '✔ تأكد', p(rich('مشتقات الدوال العكسية كلها كسور فيها $u\'$ فوق. إذا جوابك ما فيه كسر، راجع الجدول.')))
     U.drill('1', 'G-61', 'G', "صف $\\sin^{-1}$ مع $u=2x$.", first=r"u=2x,\quad u'=2", claims=[('diff(2*x,x)', '2')],
             sol_rows=[('line', '2/sqrt(1-4*x**2)', "$\\frac{u'}{\\sqrt{1-u^2}}$، و $u^2=4x^2$")])
-    U.drill('2', 'G-62', 'P', "صف $\\tan^{-1}$ مع $u=e^x$، و $u^2=e^{2x}$.",
-            sol_rows=[('tex', r"u=e^{x},\quad u'=e^{x},\quad u^{2}=e^{2x}", [('exp(x)**2', 'exp(2*x)')], 'الداخل ومربعه'),
-                      ('line', 'exp(x)/(1+exp(2*x))', "$\\frac{u'}{1+u^2}$")])
-    U.drill('3', 'G-63', 'P', 'ضرب: $x$ في $\\ln x$.',
-            sol_rows=[('tex', r"f=x,\ f'=1;\qquad g=\ln x,\ g'=\frac1x", [('diff(log(x),x)', '1/x', 't')], 'القطع الأربع'),
-                      ('line', 'log(x)+1', '$1\\cdot\\ln x+x\\cdot\\frac1x$')])
+    U.drill('2', 'M-02', 'P', "ln والداخل فيه $\\tan^{-1}2x$.",
+            sol_rows=[('tex', r"u=x^{3}+\tan^{-1}2x,\quad u'=3x^{2}+\frac{2}{1+4x^{2}}", [('diff(x**3+atan(2*x),x)', '3*x**2+2/(1+4*x**2)')],
+                       'الداخل ومشتقته: صف $\\tan^{-1}$ مع $u=2x$'),
+                      ('line', '(3*x**2+2/(1+4*x**2))/(x**3+atan(2*x))', "$(\\ln|u|)'=\\frac{u'}{u}$")])
+    U.drill('3', 'M-01', 'P', 'ضرب: $\\sqrt x$ في $\\ln|x|$.',
+            sol_rows=[('tex', r"f=\sqrt{x},\ f'=\frac{1}{2\sqrt{x}};\qquad g=\ln|x|,\ g'=\frac1x",
+                       [('diff(sqrt(x),x)', '1/(2*sqrt(x))'), ('diff(log(x),x)', '1/x', 't')], 'القطع الأربع'),
+                      ('tex', r"y'=\frac{\ln|x|}{2\sqrt{x}}+\sqrt{x}\cdot\frac1x", [('diff(sqrt(x)*log(x),x)', 'log(x)/(2*sqrt(x))+sqrt(x)/x', 't')],
+                       "قاعدة الضرب $f'g+fg'$"),
+                      ('line', 'log(Abs(x))/(2*sqrt(x))+1/sqrt(x)', '$\\frac{\\sqrt x}{x}=\\frac{1}{\\sqrt x}$ (أ1)')])
     U.drill('4', 'G-64', 'I', 'رقم زائد مربع بلا جذر ⇐ $\\tan^{-1}$، و $a=4$.',
             sol_rows=[('tex', r'16+x^{2}=4^{2}+x^{2}\ \Rightarrow\ a=4', [('16+x**2', '4**2+x**2')], 'رقم زائد مربع بلا جذر'),
                       ('line', 'atan(x/4)/4', '$\\frac1a\\tan^{-1}\\frac{x}{a}$')])
@@ -539,9 +543,9 @@ def part_b2():
                                 rich('$\\int e^{-x}dx=-e^{-x}$: القسمة على $k=-1$ تعطي سالب.'),
                                 rich('$\\int x^{-1}dx$ ما ينفع معه قاعدة القوة: هو $\\ln|x|$.')]))
     U.add('ok', '✔ تأكد', p(rich('اشتق جوابك. هنا السهل تغلط في الإشارة، والاشتقاق يكشفها فورًا.')))
-    U.drill('1', 'G-66', 'G', '$u=5x$، و $\\int\\cos u=\\sin u$.', first=r'u=5x,\quad dx=\frac{du}{5}', claims=[('diff(5*x,x)', '5')],
-            sol_rows=[('tex', r'\int\cos5x\,dx=\frac15\int\cos u\,du', [('cos(5*x)', 'Rational(1,5)*cos(5*x)*diff(5*x,x)')], 'نعوّض'),
-                      ('line', 'sin(5*x)/5', '$\\int\\cos u\\,du=\\sin u$، ونرجع $u$')])
+    U.drill('1', 'M-03', 'G', '$u=8x+1$، و $\\int e^u du=e^u$.', first=r'u=8x+1,\quad dx=\frac{du}{8}', claims=[('diff(8*x+1,x)', '8')],
+            sol_rows=[('tex', r'\int e^{8x+1}dx=\frac18\int e^{u}\,du', [('exp(8*x+1)', 'Rational(1,8)*exp(8*x+1)*diff(8*x+1,x)')], 'نعوّض'),
+                      ('line', 'exp(8*x+1)/8', '$\\int e^u\\,du=e^u$، ونرجع $u$')])
     U.drill('2', 'G-67', 'P', 'sinh تكامله cosh بدون سالب، ونقسم على 2.',
             sol_rows=[('sub', '2*x', '2', '$u=2x$'),
                       ('tex', r'\int\sinh2x\,dx=\frac12\int\sinh u\,du', [('sinh(2*x)', 'Rational(1,2)*sinh(2*x)*diff(2*x,x)')], '$dx=\\frac{du}{2}$'),
@@ -553,10 +557,10 @@ def part_b2():
             sol_rows=[('sub', 'x**2-1', '2*x', '$w=x^2-1$', 'w', '1+t'),
                       ('tex', r'=\frac12\int w^{-1/2}dw=w^{1/2}', [('integrate(w**Rational(-1,2),w)/2', 'w**Rational(1,2)')], '$x\\,dx=\\frac{dw}{2}$'),
                       ('line', 'sqrt(x**2-1)', 'نرجع $w$')])
-    U.drill('5', 'G-70', 'I', 'المقام $w=4+x^2$، ومشتقته $2x$.',
-            sol_rows=[('sub', '4+x**2', '2*x', '$w=4+x^2$', 'w'),
-                      ('tex', r'=\frac12\int\frac{dw}{w}', [('x/(4+x**2)', 'Rational(1,2)*diff(4+x**2,x)/(4+x**2)')], '$x\\,dx=\\frac{dw}{2}$'),
-                      ('line', 'log(4+x**2)/2', '$4+x^2>0$ فلا نحتاج $|\\,|$')])
+    U.drill('5', 'M-04', 'I', 'البسط نص مشتقة المقام.',
+            sol_rows=[('sub', 'x**2+2*sin(x)', '2*x+2*cos(x)', '$w=$ المقام، ومشتقته $2x+2\\cos x=2(x+\\cos x)$', 'w', 't'),
+                      ('tex', r'=\frac12\int\frac{dw}{w}', [('(x+cos(x))/(x**2+2*sin(x))', 'Rational(1,2)*diff(x**2+2*sin(x),x)/(x**2+2*sin(x))')],
+                       'البسط $=\\frac12\\,dw$، و $\\int\\frac{dw}{w}=\\ln|w|$، ثم نرجع $w$')])
     return U
 
 

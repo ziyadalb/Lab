@@ -1217,5 +1217,81 @@
   "case": "PRE-C3",
   "section": "5.2",
   "note": "prerequisite part (before lesson 5.2)"
+ },
+ {
+  "id": "G-79",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:log(Abs(3*x))",
+  "answer": [
+   "x*log(Abs(3*x))",
+   "-x"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "C51-LN0",
+  "section": "5.1",
+  "note": "extra exercise (type 15 had two)"
+ },
+ {
+  "id": "G-80",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:log(x**2+4)",
+  "answer": [
+   "x*log(x**2+4)",
+   "-2*x",
+   "4*atan(x/2)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C51-LN0",
+  "section": "5.1",
+  "note": "extra exercise (type 15 had two)"
+ },
+ {
+  "id": "G-81",
+  "kind": "generated",
+  "task": "defint",
+  "q": "raw:x*cos(x)",
+  "answer": [
+   "pi/2",
+   "-1"
+  ],
+  "bounds": [
+   "0",
+   "pi/2"
+  ],
+  "antiderivative": [
+   "x*sin(x)",
+   "cos(x)"
+  ],
+  "branches": [],
+  "case": "C51-DEF",
+  "section": "5.1",
+  "note": "extra exercise (type 16 had two)"
+ },
+ {
+  "id": "G-82",
+  "kind": "generated",
+  "task": "defint",
+  "q": "raw:x**2*log(x)",
+  "answer": [
+   "(2*E**3+1)/9"
+  ],
+  "bounds": [
+   "1",
+   "E"
+  ],
+  "antiderivative": [
+   "x**3*log(x)/3",
+   "-x**3/9"
+  ],
+  "branches": [],
+  "case": "C51-DEF",
+  "section": "5.1",
+  "note": "extra exercise (type 16 had two)"
  }
 ]

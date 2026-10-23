@@ -40,7 +40,7 @@ H03,,,,,,,,,,محجوز للمحاكاة,
 1445-S2-FE-Q3.4,exam,M 111 - 451-452 - English.pdf,31,1445,النهائي,3,4,خارج (6.x/7.x/8.x/2.2/3.x),,مستبعد (خارج النطاق المثبت),
 1445-S2-FE-Q3.5,exam,M 111 - 451-452 - English.pdf,31,1445,النهائي,3,5,خارج (6.x/7.x/8.x/2.2/3.x),,مستبعد (خارج النطاق المثبت),
 1445-S2-FE-Q3.6,exam,M 111 - 451-452 - English.pdf,31,1445,النهائي,3,6,خارج (6.x/7.x/8.x/2.2/3.x),,مستبعد (خارج النطاق المثبت),
-1445-S2-SE-Q1.1,exam,M 111 - 451-452 - English.pdf,22,1445,الاختبار الثاني,1,1,4.2,C42-D,مستخدم في المذكرة الكاملة,day 2 warm-up
+1445-S2-SE-Q1.1,exam,M 111 - 451-452 - English.pdf,22,1445,الاختبار الثاني,1,1,4.2,C42-D,مستخدم في كرّاسة الاختصارات,drill I1
 1445-S2-SE-Q1.2,exam,M 111 - 451-452 - English.pdf,22,1445,الاختبار الثاني,1,2,4.2,C42-D,مرجع إضافي (غير مستخدم في المذكرة),
 1445-S2-SE-Q2.1,exam,M 111 - 451-452 - English.pdf,22,1445,الاختبار الثاني,2,1,4.1,P10,مستبعد (خارج النطاق المثبت),
 1445-S2-SE-Q2.2,exam,M 111 - 451-452 - English.pdf,22-23,1445,الاختبار الثاني,2,2,5.1,C51-POLY1,مستخدم في المذكرة الكاملة,day 4 warm-up
@@ -183,7 +183,7 @@ N42-X1-2,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf
 N42-X1-3,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,62,غير معلوم,مذكرة د. طارق,1(3),,4.2,C42-D,مستخدم في المذكرة الكاملة,speed42
 N42-X1-4,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,62,غير معلوم,مذكرة د. طارق,1(4),,4.2,C42-D,مرجع إضافي (غير مستخدم في المذكرة),
 N42-X1-5,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,62,غير معلوم,مذكرة د. طارق,1(5),,4.2,C42-D,مرجع إضافي (غير مستخدم في المذكرة),
-N42-X1-6,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,62,غير معلوم,مذكرة د. طارق,1(6),,4.2,C42-D,مستخدم في المذكرة الكاملة,day 7 warm-up
+N42-X1-6,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,62,غير معلوم,مذكرة د. طارق,1(6),,4.2,C42-D,مرجع إضافي (غير مستخدم في المذكرة),
 N42-X2-01,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,62,غير معلوم,مذكرة د. طارق,2(1),,4.2,C42-I-HIDDEN,مستخدم في المذكرة الكاملة,U-I1 example 2
 N42-X2-02,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,62,غير معلوم,مذكرة د. طارق,2(2),,4.2,C42-I-HIDDEN,مستخدم في المذكرة الكاملة,U-I1 drill 2
 N42-X2-03,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,62,غير معلوم,مذكرة د. طارق,2(3),,4.2,C42-I-TANH,مستخدم في المذكرة الكاملة,U-I2 drill 1
@@ -203,7 +203,7 @@ N42-X2-16,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pd
 N51-E1,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,63,غير معلوم,مذكرة د. طارق,Ex(1),,5.1,C51-POLY1,مستخدم في المذكرة الكاملة,U-P1 drill 1
 N51-E2,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,63,غير معلوم,مذكرة د. طارق,Ex(2),,5.1,C51-POLY2,مستخدم في المذكرة الكاملة,U-P2 drill 1
 N51-E3,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,64,غير معلوم,مذكرة د. طارق,Ex(3),,5.1,C51-LN,مستخدم في المذكرة الكاملة,U-P3 example 1
-N51-E4,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,64,غير معلوم,مذكرة د. طارق,Ex(4),,5.1,C51-LN0,مستخدم في المذكرة الكاملة,U-P4 drill 2
+N51-E4,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,64,غير معلوم,مذكرة د. طارق,Ex(4),,5.1,C51-LN0,مستخدم في المذكرة الكاملة,U-P4 drill 3
 N51-E5,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,64,غير معلوم,مذكرة د. طارق,Ex(5),,5.1,C51-INV,مرجع إضافي (غير مستخدم في المذكرة),
 N51-E6,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,65,غير معلوم,مذكرة د. طارق,Ex(6),,5.1,C51-XINV,مستخدم في المذكرة الكاملة,U-P7 drill 3
 N51-E7,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,65,غير معلوم,مذكرة د. طارق,Ex(7),,5.1,C51-CYC,مستخدم في المذكرة الكاملة,U-P8 drill 1
@@ -222,7 +222,7 @@ N51-X12,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,
 N51-X13,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,66,غير معلوم,مذكرة د. طارق,(13),,5.1,C51-EXPH,مستخدم في المذكرة الكاملة,U-P9 drill 1
 N51-X14,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,66,غير معلوم,مذكرة د. طارق,(14),,5.1,C51-EXPH,مستخدم في المذكرة الكاملة,U-P9 drill 2
 N51-X15,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,66,غير معلوم,مذكرة د. طارق,(15),,5.1,C51-SUBPARTS,مستخدم في المذكرة الكاملة,U-P10 example
-N51-X16,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,66,غير معلوم,مذكرة د. طارق,(16),,5.1,C51-LN0,مستخدم في المذكرة الكاملة,U-P4 drill 1
+N51-X16,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,66,غير معلوم,مذكرة د. طارق,(16),,5.1,C51-LN0,مستخدم في المذكرة الكاملة,U-P4 drill 2
 N51-X17,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,66,غير معلوم,مذكرة د. طارق,(17),,5.1,C51-ROOT,مستخدم في المذكرة الكاملة,U-P10 drill 2
 N51-X18,notes_exercise,MATH 111 - Class Notes - 2024 - English (compressed).pdf,66,غير معلوم,مذكرة د. طارق,(18),,5.1,C51-ROOT,مستخدم في المذكرة الكاملة,U-P10 drill 3
 N52-E1-1,notes_example,MATH 111 - Class Notes - 2024 - English (compressed).pdf,67,غير معلوم,مذكرة د. طارق,Ex1(1),,5.2,C52-ODD1,مستخدم في المذكرة الكاملة,U-T1 example

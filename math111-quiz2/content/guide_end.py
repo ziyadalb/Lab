@@ -1,32 +1,32 @@
-"""المذكرة الكاملة — صفحات الأيام، سرعة الاختصار، المراجعة المخلوطة، ورقة القوانين، بطاقة القرار، إذا علقت، سجل الأخطاء،
-سلّم المساعدة (التلميح وأول خطوة لكل تمرين)، المفاتيح، الملحق."""
+"""المذكرة الكاملة — صفحات الأيام، اعرف النوع، المراجعة المخلوطة، ورقة القوانين، بطاقة القرار، إذا علقت، سجل الأخطاء،
+المفاتيح، الملحق."""
 import json
 from pathlib import Path
 
 import booklet as B
-from booklet import sc_dawaran, sc_even, sc_lamda, sc_nisfayn, sc_prod, sc_qaws, sc_rafeeq, sc_reduce, \
-    sc_six, sc_small, sc_square, sc_twins
+from booklet import sc_dawaran, sc_even, sc_lamda, sc_prod, sc_qaws, sc_reduce, sc_six, sc_square, sc_twins
 from booklet_engine import HOLD, ITEMS, LOG, ans_tex, q_tex
 from guide_52 import sc_method
 import guide_prereq as PQ
-from guide_kit import ALG_SEEN, DAYS as UNIT_DAYS, DRILLS_N, HELP, TRY_KEYS, final, pgref, rich
+from guide_kit import ALG_SEEN, DAY_NAME, DAYS as UNIT_DAYS, DRILLS_N, HELP, TRY_KEYS, final, pgref, rich, unit_minutes
 from html_kit import box, chip, lines, link, md, mi, p, table, ul
 
 ROOT = Path(__file__).resolve().parent.parent
 
-TITLES = {'speed42': 'سرعة الاختصار: 4.2', 'speed51': 'سرعة الاختصار: 5.1', 'speed52': 'سرعة الاختصار: 5.2',
+TITLES = {'speed42': 'اعرف النوع: 4.2', 'speed51': 'اعرف النوع: 5.1', 'speed52': 'اعرف النوع: 5.2',
           'mockA': 'الاختبار التجريبي A', 'mixed': 'المراجعة المخلوطة', 'mockB': 'الاختبار التجريبي B',
           'quizday': 'يوم الكويز: الليلة، والصباح، وفي القاعة'}
 TITLES.update({a: '📚 ' + t for a, t in PQ.TITLES.items()})
 # a speed drill comes after its lesson ends (5.1 and 5.2: the next morning; 4.2 ends on day 3 with type 11, so its
 # speed drill follows it the same day); mocks and mixed review close the last days
 DAY_START = {5: ['speed51'], 7: ['speed52']}
-DAY_END = {6: ['mockA'], 7: ['mixed', 'mockB', 'quizday']}
+# day 6 is the last day before the quiz (mock A, then the quiz-day page); day 7 holds the extras for spare time
+DAY_END = {6: ['mockA', 'quizday'], 7: ['mixed', 'mockB']}
 # pages printed just before a type: the «before the lesson» chapter before the lesson's first type, and speed 4.2
 BEFORE_UNIT = {'U-D1': ['pre42'], 'U-P1': ['speed42', 'pre51'], 'U-T1': ['pre52']}
 END_TOC = [('formulas', 'ورقة القوانين والاختصارات'), ('decide', 'بطاقة القرار: أي نوع؟'), ('stuck', 'إذا علقت'),
-           ('mistakes', 'أخطاء الجبر الشائعة: غلط وصح'), ('errlog', 'سجل الأخطاء'), ('help', 'سلّم المساعدة: التلميح وأول خطوة لكل تمرين'),
-           ('keys', 'المفاتيح: الإحماء، سرعة الاختصار، المراجعة المخلوطة، «جرّب»'),
+           ('mistakes', 'أخطاء الجبر الشائعة: غلط وصح'), ('errlog', 'سجل الأخطاء'),
+           ('keys', 'المفاتيح: الإحماء، اعرف النوع، المراجعة المخلوطة، «جرّب»'),
            ('appendix', 'ملحق: المصادر والتحقق')]
 
 # two review questions per day: one from yesterday's types, one from an older day (spaced retrieval)
@@ -35,25 +35,25 @@ WARM = {2: ['1445-S2-SE-Q1.1', 'G-45'], 3: ['G-38', 'N42-X2-04'], 4: ['1445-S2-S
         5: ['G-42', 'N51-X06'], 6: ['G-43', '1446-S1-FE-Q2.2'], 7: ['G-44', 'N42-X1-6']}
 
 SPEED = {
-    'speed42': ('4.2', [('N42-X2-13', 'النوع 10: $h=-3$، $d=-9$ ⇐ cosh، $a=3$'),
-                        ('1446-S2-SE-Q2.2', 'النوع 10: $h=-1$، $d=9$ ⇐ sinh، $a=3$'),
-                        ('N42-E2-7', 'النوع 10: $h=-1$، $d=-9$ ⇐ cosh، $a=3$'),
-                        ('1447-S1-SE-Q2.4', 'النوع 11: $h=3$، $d=16$، معامل $x^2$ سالب ⇐ sech'),
+    'speed42': ('4.2', [('N42-X2-13', 'النوع 10: المركز $-3$، والباقي $-9$ سالب ⇐ cosh، و $a=3$'),
+                        ('1446-S2-SE-Q2.2', 'النوع 10: المركز $-1$، والباقي $9$ موجب ⇐ sinh، و $a=3$'),
+                        ('N42-E2-7', 'النوع 10: المركز $-1$، والباقي $-9$ سالب ⇐ cosh، و $a=3$'),
+                        ('1447-S1-SE-Q2.4', 'النوع 11: المركز $3$، والباقي $16$، ومعامل $x^2$ سالب ⇐ sech'),
                         ('N42-X2-05', 'النوع 5: $u=3x^2$، $a=2$، داخل الجذر ناقص ⇐ sech'),
                         ('N42-E1-7', 'النوع 2: ضرب دالتين، و $u=5x$'),
                         ('N42-X1-3', 'النوع 2: قوة، ثم tanh⁻¹ مع $u=3x$'),
                         ('1445-S1-FE-Q1.3', 'النوعان 1 و 2: sinh⁻¹ مع $u=3^x$، ثم ln'),
                         ('1447-S2-SE-Q1.1', 'النوع 1: $u=\\ln|x+1|$'),
-                        ('1447-S2-SE-Q3.4', 'النوع 11: $h=2$، $d=2$، معامل $x^2$ سالب ⇐ sech، $a=\\sqrt2$')]),
-    'speed51': ('5.1', [('N51-X01', 'النوع 12: $p=2$، $G_1=\\sinh x$'),
-                        ('G-22', 'النوع 14: $n=4$'),
-                        ('G-40', 'النوع 17: الرفيق'),
-                        ('G-41', 'النوع 17: الرفيق'),
-                        ('G-17', 'النوع 12: $p=1$، $G_1=-e^{-x}$'),
+                        ('1447-S2-SE-Q3.4', 'النوع 11: المركز $2$، والباقي $2$، ومعامل $x^2$ سالب ⇐ sech، و $a=\\sqrt2$')]),
+    'speed51': ('5.1', [('N51-X01', 'النوع 12: $u=$ القوس، و $dv=\\cosh x\\,dx$ (أو جدول DI)'),
+                        ('G-22', 'النوع 14: $u=\\ln|x|$، و $dv=x^4dx$'),
+                        ('G-40', 'النوع 17: دالة عكسية وحدها ⇐ $u=$ الدالة، و $dv=dx$'),
+                        ('G-41', 'النوع 17: دالة عكسية وحدها ⇐ $u=$ الدالة، و $dv=dx$'),
+                        ('G-17', 'النوع 12: $u=x$، و $dv=e^{-x}dx$'),
                         ('G-18', 'النوع 13: جدول DI'),
-                        ('G-19', 'النوع 19: $a=3$، $b=1$'),
-                        ('G-20', 'النوع 20: $a=2$، $b=1$'),
-                        ('G-21', 'النوع 17: الرفيق')]),
+                        ('G-19', 'النوع 19: التكامل يرجع لنفسه، رقم الأسية 3 ورقم sin 1'),
+                        ('G-20', 'النوع 20: اكتب sinh بالأسس'),
+                        ('G-21', 'النوع 17: دالة عكسية وحدها ⇐ $u=$ الدالة، و $dv=dx$')]),
     'speed52': ('5.2', [('N52-X11', 'النوع 29: sin·sin، $m=2$، $n=6$'),
                         ('N52-X04', 'النوع 23: $u=\\cos x$، و $\\sqrt[3]{\\cos x}=u^{1/3}$'),
                         ('G-23', 'النوع 23: sin فردي ⇐ $u=\\cos x$'),
@@ -77,11 +77,6 @@ def section(id_, title, inner, cls=''):
     return '<section class="chapter %s" id="%s"><h2>%s</h2>%s</section>' % (cls, id_, title, inner)
 
 
-def unit_minutes(uid):
-    """Study time of one type: 25 minutes with three exercises, 20 with two (plus a 5-minute break)."""
-    return 25 if DRILLS_N.get(uid, 3) >= 3 else 20
-
-
 def day_extras(d):
     inner = [a for uid, _, _ in UNIT_DAYS.get(d, []) for a in BEFORE_UNIT.get(uid, [])]
     return [(a, TITLES[a]) for a in DAY_START.get(d, []) + inner + DAY_END.get(d, []) if a != 'quizday']
@@ -98,13 +93,13 @@ def day_schedule(d):
         add(5, '5 دقائق', 'اقرأ صفحة «كيف تستخدم المذكرة»')
         add(5, '5 دقائق', '🔁 الإحماء تحت: مشتقات sinh و cosh و tanh من ذاكرتك')
     else:
-        add(5, '5 دقائق', '🔁 الإحماء تحت: اكتب الاختصارات من ذاكرتك، وابدأ سؤالي المراجعة')
+        add(5, '5 دقائق', '🔁 الإحماء تحت: أول خطوة لكل نوع من أمس، وسؤالا المراجعة')
     for a in DAY_START.get(d, []):
-        add(10, '10 دقائق', '⚡ %s: رقم النوع وأول سطر فقط' % TITLES[a])
+        add(10, '10 دقائق', '🔎 %s: رقم النوع وأول سطر فقط' % TITLES[a])
     for uid, num, title in UNIT_DAYS.get(d, []):
         for a in BEFORE_UNIT.get(uid, []):
             if a.startswith('speed'):
-                add(10, '10 دقائق', '⚡ %s: رقم النوع وأول سطر فقط' % TITLES[a])
+                add(10, '10 دقائق', '🔎 %s: رقم النوع وأول سطر فقط' % TITLES[a])
                 continue
             for m, what in PQ.schedule_rows(a):
                 add(m, '%d دقائق' % m if m <= 10 else '%d دقيقة' % m, what)
@@ -117,8 +112,8 @@ def day_schedule(d):
             add(75, '60 + 15 دقيقة', 'الاختبار التجريبي B، ثم صحّح B')
         elif a == 'mixed':
             add(45, '45 دقيقة', 'المراجعة المخلوطة (12 سؤالًا بدون عناوين)')
-    if d == 7:
-        add(20, '20 دقيقة', 'اقرأ ورقة القوانين، وسجل أخطائك كله، وصفحة «يوم الكويز»')
+    if d == 6:
+        add(20, '20 دقيقة', '🌙 بالليل: ورقة القوانين، وسجل أخطائك، وصفحة «يوم الكويز»')
     add(5, '5 دقائق', 'سجّل أخطاء اليوم في سجل الأخطاء')
     return rows, total
 
@@ -139,7 +134,7 @@ def question_used(it, where):
 
 def warmup(d):
     prev = [n for _, n, _ in UNIT_DAYS.get(d - 1, [])]
-    body = p('اكتب على ورقة جانبية، بدون ما تفتح المذكرة: اسم كل نوع من <b>أنواع أمس</b> (%d–%d) واختصاره أو أول خطوة فيه، '
+    body = p('اكتب على ورقة جانبية، بدون ما تفتح المذكرة: اسم كل نوع من <b>أنواع أمس</b> (%d–%d) وأول خطوة فيه، '
              'سطر لكل نوع. بعدها تأكد من ' % (min(prev), max(prev)) + link('toc', 'المحتويات') + ' ومن صفحات الأنواع.')
     if d in WARM:
         qs, keys = '', []
@@ -164,11 +159,11 @@ def speed_page(anchor):
         key.append([str(k), rich(hint), mi(r'\displaystyle ' + ans_tex(it, with_lhs=False).lstrip('= '))])
         final(it, anchor)
     SPEED_KEYS[anchor] = (lesson, key)
-    hint = {'4.2': '$u$ و $a$، أو $h$ و $d$', '5.1': '$u$ و $dv$، أو $p$، أو $a$ و $b$', '5.2': 'القطعة اللي تحجزها و $u$، أو $m$ و $n$'}[lesson]
+    hint = {'4.2': '$u$ و $a$، أو المركز والباقي', '5.1': '$u$ و $dv$', '5.2': 'القطعة اللي تحجزها و $u$'}[lesson]
     page = (p(rich('لا تحل. اكتب تحت كل سؤال <b>رقم النوع</b> و<b>أول سطر</b> فقط (مثل ' + hint + '). '
                    'الهدف أن تعرف النوع والبداية في ثوانٍ. المفتاح في ') + link('k-' + anchor, 'المفاتيح ص ' + pgref('k-' + anchor)) + '.')
             + '<div class="chgrid">' + qs + '</div>')
-    return section(anchor, '⚡ سرعة الاختصار: %s' % lesson, page, 'flow')
+    return section(anchor, '🔎 اعرف النوع: %s' % lesson, page, 'flow')
 
 
 def mock_box(which):
@@ -178,11 +173,11 @@ def mock_box(which):
                  '60 دقيقة بالضبط (اضبط منبهًا)، بدون مذكرة وبدون ورقة قوانين وبدون آلة حاسبة.',
                  'بعد الوقت صحّح <b>A فقط</b> من صفحة حلوله، وسجّل كل غلطة في ' + link('errlog', 'سجل الأخطاء')
                  + '. حلول B بعد فاصل ثاني: لا تفتحها قبل ما تحل B بكرة.',
-                 'أي نوع غلطت فيه: ارجع لصفحته، واقرأ ⚡ و🧱، وحل تمرينه الأخير مرة ثانية.']
+                 'أي نوع غلطت فيه: ارجع لصفحته، واقرأ 🧱 الحل خطوة خطوة، وحل تمرينه الأخير مرة ثانية.']
     else:
         items = ['افتح الملف نفسه، الاختبار B. نفس الشروط: 60 دقيقة، بدون مذكرة وبدون ورقة قوانين وبدون آلة حاسبة.',
                  'بعد الوقت صحّح B من صفحة حلوله، وسجّل أخطاءك في ' + link('errlog', 'سجل الأخطاء') + '.',
-                 'أي نوع غلطت فيه: ارجع لصفحته، واقرأ ⚡ و🧱، وحل تمرينه الأخير مرة ثانية.',
+                 'أي نوع غلطت فيه: ارجع لصفحته، واقرأ 🧱 الحل خطوة خطوة، وحل تمرينه الأخير مرة ثانية.',
                  'بعدها (20 دقيقة): اقرأ ' + link('formulas', 'ورقة القوانين') + ' وسجل أخطائك كله، ثم سجّل أخطاء اليوم.']
     return section(anchor, '📝 الاختبار التجريبي %s' % which, box('warn', 'التعليمات', ul(items)), 'flow')
 
@@ -219,11 +214,13 @@ def after_day(d):
 def formulas():
     parts = []
     for title, fns in [('4.2', [sc_twins, sc_six, sc_lamda, sc_square]),
-                       ('5.1', [sc_qaws, sc_rafeeq, sc_dawaran, sc_nisfayn, sc_small]),
+                       ('5.1', [sc_qaws, sc_dawaran]),
                        ('5.2', [sc_method, sc_even, sc_reduce, sc_prod])]:
-        inner = p('<b>الخطي و DI:</b> ' + rich('$\\int(px+q)\\,g\\,dx=(px+q)G_1-pG_2$؛ ومع $x^2$ أو $x^3$ جدول DI.')) if title == '5.1' else ''
+        inner = (p('<b>التجزئة:</b> ' + rich('$\\int u\\,dv=uv-\\int v\\,du$. القوس أو كثيرة الحدود ⇐ جدول DI (D تشتق لين الصفر، I تكامل، '
+                     'وإشارات $+\\,-\\,+$). ln أو دالة عكسية ⇐ هي $u$. وsinh أو cosh مع أسية ⇐ اكتبها بالأسس.'))
+                 if title == '5.1' else '')
         for fn in fns:
-            short, _ = fn(sheet=True) if fn is sc_rafeeq else fn()
+            short, _ = fn()
             inner += '<div class="fsheet">' + short + '</div>'
         parts.append('<h3>%s</h3>' % title + inner)
     return section('formulas', '📋 ورقة القوانين والاختصارات',
@@ -297,7 +294,7 @@ def keys():
     out = '<h3>أجوبة الإحماء</h3>' + table(['اليوم', 'مراجعة 1', 'مراجعة 2'], w_rows, 'answers')
     for anchor in ('speed42', 'speed51', 'speed52'):
         lesson, key = SPEED_KEYS[anchor]
-        out += ('<h3 id="k-%s">مفتاح سرعة الاختصار: %s %s</h3>' % (anchor, lesson, link(anchor, '↩'))
+        out += ('<h3 id="k-%s">مفتاح اعرف النوع: %s %s</h3>' % (anchor, lesson, link(anchor, '↩'))
                 + table(['#', 'النوع وأول سطر', 'الجواب (للتأكد فقط)'], key, 'answers'))
     out += ('<h3 id="k-mixed">أجوبة المراجعة المخلوطة %s</h3>' % link('mixed', '↩')
             + p('للتكاملات: اشتق جوابك؛ إذا رجع السؤال فهو صحيح (قد يختلف بثابت). للمشتقات: قارن حدًا حدًا. '
@@ -405,4 +402,4 @@ def quiz_day():
 
 
 def end_sections():
-    return formulas() + decide() + stuck() + mistakes() + errlog() + help_ladder() + keys() + appendix()
+    return formulas() + decide() + stuck() + mistakes() + errlog() + keys() + appendix()
