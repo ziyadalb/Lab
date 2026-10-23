@@ -1,0 +1,44 @@
+[
+ {
+  "id": "G-83",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/(9-x**2)",
+  "answer": [
+   "atanh(x/3)/3"
+  ],
+  "branches": [
+   "3*t/(1+t)",
+   "-3*t/(1+t)"
+  ],
+  "case": "C42-I-TANH",
+  "section": "4.2",
+  "note": "extra exercise"
+ },
+ {
+  "id": "M-10",
+  "kind": "musa",
+  "task": "defint",
+  "q": "raw:x/(x**4-16)",
+  "answer": [
+   "acoth(4)/8",
+   "-acoth(16)/8"
+  ],
+  "bounds": [
+   "4",
+   "8"
+  ],
+  "antiderivative": [
+   "-acoth(x**2/4)/8"
+  ],
+  "branches": [],
+  "case": "C42-I-TANH",
+  "section": "4.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 69,
+   "number": "أمثلة 4 رقم 3"
+  },
+  "note": "u = x^2 > 4 on [4, 8], so coth^-1; the notes' answer -1/8[coth^-1(x^2/4)] from 4 to 8 is correct (they also write +C after the bounds)"
+ }
+]
