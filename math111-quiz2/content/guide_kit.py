@@ -203,8 +203,8 @@ def alg(skill, title=None, rows=None, intro='', try_=None):
     anchor = 'alg-' + skill
     if skill in ALG_SEEN:
         return p('🧮 ' + ALG_SEEN[skill] + ' — ' + link(anchor, 'الشرح المفصّل في ص ' + pgref(anchor)), 'algref')
-    if rows is None:
-        raise BuildError('first use of algebra skill %s needs its explanation' % skill)
+    if rows is None:            # the skill's box was dropped (the algebra now sits inside the solution tables)
+        return ''
     ALG_SEEN[skill] = title
     if try_ is None:
         from guide_checks import TRY
@@ -269,9 +269,9 @@ class Unit:
         first_tex = arith(first, claims, where + ' first') if first else None
         n = WRITE[level][self.section] + extra_lines
         if level == 'G':
-            body += p('البداية جاهزة؛ أكمل:') + md(first_tex) + lines(n, 'write tight')
+            body += p('أول سطر جاهز. كمّل الحل:') + md(first_tex) + lines(n, 'write tight')
         elif level == 'P':
-            body += p('اكتب سطر المعطيات ثم الجواب:') + lines(n, 'write tight')
+            body += p('اكتب أول سطر، ثم كمّل الحل:') + lines(n, 'write tight')
         else:
             body += lines(n, 'write tight')
         self.drills.append((prompt(it), '<div class="drill">' + head + body + '</div>'))

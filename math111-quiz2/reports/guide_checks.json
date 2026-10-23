@@ -4788,27 +4788,6 @@
    "status": "symbolic"
   },
   {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra const-out",
-   "claim": "integrate(3*cosh(x),x) = 3*sinh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra const-out",
-   "claim": "-integrate(3*cosh(x),x) = -3*sinh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try const-out",
-   "claim": "integrate(5*sin(x),x) = -5*cos(x)",
-   "residual": "0"
-  },
-  {
    "kind": "identity",
    "ok": true,
    "label": "U-P1 check",
@@ -4840,6 +4819,13 @@
    "ok": true,
    "item": "N51-E1",
    "label": "U-P1 drill 1 step 2",
+   "step": "x*sin(x)-(-cos(x))"
+  },
+  {
+   "kind": "step",
+   "ok": true,
+   "item": "N51-E1",
+   "label": "U-P1 drill 1 step 3",
    "step": "x*sin(x)+cos(x)"
   },
   {
@@ -5037,20 +5023,6 @@
    "item": "1445-S1-FE-Q2.2",
    "label": "U-P2 ex short 4",
    "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra neg-bracket",
-   "claim": "-(2*x*cosh(x)-2*sinh(x)) = -2*x*cosh(x)+2*sinh(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try neg-bracket",
-   "claim": "-(3*x*sin(x)-2*cos(x)) = -3*x*sin(x)+2*cos(x)",
-   "residual": "0"
   },
   {
    "kind": "arithmetic",
@@ -5255,41 +5227,6 @@
    "ok": true,
    "label": "U-P3 ex1 short 4",
    "claim": "x**3/3*Rational(1,3) = x**3/9",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra pow-rules",
-   "claim": "x**3/3*(1/x) = x**2/3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra pow-rules",
-   "claim": "x**(-2) = 1/x**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra pow-rules",
-   "claim": "integrate(x**(-2),x) = -1/x",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra pow-rules",
-   "claim": "x**(-3)/(-3) = -1/(3*x**3)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try pow-rules",
-   "claim": "integrate(x**(-5),x) = -1/(4*x**4)",
    "residual": "0"
   },
   {
@@ -5498,27 +5435,6 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "algebra poly-div",
-   "claim": "2*x**2/(1+x**2) = 2-2/(1+x**2)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra poly-div",
-   "claim": "x**2/(1-x**2) = -1+1/(1-x**2)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try poly-div",
-   "claim": "x**2/(x**2+4) = 1-4/(x**2+4)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
    "label": "U-P4 drill 1 first",
    "claim": "diff(log(3*x),x) = 1/x",
    "residual": "0"
@@ -5704,62 +5620,6 @@
    "item": "1445-S1-SE-Q2.3",
    "label": "U-P5 example",
    "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra ln-values",
-   "claim": "log(E) = 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra ln-values",
-   "claim": "log(1) = 0",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra ln-values",
-   "claim": "exp(0) = 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra ln-values",
-   "claim": "exp(log(5)) = 5",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra ln-values",
-   "claim": "sin(pi/2) = 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra ln-values",
-   "claim": "cos(pi/2) = 0",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try ln-values",
-   "claim": "log(E**3) = 3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try ln-values",
-   "claim": "exp(log(7)) = 7",
-   "residual": "0"
   },
   {
    "kind": "arithmetic",
@@ -6327,34 +6187,6 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "algebra cyclic-eq",
-   "claim": "1+Rational(1,4) = Rational(5,4)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra cyclic-eq",
-   "claim": "Rational(5,4)*Rational(4,5) = 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try cyclic-eq",
-   "claim": "1+Rational(1,9) = Rational(10,9)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try cyclic-eq",
-   "claim": "Rational(10,9)*Rational(9,10) = 1",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
    "label": "U-P8 drill 1 first",
    "claim": "diff(cos(x),x) = -sin(x)",
    "residual": "0"
@@ -6610,41 +6442,6 @@
    "item": "1446-S1-SE-Q2.3",
    "label": "U-P9 example",
    "status": "symbolic"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra exp-mult",
-   "claim": "exp(x)*exp(2*x) = exp(3*x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra exp-mult",
-   "claim": "exp(x)*exp(-2*x) = exp(-x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra exp-mult",
-   "claim": "cosh(x) = (exp(x)+exp(-x))/2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "algebra exp-mult",
-   "claim": "sinh(x) = (exp(x)-exp(-x))/2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "try exp-mult",
-   "claim": "exp(3*x)*cosh(x) = (exp(4*x)+exp(2*x))/2",
-   "residual": "0"
   },
   {
    "kind": "arithmetic",
@@ -11023,7 +10820,7 @@
   ]
  },
  "counts": {
-  "total": 1474,
-  "ok": 1474
+  "total": 1445,
+  "ok": 1445
  }
 }

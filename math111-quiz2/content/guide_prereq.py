@@ -84,7 +84,7 @@ class PreUnit(Unit):
         body = '<div class="q">' + p(rich(instruction)) + md(q_latex) + '</div>'
         n = max(2, WRITE[level][self.section] - 1)
         if level == 'G':
-            body += p('البداية جاهزة؛ أكمل:') + md(cells[0][0]) + lines(n, 'write tight')
+            body += p('أول سطر جاهز. كمّل الحل:') + md(cells[0][0]) + lines(n, 'write tight')
         else:
             body += lines(n, 'write tight')
         self.drills.append(('', '<div class="drill">' + head + body + '</div>'))
