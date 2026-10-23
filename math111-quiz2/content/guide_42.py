@@ -353,138 +353,357 @@ def u_sech():
 
 # ---------------------------------------------------------------- 6
 def u_lamda():
-    U = Unit('U-I4', 'لامدا: أسية تحت الجذر', '4.2', 'ص61، تمارين 10 و12', 2)
-    U.add('idea', 'الفكرة', p(rich('أسية تحت الجذر بدون مشتقتها في البسط. الحل الطويل: اضرب فوق وتحت في الأسية فتصير '
-                                   'النوع السابق (sech أو csch). الاختصار يعطيك الجواب مباشرة.')))
-    U.add('sign', 'العلامة', p(rich('$\\int\\frac{dx}{\\sqrt{e^{kx}+a^2}}$ أو $\\int\\frac{dx}{\\sqrt{a^2-b^{kx}}}$ أو $\\int\\frac{dx}{x\\sqrt{a^2\\pm x^{n}}}$ و $n$ فردي (مثل $x^3$)، والبسط رقم فقط '
-                                    '(مع $\\sqrt{e^{kx}-a^2}$ يطلع $\\sec^{-1}$، وهذا ليس من الدرس).')))
-    short, memo = sc_lamda()
-    U.add('short', '⚡ الاختصار', short + box_memo(memo))
+    U = Unit('U-I4', 'أسية تحت الجذر', '4.2', 'ص61، تمارين 10 و12', 2)
+    U.add('idea', 'الفكرة', p(rich(
+        'تحت الجذر أسية مثل $e^{6x}$، والبسط رقم بس. مشتقة الأسية مو موجودة فوق، فما نقدر نعوّض على طول. '
+        'نضرب فوق وتحت في جذر الأسية (هنا $e^{3x}$). كذا تطلع مشتقتها فوق، ويصير $u$ برّا الجذر. '
+        'وهذا شكل قانون $\\operatorname{csch}^{-1}$ أو $\\operatorname{sech}^{-1}$ من النوع 5.')))
+    U.add('sign', 'العلامة', p(rich('إذا شفت أسية تحت الجذر زائد أو ناقص رقم، مثل $\\sqrt{e^{6x}+1}$، والبسط رقم بس.'))
+          + contrast([(r'\int\frac{dx}{\sqrt{e^{6x}+1}}', 'هذا النوع', 'البسط رقم، ومشتقة الأسية مو فوق'),
+                      (r'\int\frac{e^{3x}\,dx}{\sqrt{e^{6x}+1}}', 'النوع 3', 'مشتقة الأسية فوق، فنعوّض $u=e^{3x}$ على طول'),
+                      (r'\int\frac{dx}{\sqrt{e^{2x}-1}}', '$\\sec^{-1}$ (درس 3.4)', 'أسية ناقص رقم، وقانونها مو من جدول 4.2')]))
+    U.prev('في النوع 5 كان $x$ برّا الجذر من البداية. هنا ما فيه شي برّا الجذر، فنصنعه: نضرب فوق وتحت في جذر الأسية.')
+    formula('1/(u*sqrt(u**2+a**2))', '-acsch(Abs(u)/a)/a', pos=('a',), label='U-I4 law csch')
+    formula('1/(u*sqrt(a**2-u**2))', '-asech(Abs(u)/a)/a', branches=('a*t/(1+t)', '-a*t/(1+t)'), pos=('a',), label='U-I4 law sech')
+    laws = (md(r'\int\frac{du}{u\sqrt{u^{2}+a^{2}}}=-\frac1a\operatorname{csch}^{-1}\frac{|u|}{a}+C')
+            + md(r'\int\frac{du}{u\sqrt{a^{2}-u^{2}}}=-\frac1a\operatorname{sech}^{-1}\frac{|u|}{a}+C'))
+    U.add('short', '🧭 الطريقة', method([
+        'نكتب الأسية كمربع: نص الأس. مثل $e^{6x}=(e^{3x})^2$.',
+        'نضرب فوق وتحت في جذر الأسية ($e^{3x}$)، فيطلع برّا الجذر.',
+        'نسمّي $u$ = جذر الأسية. مشتقته صارت فوق، ونقسم على الرقم اللي يطلع معها.',
+        '$u^2+a^2$ تحت الجذر يعني قانون $\\operatorname{csch}^{-1}$. و $a^2-u^2$ يعني قانون $\\operatorname{sech}^{-1}$. ثم نرجع $u$.'],
+        tricks_=[('أسية تحت الجذر: نضرب فوق وتحت في جذرها. $e^{6x}=(e^{3x})^2$، فنضرب في $e^{3x}$.', [('exp(6*x)', 'exp(3*x)**2')]),
+                 ('رقم التعديل: $du=3e^{3x}dx$ والبسط $e^{3x}dx$ بس. فالبسط $=\\frac13du$، ونطلّع $\\frac13$ برّا التكامل.',
+                  [('diff(exp(3*x),x)/3', 'exp(3*x)')])], label='U-I4') + laws)
     it = ITEMS['1446-S2-SE-Q2.7']
     ex = question(it, 'U-I4 example')
-    ex += short_steps(it, [
-        ('القانون: أسية تحت الجذر مع $+$ ⇐ صف csch في جدول لامدا',
-         r'\int\frac{dx}{\sqrt{b^{2\lambda x}+a^{2}}}=-\frac{1}{a\lambda\ln b}\operatorname{csch}^{-1}\frac{b^{\lambda x}}{a}+C', [R('lamda csch')]),
-        ('اكتب الأسية كمربع: نصف الأس (🧮 كتابة الحد كمربع)', r'e^{6x}=\left(e^{3x}\right)^{2}', [('exp(6*x)', 'exp(3*x)**2')]),
-        ('طلّع الأرقام: الأساس $e$، و $b^{\\lambda x}=e^{3x}$، و $1=1^2$', r'b=e,\qquad \lambda=3,\qquad a=1', [('exp(2*3*x)', 'exp(6*x)')]),
-        ('احسب المعامل؛ تذكّر $\\ln e=1$', r'-\frac{1}{a\lambda\ln b}=-\frac{1}{1\cdot3\cdot\ln e}=-\frac13', [('-1/(1*3*log(E))', '-Rational(1,3)')]),
-        ('عوّض في القانون، و $\\frac{e^{3x}}{1}=e^{3x}$؛ نفس جواب 🧱 (الضرب في $e^{3x}$)', r'-\frac13\operatorname{csch}^{-1}e^{3x}+C',
-         [('=ANS', '-acsch(exp(3*x))/3')])], 'U-I4 ex')
-    ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('tex', r'\frac{1}{\sqrt{e^{6x}+1}}=\frac{e^{3x}}{e^{3x}\sqrt{(e^{3x})^{2}+1}}',
-         [('1/sqrt(exp(6*x)+1)', 'exp(3*x)/(exp(3*x)*sqrt(exp(3*x)**2+1))')], 'نضرب فوق وتحت في $e^{3x}$'),
-        ('sub', 'exp(3*x)', '3*exp(3*x)', 'نسمّي $u=e^{3x}$'),
-        ('tex', r'\begin{array}{l}e^{3x}dx=\frac{du}{3}\\[7pt] \displaystyle\int\frac{e^{3x}dx}{e^{3x}\sqrt{e^{6x}+1}}=\frac13\int\frac{du}{u\sqrt{u^{2}+1}}\end{array}',
-         [('exp(3*x)/(exp(3*x)*sqrt(exp(3*x)**2+1))', 'Rational(1,3)*diff(exp(3*x),x)/(exp(3*x)*sqrt(exp(3*x)**2+1))')], 'التكامل بدلالة $u$'),
-        ('line', '-acsch(exp(3*x))/3', 'صف csch مع $a=1$، و $u=e^{3x}>0$')], 'U-I4 ex')
+    ex += steps(it, [
+        ('tex', r'e^{6x}=\left(e^{3x}\right)^{2}', [('exp(6*x)', 'exp(3*x)**2')],
+         'البسط رقم، ومشتقة الأسية مو فوق. فنجهّزها: نكتب الأسية كمربع، ونص 6 هو 3.'),
+        ('tex', r'\frac{1}{\sqrt{e^{6x}+1}}=\frac{e^{3x}}{e^{3x}\sqrt{\left(e^{3x}\right)^{2}+1}}',
+         [('1/sqrt(exp(6*x)+1)', 'exp(3*x)/(exp(3*x)*sqrt(exp(3*x)**2+1))')],
+         'هنا التريك: نضرب فوق وتحت في $e^{3x}$، فما تتغير القيمة. وصار $e^{3x}$ برّا الجذر.'),
+        ('sub', 'exp(3*x)', '3*exp(3*x)', 'نسمّي $u=e^{3x}$، لأنه برّا الجذر وداخله. ومشتقته $3e^{3x}$.'),
+        ('tex', r'e^{3x}\,dx=\frac{du}{3}', [('diff(exp(3*x),x)/3', 'exp(3*x)')],
+         'فوق عندنا $e^{3x}dx$ بدون 3. فنقسم على 3.'),
+        ('tex', r'\int\frac{e^{3x}\,dx}{e^{3x}\sqrt{\left(e^{3x}\right)^{2}+1}}=\frac13\int\frac{du}{u\sqrt{u^{2}+1^{2}}}',
+         [('exp(3*x)/(exp(3*x)*sqrt(exp(3*x)**2+1))', 'Rational(1,3)*diff(exp(3*x),x)/(exp(3*x)*sqrt(exp(3*x)**2+1**2))')],
+         'نعوّض. صار بنفس شكل القانون، و $\\frac13$ برّا التكامل.'),
+        ('tex', r'=-\frac13\operatorname{csch}^{-1}u', [('diff(-acsch(x)/3,x)', '1/(3*x*sqrt(x**2+1))', 't')],
+         'القانون: $\\int\\frac{du}{u\\sqrt{u^2+a^2}}=-\\frac1a\\operatorname{csch}^{-1}\\frac{|u|}{a}$، وهنا $a=1$. و $u=e^{3x}$ موجب، فـ $|u|=u$.'),
+        ('line', '-acsch(exp(3*x))/3', 'نرجع $u=e^{3x}$.')], 'U-I4 ex')
     ex += final(it, 'U-I4 example')
-    U.add('ex', 'مثال (اختبار سابق)', ex)
-    U.add('trap', '⚠️ الفخ', ul([rich('إذا ظهرت مشتقة الداخل في البسط، مثل $\\frac{e^x}{\\sqrt{e^{2x}+1}}$، فهذا النوع 3 مباشرة.'),
-                                rich('مع أساس غير $e$ (مثل $5^x$) يظهر $\\ln5$ في المقام.')]))
-    U.add('paper', '✍️ في ورقة الكويز', p(rich('اكتب سطر الضرب في الأسية (يقنع المصحح)، ثم الجواب.')))
-    U.drill('1', 'N42-E2-6', 'G', 'لامدا مع $\\lambda=1$ و $a=1$ و $b=e$.', first=r'e^{2x}=\left(e^{x}\right)^{2}:\quad b=e,\ \lambda=1,\ a=1',
-            claims=[('exp(2*x)', 'exp(x)**2')])
-    U.drill('2', '1447-S1-SE-Q2.2', 'P', 'الأساس 5: $5^{2x}=(5^x)^2$، فيظهر $\\ln5$ في المقام.')
-    U.drill('3', 'N42-X2-10', 'I', 'داخل الجذر ناقص ⇐ sech، و $a=3$ و $\\lambda=3$، والبسط 2 يضرب الجواب.')
-    U.drill('4', 'N42-X2-12', 'I', 'شكل القوة: $x^3=(x^{3/2})^2$، فـ $\\lambda=\\frac32$ و $a=5$، وداخل الجذر ناقص ⇐ sech.')
+    U.add('ex', '🧱 مثال محلول خطوة خطوة (اختبار سابق)', ex)
+    U.add('trap', '⚠️ الفخ', ul([rich('إذا مشتقة الأسية موجودة فوق، مثل $\\frac{e^{x}}{\\sqrt{e^{2x}+1}}$، لا تضرب في شي. هذا النوع 3: $u=e^x$ على طول.'),
+                                rich('مع أساس غير $e$ مثل $5^x$: مشتقته $5^x\\ln5$. فيطلع $\\ln5$ تحت في الجواب.')]))
+    U.add('paper', '✍️ في ورقة الكويز',
+          md(arith(r'\frac{1}{\sqrt{e^{6x}+1}}=\frac{e^{3x}}{e^{3x}\sqrt{\left(e^{3x}\right)^{2}+1}}',
+                   [('1/sqrt(exp(6*x)+1)', 'exp(3*x)/(exp(3*x)*sqrt(exp(3*x)**2+1))')], 'U-I4 paper 1'))
+          + md(arith(r'u=e^{3x}\qquad du=3e^{3x}\,dx', [('diff(exp(3*x),x)', '3*exp(3*x)')], 'U-I4 paper 2'))
+          + md(arith(r'\frac13\int\frac{du}{u\sqrt{u^{2}+1}}=-\frac13\operatorname{csch}^{-1}e^{3x}+C',
+                     [('diff(-acsch(exp(3*x))/3,x)', '1/sqrt(exp(6*x)+1)')], 'U-I4 paper 3')))
+    U.add('ok', '✔ تأكد', p(rich('الجواب يبدأ بسالب دايم. والرقم قدّامه = البسط ÷ ($a$ × الرقم اللي في أس $u$). '
+                                 'هنا $u=e^{3x}$ و $a=1$، فالرقم $\\frac{1}{1\\times3}=\\frac13$ ✓.')))
+    U.gist('أسية تحت الجذر، والبسط رقم بس', 'نضرب فوق وتحت في جذر الأسية، ونسمّيه $u$',
+           'زائد تحت الجذر يعني $\\operatorname{csch}^{-1}$، وناقص يعني $\\operatorname{sech}^{-1}$')
+    U.drill('1', 'N42-E2-6', 'G', 'نص الأس 2 هو 1، فنضرب فوق وتحت في $e^x$.',
+            first=r'\frac{1}{\sqrt{1+e^{2x}}}=\frac{e^{x}}{e^{x}\sqrt{1+\left(e^{x}\right)^{2}}}',
+            claims=[('1/sqrt(1+exp(2*x))', 'exp(x)/(exp(x)*sqrt(1+exp(x)**2))')],
+            sol_rows=[('sub', 'exp(x)', 'exp(x)', 'نسمّي $u=e^x$. مشتقته $e^x$، وهي فوق كاملة.'),
+                      ('tex', r'\int\frac{e^{x}\,dx}{e^{x}\sqrt{1+\left(e^{x}\right)^{2}}}=\int\frac{du}{u\sqrt{u^{2}+1^{2}}}',
+                       [('exp(x)/(exp(x)*sqrt(1+exp(x)**2))', 'diff(exp(x),x)/(exp(x)*sqrt(exp(x)**2+1**2))')],
+                       'نعوّض. صار بنفس شكل القانون.'),
+                      ('line', '-acsch(exp(x))', 'القانون: $-\\frac1a\\operatorname{csch}^{-1}\\frac{|u|}{a}$ مع $a=1$. و $e^x$ موجب. ثم نرجع $u=e^x$.')])
+    U.drill('2', '1447-S1-SE-Q2.2', 'P', '$5^{2x}=(5^x)^2$، ومشتقة $5^x$ فيها $\\ln5$.',
+            sol_rows=[('tex', r'5^{2x}=\left(5^{x}\right)^{2}', [('5**(2*x)', '(5**x)**2')],
+                       'البسط رقم، ومشتقة الأسية مو فوق. نكتب الأسية كمربع: نص الأس $2x$ هو $x$.'),
+                      ('tex', r'\frac{1}{\sqrt{5^{2x}+1}}=\frac{5^{x}}{5^{x}\sqrt{\left(5^{x}\right)^{2}+1}}',
+                       [('1/sqrt(5**(2*x)+1)', '5**x/(5**x*sqrt((5**x)**2+1))')], 'نضرب فوق وتحت في $5^x$، فيطلع برّا الجذر.'),
+                      ('sub', '5**x', '5**x*log(5)', 'نسمّي $u=5^x$. مشتقة $5^x$ هي $5^x\\ln5$.'),
+                      ('tex', r'5^{x}\,dx=\frac{du}{\ln5}', [('diff(5**x,x)/log(5)', '5**x')], 'فوق عندنا $5^x dx$ بدون $\\ln5$. فنقسم على $\\ln5$.'),
+                      ('tex', r'=\frac{1}{\ln5}\int\frac{du}{u\sqrt{u^{2}+1^{2}}}',
+                       [('5**x/(5**x*sqrt((5**x)**2+1))', 'diff(5**x,x)/log(5)/(5**x*sqrt((5**x)**2+1**2))')],
+                       'نعوّض، و $\\frac{1}{\\ln5}$ برّا التكامل.'),
+                      ('line', '-acsch(5**x)/log(5)', 'القانون $\\operatorname{csch}^{-1}$ مع $a=1$، و $5^x$ موجب. ثم نرجع $u=5^x$.')])
+    U.drill('3', 'N42-X2-10', 'I', 'تحت الجذر رقم ناقص أسية، يعني قانون $\\operatorname{sech}^{-1}$ مع $a=3$.',
+            sol_rows=[('tex', r'9-e^{6x}=3^{2}-\left(e^{3x}\right)^{2}', [('9-exp(6*x)', '3**2-exp(3*x)**2')],
+                       'البسط رقم. نكتب 9 والأسية كمربعين: $9=3^2$، ونص الأس 6 هو 3.'),
+                      ('tex', r'\frac{2}{\sqrt{9-e^{6x}}}=\frac{2e^{3x}}{e^{3x}\sqrt{3^{2}-\left(e^{3x}\right)^{2}}}',
+                       [('2/sqrt(9-exp(6*x))', '2*exp(3*x)/(exp(3*x)*sqrt(3**2-exp(3*x)**2))')], 'نضرب فوق وتحت في $e^{3x}$.'),
+                      ('sub', 'exp(3*x)', '3*exp(3*x)', 'نسمّي $u=e^{3x}$، فـ $e^{3x}dx=\\frac{du}{3}$.'),
+                      ('tex', r'=\frac23\int\frac{du}{u\sqrt{3^{2}-u^{2}}}',
+                       [('2*exp(3*x)/(exp(3*x)*sqrt(3**2-exp(3*x)**2))', 'Rational(2,3)*diff(exp(3*x),x)/(exp(3*x)*sqrt(3**2-exp(3*x)**2))')],
+                       'نعوّض. الرقم 2 فوق مع $\\frac13$ يصير $\\frac23$.'),
+                      ('tex', r'\frac23\cdot\left(-\frac13\right)=-\frac29', [('Rational(2,3)*(-Rational(1,3))', '-Rational(2,9)')],
+                       'القانون: $-\\frac1a\\operatorname{sech}^{-1}\\frac{|u|}{a}$ مع $a=3$. نضرب الرقمين.'),
+                      ('line', '-2*asech(exp(3*x)/3)/9', 'نرجع $u=e^{3x}$. وهو موجب، فـ $|u|=u$.')])
+    U.drill('4', 'N42-X2-12', 'I', 'نكتب $x^3=(x^{3/2})^2$، ونضرب فوق وتحت في $x^{1/2}$.',
+            sol_rows=[('tex', r'x^{3}=\left(x^{3/2}\right)^{2}', [('x**3', '(x**Rational(3,2))**2', 't')],
+                       'نفس الفكرة لكن مع قوة. نكتب $x^3$ كمربع: نص الأس 3 هو $\\frac32$.'),
+                      ('tex', r'\frac{1}{x\sqrt{25-x^{3}}}=\frac{x^{1/2}}{x^{3/2}\sqrt{5^{2}-\left(x^{3/2}\right)^{2}}}',
+                       [('1/(x*sqrt(25-x**3))', 'x**Rational(1,2)/(x**Rational(3,2)*sqrt(5**2-(x**Rational(3,2))**2))', 't')],
+                       'نضرب فوق وتحت في $x^{1/2}$. لأن $x\\cdot x^{1/2}=x^{3/2}$، فيصير برّا الجذر $x^{3/2}$.'),
+                      ('sub', 'x**Rational(3,2)', '3*x**Rational(1,2)/2', 'نسمّي $u=x^{3/2}$. مشتقته $\\frac32x^{1/2}$، يعني $x^{1/2}dx=\\frac23du$.', 'u', 't'),
+                      ('tex', r'=\frac23\int\frac{du}{u\sqrt{5^{2}-u^{2}}}',
+                       [('x**Rational(1,2)/(x**Rational(3,2)*sqrt(5**2-(x**Rational(3,2))**2))',
+                         'Rational(2,3)*diff(x**Rational(3,2),x)/(x**Rational(3,2)*sqrt(5**2-(x**Rational(3,2))**2))', 't')],
+                       'نعوّض، و $\\frac23$ برّا التكامل.'),
+                      ('tex', r'\frac23\cdot\left(-\frac15\right)=-\frac{2}{15}', [('Rational(2,3)*(-Rational(1,5))', '-Rational(2,15)')],
+                       'القانون $\\operatorname{sech}^{-1}$ مع $a=5$. نضرب $\\frac23$ في $-\\frac15$.'),
+                      ('line', '-2*asech(x**Rational(3,2)/5)/15', 'نرجع $u=x^{3/2}$.')])
     return U
 
 
 # ---------------------------------------------------------------- 7
 def u_sqrt():
     U = Unit('U-I5', 'جذر x مخفي', '4.2', 'ص61، تمرين 2(4)', 2)
-    U.add('idea', 'الفكرة', p(rich('$\\frac{1}{\\sqrt x}$ في السؤال هي تقريبًا مشتقة $\\sqrt x$. نسمّي $u=\\sqrt{x}$ فيصير '
-                                   '$x=u^2$ ويظهر شكل الجدول.')))
-    U.add('sign', 'العلامة', p(rich('$\\sqrt{x}$ في المقام، ومعها جذر فيه $x$ وحدها، مثل $\\sqrt{x}\\sqrt{4+x}$.')))
-    f = formula('1/(sqrt(x)*sqrt(a**2+x))', '2*asinh(sqrt(x)/a)', var='x', branches=('t',), pos=('a',), label='G sqrt sinh')
-    U.add('short', '⚡ الاختصار', md(f[0] + ' = ' + f[1] + ' + C') + box_memo(rich('ضعف sinh⁻¹ مع $\\sqrt{x}$ داخلها.')))
+    U.add('idea', 'الفكرة', p(rich(
+        'في المقام $\\sqrt x$، ومعها جذر ثاني فيه $x$ لحالها. نسمّي $u=\\sqrt x$. '
+        'مشتقته $\\frac{1}{2\\sqrt x}$، وهي موجودة في السؤال إلا الرقم 2. '
+        'و $x=u^2$، فيصير الجذر الثاني بشكل قانون من جدول 4.2.')))
+    U.add('sign', 'العلامة', p(rich('إذا شفت $\\sqrt x$ في المقام، ومعها جذر فيه $x$ لحالها (مو $x^2$)، مثل $\\sqrt{x}\\sqrt{4+x}$.'))
+          + contrast([(r'\int\frac{dx}{\sqrt{x}\sqrt{4+x}}', 'هذا النوع', 'تحت الجذر الثاني $x$ لحالها'),
+                      (r'\int\frac{dx}{\sqrt{4+x^{2}}}', 'النوع 3', 'تحت الجذر $x^2$، فهو مربع جاهز'),
+                      (r'\int\frac{dx}{\sqrt{4+x}}', 'قاعدة القوة', 'ما فيه $\\sqrt x$ برّا: الجواب $2\\sqrt{4+x}$')]))
+    U.prev('في النوع 6 كانت أسية تحت الجذر، فضربنا فوق وتحت. هنا $\\sqrt x$ موجودة من البداية، فنسمّيها $u$ على طول.')
+    formula('1/sqrt(u**2+a**2)', 'asinh(u/a)', pos=('a',), label='U-I5 law sinh')
+    formula('1/sqrt(u**2-a**2)', 'acosh(u/a)', branches=('a+t',), pos=('a',), label='U-I5 law cosh')
+    laws = (md(r'\int\frac{du}{\sqrt{u^{2}+a^{2}}}=\sinh^{-1}\frac{u}{a}+C') + md(r'\int\frac{du}{\sqrt{u^{2}-a^{2}}}=\cosh^{-1}\frac{u}{a}+C'))
+    U.add('short', '🧭 الطريقة', method([
+        'نسمّي $u=\\sqrt x$. يعني $du=\\frac{dx}{2\\sqrt x}$.',
+        'نضرب في 2: $\\frac{dx}{\\sqrt x}=2\\,du$.',
+        'نكتب $x=u^2$ في الجذر الثاني، لأن $\\sqrt x\\cdot\\sqrt x=x$.',
+        'زائد يعني قانون $\\sinh^{-1}$، وناقص يعني قانون $\\cosh^{-1}$. ثم نرجع $u=\\sqrt x$.'],
+        tricks_=[('$\\sqrt x$ ومعها $\\frac{1}{\\sqrt x}$؟ يعني $u=\\sqrt x$، و $\\frac{dx}{\\sqrt x}=2\\,du$.', [('2*diff(sqrt(x),x)', '1/sqrt(x)')]),
+                 ('نكتب الرقم كمربع عشان نعرف $a$: $4+x=2^2+u^2$، يعني $a=2$.', [('2**2+sqrt(x)**2', '4+x')])], label='U-I5') + laws)
     it = ITEMS['N42-E2-4']
     ex = question(it, 'U-I5 example')
-    ex += short_steps(it, [
-        ('القانون: $\\sqrt x$ في المقام × جذر فيه $x$ وحدها', r'\int\frac{dx}{\sqrt{x}\sqrt{a^{2}+x}}=2\sinh^{-1}\frac{\sqrt{x}}{a}+C',
-         [R('sqrt sinh')]),
-        ('طلّع $a$: الرقم تحت الجذر هو $a^2$', r'a^{2}=4\ \Rightarrow\ a=2', [('2**2', '4')]),
-        ('عوّض $a=2$. الـ 2 قدّام جات من $\\frac{dx}{\\sqrt x}=2\\,du$ (السطر 2 في 🧱)', r'2\sinh^{-1}\frac{\sqrt{x}}{2}+C',
-         [('=ANS', '2*asinh(sqrt(x)/2)')])], 'U-I5 ex')
-    ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('sub', 'sqrt(x)', '1/(2*sqrt(x))', 'نسمّي $u=\\sqrt x$'),
-        ('tex', r'\frac{dx}{\sqrt{x}}=2\,du,\qquad 4+x=2^{2}+u^{2}', [('4+sqrt(x)**2', '4+x')], 'لأن $u^2=x$ (🧮 الجذر في نفسه)'),
-        ('tex', r'=2\int\frac{du}{\sqrt{u^{2}+2^{2}}}', [('1/(sqrt(x)*sqrt(4+x))', '2*diff(sqrt(x),x)/sqrt(sqrt(x)**2+2**2)')], 'التكامل بدلالة $u$'),
-        ('line', '2*asinh(sqrt(x)/2)', 'صف sinh ونرجع $u=\\sqrt x$')], 'U-I5 ex')
+    ex += steps(it, [
+        ('sub', 'sqrt(x)', '1/(2*sqrt(x))', 'في المقام $\\sqrt x$ وتحت الجذر الثاني $x$ لحالها. فنسمّي $u=\\sqrt x$.'),
+        ('tex', r'\frac{dx}{\sqrt{x}}=2\,du', [('2*diff(sqrt(x),x)', '1/sqrt(x)')],
+         'هنا التريك: نضرب الطرفين في 2، عشان يطلع $\\frac{dx}{\\sqrt x}$ اللي في السؤال.'),
+        ('tex', r'x=\sqrt{x}\cdot\sqrt{x}=u^{2}', [('sqrt(x)*sqrt(x)', 'x')], 'الجذر في نفسه يعطي اللي تحته. فـ $x=u^2$.'),
+        ('tex', r'4+x=2^{2}+u^{2}', [('2**2+sqrt(x)**2', '4+x')], 'نعوّض $x=u^2$، ونكتب 4 كمربع: $4=2^2$.'),
+        ('tex', r'\int\frac{dx}{\sqrt{x}\sqrt{4+x}}=2\int\frac{du}{\sqrt{u^{2}+2^{2}}}',
+         [('1/(sqrt(x)*sqrt(4+x))', '2*diff(sqrt(x),x)/sqrt(sqrt(x)**2+2**2)')], 'نعوّض. صار بنفس شكل القانون، والـ 2 برّا التكامل.'),
+        ('line', '2*asinh(sqrt(x)/2)', 'القانون: $\\int\\frac{du}{\\sqrt{u^2+a^2}}=\\sinh^{-1}\\frac ua$، وهنا $a=2$. ثم نرجع $u=\\sqrt x$.')], 'U-I5 ex')
     ex += final(it, 'U-I5 example')
-    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
-    U.raw(alg('root-self'))
-    U.add('trap', '⚠️ الفخ', ul([rich('لا تنسَ الـ 2: $\\frac{dx}{\\sqrt x}=2\\,du$.'),
-                                rich('المفتاح الرسمي لسؤال 1445 أعطى أيضًا $2\\cosh^{-1}\\sqrt{x+1}$، وهو جواب صحيح آخر.')]))
-    U.add('paper', '✍️ في ورقة الكويز', p(rich('سطر $u=\\sqrt x$، $du=\\frac{dx}{2\\sqrt x}$، ثم الجواب.')))
-    U.drill('1', '1445-S1-SE-Q2.2', 'G', 'نفس المثال مع $a=1$.', first=r'u=\sqrt{x},\quad \frac{dx}{\sqrt{x}}=2\,du,\quad 1+x=1+u^{2}',
-            claims=[('1+sqrt(x)**2', '1+x')])
-    U.drill('2', 'G-39', 'I', 'نفس التعويض $u=\\sqrt x$، لكن داخل الجذر $u^2-4$ ⇐ صف cosh مع $a=2$.')
+    U.add('ex', '🧱 مثال محلول خطوة خطوة (من مذكرة د. طارق)', ex)
+    U.add('trap', '⚠️ الفخ', ul([rich('لا تنسى الـ 2: $\\frac{dx}{\\sqrt x}=2\\,du$، مو $du$.'),
+                                rich('داخل الدالة العكسية $\\sqrt x$، مو $x$: الجواب $2\\sinh^{-1}\\frac{\\sqrt x}{2}$.')]))
+    U.add('paper', '✍️ في ورقة الكويز',
+          md(arith(r'u=\sqrt{x}\qquad du=\frac{dx}{2\sqrt{x}}\qquad \frac{dx}{\sqrt{x}}=2\,du', [('2*diff(sqrt(x),x)', '1/sqrt(x)')], 'U-I5 paper 1'))
+          + md(arith(r'4+x=2^{2}+u^{2}', [('2**2+sqrt(x)**2', '4+x')], 'U-I5 paper 2'))
+          + md(arith(r'2\int\frac{du}{\sqrt{u^{2}+2^{2}}}=2\sinh^{-1}\frac{\sqrt{x}}{2}+C',
+                     [('diff(2*asinh(sqrt(x)/2),x)', '1/(sqrt(x)*sqrt(4+x))', 't')], 'U-I5 paper 3')))
+    U.add('ok', '✔ تأكد', p(rich('الجواب فيه 2 قدّام، و $\\sqrt x$ داخل الدالة العكسية. '
+                                 'لأن مشتقة $\\sqrt x$ فيها $\\frac12$، والـ 2 اللي قدّام تلغيها ✓.')))
+    U.gist('$\\sqrt x$ في المقام، ومعها جذر فيه $x$ لحالها', 'نسمّي $u=\\sqrt x$، و $\\frac{dx}{\\sqrt x}=2\\,du$',
+           '$x=u^2$. زائد يعني $\\sinh^{-1}$، وناقص يعني $\\cosh^{-1}$')
+    U.drill('1', '1445-S1-SE-Q2.2', 'G', 'نفس المثال، و $1=1^2$.',
+            first=r'u=\sqrt{x},\qquad \frac{dx}{\sqrt{x}}=2\,du,\qquad 1+x=1+u^{2}',
+            claims=[('2*diff(sqrt(x),x)', '1/sqrt(x)'), ('1+sqrt(x)**2', '1+x')],
+            sol_rows=[('tex', r'\int\frac{dx}{\sqrt{x}\sqrt{1+x}}=2\int\frac{du}{\sqrt{u^{2}+1^{2}}}',
+                       [('1/(sqrt(x)*sqrt(1+x))', '2*diff(sqrt(x),x)/sqrt(sqrt(x)**2+1**2)')], 'نعوّض. صار بنفس شكل القانون، والـ 2 برّا.'),
+                      ('tex', r'=2\sinh^{-1}\frac{u}{1}=2\sinh^{-1}u', [('diff(2*asinh(x),x)', '2/sqrt(x**2+1)')],
+                       'القانون: $\\int\\frac{du}{\\sqrt{u^2+a^2}}=\\sinh^{-1}\\frac ua$، وهنا $a=1$.'),
+                      ('line', '2*asinh(sqrt(x))', 'نرجع $u=\\sqrt x$.')])
+    U.drill('2', 'G-85', 'P', 'نفس المثال، و $9=3^2$.',
+            sol_rows=[('sub', 'sqrt(x)', '1/(2*sqrt(x))', 'في المقام $\\sqrt x$، فنسمّيها $u$.'),
+                      ('tex', r'\frac{dx}{\sqrt{x}}=2\,du', [('2*diff(sqrt(x),x)', '1/sqrt(x)')], 'نضرب الطرفين في 2، عشان يطلع اللي في السؤال.'),
+                      ('tex', r'9+x=3^{2}+u^{2}', [('3**2+sqrt(x)**2', '9+x')], 'لأن $\\sqrt x\\cdot\\sqrt x=x$، يعني $x=u^2$. و $9=3^2$.'),
+                      ('tex', r'\int\frac{dx}{\sqrt{x}\sqrt{9+x}}=2\int\frac{du}{\sqrt{u^{2}+3^{2}}}',
+                       [('1/(sqrt(x)*sqrt(9+x))', '2*diff(sqrt(x),x)/sqrt(sqrt(x)**2+3**2)')], 'نعوّض. صار بنفس شكل القانون.'),
+                      ('line', '2*asinh(sqrt(x)/3)', 'القانون $\\sinh^{-1}\\frac ua$ مع $a=3$. ثم نرجع $u=\\sqrt x$.')])
+    U.drill('3', 'G-39', 'I', 'نفس التعويض، لكن تحت الجذر ناقص، يعني $\\cosh^{-1}$.',
+            sol_rows=[('sub', 'sqrt(x)', '1/(2*sqrt(x))', 'في المقام $\\sqrt x$، فنسمّيها $u$.'),
+                      ('tex', r'\frac{dx}{\sqrt{x}}=2\,du', [('2*diff(sqrt(x),x)', '1/sqrt(x)')], 'نضرب الطرفين في 2.'),
+                      ('tex', r'x-4=u^{2}-2^{2}', [('sqrt(x)**2-2**2', 'x-4')], 'لأن $x=u^2$، و $4=2^2$.'),
+                      ('tex', r'\int\frac{dx}{\sqrt{x}\sqrt{x-4}}=2\int\frac{du}{\sqrt{u^{2}-2^{2}}}',
+                       [('1/(sqrt(x)*sqrt(x-4))', '2*diff(sqrt(x),x)/sqrt(sqrt(x)**2-2**2)')], 'نعوّض. صار مربع ناقص رقم.'),
+                      ('line', '2*acosh(sqrt(x)/2)', 'القانون: $\\int\\frac{du}{\\sqrt{u^2-a^2}}=\\cosh^{-1}\\frac ua$، و $a=2$. ثم نرجع $u=\\sqrt x$.')])
+    U.drill('4', 'G-86', 'I', '$x=\\sqrt x\\cdot\\sqrt x$، فتطلع $\\sqrt x$ في المقام.',
+            sol_rows=[('tex', r'\frac{1}{x\sqrt{1+x}}=\frac{1}{\sqrt{x}\cdot\sqrt{x}\,\sqrt{1+x}}', [('1/(x*sqrt(1+x))', '1/(sqrt(x)*sqrt(x)*sqrt(1+x))')],
+                       'ما فيه $\\sqrt x$ ظاهرة. لكن $x=\\sqrt x\\cdot\\sqrt x$، فتطلع $\\sqrt x$ في المقام.'),
+                      ('sub', 'sqrt(x)', '1/(2*sqrt(x))', 'نسمّي $u=\\sqrt x$.'),
+                      ('tex', r'\frac{dx}{\sqrt{x}}=2\,du', [('2*diff(sqrt(x),x)', '1/sqrt(x)')],
+                       'نضرب في 2. وتبقى $\\sqrt x$ الثانية، وهي $u$ نفسه.'),
+                      ('tex', r'\int\frac{dx}{\sqrt{x}\cdot\sqrt{x}\,\sqrt{1+x}}=2\int\frac{du}{u\sqrt{u^{2}+1^{2}}}',
+                       [('1/(x*sqrt(1+x))', '2*diff(sqrt(x),x)/(sqrt(x)*sqrt(sqrt(x)**2+1**2))')],
+                       'نعوّض: $\\sqrt x=u$، و $1+x=1+u^2$. صار $u$ برّا الجذر مثل النوع 5.'),
+                      ('line', '-2*acsch(sqrt(x))',
+                       'القانون: $\\int\\frac{du}{u\\sqrt{u^2+a^2}}=-\\frac1a\\operatorname{csch}^{-1}\\frac{|u|}{a}$، و $a=1$. و $u=\\sqrt x$ موجب.')])
     return U
 
 
 # ---------------------------------------------------------------- 8
 def u_split():
     U = Unit('U-I6', 'بسط مركّب: افصل الكسر', '4.2', 'ص62، تمرينا 7 و8', 2)
-    U.add('idea', 'الفكرة', p(rich('إذا البسط فيه $x$ ورقم، افصل الكسر لكسرين: جزء $x$ تعويض مباشر، وجزء الرقم من الجدول.')))
-    U.add('sign', 'العلامة', p(rich('البسط مثل $x-2$ أو $2x+3$، والمقام من أشكال الجدول.')))
-    m1 = formula('x/sqrt(c+x**2)', 'sqrt(c+x**2)', var='x', branches=('t', '-t'), pos=('c',), label='G micro +')
-    m3 = formula('x/(c-x**2)', '-log(Abs(c-x**2))/2', var='x', branches=('sqrt(c)*t/(1+t)', 'sqrt(c)+t'), pos=('c',), label='G micro ln -')
-    U.add('short', '⚡ الاختصار', table(['جزء x', 'الجواب (+C)'], [frow(m1), frow(m3)], 'formula compact')
-          + box_memo('جزء x: ضد الجدول، ينحل بتعويض. جزء الرقم: الجدول.'))
+    U.add('idea', 'الفكرة', p(rich(
+        'البسط فيه حدّين: حد فيه $x$، ورقم. كل حد يحتاج طريقة، فنفصل الكسر لكسرين لهم نفس المقام. '
+        'كسر $x$ نحلّه بتعويض $w$ = اللي تحت الجذر. وكسر الرقم نحلّه بقانون من جدول 4.2.')))
+    U.add('sign', 'العلامة', p(rich('إذا شفت البسط فيه $x$ ورقم مع بعض، مثل $x-2$، والمقام من أشكال جدول 4.2.'))
+          + contrast([(r'\int\frac{x-2}{\sqrt{25+x^{2}}}dx', 'هذا النوع: نفصل', 'البسط فيه $x$ ورقم'),
+                      (r'\int\frac{x+3}{\sqrt{x^{2}+6x+10}}dx', 'تعويض واحد', 'البسط نص مشتقة اللي تحت الجذر، فما نفصل'),
+                      (r'\int\frac{3\,dx}{\sqrt{25+x^{2}}}', 'النوع 3', 'البسط رقم بس، فقانون على طول')]))
+    U.prev('في النوع 7 كان البسط رقم، وكفانا تعويض واحد. هنا البسط فيه $x$ ورقم، فنفصل الكسر ونحل كل جزء لحاله.')
+    formula('1/sqrt(u)', '2*sqrt(u)', branches=('t',), label='U-I6 law power')
+    formula('1/sqrt(u**2+a**2)', 'asinh(u/a)', pos=('a',), label='U-I6 law sinh')
+    laws = (md(r'\int w^{-1/2}\,dw=\frac{w^{1/2}}{1/2}=2\sqrt{w}+C') + md(r'\int\frac{du}{\sqrt{u^{2}+a^{2}}}=\sinh^{-1}\frac{u}{a}+C'))
+    U.add('short', '🧭 الطريقة', method([
+        'نشوف البسط أول: إذا هو مشتقة اللي تحت الجذر (أو نصها)، فهو تعويض واحد وما نفصل.',
+        'غير كذا نفصل الكسر: كل حد في البسط على نفس المقام، ومعه إشارته.',
+        'كسر $x$: نسمّي $w$ = اللي تحت الجذر. مشتقته فيها $x$، فينحل بقاعدة القوة.',
+        'كسر الرقم: نطلّع الرقم برّا، ونستعمل قانون $\\sinh^{-1}$ أو $\\cosh^{-1}$ أو $\\tanh^{-1}$.',
+        'نجمع الجوابين بنفس الإشارة اللي في الفصل.'],
+        tricks_=[('بسط فيه جمع؟ نفصل لكسرين، وكل واحد نوع لحاله: $\\frac{x-2}{\\sqrt{25+x^2}}=\\frac{x}{\\sqrt{25+x^2}}-\\frac{2}{\\sqrt{25+x^2}}$.',
+                  [('(x-2)/sqrt(25+x**2)', 'x/sqrt(25+x**2)-2/sqrt(25+x**2)')])], label='U-I6') + laws)
     it = ITEMS['N42-X2-07']
     ex = question(it, 'U-I6 example')
-    ex += short_steps(it, [
-        ('افصل الكسر: كل حد من البسط على المقام نفسه (انتبه للإشارة)',
-         r'\frac{x-2}{\sqrt{25+x^{2}}}=\frac{x}{\sqrt{25+x^{2}}}-\frac{2}{\sqrt{25+x^{2}}}', [('(x-2)/sqrt(25+x**2)', 'x/sqrt(25+x**2)-2/sqrt(25+x**2)')]),
-        ('قانون جزء $x$ من جدول الاختصار (يطلع من تعويض $w=c+x^2$)', r'\int\frac{x\,dx}{\sqrt{c+x^{2}}}=\sqrt{c+x^{2}}', [R('micro +')]),
-        ('جزء $x$ مع $c=25$', r'\int\frac{x\,dx}{\sqrt{25+x^{2}}}=\sqrt{25+x^{2}}', [('diff(sqrt(25+x**2),x)', 'x/sqrt(25+x**2)')]),
-        ('جزء الرقم: صف sinh مع $a=5$، والـ 2 تطلع قدّام', r'\int\frac{2\,dx}{\sqrt{x^{2}+5^{2}}}=2\sinh^{-1}\frac{x}{5}',
-         [('diff(2*asinh(x/5),x)', '2/sqrt(x**2+25)')]),
-        ('اطرح الجزأين كما في سطر الفصل', r'\sqrt{25+x^{2}}-2\sinh^{-1}\frac{x}{5}+C', [('=ANS', 'sqrt(25+x**2)-2*asinh(x/5)')])], 'U-I6 ex')
-    ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
+    ex += steps(it, [
         ('tex', r'\frac{x-2}{\sqrt{25+x^{2}}}=\frac{x}{\sqrt{25+x^{2}}}-\frac{2}{\sqrt{25+x^{2}}}',
-         [('(x-2)/sqrt(25+x**2)', 'x/sqrt(25+x**2)-2/sqrt(25+x**2)')], 'نفصل الكسر (البسط على المقام لكل حد)'),
-        ('line', 'sqrt(25+x**2)-Integral(2/sqrt(25+x**2),x)', 'الجزء الأول: $\\int\\frac{x}{\\sqrt{c+x^2}}dx=\\sqrt{c+x^2}$'),
-        ('line', 'sqrt(25+x**2)-2*asinh(x/5)', 'الجزء الثاني: صف sinh مع $a=5$')], 'U-I6 ex')
+         [('(x-2)/sqrt(25+x**2)', 'x/sqrt(25+x**2)-2/sqrt(25+x**2)')],
+         'مشتقة $25+x^2$ هي $2x$، والبسط فيه $-2$ زيادة. هنا التريك: نفصل الكسر، وكل حد ومعه إشارته.'),
+        ('sub', '25+x**2', '2*x', 'الكسر الأول: نسمّي $w$ = اللي تحت الجذر. مشتقته $2x$، و $x$ موجودة فوق.', 'w'),
+        ('tex', r'x\,dx=\frac{dw}{2}', [('diff(25+x**2,x)/2', 'x')], 'فوق عندنا $x\\,dx$ بدون 2. فنقسم على 2.'),
+        ('tex', r'\int\frac{x\,dx}{\sqrt{25+x^{2}}}=\frac12\int w^{-1/2}\,dw',
+         [('x/sqrt(25+x**2)', 'Rational(1,2)*diff(25+x**2,x)*(25+x**2)**Rational(-1,2)')],
+         'نعوّض، ونكتب الجذر تحت كأس سالب: $\\frac{1}{\\sqrt w}=w^{-1/2}$.'),
+        ('tex', r'=\frac12\cdot2\sqrt{w}=\sqrt{25+x^{2}}', [('diff(sqrt(25+x**2),x)', 'x/sqrt(25+x**2)')],
+         'قاعدة القوة: $\\int w^{-1/2}dw=2\\sqrt w$. ثم نرجع $w=25+x^2$.'),
+        ('tex', r'\int\frac{2\,dx}{\sqrt{x^{2}+5^{2}}}=2\sinh^{-1}\frac{x}{5}', [('diff(2*asinh(x/5),x)', '2/sqrt(x**2+25)')],
+         'الكسر الثاني: الرقم 2 برّا. والقانون $\\int\\frac{du}{\\sqrt{u^2+a^2}}=\\sinh^{-1}\\frac ua$ مع $u=x$ و $a=5$.'),
+        ('line', 'sqrt(25+x**2)-2*asinh(x/5)', 'نطرح الجزأين، بنفس الإشارة اللي في الفصل.')], 'U-I6 ex')
     ex += final(it, 'U-I6 example')
-    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
-    U.add('trap', '⚠️ الفخ', p(rich('انتبه للإشارة عند الفصل: $\\frac{x-2}{\\ldots}=\\frac{x}{\\ldots}-\\frac{2}{\\ldots}$.')))
-    U.add('paper', '✍️ في ورقة الكويز', p('سطر الفصل، ثم جواب كل جزء، ثم اجمع.'))
-    U.drill('1', 'G-01', 'G', 'الجزء الأول تعويض $w=x^2+9$، والثاني صف sinh مع $a=3$.',
-            first=r'=\int\frac{2x}{\sqrt{x^{2}+9}}\,dx+\int\frac{3}{\sqrt{x^{2}+9}}\,dx',
-            claims=[('(2*x+3)/sqrt(x**2+9)', '2*x/sqrt(x**2+9)+3/sqrt(x**2+9)')])
-    U.drill('2', 'N42-X2-08', 'I', 'افصل: $\\frac{x}{16-x^2}$ يعطي ln، و $\\frac{1}{16-x^2}$ يعطي tanh⁻¹ مع $a=4$.')
+    U.add('ex', '🧱 مثال محلول خطوة خطوة (من مذكرة د. طارق)', ex)
+    U.add('trap', '⚠️ الفخ', ul([rich('انتبه للإشارة: $\\frac{x-2}{\\ldots}=\\frac{x}{\\ldots}-\\frac{2}{\\ldots}$. السالب يروح مع الرقم.'),
+                                rich('كسر $x$ مو قانون $\\sinh^{-1}$. جوابه جذر، أو $\\ln$ إذا ما فيه جذر.')]))
+    U.add('paper', '✍️ في ورقة الكويز',
+          md(arith(r'\int\frac{x-2}{\sqrt{25+x^{2}}}dx=\int\frac{x\,dx}{\sqrt{25+x^{2}}}-\int\frac{2\,dx}{\sqrt{25+x^{2}}}',
+                   [('(x-2)/sqrt(25+x**2)', 'x/sqrt(25+x**2)-2/sqrt(25+x**2)')], 'U-I6 paper 1'))
+          + md(arith(r'w=25+x^{2}\qquad dw=2x\,dx', [('diff(25+x**2,x)', '2*x')], 'U-I6 paper 2'))
+          + md(arith(r'=\sqrt{25+x^{2}}-2\sinh^{-1}\frac{x}{5}+C', [('diff(sqrt(25+x**2)-2*asinh(x/5),x)', '(x-2)/sqrt(25+x**2)')], 'U-I6 paper 3')))
+    U.add('ok', '✔ تأكد', p(rich("اشتق الحد الأول: $\\left(\\sqrt{25+x^2}\\right)'=\\frac{2x}{2\\sqrt{25+x^2}}=\\frac{x}{\\sqrt{25+x^2}}$. "
+                                 'لازم يرجع الكسر الأول ✓.')))
+    U.gist('البسط فيه $x$ ورقم', 'نشوف هل البسط مشتقة اللي تحت الجذر. إذا لا، نفصل الكسر',
+           'كسر $x$ بتعويض $w$، وكسر الرقم بقانون من جدول 4.2')
+    U.drill('1', 'G-87', 'G', 'مثل المثال، لكن الرقم موجب، و $a=2$.',
+            first=r'\frac{x+2}{\sqrt{x^{2}+4}}=\frac{x}{\sqrt{x^{2}+4}}+\frac{2}{\sqrt{x^{2}+4}}',
+            claims=[('(x+2)/sqrt(x**2+4)', 'x/sqrt(x**2+4)+2/sqrt(x**2+4)')],
+            sol_rows=[('sub', 'x**2+4', '2*x', 'كسر $x$: نسمّي $w$ = اللي تحت الجذر، فـ $x\\,dx=\\frac{dw}{2}$.', 'w'),
+                      ('tex', r'\int\frac{x\,dx}{\sqrt{x^{2}+4}}=\frac12\int w^{-1/2}\,dw=\sqrt{x^{2}+4}',
+                       [('x/sqrt(x**2+4)', 'Rational(1,2)*diff(x**2+4,x)*(x**2+4)**Rational(-1,2)'), ('diff(sqrt(x**2+4),x)', 'x/sqrt(x**2+4)')],
+                       'قاعدة القوة: $\\int w^{-1/2}dw=2\\sqrt w$، و $\\frac12\\cdot2=1$. ثم نرجع $w$.'),
+                      ('tex', r'\int\frac{2\,dx}{\sqrt{x^{2}+2^{2}}}=2\sinh^{-1}\frac{x}{2}', [('diff(2*asinh(x/2),x)', '2/sqrt(x**2+4)')],
+                       'كسر الرقم: القانون $\\sinh^{-1}\\frac ua$ مع $u=x$ و $a=2$، والـ 2 برّا.'),
+                      ('line', 'sqrt(x**2+4)+2*asinh(x/2)', 'نجمع الجزأين.')])
+    U.drill('2', 'G-01', 'P', 'افصل الكسر. كسر $2x$ هو مشتقة اللي تحت الجذر كاملة.',
+            sol_rows=[('tex', r'\frac{2x+3}{\sqrt{x^{2}+9}}=\frac{2x}{\sqrt{x^{2}+9}}+\frac{3}{\sqrt{x^{2}+9}}',
+                       [('(2*x+3)/sqrt(x**2+9)', '2*x/sqrt(x**2+9)+3/sqrt(x**2+9)')], 'مشتقة $x^2+9$ هي $2x$، والبسط فيه 3 زيادة. فنفصل الكسر.'),
+                      ('sub', 'x**2+9', '2*x', 'الكسر الأول: نسمّي $w=x^2+9$. ومشتقته $2x$ فوق كاملة.', 'w'),
+                      ('tex', r'\int w^{-1/2}\,dw=2\sqrt{w}=2\sqrt{x^{2}+9}', [('diff(2*sqrt(x**2+9),x)', '2*x/sqrt(x**2+9)')],
+                       'قاعدة القوة: $\\frac{w^{1/2}}{1/2}=2\\sqrt w$. ثم نرجع $w$.'),
+                      ('tex', r'\int\frac{3\,dx}{\sqrt{x^{2}+3^{2}}}=3\sinh^{-1}\frac{x}{3}', [('diff(3*asinh(x/3),x)', '3/sqrt(x**2+9)')],
+                       'الكسر الثاني: القانون $\\sinh^{-1}\\frac ua$ مع $a=3$، والـ 3 برّا.'),
+                      ('line', '2*sqrt(x**2+9)+3*asinh(x/3)', 'نجمع الجزأين.')])
+    U.drill('3', 'N42-X2-08', 'I', 'افصل. كسر $x$ يعطي $\\ln$، وكسر الرقم قانون $\\tanh^{-1}$ مع $a=4$.',
+            sol_rows=[('tex', r'\frac{x+1}{16-x^{2}}=\frac{x}{16-x^{2}}+\frac{1}{16-x^{2}}', [('(x+1)/(16-x**2)', 'x/(16-x**2)+1/(16-x**2)')],
+                       'البسط فيه $x$ ورقم، والمقام بلا جذر. فنفصل الكسر.'),
+                      ('sub', '16-x**2', '-2*x', 'الكسر الأول: نسمّي $w=16-x^2$. مشتقته $-2x$، يعني $x\\,dx=-\\frac{dw}{2}$.', 'w'),
+                      ('tex', r'\int\frac{x\,dx}{16-x^{2}}=-\frac12\int\frac{dw}{w}=-\frac12\ln\left|16-x^{2}\right|',
+                       [('diff(-log(Abs(16-x**2))/2,x)', 'x/(16-x**2)', '4*t/(1+t)'), ('diff(-log(Abs(16-x**2))/2,x)', 'x/(16-x**2)', '-4*t/(1+t)')],
+                       'القانون $\\int\\frac{dw}{w}=\\ln|w|$. ثم نرجع $w$.'),
+                      ('tex', r'\int\frac{dx}{4^{2}-x^{2}}=\frac14\tanh^{-1}\frac{x}{4}', [('diff(atanh(x/4)/4,x)', '1/(16-x**2)')],
+                       'الكسر الثاني: القانون $\\int\\frac{du}{a^2-u^2}=\\frac1a\\tanh^{-1}\\frac ua$ مع $a=4$، لأن $|x|<4$.'),
+                      ('line', '-log(Abs(16-x**2))/2+atanh(x/4)/4', 'نجمع الجزأين.')])
+    U.drill('4', 'M-13', 'I', 'قبل ما تفصل، شوف البسط: هل هو نص مشتقة اللي تحت الجذر؟',
+            sol_rows=[('tex', r'\left(x^{2}+8x+25\right)^{\prime}=2x+8=2\left(x+4\right)', [('diff(x**2+8*x+25,x)', '2*(x+4)')],
+                       'قبل ما نفصل، نشتق اللي تحت الجذر. طلع $2(x+4)$، يعني البسط نص المشتقة.'),
+                      ('tex', r'w=x^{2}+8x+25\qquad dw=\left(2x+8\right)dx', [('diff(x**2+8*x+25,x)', '2*x+8')],
+                       'فما نحتاج نفصل. نسمّي $w$ = اللي تحت الجذر كله.'),
+                      ('tex', r'(x+4)\,dx=\frac{dw}{2}', [('diff(x**2+8*x+25,x)/2', 'x+4')], 'نقسم على 2 عشان يطلع البسط نفسه.'),
+                      ('tex', r'\int\frac{(x+4)\,dx}{\sqrt{x^{2}+8x+25}}=\frac12\int w^{-1/2}\,dw',
+                       [('(x+4)/sqrt(x**2+8*x+25)', 'Rational(1,2)*diff(x**2+8*x+25,x)*(x**2+8*x+25)**Rational(-1,2)')],
+                       'نعوّض، و $\\frac{1}{\\sqrt w}=w^{-1/2}$.'),
+                      ('line', 'sqrt(x**2+8*x+25)', 'قاعدة القوة: $\\frac12\\cdot2\\sqrt w=\\sqrt w$. ثم نرجع $w$.')])
     return U
 
 
 # ---------------------------------------------------------------- 9
 def u_invnum():
     U = Unit('U-I7', 'دالة عكسية ومشتقتها في السؤال', '4.2', 'ص62، تمرين 9', 3)
-    U.add('idea', 'الفكرة', p(rich('إذا شفت دالة عكسية <b>ومشتقتها</b> في نفس التكامل، هذا تعويض بسيط: $u$ = الدالة العكسية.')))
-    U.add('sign', 'العلامة', contrast([(r'\int\frac{\cosh^{-1}x}{\sqrt{x^{2}-1}}dx', 'تعويض $u=\\cosh^{-1}x$', 'مشتقة $\\cosh^{-1}x$ (وهي $\\frac{1}{\\sqrt{x^2-1}}$) موجودة في السؤال'),
-                                       (r'\int\cosh^{-1}x\,dx', 'تجزئة (اليوم 4)', 'الدالة وحدها بلا مشتقتها')]))
-    U.add('short', '⚡ الاختصار', md(r'\int f^{-1}\cdot\left(f^{-1}\right)'"'"r'\,dx=\frac{\left(f^{-1}\right)^{2}}{2}+C')
-          + box_memo('الدالة × مشتقتها ⇐ مربع الدالة على 2.'))
-    functional(lambda: s.diff(s.Function('g')(x) ** 2 / 2, x) - s.Function('g')(x) * s.diff(s.Function('g')(x), x), 'g g\' rule')
+    U.add('idea', 'الفكرة', p(rich(
+        'في السؤال دالة عكسية مثل $\\cosh^{-1}x$، ومعها مشتقتها مضروبة فيها. نسمّي $u$ = الدالة العكسية. '
+        'فتصير مشتقتها مع $dx$ هي $du$، ويبقى تكامل سهل: $\\int u\\,du$.')))
+    U.add('sign', 'العلامة', p(rich('إذا شفت دالة عكسية ومعها مشتقتها، مضروبتين في بعض.'))
+          + contrast([(r'\int\frac{\cosh^{-1}x}{\sqrt{x^{2}-1}}dx', 'تعويض $u=\\cosh^{-1}x$', 'مشتقة $\\cosh^{-1}x$ هي $\\frac{1}{\\sqrt{x^2-1}}$، وموجودة في السؤال'),
+                      (r'\int\sinh^{-1}(2x)\,dx', 'تجزئة (درس 5.1)', 'الدالة لحالها، بلا مشتقتها')]))
+    U.prev('في النوع 8 كان $w$ = اللي تحت الجذر. هنا $u$ = الدالة العكسية نفسها، لأن مشتقتها موجودة في السؤال.')
+    laws = (md(arith(r'\frac{d}{dx}\sinh^{-1}x=\frac{1}{\sqrt{x^{2}+1}}\qquad \frac{d}{dx}\cosh^{-1}x=\frac{1}{\sqrt{x^{2}-1}}\qquad \frac{d}{dx}\tanh^{-1}x=\frac{1}{1-x^{2}}',
+                     [('diff(asinh(x),x)', '1/sqrt(x**2+1)'), ('diff(acosh(x),x)', '1/sqrt(x**2-1)', '1+t'), ('diff(atanh(x),x)', '1/(1-x**2)')], 'U-I7 law derivatives'))
+            + md(arith(r'\int u\,du=\frac{u^{2}}{2}+C', [('integrate(x,x)', 'x**2/2')], 'U-I7 law power')))
+    U.add('short', '🧭 الطريقة', method([
+        'نلقى الدالة العكسية في السؤال، مثل $\\cosh^{-1}x$.',
+        'نتأكد إن مشتقتها موجودة، من جدول مشتقات الدوال العكسية.',
+        'نسمّي $u$ = الدالة العكسية. فمشتقتها مع $dx$ تصير $du$.',
+        'نكامل بقاعدة القوة: $\\int u\\,du=\\frac{u^2}{2}$. ثم نرجع $u$.'],
+        tricks_=[('الدالة العكسية ومشتقتها مضروبتين؟ $u$ = الدالة، والجواب $\\frac{u^2}{2}$. مع $\\cosh^{-1}x$ يطلع $\\frac{(\\cosh^{-1}x)^2}{2}$.',
+                  [('diff(acosh(x)**2/2,x)', 'acosh(x)/sqrt(x**2-1)', '1+t')])], label='U-I7') + laws)
     it = ITEMS['N42-X2-09']
     ex = question(it, 'U-I7 example')
-    ex += short_steps(it, [
-        ('القانون: الدالة × مشتقتها ⇐ مربعها على 2', r'\int f^{-1}\cdot\left(f^{-1}\right)'"'"r'\,dx=\frac{\left(f^{-1}\right)^{2}}{2}+C',
-         [R('g gprime')]),
-        ('تأكد أن العامل $\\frac{1}{\\sqrt{x^2-1}}$ هو مشتقة الدالة (صف cosh في التوائم)',
-         r'f^{-1}=\cosh^{-1}x,\qquad \left(\cosh^{-1}x\right)'"'"r'=\frac{1}{\sqrt{x^{2}-1}}', [('diff(acosh(x),x)', '1/sqrt(x**2-1)', '1+t')]),
-        ('عوّض في القانون؛ = $\\int u\\,du=\\frac{u^2}{2}$ في 🧱', r'\frac{\left(\cosh^{-1}x\right)^{2}}{2}+C', [('=ANS', 'acosh(x)**2/2')])], 'U-I7 ex')
-    ex += p('<b>🧱 خطوة خطوة:</b>') + steps(it, [
-        ('sub', 'acosh(x)', '1/sqrt(x**2-1)', 'مشتقة $\\cosh^{-1}x$ موجودة في المقام', 'u', '1+t'),
-        ('tex', r'=\int u\,du=\frac{u^{2}}{2}', [('integrate(x,x)', 'x**2/2')], 'قاعدة القوة')], 'U-I7 ex')
+    ex += steps(it, [
+        ('tex', r'\frac{\cosh^{-1}x}{\sqrt{x^{2}-1}}=\cosh^{-1}x\cdot\frac{1}{\sqrt{x^{2}-1}}', [('acosh(x)/sqrt(x**2-1)', 'acosh(x)*1/sqrt(x**2-1)')],
+         'نكتب الكسر كضرب، عشان نشوف الدالة العكسية ومعها كسر ثاني.'),
+        ('tex', r'\frac{d}{dx}\cosh^{-1}x=\frac{1}{\sqrt{x^{2}-1}}', [('diff(acosh(x),x)', '1/sqrt(x**2-1)', '1+t')],
+         'الكسر الثاني هو نفسه مشتقة $\\cosh^{-1}x$، من جدول مشتقات الدوال العكسية.'),
+        ('sub', 'acosh(x)', '1/sqrt(x**2-1)', 'هنا التريك: نسمّي $u$ = الدالة العكسية. ومشتقتها مع $dx$ صارت $du$.', 'u', '1+t'),
+        ('tex', r'\int\cosh^{-1}x\cdot\frac{dx}{\sqrt{x^{2}-1}}=\int u\,du', [('acosh(x)/sqrt(x**2-1)', 'acosh(x)*diff(acosh(x),x)', '1+t')],
+         'نعوّض. بقي تكامل سهل.'),
+        ('tex', r'=\frac{u^{2}}{2}', [('integrate(x,x)', 'x**2/2')], 'قاعدة القوة: نزيد الأس واحد، ونقسم على الأس الجديد.'),
+        ('line', 'acosh(x)**2/2', 'نرجع $u=\\cosh^{-1}x$.')], 'U-I7 ex')
     ex += final(it, 'U-I7 example')
-    U.add('ex', 'مثال (من مذكرة د. طارق)', ex)
-    U.add('trap', '⚠️ الفخ', p(rich('$(\\cosh^{-1}x)^2$ تعني مربع الدالة، وليست $\\cosh^{-1}(x^2)$.')))
-    U.add('paper', '✍️ في ورقة الكويز', p(rich('سطر $u$ و $du$، ثم $\\int u\\,du$، ثم الجواب.')))
-    U.drill('1', 'G-02', 'G', '$\\int u^2du=\\frac{u^3}{3}$.', first=r'u=\sinh^{-1}x,\quad du=\frac{dx}{\sqrt{1+x^{2}}}',
-            claims=[('diff(asinh(x),x)', '1/sqrt(1+x**2)')])
-    U.drill('2', 'G-03', 'I', 'مشتقة $\\tanh^{-1}x$ هي $\\frac{1}{1-x^2}$.')
+    U.add('ex', '🧱 مثال محلول خطوة خطوة (من مذكرة د. طارق)', ex)
+    U.add('trap', '⚠️ الفخ', ul([rich('$(\\cosh^{-1}x)^2$ يعني مربع الدالة كلها، مو $\\cosh^{-1}(x^2)$.'),
+                                rich('إذا الدالة العكسية في المقام، مثل $\\frac{1}{\\sqrt{x^2-1}\\,\\cosh^{-1}x}$، يصير $\\int\\frac{du}{u}=\\ln|u|$، مو $\\frac{u^2}{2}$.')]))
+    U.add('paper', '✍️ في ورقة الكويز',
+          md(arith(r'u=\cosh^{-1}x\qquad du=\frac{dx}{\sqrt{x^{2}-1}}', [('diff(acosh(x),x)', '1/sqrt(x**2-1)', '1+t')], 'U-I7 paper 1'))
+          + md(arith(r'\int u\,du=\frac{u^{2}}{2}=\frac{\left(\cosh^{-1}x\right)^{2}}{2}+C',
+                     [('diff(acosh(x)**2/2,x)', 'acosh(x)/sqrt(x**2-1)', '1+t')], 'U-I7 paper 2')))
+    U.add('ok', '✔ تأكد', p(rich("اشتق جوابك: $\\left(\\frac{u^2}{2}\\right)'=u\\cdot u'$، يعني $\\cosh^{-1}x\\cdot\\frac{1}{\\sqrt{x^2-1}}$. "
+                                 'لازم يرجع السؤال ✓.')))
+    U.gist('دالة عكسية ومعها مشتقتها', 'نسمّي $u$ = الدالة العكسية', '$\\int u\\,du=\\frac{u^2}{2}$، ثم نرجع $u$')
+    U.drill('1', 'G-88', 'G', 'مشتقة $\\sinh^{-1}x$ هي $\\frac{1}{\\sqrt{1+x^2}}$، وموجودة في السؤال.',
+            first=r'u=\sinh^{-1}x,\qquad du=\frac{dx}{\sqrt{1+x^{2}}}', claims=[('diff(asinh(x),x)', '1/sqrt(1+x**2)')],
+            sol_rows=[('tex', r'\int\frac{\sinh^{-1}x}{\sqrt{1+x^{2}}}dx=\int u\,du', [('asinh(x)/sqrt(1+x**2)', 'asinh(x)*diff(asinh(x),x)')],
+                       'نعوّض: الدالة العكسية صارت $u$، والكسر مع $dx$ صار $du$.'),
+                      ('tex', r'=\frac{u^{2}}{2}', [('integrate(x,x)', 'x**2/2')], 'قاعدة القوة: نزيد الأس واحد، ونقسم على 2.'),
+                      ('line', 'asinh(x)**2/2', 'نرجع $u=\\sinh^{-1}x$.')])
+    U.drill('2', 'G-02', 'P', 'نفس التمرين 1، لكن $\\int u^2du=\\frac{u^3}{3}$.',
+            sol_rows=[('sub', 'asinh(x)', '1/sqrt(1+x**2)', 'مشتقة $\\sinh^{-1}x$ موجودة في السؤال. فنسمّي $u$ = الدالة العكسية.'),
+                      ('tex', r'\int\frac{\left(\sinh^{-1}x\right)^{2}}{\sqrt{1+x^{2}}}dx=\int u^{2}\,du',
+                       [('asinh(x)**2/sqrt(1+x**2)', 'asinh(x)**2*diff(asinh(x),x)')], 'نعوّض: $(\\sinh^{-1}x)^2$ صارت $u^2$.'),
+                      ('tex', r'=\frac{u^{3}}{3}', [('integrate(x**2,x)', 'x**3/3')], 'قاعدة القوة: نزيد الأس واحد، ونقسم على 3.'),
+                      ('line', 'asinh(x)**3/3', 'نرجع $u=\\sinh^{-1}x$.')])
+    U.drill('3', 'G-03', 'I', 'مشتقة $\\tanh^{-1}x$ هي $\\frac{1}{1-x^2}$.',
+            sol_rows=[('tex', r'\frac{d}{dx}\tanh^{-1}x=\frac{1}{1-x^{2}}', [('diff(atanh(x),x)', '1/(1-x**2)')],
+                       'المقام $1-x^2$ هو مقام مشتقة $\\tanh^{-1}x$. فمشتقتها موجودة في السؤال.'),
+                      ('sub', 'atanh(x)', '1/(1-x**2)', 'نسمّي $u$ = الدالة العكسية.', 'u', 't/(1+t)'),
+                      ('tex', r'\int\frac{\tanh^{-1}x}{1-x^{2}}dx=\int u\,du', [('atanh(x)/(1-x**2)', 'atanh(x)*diff(atanh(x),x)')], 'نعوّض.'),
+                      ('tex', r'=\frac{u^{2}}{2}', [('integrate(x,x)', 'x**2/2')], 'قاعدة القوة.'),
+                      ('line', 'atanh(x)**2/2', 'نرجع $u=\\tanh^{-1}x$.')])
+    U.drill('4', 'M-14', 'I', 'افصل الكسر أول مثل النوع 8. والجزء الثاني فيه $\\tan^{-1}x$ ومشتقتها.',
+            sol_rows=[('tex', r'\frac{x+\tan^{-1}x}{1+x^{2}}=\frac{x}{1+x^{2}}+\frac{\tan^{-1}x}{1+x^{2}}',
+                       [('(x+atan(x))/(1+x**2)', 'x/(1+x**2)+atan(x)/(1+x**2)')], 'البسط فيه حدّين، فنفصل الكسر مثل النوع 8.'),
+                      ('sub', '1+x**2', '2*x', 'الكسر الأول: نسمّي $w$ = المقام. مشتقته $2x$، يعني $x\\,dx=\\frac{dw}{2}$.', 'w'),
+                      ('tex', r'\int\frac{x\,dx}{1+x^{2}}=\frac12\int\frac{dw}{w}=\frac12\ln\left(1+x^{2}\right)', [('diff(log(1+x**2)/2,x)', 'x/(1+x**2)')],
+                       'القانون $\\int\\frac{dw}{w}=\\ln|w|$. و $1+x^2$ موجب، فما نحتاج القيمة المطلقة.'),
+                      ('tex', r'\frac{d}{dx}\tan^{-1}x=\frac{1}{1+x^{2}}', [('diff(atan(x),x)', '1/(1+x**2)')],
+                       'الكسر الثاني: مشتقة $\\tan^{-1}x$ (درس 3.4) هي $\\frac{1}{1+x^2}$، وموجودة.'),
+                      ('sub', 'atan(x)', '1/(1+x**2)', 'نسمّي $u=\\tan^{-1}x$. فالكسر مع $dx$ صار $du$.'),
+                      ('tex', r'\int\frac{\tan^{-1}x\,dx}{1+x^{2}}=\int u\,du', [('atan(x)/(1+x**2)', 'atan(x)*diff(atan(x),x)')], 'نعوّض.'),
+                      ('tex', r'=\frac{u^{2}}{2}=\frac{\left(\tan^{-1}x\right)^{2}}{2}', [('diff(atan(x)**2/2,x)', 'atan(x)/(1+x**2)')],
+                       'قاعدة القوة، ثم نرجع $u=\\tan^{-1}x$.'),
+                      ('line', 'log(x**2+1)/2+atan(x)**2/2', 'نجمع الجزأين.')])
     return U
 
 

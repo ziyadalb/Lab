@@ -1,0 +1,104 @@
+[
+ {
+  "id": "G-85",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/(sqrt(x)*sqrt(9+x))",
+  "answer": [
+   "2*asinh(sqrt(x)/3)"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "C42-I-HIDDEN",
+  "section": "4.2",
+  "note": "extra exercise"
+ },
+ {
+  "id": "G-86",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:1/(x*sqrt(1+x))",
+  "answer": [
+   "-2*acsch(sqrt(x))"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "C42-I-HIDDEN",
+  "section": "4.2",
+  "note": "extra exercise"
+ },
+ {
+  "id": "G-87",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:(x+2)/sqrt(x**2+4)",
+  "answer": [
+   "sqrt(x**2+4)",
+   "2*asinh(x/2)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-I-SPLIT",
+  "section": "4.2",
+  "note": "extra exercise"
+ },
+ {
+  "id": "G-88",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:asinh(x)/sqrt(1+x**2)",
+  "answer": [
+   "asinh(x)**2/2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-I-INVNUM",
+  "section": "4.2",
+  "note": "extra exercise"
+ },
+ {
+  "id": "M-13",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:(x+4)/sqrt(x**2+8*x+25)",
+  "answer": [
+   "sqrt(x**2+8*x+25)"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-I-SPLIT",
+  "section": "4.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 129,
+   "number": "(3)"
+  },
+  "note": "extra exercise (the numerator is half the derivative of the radicand)"
+ },
+ {
+  "id": "M-14",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:(x+atan(x))/(1+x**2)",
+  "answer": [
+   "log(x**2+1)/2",
+   "atan(x)**2/2"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C42-I-INVNUM",
+  "section": "4.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 43,
+   "number": "Q4(15)"
+  },
+  "note": "extra exercise (split, then u = tan^-1 x)"
+ }
+]
