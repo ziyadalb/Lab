@@ -260,3 +260,13 @@ section.lesson-map h2 { border-bottom-color: currentColor; }
 section.lesson-map.l42 h2 { color: var(--l42); } section.lesson-map.l51 h2 { color: var(--l51); } section.lesson-map.l52 h2 { color: var(--l52); }
 table.map td:nth-child(2), table.map td:nth-child(3) { font-size: 12pt; }
 table.map tr { break-inside: avoid; }
+
+/* v6 writing: 🔑 tricks and the seven-part quick way */
+.trick { margin: 1.5mm 0 0; padding: 1mm 3mm; background: #fff8e1; border-inline-start: 3px solid #b38600; border-radius: 1mm; break-inside: avoid; }
+.sc-part { margin: 2mm 0 0.6mm; break-after: avoid; }
+.sc-part > b { color: var(--accent); }
+.sc-part.never > b { color: var(--warn); }
+.tries { margin-top: 2.5mm; padding: 1.5mm 3mm; border: 1.5px dashed var(--accent); border-radius: 2mm; break-inside: avoid; }
+.tries ol { margin: 1mm 0; padding-inline-start: 7mm; }
+.tries li { margin: 1mm 0; }
+p.tries-ans { margin: 1.5mm 0 0; padding-top: 1mm; border-top: 1px dotted var(--line); }

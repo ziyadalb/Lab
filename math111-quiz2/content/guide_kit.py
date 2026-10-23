@@ -163,7 +163,7 @@ def final(it, where):
     return html
 
 
-def short_steps(it, rows, label):
+def short_steps(it, rows, label, lead=True):
     """The shortcut applied to the same example, as explained numbered steps in the same table as the basic
     method: the rule, the numbers read from the question, the substitution, the simplification, the answer.
     rows: (why, latex, claims); every row needs at least one claim:
@@ -193,7 +193,7 @@ def short_steps(it, rows, label):
             else:
                 plain.append(c)
         cells.append((arith(latex, plain, tag), why, k == len(rows)))
-    return (p('<b>⚡ الطريقة السريعة:</b> نفس خطوات 🧱 فوق، مختصرة. استعملها لتتأكد من جوابك.', 'sslbl')
+    return ((p('<b>⚡ الطريقة السريعة:</b> نفس خطوات 🧱 فوق، مختصرة. استعملها لتتأكد من جوابك.', 'sslbl') if lead else '')
             + steps_table(cells, 'short'))
 
 
@@ -354,10 +354,45 @@ class Unit:
         return '<article class="unit">' + head + ''.join(out) + self.gist_html + src + drills + sols + '</article>'
 
 
-def method(steps_, memo=None):
-    """A fixed list of steps in words (the way to solve a type), with an optional memory line."""
+def tricks(items, label='trick'):
+    """🔑 lines: a small rule that stops a typical mistake, each with numbers. An item is a text, or
+    (text, claims) when its math must be checked."""
+    out = ''
+    for k, item in enumerate(items, 1):
+        text, claims = (item, []) if isinstance(item, str) else item
+        if claims:
+            arith('', claims, '%s trick %d' % (label, k))
+        out += '<div class="trick"><b>🔑 تريك:</b> ' + rich(text) + '</div>'
+    return out
+
+
+def method(steps_, memo=None, tricks_=(), label='method'):
+    """A fixed list of steps in words (the way to solve a type), with an optional memory line and 🔑 lines."""
     return ('<ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in steps_) + '</ol>'
-            + ('<div class="memo-inline"><b>كيف أتذكّره:</b> ' + rich(memo) + '</div>' if memo else ''))
+            + ('<div class="memo-inline"><b>كيف أتذكّره:</b> ' + rich(memo) + '</div>' if memo else '')
+            + tricks(tricks_, label))
+
+
+def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=None, origin_html=''):
+    """The quick way of a type, always in the same seven parts:
+    what it saves, where it comes from (tied to the 🧱 solution), the steps in words, the same example
+    (short_steps rows, checked), the memory line, when it does not work, and a few half-minute tries whose answers
+    sit at the end of the box. tries: (question latex, answer latex, claims); every answer is checked."""
+    part = lambda title, body: '<div class="sc-part"><b>%s</b> %s</div>' % (title, body)
+    html = part('وش يوفر لك:', rich(saves)) + part('من وين جا:', rich(origin)) + origin_html
+    html += '<div class="sc-part"><b>الخطوات:</b></div><ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in steps_) + '</ol>'
+    html += '<div class="sc-part"><b>على نفس مثال 🧱:</b></div>' + short_steps(it, rows, label, lead=False)
+    html += '<div class="memo-inline"><b>🧠 جملة الحفظ:</b> ' + rich(memo) + '</div>'
+    html += '<div class="sc-part never"><b>⚠️ متى ما ينفع:</b></div>' + ul([rich(t) for t in never])
+    if paper:
+        html += part('✍️ في الكويز:', rich(paper))
+    qs, ans = [], []
+    for k, (q, a, claims) in enumerate(tries, 1):
+        qs.append('<li>%s</li>' % mi(r'\displaystyle ' + q))
+        ans.append('%d) %s' % (k, mi(r'\displaystyle ' + arith(a, claims, '%s try %d' % (label, k)))))
+    html += ('<div class="tries"><b>🏃 جرّب بسرعة</b> (نص دقيقة لكل واحد، بالطريقة السريعة):<ol>' + ''.join(qs) + '</ol>'
+             + '<p class="tries-ans"><b>الأجوبة:</b> ' + '&emsp;'.join(ans) + '</p></div>')
+    return html
 
 
 def contrast(rows):
