@@ -373,7 +373,8 @@ def method(steps_, memo=None, tricks_=(), label='method'):
             + tricks(tricks_, label))
 
 
-def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=None, origin_html=''):
+def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=None, origin_html='',
+             on='على نفس مثال 🧱:', ask='بالطريقة السريعة', example_html='', after_rows=''):
     """The quick way of a type, always in the same seven parts:
     what it saves, where it comes from (tied to the 🧱 solution), the steps in words, the same example
     (short_steps rows, checked), the memory line, when it does not work, and a few half-minute tries whose answers
@@ -381,7 +382,7 @@ def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=N
     part = lambda title, body: '<div class="sc-part"><b>%s</b> %s</div>' % (title, body)
     html = part('وش يوفر لك:', rich(saves)) + part('من وين جا:', rich(origin)) + origin_html
     html += '<div class="sc-part"><b>الخطوات:</b></div><ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in steps_) + '</ol>'
-    html += '<div class="sc-part"><b>على نفس مثال 🧱:</b></div>' + short_steps(it, rows, label, lead=False)
+    html += '<div class="sc-part"><b>%s</b></div>' % on + example_html + short_steps(it, rows, label, lead=False) + after_rows
     html += '<div class="memo-inline"><b>🧠 جملة الحفظ:</b> ' + rich(memo) + '</div>'
     html += '<div class="sc-part never"><b>⚠️ متى ما ينفع:</b></div>' + ul([rich(t) for t in never])
     if paper:
@@ -390,7 +391,7 @@ def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=N
     for k, (q, a, claims) in enumerate(tries, 1):
         qs.append('<li>%s</li>' % mi(r'\displaystyle ' + q))
         ans.append('%d) %s' % (k, mi(r'\displaystyle ' + arith(a, claims, '%s try %d' % (label, k)))))
-    html += ('<div class="tries"><b>🏃 جرّب بسرعة</b> (نص دقيقة لكل واحد، بالطريقة السريعة):<ol>' + ''.join(qs) + '</ol>'
+    html += ('<div class="tries"><b>🏃 جرّب بسرعة</b> (نص دقيقة لكل واحد، %s):<ol>' % rich(ask) + ''.join(qs) + '</ol>'
              + '<p class="tries-ans"><b>الأجوبة:</b> ' + '&emsp;'.join(ans) + '</p></div>')
     return html
 

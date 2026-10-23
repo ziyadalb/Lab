@@ -4,12 +4,12 @@ Every type: the card (idea, sign, how it differs from the type before), the law 
 step by step with one operation per row (🧱), then the quick way only where it saves lines (types 12-14 and 19),
 the box «before you hand in», the one-line summary, and the exercises.
 """
-from booklet import di_table, sc_dawaran, sc_qaws
-from booklet_engine import ITEMS, same_value
-from guide_kit import Unit, contrast, final, method, pgref, question, rich, short_steps, steps
+from booklet import di_table
+from booklet_engine import ITEMS, arith, same_value
+from guide_kit import Unit, contrast, final, method, pgref, question, rich, short_steps, shortcut, steps, tricks
 from guide_rules import R
 from guide_42 import box_memo
-from html_kit import link, md, p, ul
+from html_kit import link, md, mi, p, ul
 
 
 DI_RULES = ul([rich('عمود <b>D</b>: اشتق كثيرة الحدود (أو القوس) لين توصل صفر.'),
@@ -37,7 +37,10 @@ def u_parts_linear():
         'اختر $u$: الشي اللي <b>يصغر لما تشتقه</b> (هنا القوس). والباقي مع $dx$ هو $dv$.',
         'اشتق $u$ تطلع $du$، وكامل $dv$ تطلع $v$. اكتب الأربعة في مربع.',
         'عوّض في القانون: $uv-\\int v\\,du$.',
-        'كامل التكامل الباقي (صار أسهل)، ولا تنسَ $+C$.'], '$u$ اللي يصغر بالاشتقاق، و $dv$ اللي تعرف تكامله.'))
+        'كامل التكامل الباقي (صار أسهل)، ولا تنسَ $+C$.'], '$u$ اللي يصغر بالاشتقاق، و $dv$ اللي تعرف تكامله.',
+        tricks_=['<b>LIATE يختار لك $u$:</b> L = ln، ثم I = Inverse (دالة عكسية)، ثم A = Algebraic ($x$ وقواه)، '
+                 'ثم T = Trig (sin و cos)، ثم E = Exponential ($e^x$، ومعها sinh و cosh). اللي يجي أول في الترتيب هو $u$. '
+                 'مثال: $(3x-2)\\sinh x$ فيها A و E، و A أول، فـ $u=3x-2$.'], label='U-P1'))
     it = ITEMS['1446-S1-SE-Q2.4']
     ex = question(it, 'U-P1 example')
     ex += steps(it, [
@@ -47,15 +50,28 @@ def u_parts_linear():
         ('line', '(3*x-2)*cosh(x)-3*sinh(x)', 'تكامل $\\cosh x$ هو $\\sinh x$.')], 'U-P1 ex')
     ex += final(it, 'U-P1 example')
     U.add('ex', '🧱 مثال محلول خطوة خطوة (اختبار سابق)', ex)
-    sh = DI_RULES + short_steps(it, [
-        ('عمود D: نشتق القوس لين يصير صفر.', r'3x-2\ \to\ 3\ \to\ 0', [('diff(3*x-2,x)', '3'), ('diff(3,x)', '0')]),
-        ('عمود I: نكامل $\\sinh x$ مرتين.', r'\sinh x\ \to\ \cosh x\ \to\ \sinh x',
-         [('integrate(sinh(x),x)', 'cosh(x)'), ('integrate(cosh(x),x)', 'sinh(x)')]),
-        ('نضرب قطريًا: الأول بإشارة $+$، والثاني بإشارة $-$.', r'(+)\,(3x-2)\cosh x\qquad(-)\,3\sinh x',
-         [('(3*x-2)*cosh(x)-3*sinh(x)', '(3*x-2)*cosh(x)+(-1)*3*sinh(x)')]),
-        ('نجمع الحدين. نفس الجواب اللي طلع في 🧱.', r'(3x-2)\cosh x-3\sinh x+C', [('=ANS', '(3*x-2)*cosh(x)-3*sinh(x)')])], 'U-P1 ex')
-    sh += di_table([('+', '3*x-2', 'sinh(x)'), ('-', '3', 'cosh(x)'), (r'\cdot', '0', 'sinh(x)')])
-    U.add('short', '⚡ الطريقة السريعة: جدول DI بسطرين', sh)
+    U.add('short', '⚡ الطريقة السريعة: جدول DI', shortcut(
+        it, 'U-P1 ex',
+        saves='هنا يوفر سطر بس. لكن تتعلمه على مثال سهل، عشان في النوع 13 يوفر عليك تجزئتين كاملتين.',
+        origin='كل سطر في الجدول = تجزئة وحدة من 🧱. عمود D هو $u$ ومشتقاته، وعمود I هو $dv$ وتكاملاته. '
+               'والإشارة تتبادل لأن القانون $uv-\\int v\\,du$ فيه ناقص.',
+        steps_=['نرسم ثلاث أعمدة: الإشارة، و D، و I.',
+                'في D: نكتب القوس، ونشتقه لين يصير صفر.',
+                'في I: نكتب الدالة الثانية، ونكاملها في كل سطر.',
+                'نضرب كل خانة في D في خانة I اللي <b>تحتها بسطر</b> (مايل ↘). الإشارات بالترتيب: $+$ ثم $-$ ثم $+$.'],
+        example_html=di_table([('+', '3*x-2', 'sinh(x)'), ('-', '3', 'cosh(x)'), (r'\cdot', '0', 'sinh(x)')]),
+        rows=[('عمود D: نشتق القوس لين يصير صفر.', r'3x-2\ \to\ 3\ \to\ 0', [('diff(3*x-2,x)', '3'), ('diff(3,x)', '0')]),
+              ('عمود I: نكامل $\\sinh x$ في كل سطر.', r'\sinh x\ \to\ \cosh x\ \to\ \sinh x',
+               [('integrate(sinh(x),x)', 'cosh(x)'), ('integrate(cosh(x),x)', 'sinh(x)')]),
+              ('نضرب مايل: $(3x-2)$ في $\\cosh x$ بإشارة $+$، و 3 في $\\sinh x$ بإشارة $-$.', r'(+)\,(3x-2)\cosh x\qquad(-)\,3\sinh x',
+               [('(3*x-2)*cosh(x)-3*sinh(x)', '(3*x-2)*cosh(x)+(-1)*3*sinh(x)')]),
+              ('نجمع الحدين. نفس جواب 🧱 ✓', r'(3x-2)\cosh x-3\sinh x+C', [('=ANS', '(3*x-2)*cosh(x)-3*sinh(x)')])],
+        memo='D تنزل للصفر، I تتكامل، واضرب مايل $+\\ -\\ +$.',
+        never=['إذا الدالة الثانية ln أو دالة عكسية: ما نعرف نكاملها في عمود I. هذي النوعين 14 و17.',
+               'مع $e^{ax}\\sin bx$: عمود D ما يوصل صفر أبد. هذا النوع 19.'],
+        paper='في هذا النوع اكتب التجزئة العادية، لأنها قصيرة. والجدول تتأكد فيه من جوابك.',
+        tries=[(r'\int x\,e^{x}\,dx', r'x\,e^{x}-e^{x}', [('diff(x*exp(x)-exp(x),x)', 'x*exp(x)')]),
+               (r'\int(3x+1)\cos x\,dx', r'(3x+1)\sin x+3\cos x', [('diff((3*x+1)*sin(x)+3*cos(x),x)', '(3*x+1)*cos(x)')])]))
     same_value('diff((3*x-2)*cosh(x)-3*sinh(x),x)', '(3*x-2)*sinh(x)', 'U-P1 check')
     U.add('ok', '✔ تأكد', p(rich('اشتق جوابك: $3\\cosh x+(3x-2)\\sinh x-3\\cosh x=(3x-2)\\sinh x$. رجع السؤال ✓')))
     U.add('trap', '⚠️ الفخ', ul([rich('لا تنسَ الرقم اللي يطلع من مشتقة القوس (هنا 3)، ولا $+C$.'),
@@ -94,7 +110,12 @@ def u_parts_di():
         'أول تجزئة: $u=$ كثيرة الحدود، و $dv=$ الباقي.',
         'التكامل الباقي فيه $x$ بقوة أقل: سوّ تجزئة ثانية بنفس الاختيار.',
         'كرّر لين تختفي $x$.',
-        'وزّع السالب على القوس: يقلب إشارة كل حد داخله.']))
+        'وزّع السالب على القوس: يقلب إشارة كل حد داخله.'],
+        tricks_=[('<b>دورة sin و cos في عمود I:</b> $\\sin\\to-\\cos\\to-\\sin\\to\\cos\\to\\sin$. ومع $kx$ نقسم على $k$ في كل سطر: '
+                  '$\\sin2x\\to-\\frac12\\cos2x\\to-\\frac14\\sin2x\\to\\frac18\\cos2x$.',
+                  [('integrate(sin(x),x)', '-cos(x)'), ('integrate(-cos(x),x)', '-sin(x)'), ('integrate(-sin(x),x)', 'cos(x)'),
+                   ('integrate(sin(2*x),x)', '-cos(2*x)/2'), ('integrate(-cos(2*x)/2,x)', '-sin(2*x)/4'), ('integrate(-sin(2*x)/4,x)', 'cos(2*x)/8')])],
+        label='U-P2'))
     it = ITEMS['1445-S1-FE-Q2.2']
     ex = question(it, 'U-P2 example')
     ex += steps(it, [
@@ -106,19 +127,34 @@ def u_parts_di():
         ('line', 'x**2*sinh(x)-2*x*cosh(x)+2*sinh(x)', 'آخر تكامل سهل: $\\int2\\cosh x\\,dx=2\\sinh x$.')], 'U-P2 ex')
     ex += final(it, 'U-P2 example')
     U.add('ex', '🧱 مثال محلول خطوة خطوة (اختبار سابق)', ex)
-    sh = DI_RULES + short_steps(it, [
-        ('عمود D: نشتق $x^2$ لين يصير صفر.', r'x^{2}\ \to\ 2x\ \to\ 2\ \to\ 0', [('diff(x**2,x)', '2*x'), ('diff(2*x,x)', '2'), ('diff(2,x)', '0')]),
-        ('عمود I: نكامل $\\cosh x$ في كل صف.', r'\cosh x\ \to\ \sinh x\ \to\ \cosh x\ \to\ \sinh x',
-         [('integrate(cosh(x),x)', 'sinh(x)'), ('integrate(sinh(x),x)', 'cosh(x)')]),
-        ('نضرب كل خانة في D في اللي تحتها قطريًا في I، بإشارات $+$ ثم $-$ ثم $+$.',
-         r'(+)\,x^{2}\cdot\sinh x\quad(-)\,2x\cdot\cosh x\quad(+)\,2\cdot\sinh x',
-         [('x**2*sinh(x)-2*x*cosh(x)+2*sinh(x)', 'x**2*sinh(x)+(-1)*(2*x)*cosh(x)+2*sinh(x)')]),
-        ('نجمع الحدود. نفس جواب 🧱، بس التجزئتان صارت مرة وحدة.', r'x^{2}\sinh x-2x\cosh x+2\sinh x+C',
-         [('=ANS', 'x**2*sinh(x)-2*x*cosh(x)+2*sinh(x)')])], 'U-P2 ex')
-    sh += di_table([('+', 'x**2', 'cosh(x)'), ('-', '2*x', 'sinh(x)'), ('+', '2', 'cosh(x)'), (r'\cdot', '0', 'sinh(x)')])
-    U.add('short', '⚡ الطريقة السريعة: جدول DI', sh + box_memo('كثيرة الحدود تنزل للصفر، والدالة الثانية تُكامل، والإشارات تتناوب.'))
-    U.add('trap', '⚠️ الفخ', ul([rich('مع $\\sin kx$ أو $\\cos kx$: كل تكامل يقسم على $k$ ويغيّر الإشارة حسب النوع. اكتب عمود I بهدوء.'),
-                                'يتوقف الجدول عندما يصل عمود D إلى صفر.']))
+    U.add('short', '⚡ الطريقة السريعة: جدول DI', shortcut(
+        it, 'U-P2 ex',
+        saves='بدل تجزئتين، وقوس، وسالب في سالب (6 أسطر في 🧱)، تكتب جدول وسطر جواب.',
+        origin='نفس جدول النوع 12. كل سطر = تجزئة من 🧱: سطر $x^2$ هو التجزئة الأولى، وسطر $2x$ هو الثانية. '
+               'والإشارات تتبادل لأن كل تجزئة فيها ناقص. وهذا بالضبط اللي سويناه في 🧱 لما وزّعنا السالب على القوس.',
+        steps_=['نرسم ثلاث أعمدة: الإشارة، و D، و I.',
+                'في D: نكتب كثيرة الحدود، ونشتقها لين توصل صفر.',
+                'في I: نكتب الدالة الثانية، ونكاملها في كل سطر (نفس عدد سطور D).',
+                'نضرب كل خانة في D في خانة I اللي <b>تحتها بسطر</b> (مايل ↘). الإشارات بالترتيب: $+\\ -\\ +\\ -$. وصف الصفر ما نضربه.'],
+        example_html=di_table([('+', 'x**2', 'cosh(x)'), ('-', '2*x', 'sinh(x)'), ('+', '2', 'cosh(x)'), (r'\cdot', '0', 'sinh(x)')]),
+        rows=[('عمود D: نشتق $x^2$ لين يصير صفر.', r'x^{2}\ \to\ 2x\ \to\ 2\ \to\ 0', [('diff(x**2,x)', '2*x'), ('diff(2*x,x)', '2'), ('diff(2,x)', '0')]),
+              ('عمود I: نكامل $\\cosh x$ في كل سطر. تكامل cosh هو sinh، وتكامل sinh هو cosh.', r'\cosh x\ \to\ \sinh x\ \to\ \cosh x\ \to\ \sinh x',
+               [('integrate(cosh(x),x)', 'sinh(x)'), ('integrate(sinh(x),x)', 'cosh(x)')]),
+              ('نضرب مايل: كل خانة في D في اللي تحتها بسطر في I، بإشارات $+$ ثم $-$ ثم $+$.',
+               r'(+)\,x^{2}\sinh x\quad(-)\,2x\cosh x\quad(+)\,2\sinh x',
+               [('x**2*sinh(x)-2*x*cosh(x)+2*sinh(x)', 'x**2*sinh(x)+(-1)*(2*x)*cosh(x)+2*sinh(x)')]),
+              ('نجمع الحدود. نفس جواب 🧱 ✓', r'x^{2}\sinh x-2x\cosh x+2\sinh x+C', [('=ANS', 'x**2*sinh(x)-2*x*cosh(x)+2*sinh(x)')])],
+        memo='D تنزل للصفر، I تتكامل، واضرب مايل $+\\ -\\ +$.',
+        never=['إذا الدالة الثانية ln أو دالة عكسية: ما نعرف نكاملها في عمود I. هذي النوعين 14 و17.',
+               'مع $e^{ax}\\sin bx$: عمود D ما يوصل صفر أبد. هذا النوع 19.'],
+        paper='اكتب الجدول نفسه، ثم سطر الجواب. الجدول هو التجزئة المتكررة مرتبة.',
+        ask='اكتب العمود أو الجواب',
+        tries=[(r'\text{D: }x^{3}', r'x^{3}\to3x^{2}\to6x\to6\to0', [('diff(x**3,x)', '3*x**2'), ('diff(3*x**2,x)', '6*x'), ('diff(6*x,x)', '6')]),
+               (r'\text{I: }\cos3x', r'\cos3x\to\tfrac13\sin3x\to-\tfrac19\cos3x\to-\tfrac{1}{27}\sin3x',
+                [('integrate(cos(3*x),x)', 'sin(3*x)/3'), ('integrate(sin(3*x)/3,x)', '-cos(3*x)/9'), ('integrate(-cos(3*x)/9,x)', '-sin(3*x)/27')]),
+               (r'\int x^{2}e^{-x}\,dx', r'-x^{2}e^{-x}-2x\,e^{-x}-2e^{-x}', [('diff(-x**2*exp(-x)-2*x*exp(-x)-2*exp(-x),x)', 'x**2*exp(-x)')])]))
+    U.add('trap', '⚠️ الفخ', ul([rich('أكثر غلط في عمود I: إشارة تكامل sin. $\\int\\sin x\\,dx=-\\cos x$، وهذي الإشارة تنضرب مع إشارة الجدول.'),
+                                'الجدول يوقف لما يوصل عمود D صفر. صف الصفر ما تضربه.']))
     U.add('paper', '✍️ في ورقة الكويز', p('اكتب جدول DI نفسه، ثم سطر الجواب. الجدول هو التجزئة المتكررة مرتبة، والمصحح يقبله عادة.'))
     U.gist('$x^2$ أو $x^3$ مضروبة في $e^{kx}$ أو sin أو cos أو sinh أو cosh', 'جدول DI: D تشتق، و I تكامل',
            'اضرب قطريًا بإشارات $+\\,-\\,+$')
@@ -146,7 +182,9 @@ def u_qaws():
         '$u=\\ln|x|$، فـ $du=\\frac{dx}{x}$.',
         '$dv=x^n\\,dx$، فـ $v=\\frac{x^{n+1}}{n+1}$ (قاعدة القوة).',
         'عوّض في القانون $uv-\\int v\\,du$.',
-        '$v\\,du$ يصير قوة بسيطة: كاملها.']))
+        '$v\\,du$ يصير قوة بسيطة: كاملها.'],
+        tricks_=['<b>LIATE:</b> L = ln تجي قبل A = $x$، فـ $u=\\ln$ دايم في هذا النوع. وحتى لو الكسر $\\frac{\\ln x}{x^2}$، اكتبه $x^{-2}\\ln x$ أول.'],
+        label='U-P3'))
     it = ITEMS['N51-E3']
     ex = question(it, 'U-P3 example 1')
     ex += steps(it, [
@@ -155,15 +193,7 @@ def u_qaws():
         ('line', 'x**3*log(Abs(x))/3-x**3/9', 'نكامل: $\\int\\frac{x^2}{3}dx=\\frac13\\cdot\\frac{x^3}{3}=\\frac{x^3}{9}$.')], 'U-P3 ex1')
     ex += final(it, 'U-P3 example 1')
     U.add('ex', '🧱 مثال محلول خطوة خطوة (من مذكرة د. طارق)', ex)
-    short, _ = sc_qaws()
-    U.add('short', '⚡ الطريقة السريعة: القانون الجاهز', short + p(rich('$n$ = أس $x$. هذا القانون هو نفس خطوات 🧱 بعد ما نخلصها مرة وحدة.'), 'small')
-          + short_steps(it, [
-              ('القانون الجاهز: قوة × ln', r'\int x^{n}\ln|x|\,dx=\frac{x^{n+1}}{n+1}\left(\ln|x|-\frac{1}{n+1}\right)+C', [R('xn ln')]),
-              ('أس $x$ هو 2، ونزيد عليه 1.', r'n=2,\qquad n+1=3', [('2+1', '3')]),
-              ('نعوّض 3 في المكانين.', r'\frac{x^{3}}{3}\left(\ln|x|-\frac13\right)', [('=ANS', 'x**3/3*(log(Abs(x))-Rational(1,3))')]),
-              ('نوزّع $\\frac{x^3}{3}$ على القوس. نفس الجواب اللي طلع في 🧱.', r'=\frac{x^{3}}{3}\ln|x|-\frac{x^{3}}{9}+C',
-               [('x**3/3*Rational(1,3)', 'x**3/9'), ('=ANS', 'x**3*log(Abs(x))/3-x**3/9')])], 'U-P3 ex1')
-          + box_memo(p('قاعدة القوة على ' + rich('$x^n$') + '، ثم قوس: ln ناقص واحد على نفس المقام.')))
+    ex1_it = it
     it = ITEMS['1446-S1-SE-Q2.5']
     ex = question(it, 'U-P3 example 2')
     ex += steps(it, [
@@ -173,6 +203,28 @@ def u_qaws():
         ('line', '-log(x)/x-1/x', 'نكامل: $\\int x^{-2}dx=\\frac{x^{-1}}{-1}=-\\frac1x$. نزيد الأس 1 ونقسم عليه.')], 'U-P3 ex2')
     ex += final(it, 'U-P3 example 2')
     U.add('ex', '🧱 مثال 2: أس سالب (اختبار سابق)', ex)
+    U.add('short', '⚡ الطريقة السريعة: قوة × ln في سطر', shortcut(
+        ex1_it, 'U-P3 ex1',
+        saves='بدل 3 أسطر، الجواب في سطر. وتتأكد فيه من جوابك في الكويز.',
+        origin='في مثال 1 طلع الجواب $\\frac{x^3}{3}\\ln|x|-\\frac{x^3}{9}$. نطلّع $\\frac{x^3}{3}$ عامل مشترك، فيصير '
+               '$\\frac{x^3}{3}\\left(\\ln|x|-\\frac13\\right)$. ونفس الشكل يطلع مع أي أس: $v$ ضرب ($\\ln$ ناقص 1 على مقام $v$).',
+        steps_=['نكامل القوة لحالها: نزيد الأس 1 ونقسم عليه. هذا $v$.',
+                'نكتب الجواب: $v$ × ($\\ln|x|$ ناقص 1 على نفس الرقم اللي قسمنا عليه).'],
+        on='على مثال 1 في 🧱:',
+        rows=[('نكامل القوة لحالها: الأس 2 يصير 3، ونقسم على 3.', r'v=\frac{x^{3}}{3}', [('integrate(x**2,x)', 'x**3/3')]),
+              ('نضرب $v$ في ($\\ln|x|$ ناقص 1 على 3). نفس جواب 🧱 ✓', r'\frac{x^{3}}{3}\left(\ln|x|-\frac13\right)+C',
+               [('=ANS', 'x**3/3*(log(Abs(x))-Rational(1,3))'), R('xn ln')])],
+        after_rows=p(rich('وعلى مثال 2: $v=\\frac{x^{-1}}{-1}=-\\frac1x$، والرقم اللي قسمنا عليه $-1$. فالجواب '
+                          '$-\\frac1x\\left(\\ln x-\\frac{1}{-1}\\right)=-\\frac1x\\left(\\ln x+1\\right)$، نفس جواب 🧱 ✓'
+                          + arith('', [('-1/x*(log(x)+1)', '-log(x)/x-1/x')], 'U-P3 ex2 quick')), 'small'),
+        memo='كامل القوة، واضرب في ($\\ln$ ناقص واحد على نفس المقام).',
+        never=['مع $\\frac{\\ln x}{x}$: الأس $-1$، والمقام يصير صفر. هذا تعويض $u=\\ln x$، والجواب $\\frac{(\\ln x)^2}{2}$.',
+               'مع $\\ln|2x|$ نفس الطريقة، بس تكتب $\\ln|2x|$ داخل القوس.'],
+        paper='اكتب سطر التجزئة ($u$ و $dv$ و $du$ و $v$) ثم الجواب. والسريع تتأكد فيه.',
+        tries=[(r'\int x^{4}\ln x\,dx', r'\frac{x^{5}}{5}\left(\ln x-\frac15\right)', [('diff(x**5/5*(log(x)-Rational(1,5)),x)', 'x**4*log(x)', 't')]),
+               (r'\int\frac{\ln x}{x^{3}}\,dx', r'-\frac{1}{2x^{2}}\left(\ln x+\frac12\right)',
+                [('diff(-1/(2*x**2)*(log(x)+Rational(1,2)),x)', 'log(x)/x**3', 't')]),
+               (r'\int\ln x\,dx', r'x\left(\ln x-1\right)', [('diff(x*(log(x)-1),x)', 'log(x)', 't')])]))
     U.add('trap', '⚠️ الفخ', ul([rich('$n=-1$، أي $\\int\\frac{\\ln|x|}{x}dx$، ليست تجزئة: عوّض $u=\\ln|x|$ فالجواب $\\frac{(\\ln|x|)^2}{2}$.'),
                                 rich('مع $\\ln|2x|$ المشتقة $\\frac1x$ (الـ 2 تختفي)، والطريقة كما هي.')]))
     U.add('paper', '✍️ في ورقة الكويز', md(r'\begin{array}{l}u=\ln|x|\qquad dv=x^{2}dx\\du=\frac1x\,dx\qquad v=\frac{x^{3}}{3}\end{array}')
@@ -209,7 +261,10 @@ def u_ln_alone():
         'ما فيه ضرب؟ اكتب $dv=dx$ (كأنك ضربت في 1).',
         '$u=$ ln، و $du=$ مشتقتها. و $v=x$.',
         'عوّض في القانون $uv-\\int v\\,du$.',
-        '$x\\cdot du$ يصير بسيطًا. ومع $\\ln(x^2+c)$ تحتاج قسمة بسيطة.'], '$\\int\\ln|x|\\,dx=x\\ln|x|-x$. احفظ هذا السطر.'))
+        '$x\\cdot du$ يصير بسيطًا. ومع $\\ln(x^2+c)$ تحتاج قسمة بسيطة.'], '$\\int\\ln|x|\\,dx=x\\ln|x|-x$. احفظ هذا السطر.',
+        tricks_=['<b>LIATE:</b> ما فيه غير ln، فهي $u$. واللي يبقى $dx$ لحاله، فـ $dv=dx$ و $v=x$.',
+                 ('<b>⚡ النوع 14 يشتغل هنا:</b> $\\ln x=x^0\\ln x$، فـ $v=\\frac{x^1}{1}=x$، والجواب $x(\\ln x-1)$.',
+                  [('diff(x*(log(x)-1),x)', 'log(x)', 't')])], label='U-P4'))
     it = ITEMS['N51-X05']
     ex = question(it, 'U-P4 example')
     ex += steps(it, [
@@ -249,7 +304,10 @@ def u_definite():
     U.add('idea', 'الفكرة', p(rich('أوجد التكامل كأنه غير محدد ($F$)، ثم عوّض الحد الأعلى ناقص الحد الأدنى: $F(b)-F(a)$. لا $+C$.')))
     U.add('sign', 'العلامة', p(rich('$\\int_a^b$ بأرقام فوق وتحت، والدالة من أنواع التجزئة.')))
     U.prev('أي نوع من 12 إلى 15، بس فيه حدود فوق وتحت. تحل كالعادة، ثم تعوّض الأرقام.')
-    U.add('short', '📐 القانون', md(r'\int_{a}^{b}f(x)\,dx=F(b)-F(a)') + box_memo('أعلى ناقص أدنى، وانتبه لسالب في سالب.'))
+    U.add('short', '📐 القانون', md(r'\int_{a}^{b}f(x)\,dx=F(b)-F(a)') + box_memo('أعلى ناقص أدنى، وانتبه لسالب في سالب.')
+          + tricks(['احسب الجواب كامل أول ($F$)، ثم عوّض الحدّين مرة وحدة: (الأعلى) ناقص (الأدنى). لا تعوّض في نص الحل.',
+                    ('أرقام تختصر عليك: $\\ln1=0$، و $\\ln e=1$، و $e^0=1$، و $\\sinh0=0$، و $\\cosh0=1$.',
+                     [('log(1)', '0'), ('log(E)', '1'), ('exp(0)', '1'), ('sinh(0)', '0'), ('cosh(0)', '1')])], 'U-P5'))
     it = ITEMS['1445-S1-SE-Q2.3']
     ex = question(it, 'U-P5 example')
     ex += steps(it, [
@@ -303,7 +361,10 @@ def u_rafeeq():
         'الدالة العكسية وحدها، فنختارها $u$، و $dv=dx$.',
         '$du=$ مشتقتها (من جدول 3.4 أو 4.2)، و $v=x$.',
         'عوّض في القانون: $x\\cdot$ الدالة $-\\int x\\cdot$ مشتقتها.',
-        'التكامل الباقي تعويض: $w=$ ما تحت الجذر أو المقام (ب2).']))
+        'التكامل الباقي تعويض: $w=$ ما تحت الجذر أو المقام (ب2).'],
+        tricks_=['<b>LIATE:</b> I = الدالة العكسية تجي قبل كل شي، فهي $u$. وما فيه غيرها، فـ $dv=dx$.',
+                 ('<b>التكامل الباقي دايم تعويض:</b> $w$ = اللي تحت الجذر أو المقام. مثال: $\\int\\frac{x\\,dx}{\\sqrt{x^2-1}}$ مع $w=x^2-1$ '
+                  'يطلع $\\sqrt{x^2-1}$.', [('diff(sqrt(x**2-1),x)', 'x/sqrt(x**2-1)', '1+t')])], label='U-P6'))
     it = ITEMS['1445-S1-SE-Q2.5']
     ex = question(it, 'U-P6 example')
     ex += steps(it, [
@@ -347,7 +408,10 @@ def u_xinv():
         '$u=$ الدالة العكسية، و $dv=x\\,dx$.',
         '$du=$ مشتقتها، و $v=\\frac{x^2}{2}$.',
         'عوّض في القانون، وطلّع $\\frac12$ برّا التكامل الباقي.',
-        'التكامل الباقي: قسمة بسيطة أو تعويض $w$.']))
+        'التكامل الباقي: قسمة بسيطة أو تعويض $w$.'],
+        tricks_=['<b>LIATE:</b> I = الدالة العكسية قبل A = $x$، فـ $u$ = الدالة العكسية، و $dv=x\\,dx$.',
+                 ('<b>أضف واطرح في البسط:</b> $\\frac{x^2}{1+x^2}=\\frac{x^2+1-1}{1+x^2}=1-\\frac{1}{1+x^2}$. وكل حد له قانون.',
+                  [('x**2/(1+x**2)', '1-1/(1+x**2)')])], label='U-P7'))
     it = ITEMS['1446-S2-FE-Q2.2']
     ex = question(it, 'U-P7 example')
     ex += steps(it, [
@@ -389,7 +453,9 @@ def u_dawaran():
         'أول تجزئة: $u=$ sin أو cos، و $dv=e^{ax}dx$.',
         'ثاني تجزئة على التكامل الباقي، <b>بنفس الاختيار</b> (المثلثية $u$).',
         'يرجع التكامل الأصلي: سمّه $I$.',
-        'اجمع $I$ في طرف واحد، ثم اقسم.']))
+        'اجمع $I$ في طرف واحد، ثم اقسم.'],
+        tricks_=['<b>نفس الاختيار في التجزئتين:</b> إذا اخترت المثلثية $u$ في الأولى، اخترها $u$ في الثانية بعد. لو بدّلت، ترجع لنفس السؤال.'],
+        label='U-P8'))
     it = ITEMS['1447-S2-FE-Q2.3']
     I_ = '(2*exp(2*x)*sin(x)/5-exp(2*x)*cos(x)/5)'
     ex = question(it, 'U-P8 example')
@@ -405,14 +471,34 @@ def u_dawaran():
          'نضرب الطرفين في $\\frac45$ عشان يبقى $I$ لحاله.')], 'U-P8 ex')
     ex += final(it, 'U-P8 example')
     U.add('ex', '🧱 مثال محلول خطوة خطوة (اختبار سابق)', ex)
-    short, memo = sc_dawaran()
-    U.add('short', '⚡ الطريقة السريعة: الجواب في سطر', short
-          + p(rich('$a$ = رقم $x$ في الأسية، و $b$ = رقم $x$ داخل sin أو cos.'), 'small')
-          + short_steps(it, [
-              ('القانون الجاهز لـ sin.', r'\int e^{ax}\sin bx\,dx=\frac{e^{ax}}{a^{2}+b^{2}}\left(a\sin bx-b\cos bx\right)+C', [R('dawaran sin')]),
-              ('رقم $x$ في الأسية 2، ورقم $x$ داخل sin هو 1. ونحسب المقام.', r'a=2,\qquad b=1,\qquad a^{2}+b^{2}=4+1=5', [('2**2+1**2', '5')]),
-              ('نعوّض. نفس الجواب اللي طلع في 🧱.', r'\frac{e^{2x}}{5}\left(2\sin x-\cos x\right)+C', [('=ANS', 'exp(2*x)*(2*sin(x)-cos(x))/5')])], 'U-P8 ex')
-          + box_memo(memo))
+    rule = md(r"\int e^{ax}f\,dx=\frac{e^{ax}\left(a\,f-f'\right)}{a^{2}+b^{2}}+C")
+    rule += p(rich('$f$ = الدالة ($\\sin bx$ أو $\\cos bx$)، و $f\'$ = مشتقتها. مع cos ما تحتاج تحفظ إشارة: مشتقة $\\cos bx$ فيها سالب، '
+                   'فـ «ناقص مشتقتها» يصير زائد. مثال: $\\int e^{x}\\cos2x\\,dx$ قوسها $\\cos2x+2\\sin2x$.'
+                   + arith('', [('1*cos(2*x)-diff(cos(2*x),x)', 'cos(2*x)+2*sin(2*x)')], 'U-P8 cos sign')), 'small')
+    U.add('short', '⚡ الطريقة السريعة: قاعدة وحدة لـ sin و cos', shortcut(
+        it, 'U-P8 ex',
+        saves='بدل تجزئتين وحل معادلة (6 أسطر في 🧱)، الجواب في سطر.',
+        origin='في 🧱 حلّينا المعادلة بالأرقام: $\\frac54I=\\ldots$ ثم ضربنا في $\\frac45$. لو حلّيناها مرة وحدة بحروف، '
+               'يطلع قانون واحد يشتغل مع sin ومع cos:',
+        origin_html=rule,
+        steps_=['نقرأ $a$ = الرقم مع $x$ في الأسية، و $b$ = الرقم مع $x$ داخل sin أو cos.',
+                'نحسب المقام: $a^2+b^2$.',
+                'نكتب القوس: ($a$ × الدالة) ناقص (مشتقة الدالة).',
+                'الجواب = $e^{ax}$ × القوس ÷ المقام.'],
+        rows=[('نقرأ الرقمين ونحسب المقام: الأسية $e^{2x}$ فيها 2، و $\\sin x$ فيها 1.', r'a=2,\quad b=1,\quad a^{2}+b^{2}=4+1=5',
+               [('2**2+1**2', '5')]),
+              ('القوس: $2\\times\\sin x$ ناقص مشتقة $\\sin x$، ومشتقتها $\\cos x$.', r'2\sin x-\cos x',
+               [('2*sin(x)-diff(sin(x),x)', '2*sin(x)-cos(x)')]),
+              ('الجواب = $e^{2x}$ × القوس ÷ 5. نفس جواب 🧱 ✓', r'\frac{e^{2x}}{5}\left(2\sin x-\cos x\right)+C',
+               [('=ANS', 'exp(2*x)*(2*sin(x)-cos(x))/5'), R('dawaran one sin'), R('dawaran one cos')])],
+        memo='المقام $a^2+b^2$، والقوس: $a$ × الدالة ناقص مشتقتها.',
+        never=['مع sinh أو cosh ما ينفع. هذا النوع 20: اكتبها بالأسس.',
+               'مع $e^{-x}$: $a=-1$، و $a^2=1$. لا تنسى السالب في «$a$ × الدالة».'],
+        paper='إذا السؤال يقول by parts: اكتب التجزئتين والمعادلة، والسريع يعطيك الجواب الصح قبل. وإذا ما حدد: سطر القانون بالأرقام.',
+        tries=[(r'\int e^{3x}\cos x\,dx', r'\frac{e^{3x}}{10}\left(3\cos x+\sin x\right)',
+                [('diff(exp(3*x)*(3*cos(x)+sin(x))/10,x)', 'exp(3*x)*cos(x)')]),
+               (r'\int e^{-x}\sin x\,dx', r'-\frac{e^{-x}}{2}\left(\sin x+\cos x\right)',
+                [('diff(-exp(-x)*(sin(x)+cos(x))/2,x)', 'exp(-x)*sin(x)')])]))
     U.add('trap', '⚠️ الفخ', ul(['في التجزئة الثانية لازم تختار نفس النوع لـ u (المثلثية)، وإلا ترجع للبداية.',
                                 rich('لا تخلط مع $e^{ax}\\sinh bx$: هذا النوع 20.')]))
     U.add('paper', '✍️ في ورقة الكويز', p('اكتب التجزئتين ثم سطر المعادلة. وبعدها تأكد بالطريقة السريعة.'))
@@ -428,7 +514,7 @@ def u_dawaran():
                       ('tex', r'2I=e^{x}\cos x+e^{x}\sin x', [('2*%s' % J1, 'exp(x)*cos(x)+exp(x)*sin(x)')], 'نجمع $I$ في طرف واحد: $I+I=2I$.'),
                       ('line', 'exp(x)*(cos(x)+sin(x))/2', 'نقسم الطرفين على 2 عشان يبقى $I$ لحاله.'),
                       ('tex', r'\frac{e^{x}}{1^{2}+1^{2}}\left(1\cdot\cos x+1\cdot\sin x\right)', [('exp(x)/2*(cos(x)+sin(x))', J1)],
-                       '✔ تأكد بالطريقة السريعة: قانون cos مع رقم الأسية 1 ورقم cos 1.')])
+                       '✔ تأكد بالسريع: $a=1$ و $b=1$، والمقام 2. القوس: $\\cos x$ ناقص مشتقته ($-\\sin x$)، يعني $\\cos x+\\sin x$.')])
     J2 = '(exp(2*x)*(2*sin(3*x)-3*cos(3*x))/13)'
     U.drill('2', 'N51-X11', 'P', '$u=\\sin3x$ ثم $u=\\cos3x$.',
             sol_rows=[('parts', 'sin(3*x)', 'exp(2*x)', '3*cos(3*x)', 'exp(2*x)/2', 'أول تجزئة: $u=\\sin3x$، و $dv=e^{2x}dx$، فـ $v=\\frac{e^{2x}}{2}$.'),
@@ -440,7 +526,7 @@ def u_dawaran():
                        [('Rational(13,4)*%s' % J2, 'exp(2*x)*sin(3*x)/2-Rational(3,4)*exp(2*x)*cos(3*x)')], 'نجمع $I$ في طرف واحد: $I+\\frac94I=\\frac{13}{4}I$.'),
                       ('line', 'exp(2*x)*(2*sin(3*x)-3*cos(3*x))/13', 'نضرب الطرفين في $\\frac{4}{13}$ عشان يبقى $I$ لحاله.'),
                       ('tex', r'\frac{e^{2x}}{2^{2}+3^{2}}\left(2\sin3x-3\cos3x\right)', [('exp(2*x)/(2**2+3**2)*(2*sin(3*x)-3*cos(3*x))', J2)],
-                       '✔ تأكد بالطريقة السريعة: قانون sin مع رقم الأسية 2 ورقم sin 3.')])
+                       '✔ تأكد بالسريع: $a=2$ و $b=3$، والمقام 13. القوس: $2\\sin3x$ ناقص مشتقته ($3\\cos3x$).')])
     J3 = '(exp(5*x)*(5*cos(2*x)+2*sin(2*x))/29)'
     U.drill('3', 'N51-X12', 'I', '$u=\\cos2x$ ثم $u=\\sin2x$.',
             sol_rows=[('parts', 'cos(2*x)', 'exp(5*x)', '-2*sin(2*x)', 'exp(5*x)/5', 'أول تجزئة: $u=\\cos2x$، و $dv=e^{5x}dx$، فـ $v=\\frac{e^{5x}}{5}$.'),
@@ -452,7 +538,7 @@ def u_dawaran():
                        [('Rational(29,25)*%s' % J3, 'exp(5*x)*cos(2*x)/5+Rational(2,25)*exp(5*x)*sin(2*x)')], 'نجمع $I$ في طرف واحد: $I+\\frac{4}{25}I=\\frac{29}{25}I$.'),
                       ('line', 'exp(5*x)*(5*cos(2*x)+2*sin(2*x))/29', 'نضرب الطرفين في $\\frac{25}{29}$ عشان يبقى $I$ لحاله.'),
                       ('tex', r'\frac{e^{5x}}{5^{2}+2^{2}}\left(5\cos2x+2\sin2x\right)', [('exp(5*x)/(5**2+2**2)*(5*cos(2*x)+2*sin(2*x))', J3)],
-                       '✔ تأكد بالطريقة السريعة: قانون cos مع رقم الأسية 5 ورقم cos 2.')])
+                       '✔ تأكد بالسريع: $a=5$ و $b=2$، والمقام 29. القوس: $5\\cos2x$ ناقص مشتقته ($-2\\sin2x$)، يعني $5\\cos2x+2\\sin2x$.')])
     return U
 
 
@@ -466,7 +552,10 @@ def u_nisfayn():
         'اكتب sinh أو cosh بالتعريف (أ3): $\\cosh u=\\frac{e^u+e^{-u}}{2}$، و $\\sinh u=\\frac{e^u-e^{-u}}{2}$.',
         'اضرب في الأسية: لما نضرب أسيات الأسس تنجمع.',
         'كامل كل حد: $\\int e^{kx}dx=\\frac{e^{kx}}{k}$.',
-        'إذا طلع أس صفر، فالحد ثابت وتكامله $x$ × الثابت.']))
+        'إذا طلع أس صفر، فالحد ثابت وتكامله $x$ × الثابت.'],
+        tricks_=[('<b>لما نضرب أسيات الأسس تنجمع:</b> $e^{x}\\cdot e^{2x}=e^{3x}$، و $e^{x}\\cdot e^{-2x}=e^{-x}$.',
+                  [('exp(x)*exp(2*x)', 'exp(3*x)'), ('exp(x)*exp(-2*x)', 'exp(-x)')]),
+                 '<b>لا تخلط مع النوع 19:</b> sinh و cosh نكتبها بالأسس. أما sin و cos فلها الطريقة السريعة في النوع 19.'], label='U-P9'))
     it = ITEMS['1446-S1-SE-Q2.3']
     ex = question(it, 'U-P9 example')
     ex += steps(it, [
@@ -512,7 +601,9 @@ def u_subparts():
     U.add('short', '🧭 الطريقة', method([
         '<b>جذر داخل الدالة</b> ($e^{\\sqrt x}$ أو $\\cos\\sqrt x$): $t=\\sqrt x$، فـ $x=t^2$ و $dx=2t\\,dt$. يصير تجزئة (النوع 12).',
         '<b>قوة × جذر</b> ($x^3\\sqrt{x^2+c}$): $w=$ ما تحت الجذر. اكتب الباقي بدلالة $w$، وكامل حدًا حدًا.',
-        'في الآخر ارجع لـ $x$.']))
+        'في الآخر ارجع لـ $x$.'],
+        tricks_=[('<b>$\\sqrt x$ داخل دالة:</b> $t=\\sqrt x$، و $x=t^2$، و $dx=2t\\,dt$. مثال: $\\int e^{\\sqrt x}dx=\\int2t\\,e^{t}dt$، وهذا النوع 12.',
+                  [('diff(2*exp(sqrt(x))*(sqrt(x)-1),x)', 'exp(sqrt(x))', 't')])], label='U-P10'))
     it = ITEMS['N51-X15']
     ex = question(it, 'U-P10 example')
     ex += steps(it, [
