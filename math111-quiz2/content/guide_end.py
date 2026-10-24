@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import booklet as B
-from booklet import sc_dawaran, sc_even, sc_lamda, sc_prod, sc_qaws, sc_reduce, sc_six, sc_square, sc_twins
+from booklet import sc_six, sc_twins
 from booklet_engine import HOLD, ITEMS, LOG, ans_tex, q_tex
 from guide_52 import sc_method
 import guide_prereq as PQ
@@ -212,18 +212,37 @@ def after_day(d):
 
 
 def formulas():
-    parts = []
-    for title, fns in [('4.2', [sc_twins, sc_six, sc_lamda, sc_square]),
-                       ('5.1', [sc_qaws, sc_dawaran]),
-                       ('5.2', [sc_method, sc_even, sc_reduce, sc_prod])]:
-        inner = (p('<b>التجزئة:</b> ' + rich('$\\int u\\,dv=uv-\\int v\\,du$. القوس أو كثيرة الحدود ⇐ جدول DI (D تشتق لين الصفر، I تكامل، '
-                     'وإشارات $+\\,-\\,+$). ln أو دالة عكسية ⇐ هي $u$. وsinh أو cosh مع أسية ⇐ اكتبها بالأسس.'))
-                 if title == '5.1' else '')
-        for fn in fns:
-            short, _ = fn()
-            inner += '<div class="fsheet">' + short + '</div>'
-        parts.append('<h3>%s</h3>' % title + inner)
-    return section('formulas', '📋 ورقة القوانين والاختصارات',
+    """The laws to know, and the five quick ways with their memory lines (every math line checked)."""
+    from booklet_engine import arith
+    sheet = lambda html: '<div class="fsheet">' + html + '</div>'
+    quick = lambda name, text: p('<b>⚡ ' + name + ':</b> ' + rich(text))
+    law42 = sheet(sc_twins()[0]) + sheet(sc_six(adjust=False)[0])
+    law42 += quick('المركز والباقي (النوعان 10 و11)', 'المركز = سالب معامل $x$ ÷ (2 × معامل $x^2$). والباقي = اللي تحت الجذر لما نعوّض المركز. '
+                   'فيصير: (معامل $x^2$) × ($x$ ناقص المركز)² + الباقي. «المركز يصفّر القوس، والباقي هو اللي يبقى».')
+    law42 += p(rich('🔑 رقم التعديل: البسط ناقصه رقم عشان يصير $du$؟ اقسم عليه برّا. و tanh⁻¹ أم coth⁻¹؟ $u$ أصغر من $a$ يعني tanh⁻¹.'))
+    law51 = p('<b>📐 التجزئة:</b> ' + rich('$\\int u\\,dv=uv-\\int v\\,du$. واختيار $u$ بالترتيب LIATE: ln، ثم دالة عكسية، ثم $x$، ثم sin و cos، ثم $e^x$.'))
+    law51 += quick('جدول DI (النوعان 12 و13)', 'D تنزل للصفر، I تتكامل، واضرب مايل بإشارات $+\\ -\\ +$.')
+    law51 += quick('قوة × ln (النوعان 14 و15)', 'كامل القوة ($v$)، واضرب في ($\\ln x$ ناقص 1 على نفس المقام). '
+                   'مثال: $\\int x^2\\ln x\\,dx=\\frac{x^3}{3}\\left(\\ln x-\\frac13\\right)$، و $\\int\\ln x\\,dx=x(\\ln x-1)$.'
+                   + arith('', [('diff(x**3/3*(log(x)-Rational(1,3)),x)', 'x**2*log(x)', 't'), ('diff(x*(log(x)-1),x)', 'log(x)', 't')], 'sheet ln'))
+    law51 += quick('أسية × sin أو cos (النوع 19)', 'المقام $a^2+b^2$، والقوس: $a$ × الدالة ناقص مشتقتها.')
+    law51 += md(r"\int e^{ax}f\,dx=\frac{e^{ax}\left(a\,f-f'\right)}{a^{2}+b^{2}}+C\qquad f=\sin bx\ \text{or}\ \cos bx")
+    law52 = sheet(sc_method()[0])
+    law52 += sheet(md(arith(r'\sin^{2}x=\frac{1-\cos2x}{2}\qquad \cos^{2}x=\frac{1+\cos2x}{2}',
+                            [('sin(x)**2', '(1-cos(2*x))/2'), ('cos(x)**2', '(1+cos(2*x))/2')], 'sheet half'))
+                   + p(rich('🔑 سين وسالب: $\\sin^2$ معها ناقص.')))
+    law52 += sheet(md(arith(r'\sin A\cos B=\tfrac12\left[\sin(A-B)+\sin(A+B)\right]\quad '
+                            r'\sin A\sin B=\tfrac12\left[\cos(A-B)-\cos(A+B)\right]\quad '
+                            r'\cos A\cos B=\tfrac12\left[\cos(A-B)+\cos(A+B)\right]',
+                            [('sin(7*x)*cos(5*x)', '(sin(2*x)+sin(12*x))/2'), ('sin(4*x)*sin(3*x)', '(cos(x)-cos(7*x))/2'),
+                             ('cos(3*x)*cos(x)', '(cos(2*x)+cos(4*x))/2')], 'sheet product')))
+    law52 += quick('سلسلة tan و sec³ (النوع 27)', 'الأسس تنزل 2 2، كل حد على أسه، الإشارات تتبادل، والآخر $x$ (أس زوجي) أو $\\ln|\\sec x|$ (أس فردي). '
+                   'مثال: $\\int\\tan^4x\\,dx=\\frac{\\tan^3x}{3}-\\tan x+x$. و $\\int\\sec^3x\\,dx$ «نص ونص»: '
+                   '$\\frac12\\sec x\\tan x+\\frac12\\ln|\\sec x+\\tan x|$.'
+                   + arith('', [('diff(tan(x)**3/3-tan(x)+x,x)', 'tan(x)**4'),
+                                ('diff(sec(x)*tan(x)/2+log(sec(x)+tan(x))/2,x)', 'sec(x)**3', 't/(1+t)')], 'sheet tan'))
+    parts = ['<h3>4.2</h3>' + law42, '<h3>5.1</h3>' + law51, '<h3>5.2</h3>' + law52]
+    return section('formulas', '📋 ورقة القوانين والطرق السريعة',
                    p('اقرأها يوم 26 ومرة صباح الكويز. لا تُدخلها معك القاعة.', 'small') + ''.join(parts) + PQ.sheet(), 'fsheets')
 
 

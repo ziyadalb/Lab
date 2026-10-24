@@ -106,8 +106,9 @@ def card_twins():
                 short, memo, ex_, trap, paper, fallback)
 
 
-def sc_six():
-    """Shortcut box and memory line of card six (shared by the booklet and the full guide)."""
+def sc_six(adjust=True):
+    """Shortcut box and memory line of card six (shared by the booklet and the full guide); adjust=False leaves out
+    the adjusting rule written with letters (the full guide teaches it as a trick in words)."""
     rows = [formula('1/sqrt(u**2+a**2)', 'asinh(u/a)', pos=('a',), label='six sinh'),
             formula('1/sqrt(u**2-a**2)', 'acosh(u/a)', branches=('a+t',), pos=('a',), label='six cosh'),
             formula('1/(a**2-u**2)', 'atanh(u/a)/a', branches=('a*t/(1+t)', '-a*t/(1+t)'), pos=('a',), label='six tanh'),
@@ -118,7 +119,8 @@ def sc_six():
     short = table(['التكامل', 'الجواب (+C)', 'الشرط'], [frow(r, c) for r, c in zip(rows, conds)], 'formula')
     adj = formula('c*x**(n-1)/sqrt((k*x**n)**2+a**2)', 'c*asinh(k*x**n/a)/(n*k)', var='x', branches=('t',),
                   pos=('a', 'c', 'k', 'n'), label='adjust rule (sinh row)')
-    short += p('<b>قاعدة الضبط:</b> إذا كان ' + mi('u=k\\,x^{n}') + ' والبسط ' + mi('c\\,x^{n-1}') + ' فاضرب الصيغة في '
+    if adjust:
+        short += p('<b>قاعدة الضبط:</b> إذا كان ' + mi('u=k\\,x^{n}') + ' والبسط ' + mi('c\\,x^{n-1}') + ' فاضرب الصيغة في '
                + mi(r'\frac{c}{n\,k}') + '. مثلًا:') + md(adj[0] + ' = ' + adj[1] + ' + C')
     memo = ul(['صيغتا الجذر وحده (sinh و cosh) <b>بلا</b> ' + mi(r'\frac1a') + '؛ الأربع الباقية فيها ' + mi(r'\frac1a') + '.',
                'tanh أم coth؟ قارن ' + mi('|u|') + ' مع ' + mi('a') + ': أصغر ⇐ tanh، أكبر ⇐ coth.',
