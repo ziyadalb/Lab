@@ -2941,7 +2941,7 @@
   "official_check": "symbolic",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "U-D2 trap",
+  "location": "U-D1 trap",
   "exclusion_reason": ""
  },
  {
@@ -5824,7 +5824,7 @@
   "official_check": "",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "U-I2 drill 1",
+  "location": "U-I2 drill 2",
   "exclusion_reason": ""
  },
  {
@@ -5979,7 +5979,7 @@
   "official_check": "",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "U-I6 drill 2",
+  "location": "U-I6 drill 3",
   "exclusion_reason": ""
  },
  {
@@ -7219,7 +7219,7 @@
   "official_check": "",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "U-T3 drill 2",
+  "location": "U-T3 drill 4",
   "exclusion_reason": ""
  },
  {
@@ -7932,7 +7932,7 @@
   "official_check": "",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "U-T6 drill 2",
+  "location": "U-T6 drill 4",
   "exclusion_reason": ""
  },
  {
@@ -7963,7 +7963,7 @@
   "official_check": "",
   "usage": "مستخدم في المذكرة الكاملة",
   "holdout_id": "",
-  "location": "U-T6 drill 1",
+  "location": "U-T6 drill 2",
   "exclusion_reason": ""
  }
 ]

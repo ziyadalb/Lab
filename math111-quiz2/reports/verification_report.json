@@ -5281,11 +5281,479 @@
      }
     ]
    }
+  },
+  {
+   "id": "M-05",
+   "kind": "musa",
+   "task": "diff",
+   "case": "PRE-A2",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-06",
+   "kind": "musa",
+   "task": "diff",
+   "case": "PRE-A3",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-07",
+   "kind": "musa",
+   "task": "int",
+   "case": "PRE-A3",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-08",
+   "kind": "musa",
+   "task": "int",
+   "case": "PRE-A4",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-09",
+   "kind": "musa",
+   "task": "int",
+   "case": "PRE-A4",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-83",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-TANH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "3*t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "3*t/(t + 1)"
+     },
+     {
+      "branch": "-3*t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-3*t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-10",
+   "kind": "musa",
+   "task": "defint",
+   "case": "C42-I-TANH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "check": "F(b)-F(a) equals stated value",
+      "residual": "0"
+     },
+     {
+      "check": "F'=f on [a,b]",
+      "residual": "0"
+     },
+     {
+      "check": "integrand continuous on [a,b]",
+      "result": "Interval(4, 8)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-85",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-86",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-HIDDEN",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-87",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-SPLIT",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-88",
+   "kind": "generated",
+   "task": "int",
+   "case": "C42-I-INVNUM",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-13",
+   "kind": "musa",
+   "task": "int",
+   "case": "C42-I-SPLIT",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-14",
+   "kind": "musa",
+   "task": "int",
+   "case": "C42-I-INVNUM",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-19",
+   "kind": "musa",
+   "task": "int",
+   "case": "C52-SC-EVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-20",
+   "kind": "musa",
+   "task": "int",
+   "case": "C52-EVEN1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-21",
+   "kind": "musa",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-91",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-92",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-SECEVEN",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-93",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-TAN0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "G-94",
+   "kind": "generated",
+   "task": "int",
+   "case": "C52-TS-TAN0",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(t + 1)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(t + 1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-27",
+   "kind": "musa",
+   "task": "int",
+   "case": "PRE-B1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-28",
+   "kind": "musa",
+   "task": "diff",
+   "case": "PRE-B1",
+   "section": "5.1",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t/(5*t + 5)",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t/(5*t + 5)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-29",
+   "kind": "musa",
+   "task": "int",
+   "case": "PRE-C1",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
+  },
+  {
+   "id": "M-30",
+   "kind": "musa",
+   "task": "int",
+   "case": "PRE-C3",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "x",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "x"
+     }
+    ]
+   }
   }
  ],
  "items_summary": {
   "answer": {
-   "symbolic": 240
+   "symbolic": 264
   },
   "official": {
    "symbolic": 55,

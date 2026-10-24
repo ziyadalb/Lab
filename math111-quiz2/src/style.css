@@ -270,3 +270,7 @@ table.map tr { break-inside: avoid; }
 .tries ol { margin: 1mm 0; padding-inline-start: 7mm; }
 .tries li { margin: 1mm 0; }
 p.tries-ans { margin: 1.5mm 0 0; padding-top: 1mm; border-top: 1px dotted var(--line); }
+table.di { break-inside: avoid; }
+#night { break-before: page; }
+.tries-ans { margin: 1.5mm 0 0; padding-top: 1mm; border-top: 1px dotted var(--line); }
+.tries-ans ol { margin: 0.5mm 0; }

@@ -30,7 +30,7 @@
  "bookmarks": 9,
  "text_extraction": {
   "tool": "pdftotext (poppler)",
-  "characters": 27841,
+  "characters": 29322,
   "english_found": {
    "Evaluate the following integrals": true,
    "Find dy/dx of the following": true
@@ -49,8 +49,8 @@
   }
  },
  "math": {
-  "produced": 83,
-  "rendered": 83,
+  "produced": 93,
+  "rendered": 93,
   "mismatched": 0,
   "katex_errors": 0
  },

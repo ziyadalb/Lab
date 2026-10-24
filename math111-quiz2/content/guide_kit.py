@@ -390,9 +390,9 @@ def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=N
     qs, ans = [], []
     for k, (q, a, claims) in enumerate(tries, 1):
         qs.append('<li>%s</li>' % mi(r'\displaystyle ' + q))
-        ans.append('%d) %s' % (k, mi(r'\displaystyle ' + arith(a, claims, '%s try %d' % (label, k)))))
+        ans.append(mi(r'\displaystyle ' + arith(a, claims, '%s try %d' % (label, k))))
     html += ('<div class="tries"><b>🏃 جرّب بسرعة</b> (نص دقيقة لكل واحد، %s):<ol>' % rich(ask) + ''.join(qs) + '</ol>'
-             + '<p class="tries-ans"><b>الأجوبة:</b> ' + '&emsp;'.join(ans) + '</p></div>')
+             + '<div class="tries-ans"><b>الأجوبة:</b><ol>' + ''.join('<li>%s</li>' % a for a in ans) + '</ol></div></div>')
     return html
 
 
