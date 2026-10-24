@@ -160,14 +160,29 @@ def u_parts_di():
            'اضرب قطريًا بإشارات $+\\,-\\,+$')
     U.drill('1', 'N51-E2', 'G', 'كل تكاملات $e^x$ هي $e^x$؛ الإشارات $+\\,-\\,+$.',
             first=r'D:\ x^{2},\ 2x,\ 2,\ 0\qquad I:\ e^{x},\ e^{x},\ e^{x},\ e^{x}',
-            claims=[('diff(x**2,x)', '2*x'), ('integrate(exp(x),x)', 'exp(x)')])
+            claims=[('diff(x**2,x)', '2*x'), ('integrate(exp(x),x)', 'exp(x)')],
+            sol_rows=[('tex', r'(+)\,x^{2}e^{x}\quad(-)\,2x\,e^{x}\quad(+)\,2e^{x}',
+                       [('x**2*exp(x)-2*x*exp(x)+2*exp(x)', 'x**2*exp(x)+(-1)*2*x*exp(x)+2*exp(x)')],
+                       'نضرب مايل: كل خانة في D في اللي تحتها بسطر في I، بإشارات $+$ ثم $-$ ثم $+$.'),
+                      ('line', 'x**2*exp(x)-2*x*exp(x)+2*exp(x)', 'نجمع الحدود الثلاثة.'),
+                      ('line', '(x**2-2*x+2)*exp(x)', 'نطلّع $e^x$ عامل مشترك من كل الحدود.')])
     U.drill('2', 'N51-X03', 'P', 'أربعة صفوف قبل الصفر: $x^3,\\ 3x^2,\\ 6x,\\ 6$.',
             sol_rows=[('tex', r'D:\ x^{3},\ 3x^{2},\ 6x,\ 6,\ 0\qquad I:\ e^{x},\ e^{x},\ e^{x},\ e^{x},\ e^{x}',
                        [('diff(x**3,x)', '3*x**2'), ('diff(3*x**2,x)', '6*x'), ('diff(6*x,x)', '6')], 'جدول DI: نشتق $x^3$ لين الصفر، وتكامل $e^x$ هو $e^x$ دايم.'),
                       ('tex', r'+x^{3}e^{x}-3x^{2}e^{x}+6x\,e^{x}-6e^{x}',
                        [('diff(x**3*exp(x)-3*x**2*exp(x)+6*x*exp(x)-6*exp(x),x)', 'x**3*exp(x)')], 'نضرب قطريًا بإشارات $+$ ثم $-$ ثم $+$ ثم $-$.'),
                       ('line', '(x**3-3*x**2+6*x-6)*exp(x)', 'نطلّع $e^x$ عامل مشترك من كل الحدود.')])
-    U.drill('3', 'N51-X02', 'I', 'تكاملات $\\sin2x$: $-\\frac12\\cos2x$، ثم $-\\frac14\\sin2x$، ثم $\\frac18\\cos2x$.')
+    U.drill('3', 'N51-X02', 'I', 'تكاملات $\\sin2x$: $-\\frac12\\cos2x$، ثم $-\\frac14\\sin2x$، ثم $\\frac18\\cos2x$.',
+            sol_rows=[('tex', r'D:\ x^{2}-1,\ 2x,\ 2,\ 0', [('diff(x**2-1,x)', '2*x'), ('diff(2*x,x)', '2')],
+                       'عمود D: نشتق $x^2-1$ لين يصير صفر.'),
+                      ('tex', r'I:\ \sin2x,\ -\tfrac12\cos2x,\ -\tfrac14\sin2x,\ \tfrac18\cos2x',
+                       [('integrate(sin(2*x),x)', '-cos(2*x)/2'), ('integrate(-cos(2*x)/2,x)', '-sin(2*x)/4'),
+                        ('integrate(-sin(2*x)/4,x)', 'cos(2*x)/8')],
+                       'عمود I: هنا التريك: دورة sin و cos، ونقسم على 2 في كل سطر.'),
+                      ('tex', r'(x^{2}-1)\left(-\frac{\cos2x}{2}\right)-2x\left(-\frac{\sin2x}{4}\right)+2\cdot\frac{\cos2x}{8}',
+                       [('(x**2-1)*(-cos(2*x)/2)-2*x*(-sin(2*x)/4)+2*cos(2*x)/8', '-(x**2-1)*cos(2*x)/2+x*sin(2*x)/2+cos(2*x)/4')],
+                       'نضرب مايل بإشارات $+$ ثم $-$ ثم $+$.'),
+                      ('line', '-(x**2-1)*cos(2*x)/2+x*sin(2*x)/2+cos(2*x)/4', 'نبسّط: سالب في سالب = موجب، و $\\frac28=\\frac14$.')])
     return U
 
 
@@ -427,7 +442,14 @@ def u_xinv():
     U.add('paper', '✍️ في ورقة الكويز', md(r'u=\tanh^{-1}x,\ dv=x\,dx,\ du=\frac{dx}{1-x^{2}},\ v=\frac{x^{2}}{2}'))
     U.gist('$x$ مضروبة في دالة عكسية', '$u=$ الدالة، و $dv=x\\,dx$', 'القانون مع $\\frac12$، ثم قسمة أو تعويض')
     U.drill('1', 'G-07', 'G', '$\\frac{x^2}{1+x^2}=1-\\frac{1}{1+x^2}$.',
-            first=r'u=\tan^{-1}x,\ dv=x\,dx,\ du=\frac{dx}{1+x^{2}},\ v=\frac{x^{2}}{2}', claims=[('diff(atan(x),x)', '1/(1+x**2)')])
+            first=r'u=\tan^{-1}x,\ dv=x\,dx,\ du=\frac{dx}{1+x^{2}},\ v=\frac{x^{2}}{2}', claims=[('diff(atan(x),x)', '1/(1+x**2)')],
+            sol_rows=[('line', 'x**2*atan(x)/2-Integral(x**2/(2*(1+x**2)),x)',
+                       'نعوّض في القانون $uv-\\int v\\,du$. و $v\\,du=\\frac{x^2}{2}\\cdot\\frac{1}{1+x^2}$.'),
+                      ('tex', r'\frac{x^{2}}{1+x^{2}}=\frac{x^{2}+1-1}{1+x^{2}}=1-\frac{1}{1+x^{2}}', [('x**2/(1+x**2)', '1-1/(1+x**2)')],
+                       'هنا التريك: نضيف 1 ونطرحه في البسط، فينفصل الكسر.'),
+                      ('line', 'x**2*atan(x)/2-Integral(Rational(1,2)-1/(2*(1+x**2)),x)', 'نحط الكسر الجديد في التكامل.'),
+                      ('line', 'x**2*atan(x)/2-x/2+atan(x)/2',
+                       'نكامل: $\\int1\\,dx=x$، و $\\int\\frac{dx}{1+x^2}=\\tan^{-1}x$. وسالب في سالب = موجب.')])
     U.drill('2', 'N51-X10', 'P', 'لـ $x>0$: $v\\,du=-\\frac{x}{2\\sqrt{1+x^2}}$.',
             sol_rows=[('parts', 'acsch(x)', 'x', '-1/(x*sqrt(1+x**2))', 'x**2/2', '$u=\\operatorname{csch}^{-1}x$، ومشتقتها $-\\frac{1}{x\\sqrt{1+x^2}}$ (لما $x>0$). و $dv=x\\,dx$.', 't'),
                       ('line', 'x**2*acsch(x)/2+Integral(x/(2*sqrt(1+x**2)),x)', 'نعوّض في القانون. المشتقة فيها سالب، وسالب في سالب = موجب.'),
