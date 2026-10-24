@@ -404,8 +404,8 @@ def u_sec_even():
                        [('integrate(1+2*u**2+u**4,u)', 'u+2*u**3/3+u**5/5')], 'نكامل كل حد.'),
                       ('line', 'tan(x)+2*tan(x)**3/3+tan(x)**5/5', 'نرجع $u=\\tan x$.')])
     U.drill('4', 'G-12', 'I', 'احجز $\\sec^2x$، والباقي $\\sec^4x=(1+u^2)^2$.',
-            sol_rows=[('tex', r'\tan^{3}x\sec^{6}x=\tan^{3}x\sec^{4}x\cdot\sec^{2}x', [('tan(x)**3*sec(x)**6', 'tan(x)**3*sec(x)**4*sec(x)**2')],
-                       'أس sec زوجي (6). نحجز $\\sec^2x$، ويبقى $\\sec^4x$.'),
+            sol_rows=[('tex', r'\sec^{6}x=\sec^{4}x\cdot\sec^{2}x', [('sec(x)**6', 'sec(x)**4*sec(x)**2')],
+                       'أس sec زوجي (6). نحجز $\\sec^2x$ من $\\sec^6x$، ويبقى $\\sec^4x$. و $\\tan^3x$ يبقى مثل ما هو.'),
                       ('tex', r'\sec^{4}x=(1+\tan^{2}x)^{2}', [('sec(x)**4', '(1+tan(x)**2)**2')], 'نحوّل الباقي لـ tan.'),
                       ('sub', 'tan(x)', 'sec(x)**2', 'نسمّي $u=\\tan x$، و $du=\\sec^2x\\,dx$.'),
                       ('tex', r'\int\tan^{3}x\sec^{6}x\,dx=\int u^{3}(1+u^{2})^{2}\,du',

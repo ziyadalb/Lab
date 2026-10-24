@@ -15,13 +15,14 @@ ROOT = Path(__file__).resolve().parent.parent
 
 TITLES = {'speed42': 'اعرف النوع: 4.2', 'speed51': 'اعرف النوع: 5.1', 'speed52': 'اعرف النوع: 5.2',
           'mockA': 'الاختبار التجريبي A', 'mixed': 'المراجعة المخلوطة', 'mockB': 'الاختبار التجريبي B',
-          'quizday': 'يوم الكويز: الليلة، والصباح، وفي القاعة', 'review42': '🔁 مراجعة 4.2: التمارين الجديدة'}
+          'quizday': 'يوم الكويز: الليلة، والصباح، وفي القاعة', 'review42': '🔁 مراجعة 4.2: التمارين الجديدة',
+          'night': '🌙 مراجعة ليلة الكويز: الطرق السريعة والتريكات'}
 TITLES.update({a: '📚 ' + t for a, t in PQ.TITLES.items()})
 # a speed drill comes after its lesson ends (5.1 and 5.2: the next morning; 4.2 ends on day 3 with type 11, so its
 # speed drill follows it the same day); mocks and mixed review close the last days
 DAY_START = {5: ['speed51'], 7: ['speed52']}
 # day 6 is the last day before the quiz (mock A, then the quiz-day page); day 7 holds the extras for spare time
-DAY_END = {6: ['review42', 'mockA', 'quizday'], 7: ['mixed', 'mockB']}
+DAY_END = {6: ['review42', 'mockA', 'quizday', 'night'], 7: ['mixed', 'mockB']}
 # pages printed just before a type: the «before the lesson» chapter before the lesson's first type, and speed 4.2
 BEFORE_UNIT = {'U-D1': ['pre42'], 'U-P1': ['speed42', 'pre51'], 'U-T1': ['pre52']}
 END_TOC = [('formulas', 'ورقة القوانين والطرق السريعة'), ('decide', 'بطاقة القرار: أي نوع؟'), ('stuck', 'إذا علقت'),
@@ -60,7 +61,7 @@ SPEED = {
                         ('G-24', 'النوع 27: $\\tan^2x=\\sec^2x-1$'),
                         ('G-25', 'النوع 28: csc زوجي، يعني $u=\\cot x$'),
                         ('G-26', 'النوع 29: $m=5$، $n=2$'),
-                        ('G-27', 'النوع 24: نصف الزاوية'),
+                        ('G-27', 'النوع 24: نص الزاوية'),
                         ('G-28', 'النوع 28: cot فردي، يعني $u=\\csc x$')])}
 
 # derivatives first, as in the quiz; the integrals interleaved so that their order does not give away the lesson
@@ -115,7 +116,7 @@ def day_schedule(d):
         elif a == 'review42':
             add(25, '25 دقيقة', '🔁 مراجعة 4.2: التمارين الجديدة للأنواع 4 و7 و8 و9')
     if d == 6:
-        add(20, '20 دقيقة', '🌙 بالليل: ورقة القوانين، وسجل أخطائك، وصفحة «يوم الكويز»')
+        add(20, '20 دقيقة', '🌙 بالليل: صفحة «مراجعة ليلة الكويز» (الطرق السريعة والتريكات والخرائط)، ثم سجل أخطائك')
     add(5, '5 دقائق', 'سجّل أخطاء اليوم في سجل الأخطاء')
     return rows, total
 
@@ -225,7 +226,7 @@ def after_day(d):
     out = ''
     for a in DAY_END.get(d, []):
         out += (mixed_page() if a == 'mixed' else quiz_day() if a == 'quizday' else review42() if a == 'review42'
-                else mock_box(a[-1]))
+                else night() if a == 'night' else mock_box(a[-1]))
     return out
 
 
@@ -249,11 +250,10 @@ def formulas():
     law52 += sheet(md(arith(r'\sin^{2}x=\frac{1-\cos2x}{2}\qquad \cos^{2}x=\frac{1+\cos2x}{2}',
                             [('sin(x)**2', '(1-cos(2*x))/2'), ('cos(x)**2', '(1+cos(2*x))/2')], 'sheet half'))
                    + p(rich('🔑 سين وسالب: $\\sin^2$ معها ناقص.')))
-    law52 += sheet(md(arith(r'\sin A\cos B=\tfrac12\left[\sin(A-B)+\sin(A+B)\right]\quad '
-                            r'\sin A\sin B=\tfrac12\left[\cos(A-B)-\cos(A+B)\right]\quad '
-                            r'\cos A\cos B=\tfrac12\left[\cos(A-B)+\cos(A+B)\right]',
-                            [('sin(7*x)*cos(5*x)', '(sin(2*x)+sin(12*x))/2'), ('sin(4*x)*sin(3*x)', '(cos(x)-cos(7*x))/2'),
-                             ('cos(3*x)*cos(x)', '(cos(2*x)+cos(4*x))/2')], 'sheet product')))
+    prods = [(r'\sin A\cos B=\tfrac12\left[\sin(A-B)+\sin(A+B)\right]', ('sin(7*x)*cos(5*x)', '(sin(2*x)+sin(12*x))/2')),
+             (r'\sin A\sin B=\tfrac12\left[\cos(A-B)-\cos(A+B)\right]', ('sin(4*x)*sin(3*x)', '(cos(x)-cos(7*x))/2')),
+             (r'\cos A\cos B=\tfrac12\left[\cos(A-B)+\cos(A+B)\right]', ('cos(3*x)*cos(x)', '(cos(2*x)+cos(4*x))/2'))]
+    law52 += sheet(''.join(md(arith(t, [c], 'sheet product')) for t, c in prods))
     law52 += quick('سلسلة tan و sec³ (النوع 27)', 'الأسس تنزل 2 2، كل حد على أسه، الإشارات تتبادل، والآخر $x$ (أس زوجي) أو $\\ln|\\sec x|$ (أس فردي). '
                    'مثال: $\\int\\tan^4x\\,dx=\\frac{\\tan^3x}{3}-\\tan x+x$. و $\\int\\sec^3x\\,dx$ «نص ونص»: '
                    '$\\frac12\\sec x\\tan x+\\frac12\\ln|\\sec x+\\tan x|$.'
@@ -423,7 +423,7 @@ def quiz_day():
         ['40 دقيقة', 'التكاملات الأربعة، حوالي 10 دقائق لكل واحد. ابدأ بالأسهل عليك.'],
         ['آخر 10 دقائق', 'راجع: $+C$، والإشارات، و $|u|$. واشتق جواب تكامل واحد على الأقل وتأكد أنه يرجع السؤال.']], 'compact')
     body = (box('note', '🌙 الليلة قبل الكويز (الاثنين 26 أكتوبر)', ul([
-                'اقرأ ' + link('formulas', 'ورقة القوانين') + ' مرة، ثم ' + link('errlog', 'سجل أخطائك') + ' و' + link('mistakes', 'أخطاء الجبر الشائعة') + '.',
+                'اقرأ ' + link('night', 'صفحة مراجعة الليلة') + ' (الطرق السريعة والتريكات والخرائط)، ثم ' + link('errlog', 'سجل أخطائك') + '.',
                 'لا تبدأ أسئلة جديدة. ونم بدري: النوم يثبّت اللي ذاكرته.',
                 'جهّز: قلمين، وممحاة، وبطاقتك الجامعية، وساعة إذا كانت مسموحة.']))
             + box('note', '☀️ صباح الكويز', ul([
@@ -435,6 +435,55 @@ def quiz_day():
                 'اترك مكانًا وانتقل للسؤال اللي بعده، وارجع له في الآخر.',
                 'لا تمسح شغلك: إذا غلطت اشطب بخط واحد واكتب الصح جنبه.'])))
     return section('quizday', '🎯 ' + TITLES['quizday'], rich(body), 'flow')
+
+# 🔑 every type's trick in one line (the same tricks as in the 🧭 or 📐 box of each type)
+TRICKS = [
+    ('1', 'sinh⁻¹ معها $\\sqrt{u^2+1}$، و cosh⁻¹ معها $\\sqrt{u^2-1}$. tanh⁻¹ و coth⁻¹ نفس الشكل $\\frac{1}{1-u^2}$. sech⁻¹ و csch⁻¹ فيها سالب و $u$ برّا الجذر. ودايم × مشتقة الداخل.'),
+    ('2', 'اشتق من برّا لجوّا: كل طبقة مشتقتها، واضربها في بعض.'),
+    ('3–7', 'رقم التعديل: البسط ناقصه رقم عشان يصير $du$؟ اقسم عليه برّا. واكتب اللي تحت الجذر كمربع: $9x^4=(3x^2)^2$.'),
+    ('4', 'tanh⁻¹ أم coth⁻¹؟ $u$ أصغر من $a$ يعني tanh⁻¹، وأكبر يعني coth⁻¹.'),
+    ('5', '$u$ برّا الجذر: الجواب يبدأ بسالب و $\\frac1a$، ومعه $|u|$.'),
+    ('6', 'أسية تحت الجذر: اضرب فوق وتحت في جذرها ($e^{6x}=(e^{3x})^2$، فاضرب في $e^{3x}$).'),
+    ('7', '$\\sqrt x$ ومعها $\\frac{1}{\\sqrt x}$: $u=\\sqrt x$، و $\\frac{dx}{\\sqrt x}=2\\,du$.'),
+    ('8', 'بسط فيه جمع؟ افصل لكسرين، وكل واحد نوع لحاله.'),
+    ('9', 'الدالة العكسية ومشتقتها مضروبتين: $u$ = الدالة، والجواب $\\frac{u^2}{2}$.'),
+    ('10–11', '⚡ المركز والباقي، أو «نص معامل $x$» للطريقة العادية.'),
+    ('12', 'LIATE يختار $u$: ln، ثم دالة عكسية، ثم $x$، ثم sin و cos، ثم $e^x$.'),
+    ('13', 'عمود I: $\\sin\\to-\\cos\\to-\\sin\\to\\cos$، ومع $kx$ اقسم على $k$ كل سطر.'),
+    ('14–15', 'LIATE: ln هي $u$. ومع ln وحدها $dv=dx$.'),
+    ('16', 'احسب الجواب كامل، ثم عوّض الحدّين مرة وحدة. $\\ln1=0$، $e^0=1$، $\\sinh0=0$، $\\cosh0=1$.'),
+    ('17', '$dv=dx$، والتكامل الباقي تعويض: $w$ = اللي تحت الجذر.'),
+    ('18', 'أضف واطرح 1: $\\frac{x^2}{1+x^2}=1-\\frac{1}{1+x^2}$.'),
+    ('19', 'نفس الاختيار في التجزئتين (المثلثية $u$).'),
+    ('20', 'اكتب sinh أو cosh بالأسس، ووزّع: الأسس تنجمع.'),
+    ('21', '$\\sqrt x$ داخل دالة: $t=\\sqrt x$، و $dx=2t\\,dt$.'),
+    ('22–23', 'احجز وحدة من صاحب الأس الفردي. الاثنين فرديين؟ من الأصغر. ومع sin يطلع سالب.'),
+    ('24', 'سين وسالب: $\\sin^2$ معها ناقص، و $\\cos^2$ معها زائد، والزاوية تتضاعف.'),
+    ('25–26', 'sec زوجي: احجز $\\sec^2$ و $u=\\tan$. tan فردي: احجز $\\sec\\tan$ و $u=\\sec$.'),
+    ('27', '⚡ سلسلة tan، و $\\sec^3$ «نص ونص».'),
+    ('28', 'نفس tan و sec، بس مشتقة cot و csc فيها سالب.'),
+    ('29', 'الضرب يصير جمع بزاويتين: الفرق والمجموع. و sin·sin الوحيدة اللي فيها ناقص.')]
+
+
+def night():
+    """The night before the quiz: the five quick ways with their memory lines, every trick, and the lesson maps."""
+    from booklet_engine import arith
+    quick = [['المركز والباقي', '10 و11', 'المركز يصفّر القوس، والباقي هو اللي يبقى.',
+              arith(r'x^{2}+6x-16=(x+3)^{2}-25', [('x**2+6*x-16', '(x+3)**2-25')], 'night square')],
+             ['جدول DI', '12 و13', 'D تنزل للصفر، I تتكامل، واضرب مايل $+\\ -\\ +$.',
+              arith(r'\int x^{2}\cosh x=x^{2}\sinh x-2x\cosh x+2\sinh x', [('diff(x**2*sinh(x)-2*x*cosh(x)+2*sinh(x),x)', 'x**2*cosh(x)')], 'night di')],
+             ['قوة × ln', '14 و15', 'كامل القوة، واضرب في ($\\ln$ ناقص واحد على نفس المقام).',
+              arith(r'\int x^{2}\ln x=\frac{x^{3}}{3}\left(\ln x-\frac13\right)', [('diff(x**3/3*(log(x)-Rational(1,3)),x)', 'x**2*log(x)', 't')], 'night ln')],
+             ['أسية × sin أو cos', '19', 'المقام $a^2+b^2$، والقوس: $a$ × الدالة ناقص مشتقتها.',
+              arith(r'\int e^{2x}\sin x=\frac{e^{2x}}{5}\left(2\sin x-\cos x\right)', [('diff(exp(2*x)*(2*sin(x)-cos(x))/5,x)', 'exp(2*x)*sin(x)')], 'night exp')],
+             ['سلسلة tan و sec³', '27', 'الأسس تنزل 2 2، كل حد على أسه، الإشارات تتبادل، والآخر $x$ أو $\\ln|\\sec x|$.',
+              arith(r'\int\tan^{4}x=\frac{\tan^{3}x}{3}-\tan x+x', [('diff(tan(x)**3/3-tan(x)+x,x)', 'tan(x)**4')], 'night tan')]]
+    rows = [[rich('<b>' + n + '</b>'), t, rich(m), mi(r'\displaystyle ' + ex)] for n, t, m, ex in quick]
+    page = (p('20 دقيقة بس، بالليل: اقرأ الصفحة هذي، ثم الخرائط الثلاث (' + link('map-4.2', 'خريطة 4.2') + '، '
+              + link('map-5.1', 'خريطة 5.1') + '، ' + link('map-5.2', 'خريطة 5.2') + ')، ثم سجل أخطائك. لا تبدأ أسئلة جديدة.')
+            + '<h3>⚡ الطرق السريعة الخمس</h3>' + table(['الطريقة', 'الأنواع', '🧠 جملة الحفظ', 'مثال'], rows, 'answers')
+            + '<h3>🔑 كل التريكات</h3>' + table(['النوع', 'التريك'], [[n, rich(t)] for n, t in TRICKS], 'answers'))
+    return section('night', '🌙 مراجعة ليلة الكويز', page, 'flow')
 
 
 def end_sections():
