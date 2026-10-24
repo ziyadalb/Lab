@@ -5,7 +5,7 @@ examples solved step by step with one operation per row (🧱), the box «before
 and the exercises with full solutions. Only type 27 keeps a quick way (⚡), written after its examples.
 """
 from booklet_engine import ITEMS, arith, same_value
-from guide_kit import Unit, contrast, final, method, question, rich, steps, tricks
+from guide_kit import Unit, contrast, final, method, question, rich, shortcut, steps, tricks
 from html_kit import md, mi, p, table, ul
 
 
@@ -559,7 +559,31 @@ def u_reduce():
          'نقسم الطرفين على 2 عشان يبقى $I$ لحاله.')], 'U-T6 ex2')
     ex += final(it, 'U-T6 example 2')
     U.add('ex', '🧱 مثال 2 محلول خطوة خطوة (من مذكرة د. طارق)', ex)
-    # SHORTCUT-27: written by main
+    U.add('short', '⚡ الطريقة السريعة: سلسلة tan، و sec³ «نص ونص»', shortcut(
+        ITEMS['N52-E3-2'], 'U-T6 ex1',
+        saves='بدل ما تكسر القوة كل مرة وتوزّع السالب (9 أسطر في مثال 1)، تكتب الجواب حد حد. وكل ما كبر الأس، وفّرت أكثر.',
+        origin='في مثال 1 كل كسرة $\\tan^2x=\\sec^2x-1$ عطتنا حد ($\\frac{\\tan^3x}{3}$) وسالب تكامل بأس أقل باثنين ($-\\int\\tan^2x$). '
+               'والكسرة الثانية عطت $\\tan x$ وسالب $\\int1$. فالحدود تمشي بنمط ثابت.',
+        steps_=['نكتب الأسس: تبدأ من (الأس ناقص 1) وتنزل 2، 2، لين قبل الصفر.',
+                'كل حد = tan بهذا الأس ÷ نفس الأس.',
+                'الإشارات تتبادل: $+$ ثم $-$ ثم $+$.',
+                'آخر حد بالإشارة اللي عليها الدور: $x$ إذا أس السؤال زوجي، و $\\ln|\\sec x|$ إذا فردي.'],
+        on='على مثال 1 في 🧱:',
+        rows=[('الأسس تبدأ من $4-1=3$ وتنزل 2، فتصير 3 ثم 1.', r'3,\ 1', [('4-1', '3'), ('3-2', '1')]),
+              ('كل حد tan بالأس ÷ الأس، والإشارات $+$ ثم $-$.', r'\frac{\tan^{3}x}{3}-\frac{\tan^{1}x}{1}', [('tan(x)**3/3-tan(x)**1/1', 'tan(x)**3/3-tan(x)')]),
+              ('الأس 4 زوجي، فآخر حد $x$، والدور على $+$. نفس جواب 🧱 ✓', r'\frac{\tan^{3}x}{3}-\tan x+x+C', [('=ANS', 'tan(x)**3/3-tan(x)+x')])],
+        after_rows=p(rich('<b>و sec الفردي:</b> $\\int\\sec^3x\\,dx$ جوابه جاهز «نص ونص»: $\\frac12\\sec x\\tan x+\\frac12\\ln|\\sec x+\\tan x|$، نفس مثال 2 ✓. '
+                          'ومع $\\sec^5$ ننزل مرة وحدة: $\\int\\sec^5x\\,dx=\\frac14\\sec^3x\\tan x+\\frac34\\int\\sec^3x\\,dx$، ثم «نص ونص».'
+                          + arith('', [('diff(sec(x)*tan(x)/2+log(sec(x)+tan(x))/2,x)', 'sec(x)**3', 't/(1+t)'),
+                                       ('diff(sec(x)**3*tan(x)/4,x)+Rational(3,4)*sec(x)**3', 'sec(x)**5')], 'U-T6 sec quick'))),
+        memo='الأسس تنزل 2 2، كل حد على أسه، الإشارات تتبادل، والآخر $x$ أو $\\ln|\\sec x|$.',
+        never=['إذا مع tan دالة sec (مثل $\\tan^3x\\sec^2x$): هذي الأنواع 25 و26، احجز.',
+               'sec بأس زوجي وحده (مثل $\\sec^4x$): احجز $\\sec^2x$، هذا النوع 25.'],
+        paper='اكتب أول كسرة ($\\tan^4x=\\tan^2x(\\sec^2x-1)$)، ثم السلسلة كاملة.',
+        tries=[(r'\int\tan^{7}x\,dx', r'\frac{\tan^{6}x}{6}-\frac{\tan^{4}x}{4}+\frac{\tan^{2}x}{2}-\ln|\sec x|',
+                [('diff(tan(x)**6/6-tan(x)**4/4+tan(x)**2/2-log(sec(x)),x)', 'tan(x)**7')]),
+               (r'\int\tan^{8}x\,dx', r'\frac{\tan^{7}x}{7}-\frac{\tan^{5}x}{5}+\frac{\tan^{3}x}{3}-\tan x+x',
+                [('diff(tan(x)**7/7-tan(x)**5/5+tan(x)**3/3-tan(x)+x,x)', 'tan(x)**8')])]))
     U.add('ok', '✔ تأكد', p(rich('آخر حد في جوابك: أس tan زوجي يعطي $x$ أو $-x$، وأس tan فردي يعطي $\\ln|\\sec x|$ بإشارة. '
                                  'في المثال 1 الأس 4 والجواب ينتهي بـ $+x$ ✓.')))
     U.add('trap', '⚠️ الفخ', ul([rich('لا تنسَ آخر حد: $x$ مع الأس الزوجي، و $\\ln|\\sec x|$ مع الأس الفردي.'),
