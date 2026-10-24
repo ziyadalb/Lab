@@ -1,0 +1,6 @@
+[
+  {"id": "M-27", "kind": "musa", "task": "int", "q": "raw:x**2/(9+x**6)", "answer": ["atan(x**3/3)/9"], "branches": ["x"], "case": "PRE-B1", "section": "5.1", "src": {"file": "MUSA", "pdf_page": 40, "number": "2"}, "note": "prerequisite part (before lesson 5.1): u = x^3, then the tan^-1 law of 3.4"},
+  {"id": "M-28", "kind": "musa", "task": "diff", "q": "raw:sqrt(x)*asin(5*x)", "answer": ["asin(5*x)/(2*sqrt(x))", "5*sqrt(x)/sqrt(1-25*x**2)"], "branches": ["t/(5*(1+t))"], "case": "PRE-B1", "section": "5.1", "src": {"file": "MUSA", "pdf_page": 38, "number": "Q2(1)"}, "note": "prerequisite part (before lesson 5.1); checked on 0 < x < 1/5, where sin^-1(5x) is defined"},
+  {"id": "M-29", "kind": "musa", "task": "int", "q": "raw:exp(7*x)*csc(2+exp(7*x))**2", "answer": ["-cot(2+exp(7*x))/7"], "branches": ["x"], "case": "PRE-C1", "section": "5.2", "src": {"file": "MUSA", "pdf_page": 18, "number": "(8)"}, "note": "prerequisite part (before lesson 5.2): u = 2 + e^(7x), then the csc^2 integral"},
+  {"id": "M-30", "kind": "musa", "task": "int", "q": "raw:exp(cos(3*x))/csc(3*x)", "answer": ["-exp(cos(3*x))/3"], "branches": ["x"], "case": "PRE-C3", "section": "5.2", "src": {"file": "MUSA", "pdf_page": 18, "number": "(5)"}, "note": "prerequisite part (before lesson 5.2): 1/csc = sin, then u = cos 3x"}
+]
