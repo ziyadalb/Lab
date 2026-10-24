@@ -112,7 +112,7 @@ def how_to_use():
 
 
 # the lesson map goes just before the first type of its lesson
-MAP_BEFORE = {'U-D1': '4.2', 'U-P1': '5.1'}
+MAP_BEFORE = {'U-D1': '4.2', 'U-P1': '5.1', 'U-T1': '5.2'}
 
 
 def lesson_map(sec):

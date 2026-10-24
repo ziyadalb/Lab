@@ -1,0 +1,131 @@
+[
+ {
+  "id": "M-19",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:sin(x)**2*cos(x)**2",
+  "answer": [
+   "x/8",
+   "-sin(4*x)/32"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-SC-EVEN",
+  "section": "5.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 96,
+   "number": "Q2(3)(1)"
+  },
+  "note": "extra exercise"
+ },
+ {
+  "id": "M-20",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:sin(x)**4",
+  "answer": [
+   "3*x/8",
+   "-sin(2*x)/4",
+   "sin(4*x)/32"
+  ],
+  "branches": [
+   "x"
+  ],
+  "case": "C52-EVEN1",
+  "section": "5.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 92,
+   "number": "Q1(6)"
+  },
+  "note": "extra exercise"
+ },
+ {
+  "id": "M-21",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:sec(x)**4",
+  "answer": [
+   "tan(x)",
+   "tan(x)**3/3"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-SECEVEN",
+  "section": "5.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 99,
+   "number": "(4)"
+  },
+  "note": "extra exercise"
+ },
+ {
+  "id": "G-91",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(x)**6*sec(x)**2",
+  "answer": [
+   "tan(x)**7/7"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-SECEVEN",
+  "section": "5.2",
+  "note": "extra exercise"
+ },
+ {
+  "id": "G-92",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:sec(x)**6",
+  "answer": [
+   "tan(x)",
+   "2*tan(x)**3/3",
+   "tan(x)**5/5"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-SECEVEN",
+  "section": "5.2",
+  "note": "extra exercise"
+ },
+ {
+  "id": "G-93",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(2*x)**2",
+  "answer": [
+   "tan(2*x)/2",
+   "-x"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-TAN0",
+  "section": "5.2",
+  "note": "extra exercise"
+ },
+ {
+  "id": "G-94",
+  "kind": "generated",
+  "task": "int",
+  "q": "raw:tan(x)**5",
+  "answer": [
+   "tan(x)**4/4",
+   "-tan(x)**2/2",
+   "log(Abs(sec(x)))"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS-TAN0",
+  "section": "5.2",
+  "note": "extra exercise"
+ }
+]
