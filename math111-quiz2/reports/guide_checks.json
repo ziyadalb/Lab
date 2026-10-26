@@ -1911,6 +1911,11 @@
    "item": "N42-X2-06"
   },
   {
+   "kind": "doctor coth",
+   "ok": true,
+   "item": "N42-X2-06"
+  },
+  {
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I2 paper 1",
@@ -12571,7 +12576,7 @@
   ]
  },
  "counts": {
-  "total": 1705,
-  "ok": 1705
+  "total": 1706,
+  "ok": 1706
  }
 }

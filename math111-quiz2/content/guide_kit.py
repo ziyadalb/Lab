@@ -89,6 +89,10 @@ CASES = []         # (uid, number, title) in document order
 MUSA_COUNT = {}    # uid -> usable questions in Dr. Musa's notes (data/musa_index.json, filled by the renderer)
 
 
+try:                # v7: Dr. Musa's questions that replace our written (✏️) drills, by case
+    from musa_drills import MUSA_DRILLS
+except ImportError:
+    MUSA_DRILLS = {}
 EXTRA = []         # (uid, item id): exercises over a case's cap; the mastery checks take them, past exams first
 SOLS_BY_METHOD = {}  # method key -> solution blocks of its cases (printed at the end of the method)
 
@@ -216,7 +220,7 @@ def step_cells(it, rows, label):
                 latex = "y' = " + body
             else:
                 step_ok(expr, it, tag)
-                latex = '= ' + body + ('' if 'Integral' in expr else ' + C')
+                latex = 'I = ' + body + ('' if 'Integral' in expr else ' + C')     # the doctor's paper: I = …
             is_final = (k == len(rows) - 1 and 'Integral' not in expr and it['task'] != 'defint'
                         and _flat(body) == _flat(texsum(it['answer'])))
         elif kind == 'tex':
@@ -291,7 +295,8 @@ def final(it, where):
     html = answer_box(it, where)
     if it['id'] in FINAL_ROW:
         FINAL_ROW.discard(it['id'])
-        return ''
+        if doctor_terms(it) is None:     # with coth⁻¹ the box stays: it shows the doctor's sign first
+            return ''
     return html
 
 
@@ -390,6 +395,12 @@ class Unit:
     def drill(self, tag, item_id, level, hint, first=None, claims=(), mids=(), sol_rows=None, extra_lines=0):
         from guide_sols import SOLS
         it = ITEMS[item_id]
+        if it['kind'] == 'generated' and MUSA_DRILLS.get(self.uid):   # Dr. Musa's question takes the place of one we wrote
+            m = MUSA_DRILLS[self.uid].pop(0)
+            item_id, it, hint, sol_rows, mids = m['item'], ITEMS[m['item']], m['hint'], m['sol_rows'], ()
+            first, claims = (m.get('first'), m.get('claims', ())) if level == 'G' and m.get('first') else (None, ())
+            if level == 'G' and not first:
+                level = 'P'
         if len(self.drills) >= cap(self.uid):     # over the page budget: not printed (a past-exam one goes to the mastery checks)
             if item_id not in BLOCKED and not self.uid.startswith('P-'):
                 EXTRA.append((self.uid, item_id))
@@ -424,10 +435,10 @@ class Unit:
                 mid_tex.append("y' = " + rawtex(m))
             else:
                 step_ok(m, it, where + ' middle')
-                mid_tex.append('= ' + rawtex(m) + ('' if 'Integral' in m else ' + C'))
+                mid_tex.append('I = ' + rawtex(m) + ('' if 'Integral' in m else ' + C'))
             sol += md(mid_tex[-1])
         answer = answer_box(it, where)
-        if not (cells and cells[-1][2] and not mids):
+        if not (cells and cells[-1][2] and not mids) or doctor_terms(it) is not None:
             sol += answer
         self.sols.append('<div class="sol" id="s-%s"><div class="drill-head"><b>تمرين %s</b> %s %s</div>%s%s</div>'
                          % (dtag, tag, mi(r'\displaystyle ' + q_tex(it)), link('d-' + dtag, '↩ ارجع للتمرين', 'back btn'),

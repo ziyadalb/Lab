@@ -316,6 +316,14 @@ def quiz_day():
     return section('quizday', '🎯 ' + TITLES['quizday'], rich(body), 'flow')
 
 # 🔑 every type's trick in one line (the same tricks as in the 🧭 or 📐 box of each type)
+# the cases added in v7 (no old number)
+NEW_TRICKS = [
+    ('U-LD', 'الأساس والأس فيهم $x$؟ خذ ln للطرفين، اشتق، واضرب في $y$ آخر شي.'),
+    ('U-34', 'الرقم أول تحت الجذر ← $\\sin^{-1}$ (3.4). $x^2$ أول ← $\\cosh^{-1}$. و $u$ برّا الجذر: الرقم أول ← sech⁻¹، $x^2$ أول ← sec⁻¹.'),
+    ('U-X2', 'بقى $x$ بعد التعويض؟ اكتبه بـ $u$: إذا $u=x^2+a$ فـ $x^2=u-a$.'),
+    ('U-LN', 'ln لقوة أو جذر؟ نزّل الأس قدّام أول: $\\ln\\sqrt[3]x=\\frac13\\ln x$.'),
+    ('U-CH', 'cosh أو sinh لحالها في المقام؟ اكتبها بالأسس، واضرب فوق وتحت في $e^x$، ثم $u=e^x$.')]
+
 TRICKS = [
     ('1', 'sinh⁻¹ معها $\\sqrt{u^2+1}$، و cosh⁻¹ معها $\\sqrt{u^2-1}$. tanh⁻¹ و coth⁻¹ نفس الشكل $\\frac{1}{1-u^2}$. sech⁻¹ و csch⁻¹ فيها سالب و $u$ برّا الجذر. ودايم × مشتقة الداخل.'),
     ('2', 'اشتق من برّا لجوّا: كل طبقة مشتقتها، واضربها في بعض.'),
@@ -367,7 +375,9 @@ def night():
     page = (p('20 دقيقة بس، بالليل: ' + link('tree', 'الشجرة') + '، ثم السكربتات الأربعة (أول صفحة في كل طريقة)، ثم '
               + link('fullmark', 'ورقة الدرجة الكاملة') + '، ثم سجل أخطائك. لا تبدأ أسئلة جديدة.')
             + '<h3>⚡ الطرق السريعة الخمس</h3>' + table(['الطريقة', 'الحالات', '🧠 جملة الحفظ', 'مثال'], rows, 'answers')
-            + '<h3>🔑 كل التريكات</h3>' + table(['الحالة', 'التريك'], sorted([[newnums(n), rich(t)] for n, t in TRICKS], key=lambda r: int(r[0].split()[0].strip('،'))), 'answers'))
+            + '<h3>🔑 كل التريكات</h3>' + table(['الحالة', 'التريك'], sorted([[newnums(n), rich(t)] for n, t in TRICKS]
+                                                   + [[str(K.NUM[u]), rich(t)] for u, t in NEW_TRICKS if u in K.NUM],
+                                                   key=lambda r: int(r[0].split()[0].strip('،'))), 'answers'))
     return section('night', '🌙 مراجعة ليلة الكويز', page, 'flow')
 
 
