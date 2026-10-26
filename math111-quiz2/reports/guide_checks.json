@@ -652,6 +652,13 @@
   {
    "kind": "arithmetic",
    "ok": true,
+   "label": "U-D1 extra trick",
+   "claim": "diff(asinh(4*x),x) = 4/sqrt(16*x**2+1)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
    "label": "U-D1 trick 1",
    "claim": "diff(asinh(x),x) = 1/sqrt(x**2+1)",
    "residual": "0"
@@ -682,13 +689,6 @@
    "ok": true,
    "label": "U-D1 trick 1",
    "claim": "diff(asech(x),x) = -1/(x*sqrt(1-x**2))",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-D1 trick 2",
-   "claim": "diff(asinh(4*x),x) = 4/sqrt(16*x**2+1)",
    "residual": "0"
   },
   {
@@ -1528,15 +1528,15 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I1 trick 1",
-   "claim": "diff(3*x**2,x)/6 = x",
+   "label": "U-I1 extra trick",
+   "claim": "9*x**4 = (3*x**2)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I1 trick 2",
-   "claim": "9*x**4 = (3*x**2)**2",
+   "label": "U-I1 trick 1",
+   "claim": "diff(3*x**2,x)/6 = x",
    "residual": "0"
   },
   {
@@ -1847,15 +1847,15 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I2 trick 1",
-   "claim": "exp(0) = 1",
+   "label": "U-I2 extra trick",
+   "claim": "diff(x**4,x)/4 = x**3",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I2 trick 2",
-   "claim": "diff(x**4,x)/4 = x**3",
+   "label": "U-I2 trick 1",
+   "claim": "exp(0) = 1",
    "residual": "0"
   },
   {
@@ -2019,7 +2019,7 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I2 paper 3",
-   "claim": "diff(acoth(5*cosh(x)/2)/10,x) = sinh(x)/(4-25*cosh(x)**2)",
+   "claim": "diff(-acoth(5*cosh(x)/2)/10,x) = -sinh(x)/(4-25*cosh(x)**2)",
    "residual": "0"
   },
   {
@@ -2256,22 +2256,22 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I3 trick 1",
-   "claim": "diff(-acsch(Abs(x)/2)/2,x) = 1/(x*sqrt(x**2+4))",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I3 trick 1",
-   "claim": "diff(-acsch(Abs(x)/2)/2,x) = 1/(x*sqrt(x**2+4))",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "U-I3 trick 2",
+   "label": "U-I3 extra trick",
    "claim": "diff(x**2,x)/2 = x",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I3 trick 1",
+   "claim": "diff(-acsch(Abs(x)/2)/2,x) = 1/(x*sqrt(x**2+4))",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I3 trick 1",
+   "claim": "diff(-acsch(Abs(x)/2)/2,x) = 1/(x*sqrt(x**2+4))",
    "residual": "0"
   },
   {
@@ -2608,15 +2608,15 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I5 trick 1",
-   "claim": "2*diff(sqrt(x),x) = 1/sqrt(x)",
+   "label": "U-I5 extra trick",
+   "claim": "2**2+sqrt(x)**2 = 4+x",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I5 trick 2",
-   "claim": "2**2+sqrt(x)**2 = 4+x",
+   "label": "U-I5 trick 1",
+   "claim": "2*diff(sqrt(x),x) = 1/sqrt(x)",
    "residual": "0"
   },
   {
@@ -5276,15 +5276,15 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I4 trick 1",
-   "claim": "exp(6*x) = exp(3*x)**2",
+   "label": "U-I4 extra trick",
+   "claim": "diff(exp(3*x),x)/3 = exp(3*x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I4 trick 2",
-   "claim": "diff(exp(3*x),x)/3 = exp(3*x)",
+   "label": "U-I4 trick 1",
+   "claim": "exp(6*x) = exp(3*x)**2",
    "residual": "0"
   },
   {
@@ -8455,7 +8455,7 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P4 trick 2",
+   "label": "U-P4 extra trick",
    "claim": "diff(x*(log(x)-1),x) = log(x)",
    "residual": "0"
   },
@@ -8581,7 +8581,7 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P6 trick 2",
+   "label": "U-P6 extra trick",
    "claim": "diff(sqrt(x**2-1),x) = x/sqrt(x**2-1)",
    "residual": "0"
   },
@@ -8742,7 +8742,7 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-P7 trick 2",
+   "label": "U-P7 extra trick",
    "claim": "x**2/(1+x**2) = 1-1/(1+x**2)",
    "residual": "0"
   },

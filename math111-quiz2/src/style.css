@@ -348,3 +348,32 @@ table.trigvals, table.four, table.fam3, table.oldnew { break-inside: avoid; }
 section.sols .mi .katex { white-space: normal; }
 section.sols table.steps.lean td { overflow-wrap: anywhere; }
 section.sols .sol > .drill-head .mi .katex { font-size: 0.95em; }
+/* ---------------- v7 design review: less noise, one focal point, colour only for meaning ---------------- */
+section.sols table.steps.lean { table-layout: fixed; width: 100%; }
+section.sols table.steps.lean td.n { width: 5mm; }
+section.sols .katex { font-size: 0.9em; }
+.sol .drill-head .back.btn { border: 0; background: none; padding: 0; font-weight: 400; }
+.sol .srcline { margin: 0 0 0.5mm; }
+.drill-head .help .btn { font-weight: 400; background: none; }
+/* green belongs to 🟢 du only: answers, gist and solution frames are neutral */
+table.steps tr.final td { background: #f2f2f2; }
+table.steps tr.final td:nth-child(2) { box-shadow: inset 0 0 0 1.5px #333; }
+.md.ans { background: #f6f6f6; border-color: #333; }
+.sol { border-color: #bbb; }
+p.gist { background: #f4f4f4; }
+.solcase > h4 { color: var(--ink); }
+:root { --mC: #5b4a2e; }
+a { color: #333; border-bottom-color: #999; }
+a.btn { border-color: #999; background: #f7f7f7; border-bottom-color: #999; }
+/* the case detail under each fixed script line */
+ol.method .here { display: block; color: var(--muted); font-weight: 400; }
+/* one clear start per case; a «أساس» part never looks like a case */
+article.unit { margin-top: 9mm; padding-top: 3mm; border-top: 1px solid #d0d0d0; }
+article.unit > .part.p-when { break-before: avoid; }
+.prereq-unit { border-top: 3px solid #6a4c93; }
+/* shorter lines for prose (tables keep the full width) */
+.part > p, ol.method, ol.script { max-width: 155mm; }
+/* section د: question boxes stay whole, a group heading stays with its questions */
+.ch { break-inside: avoid; }
+h3[id^="mastery-"] { break-after: avoid; }
+section.sols .katex { font-size: 0.86em; }

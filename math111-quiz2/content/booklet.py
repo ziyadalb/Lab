@@ -99,7 +99,7 @@ def sc_twins():
     rows[3] = (rows[3][0], doctor_coth('diff'))          # the doctor's sign first (he marks the quiz); the math sign below
     conds[3] += ' ✎ دكتورك'
     short = table(['المشتقة', 'تساوي', 'المجال'], [frow(r, c) for r, c in zip(rows, conds)], 'formula')
-    short += p(mi("u'") + ' مشتقة ما داخل الدالة (قاعدة السلسلة).', 'small') + doctor_note('diff')
+    short += p(mi("u'") + ' مشتقة الداخل (قاعدة السلسلة).', 'small') + doctor_note('diff')
     memo = ul(['<b>sinh و cosh</b>: جذر؛ داخل الجذر ' + mi('+1') + ' مع sinh و ' + mi('-1') + ' مع cosh.',
                '<b>tanh و coth</b>: الصيغة نفسها تمامًا؛ الفرق في المجال فقط.',
                '<b>sech و csch</b>: إشارة سالبة و ' + mi('u') + ' خارج الجذر؛ sech معها ' + mi('1-u^{2}') + ' و csch معها '

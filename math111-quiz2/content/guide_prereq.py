@@ -70,10 +70,10 @@ class PreUnit(Unit):
 
     def example(self, title, q_latex, rows, check=None):
         self.n_ex += 1
-        out = p('<b>مثال %d: %s</b>' % (self.n_ex, rich(title))) + md(q_latex) + steps_table(_cells(rows, '%s ex%d' % (self.uid, self.n_ex)))
+        out = p('<b>%s</b>' % rich(title)) + md(q_latex) + steps_table(_cells(rows, '%s ex%d' % (self.uid, self.n_ex)))
         if check:
             out += p('<b>✔ تأكد:</b> ' + rich(check), 'small')
-        self.add('ex', 'مثال محلول %d' % self.n_ex, out)
+        self.add('ex', '🧱 مثال', out)
 
     def task(self, tag, level, ask, instruction, q_latex, rows, hint):
         """An exercise that is not a derivative or an integral (simplify, rewrite, evaluate)."""
@@ -252,7 +252,7 @@ def part_a2():
          formula('cos(u)', '-sin(u)', 'diff', branches=('x',), uprime=True, label='P-A2 cos'),
          formula('tan(u)', 'sec(u)**2', 'diff', branches=('t/(1+t)',), uprime=True, label='P-A2 tan'),
          formula('sec(u)', 'sec(u)*tan(u)', 'diff', branches=('t/(1+t)',), uprime=True, label='P-A2 sec')]
-    U.add('short', '📐 القانون: جدول المشتقات (u′ = مشتقة اللي داخل الدالة)',
+    U.add('short', '📐 القانون: جدول المشتقات (u′ = مشتقة الداخل)',
           table(['المشتقة', 'تساوي'], [_row(z) for z in r], 'formula compact')
           + p(rich('في الجدول: $n$ أي أس، و $a$ أي رقم موجب. و $\\log$ بدون أساس يعني أساس 10، ومشتقته مثل ln مقسومة على $\\ln10$.'), 'small')
           + tricks([(r"اشتق من برّا لجوّا: كل طبقة نشتقها، ونضرب كل المشتقات في بعض. مثال: $\left(e^{\sin3x}\right)'=e^{\sin3x}\cdot\cos3x\cdot3$.",
@@ -598,7 +598,7 @@ def part_b1():
          formula('1/(a**2+u**2)', 'atan(u/a)/a', branches=('x',), pos=('a',), label='P-B1 int atan'),
          formula('1/(u*sqrt(u**2-a**2))', 'asec(u/a)/a', branches=('a+t',), pos=('a',), label='P-B1 int asec (u > a)')]
     U.add('short', '📐 القانون: مشتقات الدوال العكسية وتكاملاتها', table(['المشتقة', 'تساوي'], [_row(z) for z in d], 'formula compact')
-          + p(rich(r"في الجدول: $u'$ مشتقة اللي داخل الدالة. وقانون $\sec^{-1}$ مكتوب لـ $u>1$، مثل مذكرة د. طارق."), 'small')
+          + p(rich(r"في الجدول: $u'$ مشتقة الداخل. وقانون $\sec^{-1}$ مكتوب لـ $u>1$، مثل مذكرة د. طارق."), 'small')
           + table(['التكامل', 'الجواب (+C)', 'الشرط'], [_row(i[0], mi('|u|<a')), _row(i[1], 'كل ' + mi('u')), _row(i[2], mi('u>a'))], 'formula compact')
           + p(rich('في جدول التكامل: $a$ رقم موجب، و $u$ اللي داخل.'), 'small')
           + tricks([(r'مشتقة أي دالة عكسية كسر، وفوقه مشتقة اللي داخل. مثال: $\left(\tan^{-1}4x\right)^{\prime}=\frac{4}{1+16x^2}$.',
@@ -929,7 +929,7 @@ def part_c1():
            (r'\sin(-x)=-\sin x,\qquad \cos(-x)=\cos x', [('sin(-x)', '-sin(x)'), ('cos(-x)', 'cos(x)')])]
     dbl_t = table(['المتطابقة'], [[mi(r'\displaystyle ' + arith(lt, c, 'P-C1 identity'))] for lt, c in dbl], 'formula compact')
     U.add('short', '📐 القانون: مشتقات الدوال الست وتكاملاتها', table(['المشتقة', 'تساوي'], [_row(z) for z in d6], 'formula compact')
-          + p(rich("في الجدول: $u'$ مشتقة اللي داخل الدالة."), 'small')
+          + p(rich("في الجدول: $u'$ مشتقة الداخل."), 'small')
           + table(['التكامل', 'الجواب (+C)'], [_row(z) for z in i6], 'formula compact'))
     U.add('short', '📐 القانون: ضعف الزاوية ونصها', dbl_t
           + tricks([(r'سين وسالب: $\sin^2$ معها ناقص، و $\cos^2$ معها زائد. والزاوية تتضاعف: $\sin^23x=\frac{1-\cos6x}{2}$.',

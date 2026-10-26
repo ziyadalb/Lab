@@ -456,7 +456,7 @@ def u_tan_odd():
     U.add('sign', 'العلامة', when(
         'tan و sec مضروبتين، وأس tan فردي، ومعه sec واحد على الأقل: $\\int\\sec^3x\\tan^3x\\,dx$.',
         'أس tan زوجي وأس sec فردي ($\\tan^4x\\sec^3x$): تجزئة (حوّل كل tan لـ sec، ثم سلسلة sec). '
-        'وأس sec زوجي: تعويض بس احجز $\\sec^2x$ و $u=\\tan x$.',
+        'وأس sec زوجي: احجز $\\sec^2x$ و $u=\\tan x$. وإذا الاثنين صح (tan فردي و sec زوجي)، أي واحد يمشي، وحجز $\\sec^2x$ أقصر.',
         [(r'\int\tan^{3}x\sec^{3}x\,dx', 'تعويض: احجز $\\sec x\\tan x$، و $u=\\sec x$', '$m=3$ فردي'),
          (r'\int\tan^{4}x\sec^{3}x\,dx', 'تجزئة: حوّل كل tan لـ sec، ثم سلسلة sec', '$m$ زوجي و $n$ فردي')]))
     U.add('short', '🧭 الطريقة', TS_TREE + method(script(TRIG_SCRIPT, [

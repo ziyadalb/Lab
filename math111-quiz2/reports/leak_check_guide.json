@@ -1,10 +1,10 @@
 {
  "document": "src/guide.katex.html",
  "pdf": "out/guide/MATH111_Quiz2_Guide.pdf",
- "formulas_scanned": 4340,
+ "formulas_scanned": 4352,
  "held_checked": 10,
  "avoid_checked": 5,
- "used_items": 178,
+ "used_items": 187,
  "failures": [],
  "for_manual_review": [
   {
@@ -98,6 +98,12 @@
    "check": "used question of the same shape, several numbers changed",
    "item": "H03",
    "used": "N52-E2-2",
+   "where": "mastery B"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X03",
    "where": "mastery B"
   },
   {

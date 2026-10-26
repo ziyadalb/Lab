@@ -136,7 +136,7 @@ def lean_steps(cells):
     why = cells[0][1]
     body = ''.join('<tr class="%s"><td class="n">%d</td><td>%s</td></tr>' % ('final' if fin else '', k, mi(r'\displaystyle ' + latex))
                    for k, (latex, _, fin) in enumerate(cells, 1))
-    return ((p('💡 ' + rich(why), 'leanwhy') if why else '')
+    return ((p(rich(why), 'leanwhy') if why else '')
             + '<table class="steps lean"><tbody>' + body + '</tbody></table>')
 
 
@@ -153,7 +153,7 @@ def times(n):
 
 def fire(uid):
     n = FIRE.get(uid, 0)
-    return '🔥 جا في الاختبارات %s' % times(n) if n else '🔥 ما جا في الاختبارات الـ12 (بس في المذكرات)'
+    return 'جا في الاختبارات %s' % times(n) if n else 'ما جا في الاختبارات'
 
 
 def src_icon(it):
@@ -164,6 +164,7 @@ def src_icon(it):
 def renum(text):
     """Rewrite old type numbers («النوع 12», «النوعين 14 و17», «الأنواع 22 إلى 25») as the new case numbers."""
     new = lambda n: NUM.get(OLD_ORDER[int(n) - 1]) if 1 <= int(n) <= len(OLD_ORDER) else None
+    text = text.replace('هذا النوع', 'هذي الحالة')
 
     def many(nums):
         got = sorted({new(n) for n in nums if new(n)})
@@ -187,7 +188,7 @@ def part(heading, inner, cls=''):
 
 def ex_label(label):
     """«🧱 مثال محلول خطوة خطوة (اختبار سابق)» -> «🧱 مثال · 📝 من اختبار سابق»."""
-    out = label.replace('محلول خطوة خطوة ', '').replace(' محلول', '')
+    out = re.sub(r'مثال ?\d+ ?', 'مثال ', label.replace('محلول خطوة خطوة ', '').replace(' محلول', ''))
     for old, new in (('(اختبار سابق)', '· 📝 من اختبار سابق'), ('(من مذكرة د. طارق)', '· 📘 من مذكرة د. طارق'),
                      ('(تمرين من مذكرة د. طارق)', '· 📘 تمرين من مذكرة د. طارق'), ('(من مذكرة د. موسى)', '· 📗 من مذكرة د. موسى')):
         out = out.replace(old, new)
@@ -475,7 +476,7 @@ class Unit:
     def gist(self, see, first, rule):
         """The one-line summary at the end of the type (also a row of the lesson map)."""
         GIST[self.uid] = (self.num, self.title, see, first, rule)
-        self.gist_html = p('📌 ' + rich('<b>الخلاصة:</b> إذا شفت ' + see + ' ← ' + first + ' ← ' + rule), 'gist')
+        self.gist_html = p(rich('<b>الخلاصة:</b> إذا شفت ' + see + ' ← ' + first + ' ← ' + rule), 'gist')
 
     def drill(self, tag, item_id, level, hint, first=None, claims=(), mids=(), sol_rows=None, extra_lines=0):
         """v7: exercises are collected, and the case prints the best ones (see _pick_drills)."""
@@ -523,8 +524,8 @@ class Unit:
         lvl = {'G': 'موجّه', 'P': 'ناقص الخطوات', 'I': 'لحالك'}[level]
         dtag = '%s-%s' % (self.uid, tag)
         DRILLS_N[self.uid] = DRILLS_N.get(self.uid, 0) + 1
-        head = ('<div class="drill-head" id="d-%s"><b>%s تمرين %s</b> %s <span class="dsrc">%s</span><span class="help">%s</span></div>'
-                % (dtag, src_icon(it), tag, chip(lvl, 'lvl'), source_label(it), link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag), 'btn')))
+        head = ('<div class="drill-head" id="d-%s"><b>%s تمرين %s</b> %s<span class="help">%s</span></div>'
+                % (dtag, src_icon(it), tag, chip(lvl, 'lvl'), link('s-' + dtag, 'الحل ص ' + pgref('s-' + dtag), 'btn')))
         body = drill_question(it, where)
         first_tex = arith(first, claims, where + ' first') if first else None
         n = WRITE[level][self.section] + extra_lines
@@ -553,8 +554,8 @@ class Unit:
         if not (cells and cells[-1][2] and not mids) or doctor_terms(it) is not None:
             sol += answer
         self.sols.append('<div class="sol" id="s-%s"><div class="drill-head"><b>تمرين %s</b> %s %s</div>%s%s</div>'
-                         % (dtag, tag, mi(r'\displaystyle ' + q_tex(it)), link('d-' + dtag, '↩ ارجع للتمرين', 'back btn'),
-                            '', sol))
+                         % (dtag, tag, mi(r'\displaystyle ' + q_tex(it)), link('d-' + dtag, '↩', 'back btn'),
+                            p(source_label(it), 'srcline'), sol))
         # levels 1 and 2 go to the help ladder at the end of the guide
         if cells:
             step = (cells[0][0], cells[0][1])
@@ -568,13 +569,13 @@ class Unit:
         m = METHOD_OF.get(self.uid, 'B')
         needs = '، '.join(link(a, '📚 %s (ص ' % NEED_LABEL[a] + pgref(a) + ')') for a in NEEDS.get(self.uid, []) if a in NEED_LABEL)
         musa = MUSA_COUNT.get(self.uid)
-        meta = ['📍 الشجرة: ' + rich(TREE.get(self.uid, TREE_DEFAULT[m])), fire(self.uid)]
+        meta = ['الشجرة: ' + rich(TREE.get(self.uid, TREE_DEFAULT[m])), fire(self.uid)]
         if musa:
             meta.append('📗 في مذكرة د. موسى: %d' % musa)
         if needs:
             meta.append('تحتاج: ' + needs)
         if self.uid in OLD_NUM:
-            meta.append('<span class="oldnum">رقمها القديم %d</span>' % OLD_NUM[self.uid])
+            pass                             # the old number is in the old → new table (how-to page)
         return ('<div class="unit-head %s" id="%s"><span class="num">%d</span><h3>%s</h3><span class="mtag">%s %s</span></div>'
                 '<p class="unit-meta">%s</p>'
                 % (METHODS[m][2], self.uid, self.num, self.title, METHODS[m][0], METHODS[m][1], ' · '.join(meta)))
@@ -588,7 +589,7 @@ class Unit:
         if by('sign'):
             out.append(part('🔎 متى؟', ''.join(by('sign')), 'p-when'))
         if by('idea'):
-            out.append(part('💡 ليش تشتغل؟', ''.join(by('idea')), 'p-why'))
+            out.append(part('ليش تشتغل؟', ''.join(by('idea')), 'p-why'))
         for kind, label, inner in self.parts:
             if kind in ('idea', 'sign', 'ok', 'trap', 'prev', 'dropped'):
                 continue
@@ -601,11 +602,11 @@ class Unit:
                     check += p('<b>✔ تأكد:</b> ' + rich(CHECKS[self.uid]))
                 elif not oks:
                     raise BuildError('unit %s has no quick check' % self.uid)
-                trap = ''.join('<div class="danger">' + _lead('<b>🔴 انتبه:</b>', t) + '</div>' for t in traps)
+                trap = ''.join('<div class="danger">' + t + '</div>' for t in traps)
                 out.append(part('🔴 لا تنسى، قبل ما تسلّم', trap + _lead('<b>✍️ في ورقة الكويز:</b>', inner) + check, 'p-paper'))
                 continue
             if kind == 'short':
-                heading = label.replace('🧭 الطريقة', '🪜 الخطوات')
+                heading = label.replace('🧭 الطريقة', '🪜 الخطوات').replace('🧭 الخطوات', '🪜 الخطوات')
                 out.append(part(heading, inner, 'p-quick' if label.startswith('⚡') else 'p-steps'))
             elif kind == 'ex':
                 out.append(part(ex_label(label), inner, 'p-ex'))
@@ -618,7 +619,6 @@ class Unit:
         self._one_example()
         first_prompt = self.drills[0][0] if self.drills else ''
         drills = ('<h4 class="drills-title">تمارين %s</h4>' % self.ref
-                  + p('📝 اختبار سابق · 📗 مذكرة د. موسى · 📘 مذكرة د. طارق · ✏️ تدريب إضافي. موجّه ← ناقص الخطوات ← لحالك.', 'small')
                   + (en(first_prompt) if first_prompt else '')
                   + ''.join(html.replace('<div class="q">', '<div class="q">' + en(pr), 1) if pr != first_prompt else html
                             for pr, html in self.drills)
@@ -655,9 +655,18 @@ def tricks(items, label='trick'):
 
 def method(steps_, memo=None, tricks_=(), label='method'):
     """A fixed list of steps in words (the way to solve a type), with an optional memory line and 🔑 lines."""
-    return ('<ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in steps_) + '</ol>'
+    def li(t):
+        t = rich(t)
+        if '<b>هنا:</b>' in t:              # v7: the script words stay one line; the detail of this case goes under them
+            head, detail = t.split('<b>هنا:</b>', 1)
+            return '<li>%s<span class="here">%s</span></li>' % (head, detail)
+        return '<li>%s</li>' % t
+    for t in tricks_[1:]:                   # v7: one trick per case (the others are still checked)
+        if not isinstance(t, str):
+            arith('', t[1], label + ' extra trick')
+    return ('<ol class="method">' + ''.join(li(t) for t in steps_) + '</ol>'
             + ('<div class="memo-inline"><b>كيف أتذكّره:</b> ' + rich(memo) + '</div>' if memo else '')
-            + tricks(tricks_, label))
+            + tricks(tricks_[:1], label))
 
 
 def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=None, origin_html='',
