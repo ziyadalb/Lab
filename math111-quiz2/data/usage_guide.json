@@ -507,6 +507,170 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-P5 drill 3"
  },
+ "G-25": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-27": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-22": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "N51-X01": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-24": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "1446-S2-SE-Q2.2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "N42-E1-7": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-28": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "N52-X11": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-41": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "1447-S2-SE-Q3.4": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-20": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-19": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "N42-X2-13": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "1445-S1-FE-Q1.3": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-23": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "N42-X1-3": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-40": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "N52-X04": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-17": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-18": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "1447-S1-SE-Q2.4": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "1447-S2-SE-Q1.1": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "N42-E2-7": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-26": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "G-21": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "N42-X2-05": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "speed"
+ },
+ "1445-S2-FE-Q1.3": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "1446-S2-SE-Q1.1": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "N42-E1-8": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "N42-X1-2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-33": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-29": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-32": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-35": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-30": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-37": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-34": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "G-31": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "1445-S2-SE-Q2.2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "1446-S1-FE-Q2.2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
  "1445-S2-SE-Q1.1": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mastery A"
@@ -582,169 +746,5 @@
  "N52-E3-1": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mastery C"
- },
- "N42-X2-13": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "1446-S2-SE-Q2.2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "N42-E2-7": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "1447-S1-SE-Q2.4": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "N42-X2-05": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "N42-E1-7": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "N42-X1-3": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "1445-S1-FE-Q1.3": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "1447-S2-SE-Q1.1": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "1447-S2-SE-Q3.4": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed42"
- },
- "N51-X01": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "G-22": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "G-40": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "G-41": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "G-17": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "G-18": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "G-19": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "G-20": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "G-21": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed51"
- },
- "N52-X11": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed52"
- },
- "N52-X04": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed52"
- },
- "G-23": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed52"
- },
- "G-24": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed52"
- },
- "G-25": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed52"
- },
- "G-26": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed52"
- },
- "G-27": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed52"
- },
- "G-28": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "speed52"
- },
- "1445-S2-FE-Q1.3": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "1446-S2-SE-Q1.1": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "N42-E1-8": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "N42-X1-2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-33": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-29": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-32": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-35": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-30": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-37": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-34": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "G-31": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "1445-S2-SE-Q2.2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
- },
- "1446-S1-FE-Q2.2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "mixed review"
  }
 }

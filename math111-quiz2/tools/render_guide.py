@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / 'content'))
 
 import booklet_engine as E  # noqa: E402
 import guide_kit as K  # noqa: E402
-from html_kit import link, p, table  # noqa: E402
+from html_kit import link, p  # noqa: E402
 import guide_42  # noqa: E402
 import guide_51  # noqa: E402
 import guide_52  # noqa: E402
@@ -54,17 +54,6 @@ ALIAS = {'P-A1': '0', 'P-B3': '0', 'P-C2': '0', 'P-A4': 'T', 'P-B2': 'C', 'P-B1'
 SEC_TITLE = {'0': '0. قبل أي حل', 'A': 'أ. الاشتقاق', 'T': '🌳 الشجرة: أي طريقة؟', 'B': 'ب. التعويض',
              'P': '🔧 التجهيزات', 'C': 'ج. التجزئة', 'D': 'د. التمييز والتذكر'}
 SEC_ANCHOR = {'0': 's0', 'A': 'sA', 'T': 'tree', 'B': 'sB', 'P': 'sP', 'C': 'sC', 'D': 'sD'}
-# the two days left (the plan approved on Sunday 25 October): (when, what, minutes, link)
-PLAN = [   # the order of study (no times: Ziyad's choice)
-    ('1', 'القسم 0 والشجرة', '', 's0'),
-    ('2', 'أ. الاشتقاق (جا 16 مرة في الاختبارات)', '', 'sA'),
-    ('3', 'ب. التعويض: تكاملات 4.2، ثم 5.2 بالحجز', '', 'sB'),
-    ('4', '🔧 التجهيزات: كمّل المربع أول (جا 8 مرات)', '', 'sP'),
-    ('5', 'ج. التجزئة (جا 17 مرة)', '', 'sC'),
-    ('6', 'د. فحوص الإتقان، و«صحّح الغلط»، و«وش الحالة؟»', '', 'mastery'),
-    ('7', 'الاختبار التجريبي A، ثم صحّحه', '', 'mockA'),
-    ('8', 'بالليل: الشجرة، والسكربتات، وورقة الدرجة الكاملة', '', 'night'),
-]
 
 
 def cover():
@@ -86,7 +75,7 @@ def toc(entries):
     def entry(anchor, text, lvl=2):
         return ('<li class="lvl%d"><a href="#%s"><span class="t">%s</span><span class="pg" data-target="%s"></span></a></li>'
                 % (lvl, anchor, text, anchor))
-    rows = entry('howto', 'كيف تذاكر منها، والترتيب، والرقم القديم ← الجديد', 1)
+    rows = entry('howto', '🚀 ابدأ هنا: كيف تذاكر منها', 1)
     for key, items in entries:
         rows += entry(SEC_ANCHOR[key], SEC_TITLE[key], 1)
         for anchor, text in items:
@@ -105,6 +94,9 @@ def main():
         for uid in uids:
             if not uid.startswith('P-') and key in K.METHODS:
                 K.METHOD_OF[uid] = key
+    flat = [uid for _, _, uids in SECTIONS for uid in uids if not uid.startswith('P-') and uid in BUILD]
+    K.NEXT_OF.clear()
+    K.NEXT_OF.update(zip(flat, flat[1:] + [None]))     # «تعرفها؟ صح؟ روح للحالة اللي بعدها»
     idx = ROOT / 'data' / 'musa_index.json'
     if idx.exists():
         for q in json.loads(idx.read_text(encoding='utf-8')):
@@ -119,13 +111,16 @@ def main():
                 continue                                   # a v7 case not written yet
             U = BUILD[uid]()
             built[uid] = U.html()
-            items.append((uid, '📚 %s. %s' % (U.num, U.title) if uid.startswith('P-') else '%d. %s' % (U.num, U.title)))
-        toc_items.append((key, items))
+            items.append((uid, '📚 %s. %s' % (U.num, U.title) if uid.startswith('P-')
+                          else '☐ %s%d. %s' % ('⭐ ' if uid in K.CORE else '', U.num, U.title)))
+        toc_items.append((key, items if key != 'D' else END.D_TOC))
+    for uid, nxt in K.NEXT_OF.items():                 # the «تعرفها؟» line names the next case by number + 1
+        if nxt and K.NUM[nxt] != K.NUM[uid] + 1:
+            raise SystemExit('case numbers are not consecutive: %s %s' % (uid, nxt))
     # first pages of the sections (they list the cases built above), then the pages around them
-    old_rows = [[str(K.OLD_NUM[uid]), link(uid, str(K.NUM[uid])), t, K.pgref(uid)]
-                for uid, n, t in sorted(K.CASES, key=lambda c: K.OLD_NUM.get(c[0], 99)) if uid in K.OLD_NUM]
-    plan_rows = [[when, link(anchor, what), mins] for when, what, mins, anchor in PLAN]
-    body = cover() + toc(toc_items) + GP.howto(plan_rows, old_rows)
+    END.OLD_ROWS[:] = [[str(K.OLD_NUM[uid]), link(uid, str(K.NUM[uid])), t, K.pgref(uid)]
+                       for uid, n, t in sorted(K.CASES, key=lambda c: K.OLD_NUM.get(c[0], 99)) if uid in K.OLD_NUM]
+    body = cover() + toc(toc_items) + GP.howto()
     for key, first, uids in SECTIONS:
         body += first() + ''.join('<span id="%s"></span>' % a for a, k in ALIAS.items() if k == key)
         body += ''.join(built[uid] for uid in uids if uid in built)
@@ -144,6 +139,17 @@ def main():
     tpl = (ROOT / 'src' / 'template.html').read_text(encoding='utf-8')
     html_out = tpl.replace('{{TITLE}}', 'مذكرة الدرجة الكاملة').replace('{{BODY}}', body)
     (ROOT / 'src' / 'guide.html').write_text(html_out, encoding='utf-8')
+    # the PDF outline (the side index on the iPad), in reading order: tools/fix_outline.py writes it into the PDF
+    outline = [[1, 'المحتويات', ['toc']], [1, '🚀 ابدأ هنا: كيف تذاكر منها', ['howto']]]
+    for (key, first, uids), (_, items) in zip(SECTIONS, toc_items):
+        outline.append([1, SEC_TITLE[key], [SEC_ANCHOR[key]]])
+        outline += [[2, re.sub(r'^☐ ', '', text), [anchor]] for anchor, text in items]
+        if key in K.METHODS and K.SOLS_BY_METHOD.get(key):
+            first_sol = next('s-%s-1' % uid for uid in uids if uid in BUILD and not uid.startswith('P-'))
+            outline.append([2, '✅ حلول تمارين %s' % K.mname(key), ['sols-' + key, first_sol]])
+    outline += [[1, title, [anchor]] for anchor, title in END.END_TOC]
+    (ROOT / 'out' / 'guide').mkdir(parents=True, exist_ok=True)
+    (ROOT / 'out' / 'guide' / 'outline.json').write_text(json.dumps(outline, ensure_ascii=False, indent=0), encoding='utf-8')
     (ROOT / 'data' / 'case_numbers.json').write_text(json.dumps(
         {uid: dict(num=n, title=t, old=K.OLD_NUM.get(uid)) for uid, n, t in K.CASES}, ensure_ascii=False, indent=1), encoding='utf-8')
     log = E.write_log('guide')

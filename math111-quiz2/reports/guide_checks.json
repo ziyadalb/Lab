@@ -10731,136 +10731,192 @@
    "residual": "0"
   },
   {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-25",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-27",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-22",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X01",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-24",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S2-SE-Q2.2",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
    "kind": "derivative",
    "ok": true,
-   "item": "1445-S2-SE-Q1.1",
-   "label": "mastery A",
+   "item": "N42-E1-7",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-28",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X11",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-41",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S2-SE-Q3.4",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-20",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-19",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-13",
+   "label": "speed",
    "status": "symbolic"
   },
   {
    "kind": "derivative",
    "ok": true,
-   "item": "1445-S2-SE-Q1.2",
-   "label": "mastery A",
+   "item": "1445-S1-FE-Q1.3",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-23",
+   "label": "speed",
    "status": "symbolic"
   },
   {
    "kind": "derivative",
    "ok": true,
-   "item": "1446-S2-FE-Q1.3",
-   "label": "mastery A",
+   "item": "N42-X1-3",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-40",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X04",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-17",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "G-18",
+   "label": "speed",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1447-S1-SE-Q2.4",
+   "label": "speed",
    "status": "symbolic"
   },
   {
    "kind": "derivative",
    "ok": true,
-   "item": "N42-X1-5",
-   "label": "mastery A",
-   "status": "symbolic"
-  },
-  {
-   "kind": "derivative",
-   "ok": true,
-   "item": "M-06",
-   "label": "mastery A",
+   "item": "1447-S2-SE-Q1.1",
+   "label": "speed",
    "status": "symbolic"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N52-E2-2",
-   "label": "mastery B",
+   "item": "N42-E2-7",
+   "label": "speed",
    "status": "symbolic"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N42-X2-04",
-   "label": "mastery B",
+   "item": "G-26",
+   "label": "speed",
    "status": "symbolic"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N52-X03",
-   "label": "mastery B",
+   "item": "G-21",
+   "label": "speed",
    "status": "symbolic"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "N52-E4-1",
-   "label": "mastery B",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N42-X2-01",
-   "label": "mastery B",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1445-S2-SE-Q2.7",
-   "label": "mastery P",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N42-X2-08",
-   "label": "mastery P",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N42-X2-12",
-   "label": "mastery P",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N52-X14",
-   "label": "mastery P",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N52-E2-4",
-   "label": "mastery P",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S1-SE-Q2.5",
-   "label": "mastery C",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N51-X06",
-   "label": "mastery C",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N51-X08",
-   "label": "mastery C",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N52-E3-1",
-   "label": "mastery C",
+   "item": "N42-X2-05",
+   "label": "speed",
    "status": "symbolic"
   },
   {
@@ -11001,195 +11057,6 @@
    "residual": "0"
   },
   {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N42-X2-13",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1446-S2-SE-Q2.2",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N42-E2-7",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1447-S1-SE-Q2.4",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N42-X2-05",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "derivative",
-   "ok": true,
-   "item": "N42-E1-7",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "derivative",
-   "ok": true,
-   "item": "N42-X1-3",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "derivative",
-   "ok": true,
-   "item": "1445-S1-FE-Q1.3",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "derivative",
-   "ok": true,
-   "item": "1447-S2-SE-Q1.1",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "1447-S2-SE-Q3.4",
-   "label": "speed42",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N51-X01",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-22",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-40",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-41",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-17",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-18",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-19",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-20",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-21",
-   "label": "speed51",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N52-X11",
-   "label": "speed52",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "N52-X04",
-   "label": "speed52",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-23",
-   "label": "speed52",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-24",
-   "label": "speed52",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-25",
-   "label": "speed52",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-26",
-   "label": "speed52",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-27",
-   "label": "speed52",
-   "status": "symbolic"
-  },
-  {
-   "kind": "antiderivative",
-   "ok": true,
-   "item": "G-28",
-   "label": "speed52",
-   "status": "symbolic"
-  },
-  {
    "kind": "derivative",
    "ok": true,
    "item": "1445-S2-FE-Q1.3",
@@ -11285,6 +11152,139 @@
    "ok": true,
    "item": "1446-S1-FE-Q2.2",
    "label": "mixed review",
+   "status": "symbolic"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1445-S2-SE-Q1.1",
+   "label": "mastery A",
+   "status": "symbolic"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1445-S2-SE-Q1.2",
+   "label": "mastery A",
+   "status": "symbolic"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "1446-S2-FE-Q1.3",
+   "label": "mastery A",
+   "status": "symbolic"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "N42-X1-5",
+   "label": "mastery A",
+   "status": "symbolic"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "M-06",
+   "label": "mastery A",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E2-2",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-04",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X03",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E4-1",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-01",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1445-S2-SE-Q2.7",
+   "label": "mastery P",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-08",
+   "label": "mastery P",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-12",
+   "label": "mastery P",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X14",
+   "label": "mastery P",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E2-4",
+   "label": "mastery P",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "1446-S1-SE-Q2.5",
+   "label": "mastery C",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X06",
+   "label": "mastery C",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X08",
+   "label": "mastery C",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E3-1",
+   "label": "mastery C",
    "status": "symbolic"
   },
   {
@@ -11950,6 +11950,129 @@
   "G-06": [
    "U-P5 drill 3"
   ],
+  "G-25": [
+   "speed"
+  ],
+  "G-27": [
+   "speed"
+  ],
+  "G-22": [
+   "speed"
+  ],
+  "N51-X01": [
+   "speed"
+  ],
+  "G-24": [
+   "speed"
+  ],
+  "1446-S2-SE-Q2.2": [
+   "speed"
+  ],
+  "N42-E1-7": [
+   "speed"
+  ],
+  "G-28": [
+   "speed"
+  ],
+  "N52-X11": [
+   "speed"
+  ],
+  "G-41": [
+   "speed"
+  ],
+  "1447-S2-SE-Q3.4": [
+   "speed"
+  ],
+  "G-20": [
+   "speed"
+  ],
+  "G-19": [
+   "speed"
+  ],
+  "N42-X2-13": [
+   "speed"
+  ],
+  "1445-S1-FE-Q1.3": [
+   "speed"
+  ],
+  "G-23": [
+   "speed"
+  ],
+  "N42-X1-3": [
+   "speed"
+  ],
+  "G-40": [
+   "speed"
+  ],
+  "N52-X04": [
+   "speed"
+  ],
+  "G-17": [
+   "speed"
+  ],
+  "G-18": [
+   "speed"
+  ],
+  "1447-S1-SE-Q2.4": [
+   "speed"
+  ],
+  "1447-S2-SE-Q1.1": [
+   "speed"
+  ],
+  "N42-E2-7": [
+   "speed"
+  ],
+  "G-26": [
+   "speed"
+  ],
+  "G-21": [
+   "speed"
+  ],
+  "N42-X2-05": [
+   "speed"
+  ],
+  "1445-S2-FE-Q1.3": [
+   "mixed review"
+  ],
+  "1446-S2-SE-Q1.1": [
+   "mixed review"
+  ],
+  "N42-E1-8": [
+   "mixed review"
+  ],
+  "N42-X1-2": [
+   "mixed review"
+  ],
+  "G-33": [
+   "mixed review"
+  ],
+  "G-29": [
+   "mixed review"
+  ],
+  "G-32": [
+   "mixed review"
+  ],
+  "G-35": [
+   "mixed review"
+  ],
+  "G-30": [
+   "mixed review"
+  ],
+  "G-37": [
+   "mixed review"
+  ],
+  "G-34": [
+   "mixed review"
+  ],
+  "G-31": [
+   "mixed review"
+  ],
+  "1445-S2-SE-Q2.2": [
+   "mixed review"
+  ],
+  "1446-S1-FE-Q2.2": [
+   "mixed review"
+  ],
   "1445-S2-SE-Q1.1": [
    "mastery A"
   ],
@@ -12006,129 +12129,6 @@
   ],
   "N52-E3-1": [
    "mastery C"
-  ],
-  "N42-X2-13": [
-   "speed42"
-  ],
-  "1446-S2-SE-Q2.2": [
-   "speed42"
-  ],
-  "N42-E2-7": [
-   "speed42"
-  ],
-  "1447-S1-SE-Q2.4": [
-   "speed42"
-  ],
-  "N42-X2-05": [
-   "speed42"
-  ],
-  "N42-E1-7": [
-   "speed42"
-  ],
-  "N42-X1-3": [
-   "speed42"
-  ],
-  "1445-S1-FE-Q1.3": [
-   "speed42"
-  ],
-  "1447-S2-SE-Q1.1": [
-   "speed42"
-  ],
-  "1447-S2-SE-Q3.4": [
-   "speed42"
-  ],
-  "N51-X01": [
-   "speed51"
-  ],
-  "G-22": [
-   "speed51"
-  ],
-  "G-40": [
-   "speed51"
-  ],
-  "G-41": [
-   "speed51"
-  ],
-  "G-17": [
-   "speed51"
-  ],
-  "G-18": [
-   "speed51"
-  ],
-  "G-19": [
-   "speed51"
-  ],
-  "G-20": [
-   "speed51"
-  ],
-  "G-21": [
-   "speed51"
-  ],
-  "N52-X11": [
-   "speed52"
-  ],
-  "N52-X04": [
-   "speed52"
-  ],
-  "G-23": [
-   "speed52"
-  ],
-  "G-24": [
-   "speed52"
-  ],
-  "G-25": [
-   "speed52"
-  ],
-  "G-26": [
-   "speed52"
-  ],
-  "G-27": [
-   "speed52"
-  ],
-  "G-28": [
-   "speed52"
-  ],
-  "1445-S2-FE-Q1.3": [
-   "mixed review"
-  ],
-  "1446-S2-SE-Q1.1": [
-   "mixed review"
-  ],
-  "N42-E1-8": [
-   "mixed review"
-  ],
-  "N42-X1-2": [
-   "mixed review"
-  ],
-  "G-33": [
-   "mixed review"
-  ],
-  "G-29": [
-   "mixed review"
-  ],
-  "G-32": [
-   "mixed review"
-  ],
-  "G-35": [
-   "mixed review"
-  ],
-  "G-30": [
-   "mixed review"
-  ],
-  "G-37": [
-   "mixed review"
-  ],
-  "G-34": [
-   "mixed review"
-  ],
-  "G-31": [
-   "mixed review"
-  ],
-  "1445-S2-SE-Q2.2": [
-   "mixed review"
-  ],
-  "1446-S1-FE-Q2.2": [
-   "mixed review"
   ]
  },
  "counts": {

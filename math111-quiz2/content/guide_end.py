@@ -1,6 +1,8 @@
 """المذكرة الكاملة — القسم د (وش الحالة؟ والمراجعة المخلوطة)، يوم الكويز، الاختباران، ليلة الكويز، ورقة القوانين،
 إذا علقت، أخطاء الجبر، سجل الأخطاء، المفاتيح، الملحق."""
 import json
+import random
+import re
 from pathlib import Path
 
 import booklet as B
@@ -20,7 +22,10 @@ TITLES = {'mockA': 'الاختبار التجريبي A', 'mixed': 'المراج
 END_TOC = [('fullmark', '💯 ورقة الدرجة الكاملة'), ('differs', '🤔 جوابك يختلف عن المفتاح؟'), ('quizday', '🎯 ' + TITLES['quizday']),
            ('mockA', '📝 الاختبار التجريبي A'), ('night', TITLES['night']), ('mockB', '📝 الاختبار التجريبي B (إذا بقي وقت)'),
            ('stuck', 'ملحق: إذا علقت'), ('mistakes', 'ملحق: أخطاء الجبر الشائعة'),
-           ('errlog', 'ملحق: سجل الأخطاء'), ('keys', 'ملحق: المفاتيح'), ('appendix', 'ملحق: المصادر والتحقق')]
+           ('errlog', 'ملحق: سجل الأخطاء'), ('keys', 'ملحق: المفاتيح'), ('appendix', 'ملحق: المصادر، والتحقق، والرقم القديم ← الجديد')]
+OLD_ROWS = []      # the old → new case numbers table (filled by the renderer, printed in the appendix)
+D_TOC = [('speed', '🔎 وش الحالة؟ (أسئلة مخلوطة)'), ('fixit', '🔍 صحّح الغلط'), ('mixed', '🔀 المراجعة المخلوطة'),
+         ('mastery', '✅ فحوص الإتقان')]
 
 SPEED = {
     'speed42': ('4.2', [('N42-X2-13', 'النوع 10: المركز $-3$، والباقي $-9$ سالب، يعني cosh، و $a=3$'),
@@ -71,20 +76,40 @@ def question_used(it, where):
     return it
 
 
-def speed_page(anchor):
-    lesson, rows = SPEED[anchor]
+def _case_of(hint):
+    """The case a «which case?» key line names first («النوع 10: …», «النوعان 1 و 2: …»), as a uid."""
+    return K.OLD_ORDER[int(re.search(r'\d+', hint).group()) - 1]
+
+
+def speed_order():
+    """The questions of the three lessons in one fixed mixed order: no two neighbours from the same case, and no
+    three in a row with the same method (so the order never gives the answer away)."""
+    rows = [row for anchor in ('speed42', 'speed51', 'speed52') for row in SPEED[anchor][1]]
+    method = lambda row: K.METHOD_OF.get(_case_of(row[1]))
+    for seed in range(1000):
+        order = rows[:]
+        random.Random(seed).shuffle(order)
+        if (all(_case_of(a[1]) != _case_of(b[1]) for a, b in zip(order, order[1:]))
+                and not any(method(a) == method(b) == method(c) for a, b, c in zip(order, order[1:], order[2:]))):
+            return order
+    raise SystemExit('no mixed order for «وش الحالة؟»')
+
+
+def speed_page():
+    """«وش الحالة؟»: one page, the questions of 4.2, 5.1 and 5.2 mixed and without lesson names."""
     qs, key = '', []
-    for k, (item_id, hint) in enumerate(rows, 1):
+    for k, (item_id, hint) in enumerate(speed_order(), 1):
         it = ITEMS[item_id]
-        qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(q_tex(question_used(it, anchor))), lines(1, 'write short'))
-        key.append([str(k), rich(hint), mi(r'\displaystyle ' + ans_tex(it, with_lhs=False).lstrip('= '))])
-        final(it, anchor)
-    SPEED_KEYS[anchor] = (lesson, key)
-    hint = {'4.2': '$u$ و $a$، أو المركز والباقي', '5.1': '$u$ و $dv$', '5.2': 'القطعة اللي تحجزها و $u$'}[lesson]
-    page = (p(rich('لا تحل. اكتب تحت كل سؤال <b>الطريقة ورقم الحالة</b> و<b>أول سطر</b> فقط (مثل ' + hint + '). '
-                   'الهدف إنك تقرّر في ثواني. المفتاح في ') + link('k-' + anchor, 'المفاتيح ص ' + pgref('k-' + anchor)) + '.')
+        qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(q_tex(question_used(it, 'speed'))), lines(1, 'write short'))
+        key.append([str(k), '<b>%s</b> · %s' % (K.mname(K.METHOD_OF[_case_of(hint)]), rich(hint)),
+                    mi(r'\displaystyle ' + ans_tex(it, with_lhs=False).lstrip('= '))])
+        final(it, 'speed')
+    SPEED_KEYS['speed'] = key
+    page = (p(rich('لا تحل. اكتب تحت كل سؤال <b>الطريقة</b> (أ، ب، 🔧، ج) و<b>أول سطر</b> بس: $u$ و $du$، أو $u$ و $dv$، '
+                   'أو المركز والباقي، أو اللي تحجزه. الأسئلة مخلوطة من الدروس الثلاثة مثل الكويز. المفتاح في ')
+              + link('k-speed', 'المفاتيح ص ' + pgref('k-speed')) + '.')
             + '<div class="chgrid">' + qs + '</div>')
-    return section(anchor, '🔎 وش الحالة؟ أسئلة من درس %s' % lesson, page, 'flow')
+    return section('speed', '🔎 وش الحالة؟ %d سؤال مخلوط' % len(key), page, 'flow')
 
 
 def mock_box(which):
@@ -118,9 +143,9 @@ def mixed_page():
 
 
 def section_d():
-    """Section د: the three «which case?» pages, then the mixed review."""
+    """Section د: «which case?» (mixed), «find the mistake», the mixed review, then the mastery check of each method."""
     import guide_paths as GP
-    return GP.mastery() + GP.fix_mistakes() + ''.join(speed_page(a) for a in ('speed42', 'speed51', 'speed52')) + mixed_page()
+    return speed_page() + GP.fix_mistakes() + mixed_page() + GP.mastery()
 
 
 def after_methods():
@@ -169,7 +194,7 @@ def stuck():
                '<b>نسيت الطريقة السريعة؟</b> استخدم خطوات 🧱 في صفحة الحالة، أو أول صفحة في طريقتها.',
                '<b>الجبر وقفك؟</b> ' + link('s0', 'حركات الجبر التسع في القسم 0') + '، وكل حركة معها فحص برقم. وشوف ' + link('mistakes', 'أخطاء الجبر الشائعة') + '.',
                '<b>جوابك يختلف عن الحل؟</b> ' + link('differs', 'جوابك يختلف عن المفتاح؟') + ': اشتق جوابك، أو عوّض رقمين.',
-               '<b>tanh⁻¹ أم coth⁻¹؟</b> قارن $|u|$ مع $a$.',
+               '<b>tanh⁻¹ أم coth⁻¹؟</b> قارن $|u|$ مع $a$. والسؤال ما حدّد $x$؟ $\\tanh^{-1}$ وجنبه الشرط $|u|<a$.',
                '<b>نسيت الإشارة في sin و cos؟</b> $\\int\\sin=-\\cos$ و $\\int\\cos=\\sin$. و sinh و cosh بدون سالب.',
                '<b>في الكويز:</b> ابدأ بالسؤال الأسهل (المشتقات عادة أسرع). لا تترك سؤالًا فاضيًا: الخطوة الأولى الصحيحة '
                '(مثل $u$ و $du$، أو $u$ و $dv$) أفضل من ورقة فاضية.'])
@@ -203,11 +228,8 @@ def help_ladder():
 def keys():
     t_rows = [['<span id="k-%s"></span>%s' % (skill, link('alg-' + skill, title + ' ↩')), mi(r'\displaystyle ' + ans)]
               for skill, title, ans in TRY_KEYS]
-    out = ''
-    for anchor in ('speed42', 'speed51', 'speed52'):
-        lesson, key = SPEED_KEYS[anchor]
-        out += ('<h3 id="k-%s">مفتاح «وش الحالة؟»: أسئلة %s %s</h3>' % (anchor, lesson, link(anchor, '↩'))
-                + table(['#', 'الحالة وأول سطر', 'الجواب (للتأكد فقط)'], key, 'answers'))
+    out = ('<h3 id="k-speed">مفتاح «وش الحالة؟» %s</h3>' % link('speed', '↩')
+           + table(['#', 'الطريقة، والحالة، وأول سطر', 'الجواب (للتأكد فقط)'], SPEED_KEYS['speed'], 'answers'))
     out += ('<h3 id="k-mixed">أجوبة المراجعة المخلوطة %s</h3>' % link('mixed', '↩')
             + p('للتكاملات: اشتق جوابك؛ إذا رجع السؤال فهو صحيح (قد يختلف بثابت). للمشتقات: قارن حدًا حدًا. '
                 'وإذا ما ضبط، افتح صفحة الحالة.', 'small')
@@ -238,7 +260,9 @@ def appendix():
                 '<b>K2:</b> بعض الحلول الرسمية تحذف القيمة المطلقة في sech⁻¹ و csch⁻¹ و ln، فتصح على جهة واحدة من المجال.',
                 '<b>K3:</b> خطأ مطبعي في مذكرة د. طارق ص65 (سطر في مثال x sec⁻¹x) لا يغير الجواب.',
                 'سطور «ليش؟» والكلام العربي كتبناها نحن؛ الحاسوب يفحص الرياضيات فقط. وفي صفحة أخطاء الجبر يفحص أيضًا أن كل «غلط» غلط فعلًا.'])
-    return section('appendix', 'ملحق: المصادر والتحقق', table(['البند', 'القيمة'], rows, 'answers') + notes)
+    import guide_paths as GP
+    return section('appendix', 'ملحق: المصادر والتحقق', table(['البند', 'القيمة'], rows, 'answers') + notes
+                   + (GP.oldnew(OLD_ROWS) if OLD_ROWS else ''))
 
 
 # common algebra mistakes: (wrong latex, right latex, why, (wrong lhs, wrong rhs) that must differ, right claims)
@@ -300,7 +324,10 @@ def quiz_day():
         'سؤال المشتقة: سطر $u$ و $u\'$، ثم القانون، ثم الجواب.',
         'التكاملات: ابدأ بالأسهل عليك.',
         'راجع: $+C$، والإشارات، و $|u|$. واشتق جواب تكامل واحد على الأقل وتأكد أنه يرجع السؤال.']) + '</ol>'
-    body = (box('note', '🌙 الليلة قبل الكويز (الاثنين 26 أكتوبر)', ul([
+    expect = p('🔮 <b>وش تتوقع</b> (من الاختبارات الثانية الست): سؤال 1 مشتقتين، وأغلبها حدّين: دالة من 4.1 + دالة زائدية عكسية. '
+               'وبعده تكاملات، أكثرها: التجزئة (11 مرة)، وإكمال المربع (5)، وأسية × sinh أو cosh (3)، و sin و cos وأحدهما فردي (3).',
+               'expect')
+    body = (expect + box('note', '🌙 الليلة قبل الكويز (الاثنين 26 أكتوبر)', ul([
                 'اقرأ ' + link('night', 'صفحة مراجعة الليلة') + ' (الشجرة، والسكربتات، والتريكات)، ثم ' + link('errlog', 'سجل أخطائك') + '.',
                 'لا تبدأ أسئلة جديدة.',
                 'جهّز: قلمين، وممحاة، وبطاقتك الجامعية.']))
@@ -328,7 +355,7 @@ TRICKS = [
     ('1', 'sinh⁻¹ معها $\\sqrt{u^2+1}$، و cosh⁻¹ معها $\\sqrt{u^2-1}$. tanh⁻¹ شكلها $\\frac{1}{1-u^2}$، و coth⁻¹ نفسها بسالب ✎ (إشارة دكتورك). sech⁻¹ و csch⁻¹ فيها سالب و $u$ برّا الجذر. ودايم × مشتقة الداخل.'),
     ('2', 'اشتق من برّا لجوّا: كل طبقة مشتقتها، واضربها في بعض.'),
     ('3 إلى 7', 'رقم التعديل: البسط ناقصه رقم عشان يصير $du$؟ اقسم عليه برّا. واكتب اللي تحت الجذر كمربع: $9x^4=(3x^2)^2$.'),
-    ('4', 'tanh⁻¹ أم coth⁻¹؟ $u$ أصغر من $a$ يعني tanh⁻¹، وأكبر يعني coth⁻¹.'),
+    ('4', 'tanh⁻¹ أم coth⁻¹؟ $u$ أصغر من $a$ يعني tanh⁻¹، وأكبر يعني coth⁻¹ ✎. السؤال ما حدّد $x$؟ tanh⁻¹ وجنبه الشرط $|u|<a$.'),
     ('5', '$u$ برّا الجذر: الجواب يبدأ بسالب و $\\frac1a$، ومعه $|u|$.'),
     ('6', 'أسية تحت الجذر: اضرب فوق وتحت في جذرها ($e^{6x}=(e^{3x})^2$، فاضرب في $e^{3x}$).'),
     ('7', '$\\sqrt x$ ومعها $\\frac{1}{\\sqrt x}$: $u=\\sqrt x$، و $\\frac{dx}{\\sqrt x}=2\\,du$.'),

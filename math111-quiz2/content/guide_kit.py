@@ -86,6 +86,9 @@ TREE = {'U-T1': 'س2 بعد ما تحجز ← ب. التعويض', 'U-T2': 'س2 
         'U-P10': 'س2 أول: تعويض يشيل الجذر ← ثم س4: تجزئة', 'U-P5': 'س4 ← ج. التجزئة، ثم عوّض الحدّين مرة وحدة'}
 NUM = {}           # uid -> case number (document order)
 CASES = []         # (uid, number, title) in document order
+# ⭐ the core cases: the ones that came at least twice in the 12 past exams (together most of the exam parts)
+CORE = {uid for uid, n in FIRE.items() if n >= 2}
+NEXT_OF = {}       # uid -> the uid of the next case in document order (None after the last), set by the renderer
 MUSA_COUNT = {}    # uid -> usable questions in Dr. Musa's notes (data/musa_index.json, filled by the renderer)
 
 
@@ -524,6 +527,7 @@ class Unit:
         lvl = {'G': 'موجّه', 'P': 'ناقص الخطوات', 'I': 'لحالك'}[level]
         dtag = '%s-%s' % (self.uid, tag)
         DRILLS_N[self.uid] = DRILLS_N.get(self.uid, 0) + 1
+        self.drill_tags = getattr(self, 'drill_tags', []) + [(dtag, tag, level, lvl)]
         head = ('<div class="drill-head" id="d-%s"><b>%s تمرين %s</b> %s<span class="help">%s</span></div>'
                 % (dtag, src_icon(it), tag, chip(lvl, 'lvl'), link('s-' + dtag, 'الحل ص ' + pgref('s-' + dtag), 'btn')))
         body = drill_question(it, where)
@@ -574,11 +578,22 @@ class Unit:
             meta.append('📗 في مذكرة د. موسى: %d' % musa)
         if needs:
             meta.append('تحتاج: ' + needs)
-        if self.uid in OLD_NUM:
-            pass                             # the old number is in the old → new table (how-to page)
-        return ('<div class="unit-head %s" id="%s"><span class="num">%d</span><h3>%s</h3><span class="mtag">%s %s</span></div>'
-                '<p class="unit-meta">%s</p>'
-                % (METHODS[m][2], self.uid, self.num, self.title, METHODS[m][0], METHODS[m][1], ' · '.join(meta)))
+        star = '<span class="star">⭐</span>' if self.uid in CORE else ''
+        return ('<div class="unit-head %s" id="%s"><span class="num">%d</span>%s<h3>%s</h3><span class="mtag">%s %s</span></div>'
+                '<p class="unit-meta">%s</p>%s'
+                % (METHODS[m][2], self.uid, self.num, star, self.title, METHODS[m][0], METHODS[m][1], ' · '.join(meta),
+                   self.know_html()))
+
+    def know_html(self):
+        """«تعرفها؟»: solve the case's last (on your own) exercise first. Right: go to the next case. Wrong: read this one."""
+        tags = getattr(self, 'drill_tags', [])
+        if not tags:
+            return ''
+        dtag, tag, _, lvl = ([t for t in tags if t[2] == 'I'] or tags)[-1]
+        nxt = NEXT_OF.get(self.uid)
+        go = link(nxt, 'للحالة %d' % (self.num + 1)) if nxt else link('sD', 'للقسم د')
+        return p('<b>تعرفها؟</b> حل ' + link('d-' + dtag, 'تمرين %s (%s، ص %s)' % (tag, lvl, pgref('d-' + dtag)))
+                 + ' أول. صح؟ روح ' + go + '. غلط؟ اقرأ الحالة.', 'knowit')
 
     def body_parts(self):
         """The case page in one column: متى؟ ← ليش تشتغل؟ ← الخطوات ← 🧱 ← ⚡ ← قبل ما تسلّم (no boxes)."""
