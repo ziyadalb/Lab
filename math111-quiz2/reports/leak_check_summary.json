@@ -1,0 +1,89 @@
+{
+ "document": "src/summary.katex.html",
+ "pdf": "out/summary/MATH111_Quiz2_Summary.pdf",
+ "formulas_scanned": 390,
+ "held_checked": 10,
+ "avoid_checked": 5,
+ "used_items": 187,
+ "failures": [],
+ "for_manual_review": [
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H01",
+   "used": "1446-S1-FE-Q2.1",
+   "where": "U-34 drill 2"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "1446-S1-SE-Q2.6",
+   "where": "U-T2 example"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "1447-S1-SE-Q2.3",
+   "where": "U-T2 drill 1"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X01",
+   "where": "U-T2 drill 2"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "1445-S1-SE-Q2.4",
+   "where": "U-T2 drill 3"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "1445-S2-FE-Q2.6",
+   "where": "U-T2 drill 4"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "M-19",
+   "where": "U-T3 drill 1"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "G-23",
+   "where": "speed"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X04",
+   "where": "speed"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "G-33",
+   "where": "mixed review"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-E2-2",
+   "where": "mastery B"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-X03",
+   "where": "mastery B"
+  },
+  {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H03",
+   "used": "N52-E2-4",
+   "where": "mastery P"
+  }
+ ]
+}

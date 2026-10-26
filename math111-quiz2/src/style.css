@@ -389,3 +389,12 @@ ol.plan.start li { margin-bottom: 1.2mm; }
 /* the old → new numbers in the appendix: three columns of short lines */
 ul.oldnew { columns: 3; column-gap: 6mm; list-style: none; padding: 0; margin: 1mm 0 0; }
 ul.oldnew li { break-inside: avoid; }
+/* «ملخص الفهم»: boxes of what to memorise, and the decision table */
+.sbox { border: 1.5px solid #999; border-radius: 2mm; padding: 1.5mm 3mm; margin: 2.5mm 0; break-inside: avoid; }
+.sbox > h3 { margin: 0 0 1mm; font-size: 13.5pt; }
+table.decide { font-size: 12pt; }
+table.decide td:last-child, table.decide th:last-child { white-space: nowrap; text-align: center; }
+section.summary h3 { break-after: avoid; }
+table.decide tr { break-inside: avoid; }
+section.summary#top h1 { margin: 2mm 0 2mm; }
+section.chapter.summary#memory { break-before: auto; margin-top: 4mm; }
