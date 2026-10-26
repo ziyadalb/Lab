@@ -45,6 +45,7 @@ class PreUnit(Unit):
         self.uid, self.num, self.ref, self.title = uid, label, label, title
         self.section, self.pages, self.chapter, self.day = LESSON[chapter], source, chapter, 0
         self.parts, self.drills, self.sols = [], [], []
+        self.pending, self.ex_items = [], []
         self.n_ex = 0
         PARTS.setdefault(chapter, []).append((uid, label, title))
 

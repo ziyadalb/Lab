@@ -19,7 +19,7 @@ TITLES = {'mockA': 'الاختبار التجريبي A', 'mixed': 'المراج
 # after the four methods: what to write for a full mark, the quiz day, the mocks; then the appendix
 END_TOC = [('fullmark', '💯 ورقة الدرجة الكاملة'), ('differs', '🤔 جوابك يختلف عن المفتاح؟'), ('quizday', '🎯 ' + TITLES['quizday']),
            ('mockA', '📝 الاختبار التجريبي A'), ('night', TITLES['night']), ('mockB', '📝 الاختبار التجريبي B (إذا بقي وقت)'),
-           ('formulas', 'ملحق: ورقة القوانين والطرق السريعة'), ('stuck', 'ملحق: إذا علقت'), ('mistakes', 'ملحق: أخطاء الجبر الشائعة'),
+           ('stuck', 'ملحق: إذا علقت'), ('mistakes', 'ملحق: أخطاء الجبر الشائعة'),
            ('errlog', 'ملحق: سجل الأخطاء'), ('keys', 'ملحق: المفاتيح'), ('appendix', 'ملحق: المصادر والتحقق')]
 
 SPEED = {
@@ -166,7 +166,7 @@ def formulas():
 def stuck():
     body = ul(['<b>ما عرفت الطريقة؟</b> ' + link('tree', 'الشجرة') + ': أربعة أسئلة بالترتيب، ووقّف عند أول «إيه».',
                '<b>عرفت الطريقة وما عرفت تبدأ؟</b> اكتب أول سطر في سكربتها: غالبًا $u$ و $du$، أو $u$ و $dv$.',
-               '<b>نسيت الطريقة السريعة؟</b> استخدم خطوات 🧱 في صفحة الحالة، أو ' + link('formulas', 'ورقة القوانين') + '.',
+               '<b>نسيت الطريقة السريعة؟</b> استخدم خطوات 🧱 في صفحة الحالة، أو أول صفحة في طريقتها.',
                '<b>الجبر وقفك؟</b> ' + link('s0', 'حركات الجبر التسع في القسم 0') + '، وكل حركة معها فحص برقم. وشوف ' + link('mistakes', 'أخطاء الجبر الشائعة') + '.',
                '<b>جوابك يختلف عن الحل؟</b> ' + link('differs', 'جوابك يختلف عن المفتاح؟') + ': اشتق جوابك، أو عوّض رقمين.',
                '<b>tanh⁻¹ أم coth⁻¹؟</b> قارن $|u|$ مع $a$.',
@@ -382,4 +382,4 @@ def night():
 
 
 def end_sections():
-    return formulas() + stuck() + mistakes() + errlog() + keys() + appendix()
+    return stuck() + mistakes() + errlog() + keys() + appendix()     # v7: the laws sheet is the tree and the method pages

@@ -1,0 +1,23 @@
+[
+ {"id": "MU2-102-1", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 102, "number": "(1)"}, "task": "int",
+  "q": "raw:sin(5*x)*sin(3*x)", "answer": ["sin(2*x)/4", "-sin(8*x)/16"], "branches": ["t", "-t"], "domain": "all real x",
+  "case": "C52-PROD", "section": "5.2", "note": "products of different angles (case U-T8)"},
+ {"id": "MU2-102-2", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 102, "number": "(2)"}, "task": "int",
+  "q": "raw:sin(4*x)*cos(3*x)", "answer": ["-cos(7*x)/14", "-cos(x)/2"], "branches": ["t", "-t"], "domain": "all real x",
+  "case": "C52-PROD", "section": "5.2", "note": "products of different angles (case U-T8)"},
+ {"id": "MU2-115-1", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 115, "number": "Home work (1)"}, "task": "int",
+  "q": "raw:1/(x*sqrt(25*x**2+16))", "answer": ["-acsch(5*x/4)/4"], "branches": ["t"], "domain": "x>0",
+  "case": "C42-SECH", "section": "4.2", "note": "u outside the root, csch (case U-I3)"},
+ {"id": "MU2-121-1", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 121, "number": "1- Example"}, "task": "int",
+  "q": "raw:(2*x-1)/(x**2-6*x+13)", "answer": ["log(x**2-6*x+13)", "5*atan((x-3)/2)/2"], "branches": ["t", "-t"], "domain": "all real x",
+  "case": "C42-SPLIT", "section": "4.2", "note": "split the fraction, then complete the square (case U-I6)"},
+ {"id": "MU2-123-2", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 123, "number": "2- Example"}, "task": "int",
+  "q": "raw:1/(x**2+8*x+25)", "answer": ["atan((x+4)/3)/3"], "branches": ["t", "-t"], "domain": "all real x",
+  "case": "C42-CS", "section": "4.2", "note": "complete the square, the 3.4 rule (case U-I8)"},
+ {"id": "MU2-52-4", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 52, "number": "Q2 (4)"}, "task": "int",
+  "q": "raw:sech(sqrt(x))*tanh(sqrt(x))/sqrt(x)", "answer": ["-2*sech(sqrt(x))"], "branches": ["t"], "domain": "x>0",
+  "case": "C42-SQRT", "section": "4.2", "note": "hidden sqrt(x) (case U-I5)"},
+ {"id": "MU2-52-2", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 52, "number": "Q2 (2)"}, "task": "int",
+  "q": "raw:cosh(log(x))/(5*x)", "answer": ["sinh(log(x))/5"], "branches": ["t"], "domain": "x>0 (the notes write ln|x|)",
+  "case": "C42-INV", "section": "4.2", "note": "ln x (the inverse of e^x) with its derivative 1/x (case U-I7)"}
+]

@@ -1,12 +1,30 @@
-"""المذكرة الكاملة — الدرس 5.2: التكاملات المثلثية (اليومان 5–6).
+"""المذكرة الكاملة — الدرس 5.2: التكاملات المثلثية.
 
-Every type: the card (idea, sign, how it differs from the type before), the way in fixed steps (or the law), the
-examples solved step by step with one operation per row (🧱), the box «before you hand in», the one-line summary,
-and the exercises with full solutions. Only type 27 keeps a quick way (⚡), written after its examples.
+Every case, printed in this order: when (what you see, and what it is not), why it works, the steps (the doctor's
+branches, then the fixed script of the method in the same words every time), the examples solved step by step with one
+operation per row (🧱), before you hand in, the one-line summary, and the exercises with full solutions. Only the
+tan chain keeps a quick way (⚡), written after its examples.
 """
 from booklet_engine import ITEMS, arith, same_value
 from guide_kit import Unit, contrast, final, method, question, rich, shortcut, steps, tricks
+from guide_51 import PREP_SCRIPT, SUB_SCRIPT, script, when
 from html_kit import md, mi, p, table, ul
+
+# the reserve step comes first in every 5.2 substitution, then the substitution script word for word
+RESERVE = 'احجز وحدة: القطعة اللي تصير 🟢 $du$'
+TRIG_SCRIPT = [RESERVE] + SUB_SCRIPT
+# the doctor's branches, in his words and order
+SC_TREE = (p('<b>🌳 فروع دكتورك:</b>')
+           + table([rich('$\\int\\sin^m x\\cos^n x\\,dx$'), 'وش تسوي'],
+                   [[rich('$m$ فردي'), rich('$u=\\cos x$ (احجز $\\sin x$)')],
+                    [rich('$n$ فردي'), rich('$u=\\sin x$ (احجز $\\cos x$)')],
+                    ['الاثنين زوجي', 'نص الزاوية']], 'compact'))
+TS_TREE = (p('<b>🌳 فروع دكتورك:</b>')
+           + table([rich('$\\int\\tan^m x\\sec^n x\\,dx$'), 'وش تسوي'],
+                   [[rich('$m$ فردي'), rich('$u=\\sec x$ (احجز $\\sec x\\tan x$)')],
+                    [rich('$n$ زوجي'), rich('$u=\\tan x$ (احجز $\\sec^2x$)')],
+                    [rich('$m$ زوجي و $n$ فردي'), 'تجزئة']], 'compact')
+           + p(rich('$m$ فردي و $n$ زوجي مع بعض (مثل $\\tan^3x\\sec^2x$)؟ الفرعين صح، والجوابين يختلفون برقم ثابت بس.'), 'small'))
 
 
 def laws(label, rows):
@@ -57,31 +75,33 @@ def sc_method():
 def u_odd_alone():
     U = Unit('U-T1', 'قوة فردية لـ sin أو cos وحدها', '5.2', 'ص67–68، مثال 1', 5)
     U.add('idea', 'الفكرة', p(rich(
-        'مشتقة $\\sin x$ هي $\\cos x$. فإذا حجزنا $\\cos x$ وحدة، صار عندنا $du$ جاهز لما $u=\\sin x$. '
-        'والباقي أسه زوجي، فنحوّله كله لـ $\\sin x$ بالمتطابقة $\\cos^2x=1-\\sin^2x$. فيصير التكامل قوى $u$ بسيطة.')))
-    U.add('sign', 'العلامة', p(rich('قوة فردية لـ sin أو cos وحدها، مثل $\\int\\cos^3x\\,dx$ أو $\\int\\sin^5x\\,dx$.'))
-          + contrast([(r'\int\cos^{3}x\,dx', 'احجز $\\cos x$، و $u=\\sin x$', 'الأس فردي'),
-                      (r'\int\cos^{2}x\,dx', 'نص الزاوية (النوع 24)', 'الأس زوجي، فما فيه شي نحجزه')]))
-    U.prev('أول نوع في 5.2. في 5.1 كان فيه شيئان مضروبان فاستعملنا التجزئة. هنا قوة لدالة مثلثية، فنرجع للتعويض بعد ما نحوّل بمتطابقة.')
-    U.add('short', '🧭 الطريقة', method([
-        'نحجز وحدة من الدالة اللي أسها فردي: $\\cos x$ أو $\\sin x$.',
-        'الباقي أسه زوجي. نحوّله كله للدالة الثانية بالمتطابقة.',
-        'نسمّي $u$ الدالة الثانية. مع $\\cos x$ محجوزة $u=\\sin x$، ومع $\\sin x$ محجوزة $u=\\cos x$ و $\\sin x\\,dx=-du$.',
-        'نفك القوس، ونكامل كل حد: نزيد الأس 1 ونقسم عليه.',
-        'نرجع $u$ لـ $x$.']) + laws('U-T1', SIN_COS)
+        'مشتقة $\\sin x$ هي $\\cos x$. فإذا حجزنا $\\cos x$ وحدة صارت 🟢 $du$، '
+        'والباقي أسه زوجي نحوّله كله لـ 🔵 $\\sin x$ بـ $\\cos^2x=1-\\sin^2x$.')))
+    U.add('sign', 'العلامة', when(
+        'sin أو cos لحالها بأس فردي: $\\int\\cos^3x\\,dx$ أو $\\int\\sin^5x\\,dx$.',
+        'الأس زوجي، مثل $\\int\\cos^2x\\,dx$: ما فيه شي تحجزه، فهذا تجهيز (نص الزاوية).',
+        [(r'\int\cos^{3}x\,dx', 'تعويض: احجز $\\cos x$، و $u=\\sin x$', 'الأس فردي'),
+         (r'\int\cos^{2}x\,dx', 'تجهيز: نص الزاوية', 'الأس زوجي، ما فيه شي نحجزه')]))
+    U.add('short', '🧭 الطريقة', SC_TREE + method(script(TRIG_SCRIPT, [
+        'من صاحب الأس الفردي: $\\cos^3x=\\cos^2x\\cdot\\cos x$',
+        'الدالة الثانية: حجزت $\\cos x$؟ $u=\\sin x$. حجزت $\\sin x$؟ $u=\\cos x$. والباقي حوّله لـ $u$ بالمتطابقة',
+        '$u=\\sin x$ يعطي $du=\\cos x\\,dx$، و $u=\\cos x$ يعطي $du=-\\sin x\\,dx$',
+        'القطعة المحجوزة ÷ $du$: مع $\\cos x$ الرقم 1، ومع $\\sin x$ الرقم $-1$، يعني 🔴 سالب قدّام التكامل',
+        'فك القوس، وكامل كل حد: زد الأس 1 واقسم عليه',
+        None])) + laws('U-T1', SIN_COS)
         + tricks([('احجز وحدة من صاحب الأس الفردي: $\\cos^7x=\\cos^6x\\cdot\\cos x$.', [('cos(x)**7', 'cos(x)**6*cos(x)')]),
                   ('ومع sin يطلع سالب: $u=\\cos x$ يعني $du=-\\sin x\\,dx$، فـ $\\sin x\\,dx=-du$.', [('diff(cos(x),x)', '-sin(x)')])], 'U-T1'))
     it = ITEMS['N52-E1-1']
     ex = question(it, 'U-T1 example')
     ex += steps(it, [
-        ('tex', r'\cos^{3}x=\cos^{2}x\cdot\cos x', [('cos(x)**3', 'cos(x)**2*cos(x)')],
-         'أس cos فردي. نحجز $\\cos x$ وحدة عشان تصير $du$ لما $u=\\sin x$.'),
-        ('tex', r'\cos^{2}x=1-\sin^{2}x', [('cos(x)**2', '1-sin(x)**2')],
-         'الباقي $\\cos^2x$ نحوّله لـ sin، عشان كل شي يصير بدلالة $\\sin x$.'),
-        ('tex', r'\cos^{3}x=(1-\sin^{2}x)\cos x', [('cos(x)**3', '(1-sin(x)**2)*cos(x)')], 'نحط المتطابقة مكان $\\cos^2x$.'),
+        ('tex', r'\cos^{3}x=\cos^{2}x\cdot\cD{\cos x}', [('cos(x)**3', 'cos(x)**2*cos(x)')],
+         'أس cos فردي. نحجز $\\cos x$ وحدة عشان تصير 🟢 $du$ لما $u=\\sin x$.'),
+        ('tex', r'\cos^{2}x=1-\cU{\sin^{2}x}', [('cos(x)**2', '1-sin(x)**2')],
+         'الباقي $\\cos^2x$ نحوّله لـ sin، عشان كل شي يصير بدلالة 🔵 $\\sin x$.'),
+        ('tex', r'\cos^{3}x=(1-\cU{\sin^{2}x})\,\cD{\cos x}', [('cos(x)**3', '(1-sin(x)**2)*cos(x)')], 'نحط المتطابقة مكان $\\cos^2x$.'),
         ('sub', 'sin(x)', 'cos(x)', 'نسمّي $u=\\sin x$. مشتقته $\\cos x$، وهي القطعة اللي حجزناها.'),
-        ('tex', r'\int\cos^{3}x\,dx=\int(1-u^{2})\,du', [('cos(x)**3', '(1-sin(x)**2)*diff(sin(x),x)')],
-         'نعوّض: $\\sin x$ تصير $u$، و $\\cos x\\,dx$ تصير $du$.'),
+        ('tex', r'\int\cos^{3}x\,dx=\int(1-\cU{u^{2}})\,\cD{du}', [('cos(x)**3', '(1-sin(x)**2)*diff(sin(x),x)')],
+         'نعوّض: 🔵 $\\sin x$ تصير $u$، و 🟢 $\\cos x\\,dx$ تصير $du$.'),
         ('tex', r'=u-\frac{u^{3}}{3}', [('integrate(1-u**2,u)', 'u-u**3/3')], 'نكامل كل حد: نزيد الأس 1 ونقسم عليه.'),
         ('line', 'sin(x)-sin(x)**3/3', 'نرجع $u=\\sin x$.')], 'U-T1 ex')
     ex += final(it, 'U-T1 example')
@@ -91,14 +111,14 @@ def u_odd_alone():
     U.add('trap', '⚠️ الفخ', ul([rich('مع sin: $du=-\\sin x\\,dx$، فيطلع سالب قدّام التكامل كله. لا تنساه.'),
                                 rich('القطعة اللي حجزتها هي $du$. لا تحوّلها بالمتطابقة.')]))
     U.add('paper', '✍️ في ورقة الكويز',
-          md(arith(r'\cos^{3}x=(1-\sin^{2}x)\cos x,\qquad u=\sin x,\quad du=\cos x\,dx',
+          md(arith(r'\cos^{3}x=(1-\sin^{2}x)\cos x,\qquad \cU{u=\sin x},\quad \cD{du=\cos x\,dx}',
                    [('cos(x)**3', '(1-sin(x)**2)*cos(x)'), ('diff(sin(x),x)', 'cos(x)')], 'U-T1 paper'))
           + md(arith(r'\int(1-u^{2})\,du=\sin x-\frac{\sin^{3}x}{3}+C', [('diff(sin(x)-sin(x)**3/3,x)', 'cos(x)**3')], 'U-T1 paper 2')))
     U.gist('قوة فردية لـ sin أو cos وحدها', 'احجز وحدة: $\\cos x$ أو $\\sin x$', 'حوّل الباقي بالمتطابقة، و $u$ = الدالة الثانية')
     U.drill('1', 'G-09', 'G', 'احجز $\\sin x$، و $\\sin x\\,dx=-du$.',
-            first=r'\sin^{3}x=(1-\cos^{2}x)\sin x,\quad u=\cos x,\ du=-\sin x\,dx',
+            first=r'\sin^{3}x=(1-\cos^{2}x)\sin x,\quad u=\cos x,\ du=\cR{-}\sin x\,dx',
             claims=[('sin(x)**3', '(1-cos(x)**2)*sin(x)'), ('diff(cos(x),x)', '-sin(x)')],
-            sol_rows=[('tex', r'\int\sin^{3}x\,dx=-\int(1-u^{2})\,du', [('sin(x)**3', '-(1-cos(x)**2)*diff(cos(x),x)')],
+            sol_rows=[('tex', r'\int\sin^{3}x\,dx=\cR{-}\int(1-u^{2})\,du', [('sin(x)**3', '-(1-cos(x)**2)*diff(cos(x),x)')],
                        'نعوّض: $\\cos x$ تصير $u$، و $\\sin x\\,dx=-du$. فيطلع سالب قدّام التكامل.'),
                       ('tex', r'=-\left(u-\frac{u^{3}}{3}\right)', [('-integrate(1-u**2,u)', '-(u-u**3/3)')], 'نكامل كل حد داخل القوس.'),
                       ('tex', r'=-u+\frac{u^{3}}{3}', [('-(u-u**3/3)', '-u+u**3/3')], 'نوزّع السالب: يقلب إشارة كل حد.'),
@@ -137,29 +157,32 @@ def u_odd_alone():
 def u_sc_odd():
     U = Unit('U-T2', 'sin و cos معًا وأحدهما فردي', '5.2', 'ص68–69، مثال 2', 5)
     U.add('idea', 'الفكرة', p(rich(
-        'نفس فكرة النوع 22: نحجز وحدة من الدالة اللي أسها فردي، ونحوّل باقيها. '
-        'الدالة الثانية ما نلمسها، لأنها تصير قوة لـ $u$ مباشرة. بعدها نفك القوس ونوزّع.')))
-    U.add('sign', 'العلامة', p(rich('sin و cos مضروبتين، وواحد من الأسين على الأقل فردي، مثل $\\int\\sin^4x\\cos^5x\\,dx$.'))
-          + contrast([(r'\int\sin^{4}x\cos^{5}x\,dx', 'احجز $\\cos x$، و $u=\\sin x$', 'أس cos فردي'),
-                      (r'\int\sin^{2}x\cos^{4}x\,dx', 'نص الزاوية (النوع 24)', 'الأسين زوجيين')]))
-    U.prev('مثل النوع 22، بس فيه دالتين مضروبتين. نحجز من صاحب الأس الفردي، والثانية تصير قوة لـ $u$.')
-    U.add('short', '🧭 الطريقة', method([
-        'نشوف أي أس فردي، ونحجز وحدة من دالته.',
-        'نحوّل باقي هذي الدالة بالمتطابقة. والدالة الثانية تبقى زي ما هي.',
-        'نسمّي $u$ الدالة الثانية، ونعوّض $u$ و $du$.',
-        'نفك القوس، ثم نوزّع قوة $u$ على كل حد: الأسس تنجمع.',
-        'نكامل كل حد، ونرجع لـ $x$.']) + laws('U-T2', SIN_COS) + tricks(ODD_TRICK, 'U-T2'))
+        'نحجز وحدة من صاحب الأس الفردي تصير 🟢 $du$، ونحوّل باقيه بالمتطابقة. '
+        'والدالة الثانية ما نلمسها، لأنها هي 🔵 $u$ نفسه بقوته.')))
+    U.add('sign', 'العلامة', when(
+        'sin و cos مضروبتين بنفس الزاوية، وواحد من الأسين على الأقل فردي: $\\int\\sin^4x\\cos^5x\\,dx$.',
+        'الأسين زوجيين ($\\sin^2x\\cos^4x$): تجهيز، نص الزاوية. والزاويتين مختلفتين ($\\sin7x\\cos5x$): تجهيز، الضرب إلى جمع.',
+        [(r'\int\sin^{4}x\cos^{5}x\,dx', 'تعويض: احجز $\\cos x$، و $u=\\sin x$', '$n=5$ فردي'),
+         (r'\int\sin^{3}x\cos^{8}x\,dx', 'تعويض: احجز $\\sin x$، و $u=\\cos x$', '$m=3$ فردي'),
+         (r'\int\sin^{2}x\cos^{4}x\,dx', 'تجهيز: نص الزاوية', 'الأسين زوجيين')]))
+    U.add('short', '🧭 الطريقة', SC_TREE + method(script(TRIG_SCRIPT, [
+        'من صاحب الأس الفردي: $\\sin^4x\\cos^5x=\\sin^4x\\cos^4x\\cdot\\cos x$. والاثنين فرديين؟ احجز من الأصغر',
+        'الدالة الثانية ($\\sin x$ هنا). باقي الدالة المحجوزة حوّله بالمتطابقة، والدالة الثانية تبقى مثل ما هي',
+        '$u=\\sin x$ يعطي $du=\\cos x\\,dx$',
+        'مع $\\cos x$ محجوزة الرقم 1. ومع $\\sin x$ محجوزة يطلع 🔴 $-1$ قدّام التكامل',
+        'فك القوس، ووزّع قوة $u$ على كل حد (الأسس تنجمع)، ثم كامل',
+        None])) + laws('U-T2', SIN_COS) + tricks(ODD_TRICK, 'U-T2'))
     it = ITEMS['1446-S1-SE-Q2.6']
     ex = question(it, 'U-T2 example')
     ex += steps(it, [
-        ('tex', r'\sin^{4}x\cos^{5}x=\sin^{4}x\cos^{4}x\cdot\cos x', [('sin(x)**4*cos(x)**5', 'sin(x)**4*cos(x)**4*cos(x)')],
-         'أس cos فردي (5)، وأس sin زوجي (4). نحجز $\\cos x$ وحدة عشان تصير $du$.'),
-        ('tex', r'\cos^{4}x=\left(\cos^{2}x\right)^{2}=(1-\sin^{2}x)^{2}', [('cos(x)**4', '(1-sin(x)**2)**2')],
-         'الباقي $\\cos^4x$ مربع $\\cos^2x$. نحوّل $\\cos^2x=1-\\sin^2x$ عشان يصير كله sin.'),
+        ('tex', r'\sin^{4}x\cos^{5}x=\sin^{4}x\cos^{4}x\cdot\cD{\cos x}', [('sin(x)**4*cos(x)**5', 'sin(x)**4*cos(x)**4*cos(x)')],
+         'أس cos فردي (5)، وأس sin زوجي (4). نحجز $\\cos x$ وحدة عشان تصير 🟢 $du$.'),
+        ('tex', r'\cos^{4}x=\left(\cos^{2}x\right)^{2}=(1-\cU{\sin^{2}x})^{2}', [('cos(x)**4', '(1-sin(x)**2)**2')],
+         'الباقي $\\cos^4x$ مربع $\\cos^2x$. نحوّل $\\cos^2x=1-\\sin^2x$ عشان يصير كله 🔵 sin.'),
         ('sub', 'sin(x)', 'cos(x)', 'نسمّي $u=\\sin x$، لأن مشتقته $\\cos x$ هي القطعة المحجوزة.'),
-        ('tex', r'\int\sin^{4}x\cos^{5}x\,dx=\int u^{4}(1-u^{2})^{2}\,du',
+        ('tex', r'\int\sin^{4}x\cos^{5}x\,dx=\int \cU{u^{4}}(1-\cU{u^{2}})^{2}\,\cD{du}',
          [('sin(x)**4*cos(x)**5', 'sin(x)**4*(1-sin(x)**2)**2*diff(sin(x),x)')],
-         'نعوّض: $\\sin^4x$ تصير $u^4$، والقوس بدلالة $u$، و $\\cos x\\,dx=du$.'),
+         'نعوّض: $\\sin^4x$ تصير 🔵 $u^4$، والقوس بدلالة $u$، و 🟢 $\\cos x\\,dx=du$.'),
         ('tex', r'(1-u^{2})^{2}=1-2u^{2}+u^{4}', [('(1-u**2)**2', '1-2*u**2+u**4')],
          'نفك القوس: الأول تربيع، ناقص ضعف الضرب، زائد الثاني تربيع.'),
         ('tex', r'u^{4}(1-2u^{2}+u^{4})=u^{4}-2u^{6}+u^{8}', [('u**4*(1-2*u**2+u**4)', 'u**4-2*u**6+u**8')],
@@ -171,10 +194,10 @@ def u_sc_odd():
     U.add('ex', '🧱 مثال محلول خطوة خطوة (اختبار سابق)', ex)
     U.add('ok', '✔ تأكد', p(checked('U-T2 ok', 'أعلى أس في جوابك = مجموع أسين السؤال: $4+5=9$ ✓. '
                                     'وأقل أس = أس الدالة اللي صارت $u$ زائد 1: $4+1=5$ ✓.', [('4+5', '9'), ('4+1', '5')])))
-    U.add('trap', '⚠️ الفخ', ul(['الأسين زوجيين؟ ما فيه شي نحجزه، فهذا نص الزاوية (النوع 24).',
+    U.add('trap', '⚠️ الفخ', ul(['الأسين زوجيين؟ ما فيه شي نحجزه، فهذا تجهيز: نص الزاوية.',
                                 'الاثنين فرديين؟ احجز من الأصغر، عشان القوس اللي تفكه يصير أصغر.']))
     U.add('paper', '✍️ في ورقة الكويز',
-          md(arith(r'\sin^{4}x\cos^{5}x=\sin^{4}x\,(1-\sin^{2}x)^{2}\cos x,\qquad u=\sin x,\quad du=\cos x\,dx',
+          md(arith(r'\sin^{4}x\cos^{5}x=\sin^{4}x\,(1-\sin^{2}x)^{2}\cos x,\qquad \cU{u=\sin x},\quad \cD{du=\cos x\,dx}',
                    [('sin(x)**4*cos(x)**5', 'sin(x)**4*(1-sin(x)**2)**2*cos(x)'), ('diff(sin(x),x)', 'cos(x)')], 'U-T2 paper'))
           + p('ثم سطر فك القوس، وسطر التوزيع، وسطر الجواب.'))
     U.gist('sin و cos مضروبتين، وأحد الأسين فردي', 'احجز وحدة من صاحب الأس الفردي', 'حوّل باقيه، ووزّع قوة $u$، وكامل')
@@ -224,19 +247,19 @@ def u_sc_odd():
 def u_even():
     U = Unit('U-T3', 'أسس زوجية: نص الزاوية', '5.2', 'ص67–70، أمثلة 1(3) و2(4)', 5)
     U.add('idea', 'الفكرة', p(rich(
-        'لما كل الأسس زوجية، ما فيه شي نحجزه. لو حجزنا $\\cos x$ يبقى أس فردي ما يتحوّل. '
-        'فننزّل الأس بمتطابقة نص الزاوية: $\\cos^2x$ يصير $\\frac{1+\\cos2x}{2}$. الأس 2 صار 1، والزاوية تضاعفت. '
-        'و $\\cos2x$ تكامله سهل.')))
-    U.add('sign', 'العلامة', p(rich('كل الأسس زوجية، مثل $\\int\\sin^2x\\,dx$ أو $\\int\\cos^4x\\,dx$ أو $\\int\\sin^2x\\cos^4x\\,dx$.'))
-          + contrast([(r'\int\cos^{2}x\,dx', 'نص الزاوية', 'الأس زوجي'),
-                      (r'\int\cos^{3}x\,dx', 'احجز $\\cos x$ (النوع 22)', 'الأس فردي')]))
-    U.prev('في النوعين 22 و23 كان فيه أس فردي نحجز منه. هنا كل الأسس زوجية، فنستعمل نص الزاوية بدل الحجز.')
-    U.add('short', '🧭 الطريقة', method([
-        'نكتب كل $\\sin^2$ أو $\\cos^2$ بمتطابقة نص الزاوية.',
-        'إذا الأس 4، نكتبه مربع، مثل $\\cos^4x=(\\cos^2x)^2$، ونفك القوس.',
-        'إذا طلع $\\cos^2$ بزاوية جديدة، نستعمل نص الزاوية مرة ثانية.',
-        'sin و cos مضروبتين؟ نجمعهم بـ $\\sin x\\cos x=\\frac{\\sin2x}{2}$.',
-        'نكامل كل حد: الرقم يصير مضروب في $x$، و $\\int\\cos2x\\,dx=\\frac{\\sin2x}{2}$. نقسم على رقم $x$.'])
+        'لما كل الأسس زوجية ما فيه شي نحجزه: لو حجزنا $\\cos x$ يبقى أس فردي ما يتحوّل. '
+        'فننزّل الأس بنص الزاوية: $\\cos^2x=\\frac{1+\\cos2x}{2}$، فالأس 2 يصير 1، و $\\cos2x$ تكامله سطر.')))
+    U.add('sign', 'العلامة', when(
+        'sin أو cos (أو الاثنين بنفس الزاوية) وكل الأسس زوجية: $\\int\\sin^2x\\,dx$ أو $\\int\\cos^4x\\,dx$ أو $\\int\\sin^2x\\cos^4x\\,dx$.',
+        'فيه أس فردي ($\\cos^3x$ أو $\\sin^2x\\cos^5x$): هذا تعويض، احجز من صاحب الأس الفردي.',
+        [(r'\int\cos^{2}x\,dx', 'تجهيز: نص الزاوية، $\\cos^2x=\\frac{1+\\cos2x}{2}$', 'الأس زوجي'),
+         (r'\int\cos^{3}x\,dx', 'تعويض: احجز $\\cos x$، و $u=\\sin x$', 'الأس فردي')]))
+    U.add('short', '🧭 الطريقة', SC_TREE + method(script(PREP_SCRIPT, [
+        'كل أسس sin و cos زوجية (عند دكتورك: الاثنين زوجي ← نص الزاوية)',
+        'كل $\\sin^2$ أو $\\cos^2$ بنص الزاوية. والأس 4 اكتبه مربع ($\\cos^4x=(\\cos^2x)^2$)، وفك القوس، وكرّر نص الزاوية. '
+        'و sin و cos مضروبتين؟ $\\sin x\\cos x=\\frac{\\sin2x}{2}$',
+        checked('U-T3 check', 'عوّض $x=0$: $\\cos^20=1$، و $\\frac{1+\\cos0}{2}=1$ ✓', [('cos(0)**2', '1'), ('(1+cos(0))/2', '1')]),
+        'صار رقم و $\\cos2x$: كل حد من الجدول. الرقم يصير مضروب في $x$، و 🟠 $\\int\\cos2x\\,dx=\\frac{\\sin2x}{2}$: اقسم على رقم $x$']))
         + laws('U-T3', [(r'\sin^{2}x=\frac{1-\cos2x}{2},\qquad \cos^{2}x=\frac{1+\cos2x}{2}',
                          [('sin(x)**2', '(1-cos(2*x))/2'), ('cos(x)**2', '(1+cos(2*x))/2')]),
                         (r'\sin x\cos x=\frac{\sin2x}{2}', [('sin(x)*cos(x)', 'sin(2*x)/2')])])
@@ -245,12 +268,12 @@ def u_even():
     it = ITEMS['N52-X13']
     ex = question(it, 'U-T3 example 1')
     ex += steps(it, [
-        ('tex', r'\sin^{2}x=\frac{1-\cos2x}{2}', [('sin(x)**2', '(1-cos(2*x))/2')],
-         'الأس زوجي، فما فيه شي نحجزه. ننزّل الأس بنص الزاوية، و sin معها ناقص.'),
+        ('tex', r'\sin^{2}x=\frac{1\cR{-}\cos2x}{2}', [('sin(x)**2', '(1-cos(2*x))/2')],
+         'الأس زوجي، فما فيه شي نحجزه. ننزّل الأس بنص الزاوية، و sin معها 🔴 ناقص.'),
         ('tex', r'=\frac12-\frac{\cos2x}{2}', [('(1-cos(2*x))/2', 'Rational(1,2)-cos(2*x)/2')], 'نفصل الكسر حدين عشان نكامل كل واحد لحاله.'),
-        ('tex', r'\int\frac12\,dx=\frac{x}{2},\qquad \int\frac{\cos2x}{2}\,dx=\frac{\sin2x}{4}',
-         [('integrate(Rational(1,2),x)', 'x/2'), ('integrate(cos(2*x)/2,x)', 'sin(2*x)/4')],
-         'نكامل كل حد. تكامل $\\cos2x$ هو $\\frac{\\sin2x}{2}$، لأننا نقسم على 2 رقم $x$.'),
+        ('tex', r'\int\frac12\,dx=\frac{x}{2},\qquad \int\frac{\cos2x}{2}\,dx=\frac{\sin2x}{2\cdot\cA{2}}=\frac{\sin2x}{4}',
+         [('integrate(Rational(1,2),x)', 'x/2'), ('integrate(cos(2*x)/2,x)', 'sin(2*x)/4'), ('sin(2*x)/(2*2)', 'sin(2*x)/4')],
+         'نكامل كل حد. تكامل $\\cos2x$ هو $\\frac{\\sin2x}{2}$، لأننا 🟠 نقسم على 2 رقم $x$.'),
         ('line', 'x/2-sin(2*x)/4', 'نجمع الحدين، والسالب يبقى قدّام الثاني.')], 'U-T3 ex1')
     ex += final(it, 'U-T3 example 1')
     U.add('ex', '🧱 مثال محلول خطوة خطوة (تمرين من مذكرة د. طارق)', ex)
@@ -342,17 +365,22 @@ def u_even():
 def u_sec_even():
     U = Unit('U-T4', 'tan و sec: الـ sec زوجي', '5.2', 'ص70–71، الحالة 1', 5)
     U.add('idea', 'الفكرة', p(rich(
-        'مشتقة $\\tan x$ هي $\\sec^2x$. فإذا أس sec زوجي، نحجز $\\sec^2x$ يصير $du$ لما $u=\\tan x$. '
-        'والباقي من sec أسه زوجي، فنحوّله لـ tan بالمتطابقة $\\sec^2x=1+\\tan^2x$. فيصير كله قوى $u$.')))
-    U.add('sign', 'العلامة', p(rich('tan و sec مضروبتين وأس sec زوجي، مثل $\\int\\tan^3x\\sec^2x\\,dx$. أو sec زوجي وحده، مثل $\\int\\sec^4x\\,dx$.'))
-          + contrast([(r'\int\tan^{3}x\sec^{2}x\,dx', 'احجز $\\sec^2x$، و $u=\\tan x$', 'أس sec زوجي'),
-                      (r'\int\tan^{3}x\sec x\,dx', 'احجز $\\sec x\\tan x$ (النوع 26)', 'أس sec فردي، وأس tan فردي')]))
-    U.prev('نفس فكرة 22 و23 (نحجز ونحوّل)، بس مع tan و sec. والقطعة اللي نحجزها $\\sec^2x$، لأنها مشتقة $\\tan x$.')
-    U.add('short', '🧭 الطريقة', method([
-        'نحجز $\\sec^2x$: هي مشتقة $\\tan x$.',
-        'باقي sec أسه زوجي. نحوّله بـ $\\sec^2x=1+\\tan^2x$.',
-        'نسمّي $u=\\tan x$، و $du=\\sec^2x\\,dx$.',
-        'نفك القوس ونوزّع، ثم نكامل كل حد ونرجع لـ $x$.'])
+        'مشتقة $\\tan x$ هي $\\sec^2x$. فإذا أس sec زوجي نحجز $\\sec^2x$ تصير 🟢 $du$، '
+        'والباقي نحوّله لـ 🔵 tan بـ $\\sec^2x=1+\\tan^2x$.')))
+    U.add('sign', 'العلامة', when(
+        'tan و sec مضروبتين وأس sec زوجي: $\\int\\tan^3x\\sec^2x\\,dx$. أو sec بأس زوجي لحاله: $\\int\\sec^4x\\,dx$.',
+        'أس tan فردي وأس sec فردي ($\\tan^3x\\sec x$): تعويض بس احجز $\\sec x\\tan x$ و $u=\\sec x$. '
+        'وأس tan زوجي وأس sec فردي (مثل $\\sec^3x$ لحاله): تجزئة.',
+        [(r'\int\tan^{3}x\sec^{2}x\,dx', 'تعويض: احجز $\\sec^2x$، و $u=\\tan x$', '$n=2$ زوجي'),
+         (r'\int\tan^{3}x\sec x\,dx', 'تعويض: احجز $\\sec x\\tan x$، و $u=\\sec x$', '$m=3$ فردي، و $n=1$ فردي'),
+         (r'\int\sec^{3}x\,dx', 'تجزئة: $u=\\sec x$، و $dv=\\sec^2x\\,dx$', '$m=0$ زوجي، و $n=3$ فردي')]))
+    U.add('short', '🧭 الطريقة', TS_TREE + method(script(TRIG_SCRIPT, [
+        'أس sec زوجي: احجز $\\sec^2x$ ($\\sec^4x=\\sec^2x\\cdot\\sec^2x$)',
+        '$u=\\tan x$. وباقي sec حوّله بـ $\\sec^2x=1+\\tan^2x$',
+        '$du=\\sec^2x\\,dx$',
+        'القطعة المحجوزة هي $du$ بالضبط، فالرقم 1',
+        'فك القوس ووزّع، ثم كامل كل حد',
+        None]))
         + laws('U-T4', [(r'\sec^{2}x=1+\tan^{2}x,\qquad \frac{d}{dx}\tan x=\sec^{2}x',
                          [('sec(x)**2', '1+tan(x)**2'), ('diff(tan(x),x)', 'sec(x)**2')])])
         + tricks(TAN_SEC_TRICK, 'U-T4'))
@@ -360,8 +388,8 @@ def u_sec_even():
     ex = question(it, 'U-T4 example')
     ex += steps(it, [
         ('sub', 'tan(x)', 'sec(x)**2', 'أس sec زوجي (2). نحجز $\\sec^2x$ لأنها مشتقة $\\tan x$، فنسمّي $u=\\tan x$.'),
-        ('tex', r'\int\tan^{3}x\sec^{2}x\,dx=\int u^{3}\,du', [('tan(x)**3*sec(x)**2', 'tan(x)**3*diff(tan(x),x)')],
-         'ما بقي شي من sec نحوّله. $\\tan^3x$ تصير $u^3$، و $\\sec^2x\\,dx=du$.'),
+        ('tex', r'\int\cU{\tan^{3}x}\,\cD{\sec^{2}x\,dx}=\int\cU{u^{3}}\,\cD{du}', [('tan(x)**3*sec(x)**2', 'tan(x)**3*diff(tan(x),x)')],
+         'ما بقي شي من sec نحوّله. 🔵 $\\tan^3x$ تصير $u^3$، و 🟢 $\\sec^2x\\,dx=du$.'),
         ('tex', r'=\frac{u^{4}}{4}', [('integrate(u**3,u)', 'u**4/4')], 'نكامل: نزيد الأس 1 ونقسم عليه.'),
         ('line', 'tan(x)**4/4', 'نرجع $u=\\tan x$.')], 'U-T4 ex')
     ex += final(it, 'U-T4 example')
@@ -374,7 +402,7 @@ def u_sec_even():
                                 checked('U-T4 trap', 'بعد ما تحجز $\\sec^2x$، انقص 2 من أس sec: $\\sec^8x=\\sec^6x\\cdot\\sec^2x$.',
                                         [('sec(x)**8', 'sec(x)**6*sec(x)**2')])]))
     U.add('paper', '✍️ في ورقة الكويز',
-          md(arith(r'u=\tan x,\quad du=\sec^{2}x\,dx,\qquad \int\tan^{3}x\sec^{2}x\,dx=\int u^{3}\,du=\frac{\tan^{4}x}{4}+C',
+          md(arith(r'\cU{u=\tan x},\quad \cD{du=\sec^{2}x\,dx},\qquad \int\tan^{3}x\sec^{2}x\,dx=\int u^{3}\,du=\frac{\tan^{4}x}{4}+C',
                    [('diff(tan(x),x)', 'sec(x)**2'), ('diff(tan(x)**4/4,x)', 'tan(x)**3*sec(x)**2')], 'U-T4 paper')))
     U.gist('tan و sec مضروبتين، وأس sec زوجي', 'احجز $\\sec^2x$، و $u=\\tan x$', 'حوّل باقي sec بـ $1+\\tan^2x$، ثم وزّع وكامل')
     U.drill('1', 'G-91', 'G', '$\\sec^2x$ موجودة، فـ $u=\\tan x$.',
@@ -423,31 +451,35 @@ def u_sec_even():
 def u_tan_odd():
     U = Unit('U-T5', 'tan و sec: الـ tan فردي', '5.2', 'ص71–72، الحالة 2', 6)
     U.add('idea', 'الفكرة', p(rich(
-        'مشتقة $\\sec x$ هي $\\sec x\\tan x$. فإذا أس tan فردي ومعه sec، نحجز $\\sec x\\tan x$ يصير $du$ لما $u=\\sec x$. '
-        'والباقي من tan أسه زوجي، فنحوّله لـ sec بالمتطابقة $\\tan^2x=\\sec^2x-1$.')))
-    U.add('sign', 'العلامة', p(rich('tan و sec مضروبتين، وأس tan فردي، ومعه sec واحد على الأقل. مثل $\\int\\sec^3x\\tan^3x\\,dx$.'))
-          + contrast([(r'\int\tan^{3}x\sec^{3}x\,dx', 'احجز $\\sec x\\tan x$، و $u=\\sec x$', 'أس tan فردي'),
-                      (r'\int\tan^{4}x\sec^{3}x\,dx', 'حوّل كل tan لـ sec، ثم النوع 27', 'أس tan زوجي وأس sec فردي')]))
-    U.prev('مثل النوع 25 (tan و sec)، بس هنا أس tan فردي. فنحجز $\\sec x\\tan x$ بدل $\\sec^2x$، و $u=\\sec x$.')
-    U.add('short', '🧭 الطريقة', method([
-        'نحجز $\\sec x\\tan x$: هي مشتقة $\\sec x$.',
-        'باقي tan أسه زوجي. نحوّله بـ $\\tan^2x=\\sec^2x-1$.',
-        'نسمّي $u=\\sec x$، و $du=\\sec x\\tan x\\,dx$.',
-        'نفك القوس ونوزّع، ثم نكامل كل حد ونرجع لـ $x$.'])
+        'مشتقة $\\sec x$ هي $\\sec x\\tan x$. فإذا أس tan فردي ومعه sec، نحجز $\\sec x\\tan x$ تصير 🟢 $du$، '
+        'وباقي tan أسه زوجي نحوّله لـ 🔵 sec بـ $\\tan^2x=\\sec^2x-1$.')))
+    U.add('sign', 'العلامة', when(
+        'tan و sec مضروبتين، وأس tan فردي، ومعه sec واحد على الأقل: $\\int\\sec^3x\\tan^3x\\,dx$.',
+        'أس tan زوجي وأس sec فردي ($\\tan^4x\\sec^3x$): تجزئة (حوّل كل tan لـ sec، ثم سلسلة sec). '
+        'وأس sec زوجي: تعويض بس احجز $\\sec^2x$ و $u=\\tan x$.',
+        [(r'\int\tan^{3}x\sec^{3}x\,dx', 'تعويض: احجز $\\sec x\\tan x$، و $u=\\sec x$', '$m=3$ فردي'),
+         (r'\int\tan^{4}x\sec^{3}x\,dx', 'تجزئة: حوّل كل tan لـ sec، ثم سلسلة sec', '$m$ زوجي و $n$ فردي')]))
+    U.add('short', '🧭 الطريقة', TS_TREE + method(script(TRIG_SCRIPT, [
+        'أس tan فردي: احجز $\\sec x\\tan x$',
+        '$u=\\sec x$. وباقي tan حوّله بـ $\\tan^2x=\\sec^2x-1$',
+        '$du=\\sec x\\tan x\\,dx$',
+        'القطعة المحجوزة هي $du$ بالضبط، فالرقم 1',
+        'فك القوس ووزّع، ثم كامل كل حد',
+        None]))
         + laws('U-T5', [(r'\tan^{2}x=\sec^{2}x-1,\qquad \frac{d}{dx}\sec x=\sec x\tan x',
                          [('tan(x)**2', 'sec(x)**2-1'), ('diff(sec(x),x)', 'sec(x)*tan(x)')])])
         + tricks(TAN_SEC_TRICK, 'U-T5'))
     it = ITEMS['1447-S2-SE-Q3.3']
     ex = question(it, 'U-T5 example')
     ex += steps(it, [
-        ('tex', r'\sec^{3}x\tan^{3}x=\sec^{2}x\tan^{2}x\cdot\sec x\tan x', [('sec(x)**3*tan(x)**3', 'sec(x)**2*tan(x)**2*sec(x)*tan(x)')],
-         'أس tan فردي (3) ومعه sec. نحجز $\\sec x\\tan x$ لأنها مشتقة $\\sec x$.'),
-        ('tex', r'\tan^{2}x=\sec^{2}x-1', [('tan(x)**2', 'sec(x)**2-1')],
-         'الباقي $\\tan^2x$ نحوّله لـ sec، عشان كل شي يصير بدلالة $\\sec x$.'),
+        ('tex', r'\sec^{3}x\tan^{3}x=\sec^{2}x\tan^{2}x\cdot\cD{\sec x\tan x}', [('sec(x)**3*tan(x)**3', 'sec(x)**2*tan(x)**2*sec(x)*tan(x)')],
+         'أس tan فردي (3) ومعه sec. نحجز $\\sec x\\tan x$ لأنها مشتقة $\\sec x$، فتصير 🟢 $du$.'),
+        ('tex', r'\tan^{2}x=\cU{\sec^{2}x}-1', [('tan(x)**2', 'sec(x)**2-1')],
+         'الباقي $\\tan^2x$ نحوّله لـ sec، عشان كل شي يصير بدلالة 🔵 $\\sec x$.'),
         ('sub', 'sec(x)', 'sec(x)*tan(x)', 'نسمّي $u=\\sec x$. مشتقته هي القطعة اللي حجزناها.'),
-        ('tex', r'\int\sec^{3}x\tan^{3}x\,dx=\int u^{2}(u^{2}-1)\,du',
+        ('tex', r'\int\sec^{3}x\tan^{3}x\,dx=\int\cU{u^{2}}(\cU{u^{2}}-1)\,\cD{du}',
          [('sec(x)**3*tan(x)**3', 'sec(x)**2*(sec(x)**2-1)*diff(sec(x),x)')],
-         'نعوّض: $\\sec^2x$ تصير $u^2$، و $\\tan^2x$ تصير $u^2-1$.'),
+         'نعوّض: $\\sec^2x$ تصير 🔵 $u^2$، و $\\tan^2x$ تصير $u^2-1$، و 🟢 $\\sec x\\tan x\\,dx=du$.'),
         ('tex', r'u^{2}(u^{2}-1)=u^{4}-u^{2}', [('u**2*(u**2-1)', 'u**4-u**2')], 'نوزّع $u^2$ على القوس: الأسس تنجمع.'),
         ('tex', r'\int\left(u^{4}-u^{2}\right)du=\frac{u^{5}}{5}-\frac{u^{3}}{3}', [('integrate(u**4-u**2,u)', 'u**5/5-u**3/3')],
          'نكامل كل حد.'),
@@ -458,7 +490,7 @@ def u_tan_odd():
     U.add('trap', '⚠️ الفخ', ul([rich('أس tan زوجي وأس sec فردي؟ ما ينفع الحجز. حوّل كل $\\tan^2x$ لـ $\\sec^2x-1$، ثم سلسلة sec (النوع 27).'),
                                 rich('إذا بقي $\\tan x$ في التكامل بعد ما كتبت $u=\\sec x$، فالتحويل ما خلص.')]))
     U.add('paper', '✍️ في ورقة الكويز',
-          md(arith(r'\sec^{3}x\tan^{3}x=\sec^{2}x\,(\sec^{2}x-1)\sec x\tan x,\qquad u=\sec x,\quad du=\sec x\tan x\,dx',
+          md(arith(r'\sec^{3}x\tan^{3}x=\sec^{2}x\,(\sec^{2}x-1)\sec x\tan x,\qquad \cU{u=\sec x},\quad \cD{du=\sec x\tan x\,dx}',
                    [('sec(x)**3*tan(x)**3', 'sec(x)**2*(sec(x)**2-1)*sec(x)*tan(x)'), ('diff(sec(x),x)', 'sec(x)*tan(x)')], 'U-T5 paper'))
           + p('ثم سطر التوزيع، وسطر الجواب.'))
     U.gist('tan و sec مضروبتين، وأس tan فردي', 'احجز $\\sec x\\tan x$، و $u=\\sec x$', 'حوّل باقي tan بـ $\\sec^2x-1$، ثم وزّع وكامل')
@@ -504,18 +536,22 @@ def u_tan_odd():
 def u_reduce():
     U = Unit('U-T6', 'tan وحدها و sec فردي وحده (سلسلة التخفيض)', '5.2', 'ص70–73، الحالتان 3 و4', 6)
     U.add('idea', 'الفكرة', p(rich(
-        'ما فيه دالة ثانية نحجز منها. فنكسر القوة بـ $\\tan^2x=\\sec^2x-1$. '
-        'الحد اللي فيه $\\sec^2x$ يصير تعويض $u=\\tan x$، والحد الثاني tan بأس أقل باثنين. نكرّر لين يخلص الأس. '
-        'ومع sec الفردي نستعمل التجزئة، فيرجع التكامل نفسه ونحله كمعادلة.')))
-    U.add('sign', 'العلامة', p(rich('قوة tan وحدها، مثل $\\int\\tan^4x\\,dx$. أو قوة فردية لـ sec وحدها، مثل $\\int\\sec^3x\\,dx$.'))
-          + contrast([(r'\int\tan^{4}x\,dx', 'نكسر $\\tan^2x=\\sec^2x-1$', 'tan وحدها'),
-                      (r'\int\sec^{4}x\,dx', 'احجز $\\sec^2x$ (النوع 25)', 'أس sec زوجي')]))
-    U.prev('في الأنواع 22 إلى 26 كان فيه دالتين، فنحجز من وحدة. هنا دالة وحدة بس، فنكسر القوة بدل الحجز.')
-    U.add('short', '🧭 الطريقة', method([
-        'tan وحدها: نكتب $\\tan^2x=\\sec^2x-1$ مكان مربع واحد من tan، ونوزّع.',
-        'الحد اللي فيه $\\sec^2x$ تعويض: $u=\\tan x$.',
-        'الحد الثاني tan بأس أقل باثنين. نكرّر نفس الشي لين يصير الأس 1 أو يختفي.',
-        'sec فردي وحده: تجزئة مع $dv=\\sec^2x\\,dx$. يرجع التكامل نفسه، فنجمعه في طرف ونقسم.'])
+        'ما فيه دالة ثانية نحجز منها، فنكسر $\\tan^2x=\\sec^2x-1$: يطلع حد فيه 🟢 $\\sec^2x$ (تعويض) وحد tan بأس أقل باثنين. '
+        'و sec الفردي لحاله تجزئة، يرجع فيها التكامل نفسه فنحله كمعادلة.')))
+    U.add('sign', 'العلامة', when(
+        'tan لحالها بأي أس: $\\int\\tan^4x\\,dx$. أو sec لحالها بأس فردي: $\\int\\sec^3x\\,dx$.',
+        'sec لحالها بأس زوجي ($\\sec^4x$): تعويض، احجز $\\sec^2x$. و tan ومعها sec ($\\tan^3x\\sec^2x$): تعويض، احجز.',
+        [(r'\int\tan^{4}x\,dx', 'تجهيز: اكسر $\\tan^2x=\\sec^2x-1$', 'tan لحالها'),
+         (r'\int\sec^{3}x\,dx', 'تجزئة: $u=\\sec x$، و $dv=\\sec^2x\\,dx$', '$m=0$ زوجي، و $n=3$ فردي'),
+         (r'\int\sec^{4}x\,dx', 'تعويض: احجز $\\sec^2x$، و $u=\\tan x$', '$n=4$ زوجي')]))
+    U.add('short', '🧭 الطريقة', TS_TREE + method(script(PREP_SCRIPT, [
+        'tan لحالها: $n=0$ زوجي، بس ما فيه $\\sec^2x$ تحجزه',
+        'اكسر مربع واحد: $\\tan^4x=\\tan^2x\\,(\\sec^2x-1)$، ووزّع',
+        checked('U-T6 check', 'عوّض $x=\\frac\\pi4$: $\\tan^4\\frac\\pi4=1$، و $1\\cdot(2-1)=1$ ✓',
+                [('tan(pi/4)**4', '1'), ('tan(pi/4)**2*(sec(pi/4)**2-1)', '1')]),
+        'الحد اللي فيه $\\sec^2x$ تعويض $u=\\tan x$. والحد الثاني tan بأس أقل باثنين: اكسره مرة ثانية لين يصير الأس 1 أو يختفي'],
+        ['<b>و sec فردي لحاله</b> (عند دكتورك: $m$ زوجي و $n$ فردي ← تجزئة): $u=\\sec x$، و $dv=\\sec^2x\\,dx$. '
+         'يرجع التكامل نفسه، فاجمعه في طرف واحد واقسم.']))
         + laws('U-T6', [(r'\tan^{2}x=\sec^{2}x-1', [('tan(x)**2', 'sec(x)**2-1')]),
                         (r'\int\tan x\,dx=\ln|\sec x|,\qquad \int\sec x\,dx=\ln|\sec x+\tan x|',
                          [('diff(log(sec(x)),x)', 'tan(x)'), ('diff(log(sec(x)+tan(x)),x)', 'sec(x)')])]))
@@ -524,8 +560,8 @@ def u_reduce():
     ex += steps(it, [
         ('tex', r'\tan^{4}x=\tan^{2}x\,(\sec^{2}x-1)', [('tan(x)**4', 'tan(x)**2*(sec(x)**2-1)')],
          'tan وحدها، فما فيه شي نحجزه. نكسر مربع واحد من tan بـ $\\tan^2x=\\sec^2x-1$.'),
-        ('tex', r'=\tan^{2}x\sec^{2}x-\tan^{2}x', [('tan(x)**2*(sec(x)**2-1)', 'tan(x)**2*sec(x)**2-tan(x)**2')],
-         'نوزّع $\\tan^2x$ على القوس.'),
+        ('tex', r'=\cU{\tan^{2}x}\,\cD{\sec^{2}x}\cR{-}\tan^{2}x', [('tan(x)**2*(sec(x)**2-1)', 'tan(x)**2*sec(x)**2-tan(x)**2')],
+         'نوزّع $\\tan^2x$ على القوس. الحد الأول فيه 🔵 tan ومشتقته 🟢 $\\sec^2x$. وانتبه للحد الثاني: قدّامه 🔴 سالب.'),
         ('sub', 'tan(x)', 'sec(x)**2', 'الحد الأول فيه $\\sec^2x$، يعني تعويض: نسمّي $u=\\tan x$، و $du=\\sec^2x\\,dx$. فيصير $\\int u^2\\,du$.'),
         ('tex', r'\int u^{2}\,du=\frac{u^{3}}{3}=\frac{\tan^{3}x}{3}', [('integrate(u**2,u)', 'u**3/3')],
          'نكامل: نزيد الأس 1 ونقسم عليه، ثم نرجع $u=\\tan x$.'),
@@ -533,7 +569,7 @@ def u_reduce():
         ('tex', r'\int\tan^{2}x\,dx=\int\left(\sec^{2}x-1\right)dx=\tan x-x',
          [('tan(x)**2', 'sec(x)**2-1'), ('diff(tan(x)-x,x)', 'sec(x)**2-1')],
          'نفس المتطابقة. تكامل $\\sec^2x$ هو $\\tan x$، وتكامل 1 هو $x$.'),
-        ('line', 'tan(x)**3/3-(tan(x)-x)', 'نحط الناتج بين قوسين، لأن قدّامه سالب.'),
+        ('line', 'tan(x)**3/3-(tan(x)-x)', 'نحط الناتج بين قوسين، لأن قدّامه 🔴 سالب.'),
         ('line', 'tan(x)**3/3-tan(x)+x', 'نوزّع السالب: يقلب إشارة الحدين.')], 'U-T6 ex1')
     ex += final(it, 'U-T6 example 1')
     U.add('ex', '🧱 مثال محلول خطوة خطوة (من مذكرة د. طارق)', ex)
@@ -653,17 +689,20 @@ def u_reduce():
 def u_cotcsc():
     U = Unit('U-T7', 'cot و csc', '5.2', 'ص73، الحالات المشابهة', 6)
     U.add('idea', 'الفكرة', p(rich(
-        'نفس tan و sec بالضبط. csc زوجي: نحجز $\\csc^2x$ و $u=\\cot x$. cot فردي: نحجز $\\csc x\\cot x$ و $u=\\csc x$. '
-        'الفرق الوحيد: مشتقة cot ومشتقة csc فيهم سالب، فيطلع سالب قدّام التكامل.')))
-    U.add('sign', 'العلامة', p(rich('cot و csc مضروبتين، مثل $\\int\\cot^4x\\csc^4x\\,dx$.'))
-          + contrast([(r'\int\cot^{4}x\csc^{4}x\,dx', '$u=\\cot x$', 'أس csc زوجي'),
-                      (r'\int\cot^{5}x\csc^{3}x\,dx', '$u=\\csc x$', 'أس cot فردي')]))
-    U.prev('نفس النوعين 25 و26، بس cot بدل tan و csc بدل sec. وكل مشتقة فيها سالب.')
-    U.add('short', '🧭 الطريقة', method([
-        'csc زوجي: نحجز $\\csc^2x$، و $u=\\cot x$، و $\\csc^2x\\,dx=-du$.',
-        'cot فردي ومعه csc: نحجز $\\csc x\\cot x$، و $u=\\csc x$، و $\\csc x\\cot x\\,dx=-du$.',
-        'نحوّل الباقي بالمتطابقة.',
-        'نطلّع السالب قدّام التكامل، ونفك ونوزّع، ثم نكامل ونرجع لـ $x$.'])
+        'نفس tan و sec بالضبط، لأن مشتقة cot هي $-\\csc^2x$ ومشتقة csc هي $-\\csc x\\cot x$. '
+        'الفرق الوحيد هذا 🔴 السالب، فيطلع سالب قدّام التكامل كله.')))
+    U.add('sign', 'العلامة', when(
+        'cot و csc مضروبتين: $\\int\\cot^4x\\csc^4x\\,dx$ أو $\\int\\cot^5x\\csc^3x\\,dx$.',
+        'tan و sec: نفس الطريقة بدون السالب.',
+        [(r'\int\cot^{4}x\csc^{4}x\,dx', 'تعويض: احجز $\\csc^2x$، و $u=\\cot x$', 'أس csc زوجي'),
+         (r'\int\cot^{5}x\csc^{3}x\,dx', 'تعويض: احجز $\\csc x\\cot x$، و $u=\\csc x$', 'أس cot فردي')]))
+    U.add('short', '🧭 الطريقة', method(script(TRIG_SCRIPT, [
+        'csc زوجي: احجز $\\csc^2x$. cot فردي ومعه csc: احجز $\\csc x\\cot x$',
+        '$u=\\cot x$ أو $u=\\csc x$. والباقي حوّله بالمتطابقة',
+        '$du=-\\csc^2x\\,dx$ أو $du=-\\csc x\\cot x\\,dx$',
+        'القطعة المحجوزة ÷ $du$ = $-1$، يعني 🔴 سالب قدّام التكامل كله',
+        'فك القوس ووزّع، ثم كامل كل حد',
+        None]))
         + laws('U-T7', [(r'\csc^{2}x=1+\cot^{2}x,\qquad \cot^{2}x=\csc^{2}x-1', [('csc(x)**2', '1+cot(x)**2'), ('cot(x)**2', 'csc(x)**2-1')]),
                         (r'\frac{d}{dx}\cot x=-\csc^{2}x,\qquad \frac{d}{dx}\csc x=-\csc x\cot x',
                          [('diff(cot(x),x)', '-csc(x)**2'), ('diff(csc(x),x)', '-csc(x)*cot(x)')])])
@@ -672,13 +711,13 @@ def u_cotcsc():
     it = ITEMS['1446-S2-SE-Q2.4']
     ex = question(it, 'U-T7 example')
     ex += steps(it, [
-        ('tex', r'\cot^{4}x\csc^{4}x=\cot^{4}x\csc^{2}x\cdot\csc^{2}x', [('cot(x)**4*csc(x)**4', 'cot(x)**4*csc(x)**2*csc(x)**2')],
-         'أس csc زوجي (4). نحجز $\\csc^2x$ لأنها مشتقة $\\cot x$ بسالب.'),
-        ('tex', r'\csc^{2}x=1+\cot^{2}x', [('csc(x)**2', '1+cot(x)**2')],
-         'نحوّل الباقي $\\csc^2x$ لـ cot، عشان كل شي يصير بدلالة $\\cot x$.'),
+        ('tex', r'\cot^{4}x\csc^{4}x=\cot^{4}x\csc^{2}x\cdot\cD{\csc^{2}x}', [('cot(x)**4*csc(x)**4', 'cot(x)**4*csc(x)**2*csc(x)**2')],
+         'أس csc زوجي (4). نحجز $\\csc^2x$ لأنها مشتقة $\\cot x$ بسالب، فتصير 🟢 $du$.'),
+        ('tex', r'\csc^{2}x=1+\cU{\cot^{2}x}', [('csc(x)**2', '1+cot(x)**2')],
+         'نحوّل الباقي $\\csc^2x$ لـ cot، عشان كل شي يصير بدلالة 🔵 $\\cot x$.'),
         ('sub', 'cot(x)', '-csc(x)**2', 'نسمّي $u=\\cot x$. مشتقته $-\\csc^2x$، فـ $\\csc^2x\\,dx=-du$.'),
-        ('tex', r'\int\cot^{4}x\csc^{4}x\,dx=-\int u^{4}(1+u^{2})\,du',
-         [('cot(x)**4*csc(x)**4', '-cot(x)**4*(1+cot(x)**2)*diff(cot(x),x)')], 'نعوّض. السالب اللي في $du$ يطلع قدّام التكامل.'),
+        ('tex', r'\int\cot^{4}x\csc^{4}x\,dx=\cR{-}\int\cU{u^{4}}(1+\cU{u^{2}})\,\cD{du}',
+         [('cot(x)**4*csc(x)**4', '-cot(x)**4*(1+cot(x)**2)*diff(cot(x),x)')], 'نعوّض. 🔴 السالب اللي في $du$ يطلع قدّام التكامل.'),
         ('tex', r'u^{4}(1+u^{2})=u^{4}+u^{6}', [('u**4*(1+u**2)', 'u**4+u**6')], 'نوزّع $u^4$: الأسس تنجمع.'),
         ('tex', r'-\int\left(u^{4}+u^{6}\right)du=-\left(\frac{u^{5}}{5}+\frac{u^{7}}{7}\right)',
          [('-integrate(u**4+u**6,u)', '-(u**5/5+u**7/7)')], 'نكامل كل حد.'),
@@ -690,7 +729,7 @@ def u_cotcsc():
     U.add('trap', '⚠️ الفخ', ul([rich('$\\frac{d}{dx}\\cot x=-\\csc^2x$ و $\\frac{d}{dx}\\csc x=-\\csc x\\cot x$: السالب في الاثنين.'),
                                 'السالب اللي قدّام التكامل يدخل على كل الحدود، مو على أول حد بس.']))
     U.add('paper', '✍️ في ورقة الكويز',
-          md(arith(r'\cot^{4}x\csc^{4}x=\cot^{4}x\,(1+\cot^{2}x)\csc^{2}x,\qquad u=\cot x,\quad \csc^{2}x\,dx=-du',
+          md(arith(r'\cot^{4}x\csc^{4}x=\cot^{4}x\,(1+\cot^{2}x)\csc^{2}x,\qquad \cU{u=\cot x},\quad \cD{\csc^{2}x\,dx=\cR{-}du}',
                    [('cot(x)**4*csc(x)**4', 'cot(x)**4*(1+cot(x)**2)*csc(x)**2'), ('diff(cot(x),x)', '-csc(x)**2')], 'U-T7 paper'))
           + p('ثم سطر التوزيع، وسطر الجواب.'))
     U.gist('cot و csc مضروبتين', 'csc زوجي: $u=\\cot x$. cot فردي: $u=\\csc x$', 'مثل tan و sec، والسالب قدّام التكامل كله')
@@ -741,12 +780,13 @@ def u_cotcsc():
 def u_prod():
     U = Unit('U-T8', 'ضرب sin و cos بزاويتين مختلفتين', '5.2', 'ص74–75، مثال 5', 6)
     U.add('idea', 'الفكرة', p(rich(
-        'دالتين بزاويتين مختلفتين ما ينفع فيهم الحجز، لأن مشتقة وحدة مو موجودة جنب الثانية. '
-        'لكن متطابقات الضرب تحوّل الضرب إلى جمع. والجمع نكامله حد حد.')))
-    U.add('sign', 'العلامة', p(rich('sin أو cos مضروبة في sin أو cos، والزاويتين مختلفتين، مثل $\\int\\sin7x\\cos5x\\,dx$.'))
-          + contrast([(r'\int\sin7x\cos5x\,dx', 'متطابقة الضرب', 'زاويتين مختلفتين'),
-                      (r'\int\sin^{4}x\cos^{5}x\,dx', 'احجز $\\cos x$ (النوع 23)', 'نفس الزاوية $x$، وأس فردي')]))
-    U.prev('في الأنواع 22 إلى 28 كانت كل الدوال بنفس الزاوية $x$. هنا الزاويتين مختلفتين، فنحوّل الضرب لجمع.')
+        'دالتين بزاويتين مختلفتين ما فيهم دالة ومشتقتها، فالحجز ما ينفع. '
+        'لكن متطابقة الضرب تحوّل الضرب لجمع، والجمع نكامله حد حد.')))
+    U.add('sign', 'العلامة', when(
+        'sin أو cos مضروبة في sin أو cos، والزاويتين مختلفتين: $\\int\\sin7x\\cos5x\\,dx$.',
+        'نفس الزاوية ($\\sin^4x\\cos^5x$): تعويض بالحجز، أو نص الزاوية إذا الأسين زوجيين.',
+        [(r'\int\sin7x\cos5x\,dx', 'تجهيز: الضرب إلى جمع', 'زاويتين مختلفتين'),
+         (r'\int\sin^{4}x\cos^{5}x\,dx', 'تعويض: احجز $\\cos x$، و $u=\\sin x$', 'نفس الزاوية $x$، وأس فردي')]))
     U.add('short', '📐 القانون',
           p(rich('نسمّي الزاوية الأولى $A$ والثانية $B$. مثلًا في $\\sin7x\\cos5x$: $A=7x$ و $B=5x$.'))
           + laws('U-T8', [(r'\sin A\cos B=\frac12\left[\sin(A-B)+\sin(A+B)\right]', [('sin(a)*cos(b)', '(sin(a-b)+sin(a+b))/2')]),
@@ -754,9 +794,13 @@ def u_prod():
                           (r'\cos A\cos B=\frac12\left[\cos(A-B)+\cos(A+B)\right]', [('cos(a)*cos(b)', '(cos(a-b)+cos(a+b))/2')])])
           + p(rich('وإذا طلع الفرق سالب:'))
           + laws('U-T8 sign', [(r'\sin(-2x)=-\sin2x,\qquad \cos(-2x)=\cos2x', [('sin(-2*x)', '-sin(2*x)'), ('cos(-2*x)', 'cos(2*x)')])])
-          + method(['نحدد الزاويتين، ونحسب الفرق والمجموع.',
-                    'نختار المتطابقة حسب الدالتين: sin·cos أو sin·sin أو cos·cos.',
-                    'نكامل كل حد ونقسم على رقم $x$، ثم نضرب في $\\frac12$.'])
+          + method(script(PREP_SCRIPT, [
+              'زاويتين مختلفتين. سمّ الأولى $A$ والثانية $B$، واحسب الفرق والمجموع',
+              'اختر المتطابقة حسب الدالتين: sin·cos أو sin·sin أو cos·cos',
+              checked('U-T8 check', 'عوّض $x=\\frac\\pi4$ في المثال: $\\sin\\frac{7\\pi}{4}\\cos\\frac{5\\pi}{4}=\\frac12$، '
+                      'و $\\frac12\\left[\\sin\\frac\\pi2+\\sin3\\pi\\right]=\\frac12$ ✓',
+                      [('sin(7*pi/4)*cos(5*pi/4)', 'Rational(1,2)'), ('(sin(pi/2)+sin(3*pi))/2', 'Rational(1,2)')]),
+              'صار جمع: كل حد من الجدول، و 🟠 اقسم على رقم $x$، ثم اضرب في $\\frac12$']))
           + tricks([('الضرب يصير جمع بزاويتين: الفرق والمجموع ($7x$ و $5x$ تعطي $2x$ و $12x$). و sin·sin الوحيدة اللي فيها ناقص.',
                      [('7-5', '2'), ('7+5', '12'), ('sin(7*x)*cos(5*x)', '(sin(2*x)+sin(12*x))/2')])], 'U-T8'))
     it = ITEMS['N52-E5-1']
@@ -766,9 +810,9 @@ def u_prod():
          'الزاويتين مختلفتين، فنستعمل متطابقة الضرب. نحسب الفرق والمجموع أول.'),
         ('tex', r'\sin7x\cos5x=\frac12\left[\sin2x+\sin12x\right]', [('sin(7*x)*cos(5*x)', '(sin(2*x)+sin(12*x))/2')],
          'متطابقة sin·cos: $\\frac12$ × (sin الفرق + sin المجموع).'),
-        ('tex', r'\int\sin2x\,dx=-\frac{\cos2x}{2},\qquad \int\sin12x\,dx=-\frac{\cos12x}{12}',
+        ('tex', r'\int\sin2x\,dx=\cR{-}\frac{\cos2x}{\cA{2}},\qquad \int\sin12x\,dx=\cR{-}\frac{\cos12x}{\cA{12}}',
          [('diff(-cos(2*x)/2,x)', 'sin(2*x)'), ('diff(-cos(12*x)/12,x)', 'sin(12*x)')],
-         'نكامل كل حد لحاله: تكامل sin هو سالب cos، ونقسم على رقم $x$.'),
+         'نكامل كل حد لحاله: تكامل sin هو 🔴 سالب cos، و 🟠 نقسم على رقم $x$.'),
         ('tex', r'=\frac12\left(-\frac{\cos2x}{2}-\frac{\cos12x}{12}\right)',
          [('diff((-cos(2*x)/2-cos(12*x)/12)/2,x)', 'sin(7*x)*cos(5*x)')], 'نضرب في $\\frac12$ اللي من المتطابقة.'),
         ('line', '-cos(2*x)/4-cos(12*x)/24', 'نوزّع $\\frac12$: $\\frac12\\cdot\\frac12=\\frac14$، و $\\frac12\\cdot\\frac1{12}=\\frac1{24}$.')], 'U-T8 ex')

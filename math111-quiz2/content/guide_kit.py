@@ -93,6 +93,32 @@ try:                # v7: Dr. Musa's questions that replace our written (✏️)
     from musa_drills import MUSA_DRILLS
 except ImportError:
     MUSA_DRILLS = {}
+MUSA_OVER_NOTES = {'U-T8'}   # no written drill to replace there: Dr. Musa comes before Dr. Tariq
+BAN = {'G-13'}       # one number away from a mock question (H10): never printed
+# past-exam questions freed in v7 (they left the mocks): (uid, item, level, hint, solution rows)
+EXAM_ADD = [
+    ('U-T2', '1445-S1-SE-Q2.4', 'I', 'الاثنين فرديين: احجز من الأصغر ($\\cos x$)، و $u=\\sin x$.', [
+        ('tex', r'\sin^{5}x\cos^{3}x=\sin^{5}x\,(1-\sin^{2}x)\cos x', [('sin(x)**5*cos(x)**3', 'sin(x)**5*(1-sin(x)**2)*cos(x)')],
+         'الاثنين فرديين: نحجز من الأصغر، $\\cos x$'),
+        ('sub', 'sin(x)', 'cos(x)', '$u=\\sin x$'),
+        ('tex', r'I=\int u^{5}(1-u^{2})\,du=\int\left(u^{5}-u^{7}\right)du', [('x**5*(1-x**2)', 'x**5-x**7')], 'نوزّع'),
+        ('line', 'sin(x)**6/6-sin(x)**8/8', 'نكامل ونرجع $u$')]),
+    ('U-T2', '1445-S2-FE-Q2.6', 'I', 'sin فردي: احجز $\\sin x$، و $u=\\cos x$.', [
+        ('tex', r'\sin^{5}x\cos^{6}x=(1-\cos^{2}x)^{2}\cos^{6}x\,\sin x', [('sin(x)**5*cos(x)**6', '(1-cos(x)**2)**2*cos(x)**6*sin(x)')],
+         'sin فردي: نحجز $\\sin x$'),
+        ('sub', 'cos(x)', '-sin(x)', '$u=\\cos x$، و $\\sin x\\,dx=-du$'),
+        ('tex', r'I=-\int u^{6}(1-u^{2})^{2}\,du=-\int\left(u^{6}-2u^{8}+u^{10}\right)du', [('x**6*(1-x**2)**2', 'x**6-2*x**8+x**10')],
+         'نفك القوس ونوزّع، و🔴 السالب قدّام'),
+        ('line', '-cos(x)**7/7+2*cos(x)**9/9-cos(x)**11/11', 'نكامل ونرجع $u$')]),
+    ('U-T4', '1445-S2-SE-Q2.3', 'I', 'sec زوجي: احجز $\\sec^2x$، و $u=\\tan x$.', [
+        ('tex', r'\tan^{2}x\sec^{4}x=\tan^{2}x\,(1+\tan^{2}x)\sec^{2}x', [('tan(x)**2*sec(x)**4', 'tan(x)**2*(1+tan(x)**2)*sec(x)**2')],
+         'sec زوجي: نحجز $\\sec^2x$'),
+        ('sub', 'tan(x)', 'sec(x)**2', '$u=\\tan x$'),
+        ('tex', r'I=\int\left(u^{2}+u^{4}\right)du', [('x**2*(1+x**2)', 'x**2+x**4')], 'نوزّع'),
+        ('line', 'tan(x)**3/3+tan(x)**5/5', 'نكامل ونرجع $u$')])]
+RANK = {'exam': 0, 'musa': 1, 'generated': 3}     # which exercises a case prints first: past exams, Dr. Musa, Dr. Tariq, ours
+LAST_Q = [None]      # the item of the last question() call (to know which item a 🧱 example shows)
+SC_ITEM = [None]     # the item of the last shortcut() call (its 🧱 example is the one kept)
 EXTRA = []         # (uid, item id): exercises over a case's cap; the mastery checks take them, past exams first
 SOLS_BY_METHOD = {}  # method key -> solution blocks of its cases (printed at the end of the method)
 
@@ -179,6 +205,7 @@ def pgref(anchor):
 
 def question(it, where, allow_held=False):
     use(it['id'], where, allow_held=allow_held)
+    LAST_Q[0] = (it['id'], where)
     return '<div class="q">' + chip(src_icon(it) + ' ' + source_label(it), 'src') + en(prompt(it)) + md(q_tex(it)) + '</div>'
 
 
@@ -274,16 +301,38 @@ def doctor_terms(it):
     raise BuildError('no doctor form for %s' % it['id'])
 
 
-def answer_box(it, where):
-    """Check the answer and print it in the green box (derivatives start with y' =). With coth⁻¹ the doctor's sign
-    comes first (he marks the quiz) and the true sign in a small line under it."""
+def _two_lines(lhs, terms, tail, at=2):
+    """A long answer on two lines (after `at` terms), so it fits a solution column."""
     from mathlib import texsum as _ts
+    if len(terms) <= at:
+        return lhs + _ts(terms) + tail
+    rest = _ts(terms[at:])
+    rest = rest if rest.lstrip().startswith('-') else '+ ' + rest
+    return r'\begin{aligned}%s%s\\ &\quad %s%s\end{aligned}' % (lhs.replace('=', '&=', 1), _ts(terms[:at]), rest, tail)
+
+
+def answer_box(it, where, narrow=False):
+    """Check the answer and print it in the green box (derivatives start with y' =). With coth⁻¹ the doctor's sign
+    comes first (he marks the quiz) and the true sign in a small line under it. narrow: a solution column."""
+    import sympy as _sp
+    from mathlib import P as _P, texsum as _ts
     html = _final(it, where)
-    html = md("y' = " + ans_tex(it), 'ans') if it['task'] == 'diff' else html
+    lhs0 = "y' = " if it['task'] == 'diff' else '= '
+    tail0 = ' + C' if it['task'] == 'int' else ''
+    if it['task'] == 'diff':
+        html = md("y' = " + ans_tex(it), 'ans')
+    if narrow and len(it['answer']) >= 3:
+        html = md(_two_lines(lhs0, list(it['answer']), tail0), 'ans')
     doc = doctor_terms(it)
     if doc is None:
         return html
+    if it['task'] == 'diff':             # keep the authored form of each term; only its sign changes
+        doc = [a if _sp.simplify(d - _P(a)) == 0 else '-1*(%s)' % a for d, a in zip(doc, it['answer'])]
     body = _ts([str(t) for t in doc])
+    if narrow and len(doc) >= 2:
+        return (md(_two_lines("y' = " if it['task'] == 'diff' else '= ', [str(t) for t in doc], ' + C' if it['task'] == 'int' else '', at=1), 'ans')
+                + p('✍️ هذا بإشارة دكتورك في ' + mi(r'\coth^{-1}') + ' (اكتبه كذا). رياضيًا الإشارة بالعكس:', 'small doctor')
+                + md(_two_lines(lhs0, list(it['answer']), tail0, at=1), 'truesign'))
     lhs = "y' = " if it['task'] == 'diff' else '= '
     tail = ' + C' if it['task'] == 'int' else ''
     return (md(lhs + body + tail, 'ans') + p('✍️ هذا بإشارة دكتورك في ' + mi(r'\coth^{-1}') + ' (اكتبه كذا في الكويز). '
@@ -371,6 +420,7 @@ class Unit:
         self.uid, self.num, self.title, self.section, self.pages, self.day = uid, COUNTER[0], title, section, pages, day
         self.ref = 'الحالة %d' % self.num
         self.parts, self.drills, self.sols = [], [], []
+        self.pending, self.ex_items = [], []
         self.gist_html = ''
         LESSON_OF_UID[uid] = section
         DAYS.setdefault(day, []).append((uid, self.num, title))
@@ -378,7 +428,36 @@ class Unit:
         CASES.append((uid, self.num, title))
 
     def add(self, kind, label, inner):
+        if kind == 'ex':                 # remember which question the example shows (one example is kept, see _one_example)
+            self.ex_items.append(LAST_Q[0])
+        if kind == 'short' and label.startswith('⚡'):
+            self.sc_item = SC_ITEM[0]
         self.parts.append((kind, label, inner))
+
+    def _one_example(self):
+        """v7: one 🧱 example per case — the one the ⚡ quick way uses, else a past-exam one, else the first.
+        The others are not printed, and their question no longer counts as used."""
+        exs = [k for k, (kind, _, _) in enumerate(self.parts) if kind == 'ex']
+        if len(exs) < 2:
+            return
+        items = self.ex_items
+        keep = 0
+        if getattr(self, 'sc_item', None) and self.sc_item in [i[0] for i in items if i]:
+            keep = [i[0] if i else None for i in items].index(self.sc_item)
+        else:
+            keep = next((k for k, i in enumerate(items) if i and ITEMS[i[0]]['kind'] == 'exam'), 0)
+        from booklet_engine import USED
+        for k, idx in enumerate(exs):
+            if k != keep:
+                self.parts[idx] = ('dropped', None, '')
+                if items[k]:
+                    item, where = items[k]
+                    if where in USED.get(item, []):
+                        USED[item].remove(where)
+                        if not USED[item]:
+                            del USED[item]
+                    if ITEMS[item]['kind'] == 'exam':      # a past-exam example is not lost: it goes to the mastery checks
+                        EXTRA.insert(0, (self.uid, item))
 
     def raw(self, html):
         self.parts.append(('raw', None, html))
@@ -393,26 +472,53 @@ class Unit:
         self.gist_html = p('📌 ' + rich('<b>الخلاصة:</b> إذا شفت ' + see + ' ← ' + first + ' ← ' + rule), 'gist')
 
     def drill(self, tag, item_id, level, hint, first=None, claims=(), mids=(), sol_rows=None, extra_lines=0):
+        """v7: exercises are collected, and the case prints the best ones (see _pick_drills)."""
+        self.pending.append((tag, item_id, level, hint, first, claims, mids, sol_rows, extra_lines))
+
+    def _pick_drills(self):
+        """Print cap(uid) exercises: past exams first, then Dr. Musa (also replacing ours), Dr. Tariq, ours; then in
+        guided → partial → own order. The rest go to the mastery checks."""
+        if getattr(self, 'picked', False):
+            return
+        self.picked = True
+        cands = list(self.pending) + [(str(90 + k), i, lv, h, None, (), (), rows, 0)
+                                      for k, (u, i, lv, h, rows) in enumerate(EXAM_ADD) if u == self.uid]
+        musa_left = len(MUSA_DRILLS.get(self.uid, []))
+        ranked = []
+        for n, c in enumerate(cands):
+            it = ITEMS[c[1]]
+            if c[1] in BAN or c[1] in BLOCKED:
+                continue
+            r = RANK.get(it['kind'], 2)
+            if (it['kind'] == 'generated' or (self.uid in MUSA_OVER_NOTES and it['kind'].startswith('notes'))) and musa_left:
+                r, musa_left = 1, musa_left - 1
+            ranked.append((r, n, c))
+        ranked.sort()
+        n_cap = cap(self.uid)
+        chosen = sorted(ranked[:n_cap], key=lambda z: ('GPI'.index(z[2][2]), z[1]))
+        for _, _, c in ranked[n_cap:]:
+            if not self.uid.startswith('P-') and ITEMS[c[1]]['kind'] != 'generated':
+                EXTRA.append((self.uid, c[1]))
+        for k, (_, _, c) in enumerate(chosen, 1):
+            self._drill_now(str(k), *c[1:])
+
+    def _drill_now(self, tag, item_id, level, hint, first=None, claims=(), mids=(), sol_rows=None, extra_lines=0):
         from guide_sols import SOLS
         it = ITEMS[item_id]
-        if it['kind'] == 'generated' and MUSA_DRILLS.get(self.uid):   # Dr. Musa's question takes the place of one we wrote
+        if (it['kind'] == 'generated' or (self.uid in MUSA_OVER_NOTES and it['kind'].startswith('notes'))) and MUSA_DRILLS.get(self.uid):   # Dr. Musa's question takes the place of one we wrote
             m = MUSA_DRILLS[self.uid].pop(0)
             item_id, it, hint, sol_rows, mids = m['item'], ITEMS[m['item']], m['hint'], m['sol_rows'], ()
             first, claims = (m.get('first'), m.get('claims', ())) if level == 'G' and m.get('first') else (None, ())
             if level == 'G' and not first:
                 level = 'P'
-        if len(self.drills) >= cap(self.uid):     # over the page budget: not printed (a past-exam one goes to the mastery checks)
-            if item_id not in BLOCKED and not self.uid.startswith('P-'):
-                EXTRA.append((self.uid, item_id))
-            return
         sol_rows = sol_rows if sol_rows is not None else SOLS.get(item_id, {}).get('rows')
         mids = list(mids) or SOLS.get(item_id, {}).get('mids', [])
         where = '%s drill %s' % (self.uid, tag)
         lvl = {'G': 'موجّه', 'P': 'ناقص الخطوات', 'I': 'لحالك'}[level]
         dtag = '%s-%s' % (self.uid, tag)
         DRILLS_N[self.uid] = DRILLS_N.get(self.uid, 0) + 1
-        head = ('<div class="drill-head" id="d-%s"><b>%s تمرين %s</b> %s<span class="help">%s</span></div>'
-                % (dtag, src_icon(it), tag, chip(lvl, 'lvl'), link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag), 'btn')))
+        head = ('<div class="drill-head" id="d-%s"><b>%s تمرين %s</b> %s <span class="dsrc">%s</span><span class="help">%s</span></div>'
+                % (dtag, src_icon(it), tag, chip(lvl, 'lvl'), source_label(it), link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag), 'btn')))
         body = drill_question(it, where)
         first_tex = arith(first, claims, where + ' first') if first else None
         n = WRITE[level][self.section] + extra_lines
@@ -437,12 +543,12 @@ class Unit:
                 step_ok(m, it, where + ' middle')
                 mid_tex.append('I = ' + rawtex(m) + ('' if 'Integral' in m else ' + C'))
             sol += md(mid_tex[-1])
-        answer = answer_box(it, where)
+        answer = answer_box(it, where, narrow=True)
         if not (cells and cells[-1][2] and not mids) or doctor_terms(it) is not None:
             sol += answer
         self.sols.append('<div class="sol" id="s-%s"><div class="drill-head"><b>تمرين %s</b> %s %s</div>%s%s</div>'
                          % (dtag, tag, mi(r'\displaystyle ' + q_tex(it)), link('d-' + dtag, '↩ ارجع للتمرين', 'back btn'),
-                            p(source_label(it), 'srcline'), sol))
+                            '', sol))
         # levels 1 and 2 go to the help ladder at the end of the guide
         if cells:
             step = (cells[0][0], cells[0][1])
@@ -479,7 +585,7 @@ class Unit:
         if by('idea'):
             out.append(part('💡 ليش تشتغل؟', ''.join(by('idea')), 'p-why'))
         for kind, label, inner in self.parts:
-            if kind in ('idea', 'sign', 'ok', 'trap', 'prev'):
+            if kind in ('idea', 'sign', 'ok', 'trap', 'prev', 'dropped'):
                 continue
             if kind == 'raw':
                 out.append(inner)
@@ -503,6 +609,8 @@ class Unit:
         return out
 
     def html(self):
+        self._pick_drills()
+        self._one_example()
         first_prompt = self.drills[0][0] if self.drills else ''
         drills = ('<h4 class="drills-title">تمارين %s</h4>' % self.ref
                   + p('📝 اختبار سابق · 📗 مذكرة د. موسى · 📘 مذكرة د. طارق · ✏️ تدريب إضافي. موجّه ← ناقص الخطوات ← لحالك.', 'small')
@@ -553,6 +661,7 @@ def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=N
     what it saves, where it comes from (tied to the 🧱 solution), the steps in words, the same example
     (short_steps rows, checked), the memory line, when it does not work, and a few half-minute tries whose answers
     sit at the end of the box. tries: (question latex, answer latex, claims); every answer is checked."""
+    SC_ITEM[0] = it['id']
     part = lambda title, body: '<div class="sc-part"><b>%s</b> %s</div>' % (title, body)
     html = part('وش يوفر لك:', rich(saves))
     html += '<div class="sc-part"><b>الخطوات:</b></div><ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in steps_) + '</ol>'
@@ -565,5 +674,6 @@ def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=N
 
 
 def contrast(rows):
-    """'What it is confused with' table: (question latex, method, why)."""
+    """'What it is confused with' table: (question latex, method, why); three rows at most (v7)."""
+    rows = rows[:3]
     return table(['السؤال', 'الطريقة', 'ليش؟'], [[mi(r'\displaystyle ' + q), rich(m), rich(w)] for q, m, w in rows], 'contrast')

@@ -337,3 +337,9 @@ section.sols > h3, section.sols > p { column-span: all; }
 .sol { break-inside: avoid; }
 section.sols .md .katex-display { margin: 0.4em 0; }
 section.sols table.steps.lean td { padding: 0.4mm 1mm; }
+.dsrc { color: var(--muted); }
+/* v7: the first export pass has no page numbers yet; reserve their width so the layout does not move in pass 2 */
+.pgref:empty::before, .toc .pg:empty::before { content: '000'; visibility: hidden; }
+/* v7: the «which case?» pages flow one after another (each was half a page) */
+section.chapter.flow[id^="speed"] { break-before: auto; margin-top: 6mm; }
+section.chapter.flow[id^="speed"] .ch { break-inside: avoid; }

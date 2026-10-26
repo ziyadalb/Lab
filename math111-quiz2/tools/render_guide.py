@@ -44,13 +44,13 @@ SECTIONS = [
     ('0', GP.sec0, []),
     ('A', GP.intro_A, ['P-A2', 'P-A3', 'U-D1', 'U-D2', 'U-LD']),
     ('T', GP.tree, []),
-    ('B', GP.intro_B, ['U-I1', 'U-I2', 'U-I3', 'U-I5', 'U-I7', 'P-C1', 'P-C3', 'U-T1', 'U-T2', 'U-T4', 'U-T5', 'U-T7']),
+    ('B', GP.intro_B, ['U-I1', 'U-I2', 'U-I3', 'U-I5', 'U-I7', 'P-C1', 'U-T1', 'U-T2', 'U-T4', 'U-T5', 'U-T7']),
     ('P', GP.intro_P, ['U-I6', 'U-X2', 'U-LN', 'U-I4', 'U-CH', 'U-P9', 'U-I8', 'U-I9', 'U-34', 'U-T3', 'U-T8', 'U-T6']),
-    ('C', GP.intro_C, ['P-B1', 'U-P1', 'U-P2', 'U-P3', 'U-P4', 'U-P6', 'U-P7', 'U-P8', 'U-P10', 'U-P5']),
+    ('C', GP.intro_C, ['U-P1', 'U-P2', 'U-P3', 'U-P4', 'U-P6', 'U-P7', 'U-P8', 'U-P10', 'U-P5']),
     ('D', GP.intro_D, []),
 ]
 # v6 basics now written inside a section page: their old links land on that page
-ALIAS = {'P-A1': '0', 'P-B3': '0', 'P-C2': '0', 'P-A4': 'T', 'P-B2': 'C'}
+ALIAS = {'P-A1': '0', 'P-B3': '0', 'P-C2': '0', 'P-A4': 'T', 'P-B2': 'C', 'P-B1': 'A', 'P-C3': 'B'}
 SEC_TITLE = {'0': '0. قبل أي حل', 'A': 'أ. الاشتقاق', 'T': '🌳 الشجرة: أي طريقة؟', 'B': 'ب. التعويض',
              'P': '🔧 التجهيزات', 'C': 'ج. التجزئة', 'D': 'د. التمييز والتذكر'}
 SEC_ANCHOR = {'0': 's0', 'A': 'sA', 'T': 'tree', 'B': 'sB', 'P': 'sP', 'C': 'sC', 'D': 'sD'}
