@@ -130,34 +130,34 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "mock A q5 step 1",
-   "claim": "sin(x)**5*cos(x)**6 = (1-cos(x)**2)**2*cos(x)**6*sin(x)",
+   "claim": "sin(x)**7*cos(x)**5 = sin(x)**7*(1-sin(x)**2)**2*cos(x)",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
    "label": "mock A q5 step 2",
-   "u": "cos(x)",
-   "du": "-sin(x)"
+   "u": "sin(x)",
+   "du": "cos(x)"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "mock A q5 step 3",
-   "claim": "u**6*(1-2*u**2+u**4) = u**6-2*u**8+u**10",
+   "claim": "u**7*(1-2*u**2+u**4) = u**7-2*u**9+u**11",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
-   "item": "1445-S2-FE-Q2.6",
+   "item": "MU-93-3",
    "label": "mock A q5 step 4",
-   "step": "-cos(x)**7/7+2*cos(x)**9/9-cos(x)**11/11"
+   "step": "sin(x)**8/8-sin(x)**10/5+sin(x)**12/12"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "1445-S2-FE-Q2.6",
+   "item": "MU-93-3",
    "label": "mock A q5",
    "status": "symbolic"
   },
@@ -242,34 +242,34 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "mock B q4 step 1",
-   "claim": "tan(x)**2*sec(x)**4 = tan(x)**2*(1+tan(x)**2)*sec(x)**2",
+   "claim": "tan(x)**5*sec(x) = (sec(x)**2-1)**2*sec(x)*tan(x)",
    "residual": "0"
   },
   {
    "kind": "substitution",
    "ok": true,
    "label": "mock B q4 step 2",
-   "u": "tan(x)",
-   "du": "sec(x)**2"
+   "u": "sec(x)",
+   "du": "sec(x)*tan(x)"
   },
   {
    "kind": "arithmetic",
    "ok": true,
    "label": "mock B q4 step 3",
-   "claim": "x**2*(1+x**2) = x**2+x**4",
+   "claim": "(u**2-1)**2 = u**4-2*u**2+1",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
-   "item": "1445-S2-SE-Q2.3",
+   "item": "MU-101-3",
    "label": "mock B q4 step 4",
-   "step": "tan(x)**3/3+tan(x)**5/5"
+   "step": "sec(x)**5/5-2*sec(x)**3/3+sec(x)"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "1445-S2-SE-Q2.3",
+   "item": "MU-101-3",
    "label": "mock B q4",
    "status": "symbolic"
   },
@@ -322,7 +322,7 @@
   "1446-S2-SE-Q2.5": [
    "mock A"
   ],
-  "1445-S2-FE-Q2.6": [
+  "MU-93-3": [
    "mock A"
   ],
   "1446-S1-SE-Q1.1": [
@@ -334,7 +334,7 @@
   "1445-S1-SE-Q2.7": [
    "mock B"
   ],
-  "1445-S2-SE-Q2.3": [
+  "MU-101-3": [
    "mock B"
   ],
   "1447-S2-SE-Q3.1": [

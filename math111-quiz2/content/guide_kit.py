@@ -12,6 +12,7 @@ Every math line goes through a check (tools/booklet_engine.py); a failed check s
 import re
 
 from booklet import final as _final, prompt, source_label
+from booklet_engine import BLOCKED
 from booklet_engine import (ITEMS, BuildError, ans_tex, arith, diff_step_ok, formula, functional, parts_rows, q_tex,
                             same_antiderivative, same_defint, same_derivative, step_ok, sub_row, use)
 from html_kit import box, chip, en, lines, link, md, mi, p, table, ul
@@ -53,13 +54,108 @@ NEEDS = {'U-D1': ['P-A2', 'P-A3'], 'U-D2': ['P-A2', 'P-A1'], 'U-I1': ['P-A4', 'P
 NEED_LABEL = {'P-A1': 'أ1', 'P-A2': 'أ2', 'P-A3': 'أ3', 'P-A4': 'أ4', 'P-B1': 'ب1', 'P-B2': 'ب2', 'P-B3': 'ب3',
               'P-C1': 'ج1', 'P-C2': 'ج2', 'P-C3': 'ج3'}
 # writing space in lines of 7.5 mm: a start needs a few lines, a full solution more (5.1 solutions are longest)
-WRITE = {'G': {'4.2': 3, '5.1': 3, '5.2': 3}, 'P': {'4.2': 4, '5.1': 4, '5.2': 4}, 'I': {'4.2': 5, '5.1': 7, '5.2': 6}}
+WRITE = {'G': {'4.2': 2, '5.1': 2, '5.2': 2}, 'P': {'4.2': 3, '5.1': 3, '5.2': 3}, 'I': {'4.2': 4, '5.1': 5, '5.2': 4}}
 ASK = {'diff': 'المطلوب: المشتقة', 'int': 'المطلوب: احسب التكامل', 'defint': 'المطلوب: احسب التكامل المحدد'}
 # the date shown for each study day (days 1 and 2 are already done)
 DAY_NAME = {1: '20 أكتوبر ✓', 2: '21–22 أكتوبر ✓', 3: 'الجمعة 23', 4: 'السبت 24', 5: 'الأحد 25', 6: 'الاثنين 26', 7: 'إذا بقي وقت'}
 # lesson colour class of each section (unit header band and the lesson map)
 LESSON_CLS = {'4.2': 'l42', '5.1': 'l51', '5.2': 'l52'}
 MAPS_READY = {'4.2', '5.1', '5.2'}   # lessons whose map page is built (every type of the lesson has its one-line summary)
+
+# ---------------------------------------------------------------- v7: cases ordered by the method that solves them
+# old type numbers (guide v1–v6): for the old → new table, and to rewrite «النوع N» in texts written before v7
+OLD_ORDER = ['U-D1', 'U-D2', 'U-I1', 'U-I2', 'U-I3', 'U-I4', 'U-I5', 'U-I6', 'U-I7', 'U-I8', 'U-I9',
+             'U-P1', 'U-P2', 'U-P3', 'U-P4', 'U-P5', 'U-P6', 'U-P7', 'U-P8', 'U-P9', 'U-P10',
+             'U-T1', 'U-T2', 'U-T3', 'U-T4', 'U-T5', 'U-T6', 'U-T7', 'U-T8']
+OLD_NUM = {uid: k for k, uid in enumerate(OLD_ORDER, 1)}
+# how many times each case came in the 12 past second and final exams 1445–1447 (in-scope parts, held ones included)
+FIRE = {'U-D1': 15, 'U-D2': 1, 'U-I1': 1, 'U-I2': 1, 'U-I3': 1, 'U-I4': 2, 'U-I5': 1, 'U-I6': 0, 'U-I7': 0, 'U-I8': 5,
+        'U-I9': 3, 'U-P1': 3, 'U-P2': 2, 'U-P3': 4, 'U-P4': 0, 'U-P5': 1, 'U-P6': 4, 'U-P7': 2, 'U-P8': 1, 'U-P9': 3,
+        'U-P10': 0, 'U-T1': 0, 'U-T2': 4, 'U-T3': 0, 'U-T4': 2, 'U-T5': 1, 'U-T6': 0, 'U-T7': 1, 'U-T8': 0,
+        'U-LD': 0, 'U-34': 3, 'U-X2': 0, 'U-LN': 0, 'U-CH': 0}
+# the four methods: letter, name, colour class
+METHODS = {'A': ('أ', 'الاشتقاق', 'mA'), 'B': ('ب', 'التعويض', 'mB'), 'P': ('🔧', 'التجهيزات', 'mP'), 'C': ('ج', 'التجزئة', 'mC')}
+METHOD_OF = {}     # uid -> method key, set by the renderer from the section a case sits in
+# where each case sits in the decision tree (the four questions, page «الشجرة»)
+TREE_DEFAULT = {'A': 'س1: مشتقة ← أ. الاشتقاق', 'B': 'س2: دالة ومشتقتها، أو قانون جاهز ← ب. التعويض',
+                'P': 'س3: علامة تجهيز ← سوّ الحركة، ثم ارجع لـ س2', 'C': 'س4: ضرب نوعين، أو ln أو دالة عكسية لحالها ← ج. التجزئة'}
+TREE = {'U-T1': 'س2 بعد ما تحجز ← ب. التعويض', 'U-T2': 'س2 بعد ما تحجز ← ب. التعويض', 'U-T4': 'س2 بعد ما تحجز ← ب. التعويض',
+        'U-T5': 'س2 بعد ما تحجز ← ب. التعويض', 'U-T7': 'س2 بعد ما تحجز ← ب. التعويض',
+        'U-34': 'س2: قانون جاهز، بس من أي درس؟ ← 3.4 أم 4.2 (وقبله س3: كمّل المربع إذا لزم)',
+        'U-T6': 'س3: tan لحالها ← اكسر tan، ثم س2 (و $\\sec^3x$ لحالها: س4 تجزئة)',
+        'U-P10': 'س2 أول: تعويض يشيل الجذر ← ثم س4: تجزئة', 'U-P5': 'س4 ← ج. التجزئة، ثم عوّض الحدّين مرة وحدة'}
+NUM = {}           # uid -> case number (document order)
+CASES = []         # (uid, number, title) in document order
+MUSA_COUNT = {}    # uid -> usable questions in Dr. Musa's notes (data/musa_index.json, filled by the renderer)
+
+
+EXTRA = []         # (uid, item id): exercises over a case's cap; the mastery checks take them, past exams first
+SOLS_BY_METHOD = {}  # method key -> solution blocks of its cases (printed at the end of the method)
+
+
+def cap(uid):
+    """Exercises printed per case, by how often it came in the past exams (the prerequisite parts have none)."""
+    if uid.startswith('P-'):
+        return 0
+    n = FIRE.get(uid, 0)
+    return 4 if n >= 4 else 3 if n else 2
+
+
+def lean_steps(cells):
+    """A drill solution: the steps only; the reason is written once, for the first (deciding) row."""
+    why = cells[0][1]
+    body = ''.join('<tr class="%s"><td class="n">%d</td><td>%s</td></tr>' % ('final' if fin else '', k, mi(r'\displaystyle ' + latex))
+                   for k, (latex, _, fin) in enumerate(cells, 1))
+    return ((p('💡 ' + rich(why), 'leanwhy') if why else '')
+            + '<table class="steps lean"><tbody>' + body + '</tbody></table>')
+
+
+def times(n):
+    """«مرة / مرتين / 3 مرات» in the guide's dialect."""
+    return {1: 'مرة', 2: 'مرتين'}.get(n, '%d مرات' % n if 3 <= n <= 10 else '%d مرة' % n)
+
+
+def fire(uid):
+    n = FIRE.get(uid, 0)
+    return '🔥 جا في الاختبارات %s' % times(n) if n else '🔥 ما جا في الاختبارات الـ12 (بس في المذكرات)'
+
+
+def src_icon(it):
+    """📝 past exam, 📗 Dr. Musa, 📘 Dr. Tariq, ✏️ written for this guide."""
+    return {'exam': '📝', 'musa': '📗', 'generated': '✏️'}.get(it['kind'], '📘')
+
+
+def renum(text):
+    """Rewrite old type numbers («النوع 12», «النوعين 14 و17», «الأنواع 22 إلى 25») as the new case numbers."""
+    new = lambda n: NUM.get(OLD_ORDER[int(n) - 1]) if 1 <= int(n) <= len(OLD_ORDER) else None
+
+    def many(nums):
+        got = sorted({new(n) for n in nums if new(n)})
+        return ' و'.join(str(g) for g in got) if len(got) < 3 else '، '.join(str(g) for g in got[:-1]) + ' و' + str(got[-1])
+
+    def rng(m):
+        a, b = int(m.group(2)), int(m.group(3))
+        return m.group(1) + many(range(a, b + 1))
+
+    text = re.sub(r'(الأنواع )(\d+) ?(?:إلى|–|-) ?(\d+)', lambda m: rng(m).replace('الأنواع ', 'الحالات '), text)
+    text = re.sub(r'(النوعين|النوعان|الأنواع) (\d+) ?و ?(\d+)',
+                  lambda m: {'النوعين': 'الحالتين', 'النوعان': 'الحالتان', 'الأنواع': 'الحالات'}[m.group(1)] + ' '
+                  + many([m.group(2), m.group(3)]), text)
+    return re.sub(r'النوع (\d+)', lambda m: 'الحالة %s' % (new(m.group(1)) or m.group(1)), text)
+
+
+def part(heading, inner, cls=''):
+    """A section of a case page: a heading and its content in one column (no box)."""
+    return '<div class="part %s"><h4 class="ph">%s</h4>%s</div>' % (cls, heading, inner)
+
+
+def ex_label(label):
+    """«🧱 مثال محلول خطوة خطوة (اختبار سابق)» -> «🧱 مثال · 📝 من اختبار سابق»."""
+    out = label.replace('محلول خطوة خطوة ', '').replace(' محلول', '')
+    for old, new in (('(اختبار سابق)', '· 📝 من اختبار سابق'), ('(من مذكرة د. طارق)', '· 📘 من مذكرة د. طارق'),
+                     ('(تمرين من مذكرة د. طارق)', '· 📘 تمرين من مذكرة د. طارق'), ('(من مذكرة د. موسى)', '· 📗 من مذكرة د. موسى')):
+        out = out.replace(old, new)
+    return out
 
 
 def unit_minutes(uid):
@@ -79,7 +175,7 @@ def pgref(anchor):
 
 def question(it, where, allow_held=False):
     use(it['id'], where, allow_held=allow_held)
-    return '<div class="q">' + chip(source_label(it), 'src') + en(prompt(it)) + md(q_tex(it)) + '</div>'
+    return '<div class="q">' + chip(src_icon(it) + ' ' + source_label(it), 'src') + en(prompt(it)) + md(q_tex(it)) + '</div>'
 
 
 def drill_question(it, where):
@@ -148,10 +244,46 @@ def steps(it, rows, label):
     return steps_table(cells)
 
 
+def doctor_terms(it):
+    """The answer terms in the course doctor's coth⁻¹ sign (lecture 13: d/dx coth⁻¹u = −u'/(1−u²) and
+    ∫du/(a²−u²) = −(1/a)coth⁻¹(u/a)), or None when the question has no coth⁻¹. Checked: they are exactly the true
+    answer of the same question with coth⁻¹ replaced by −coth⁻¹."""
+    import itertools
+    import sympy as sp
+    from booklet_engine import _record, _strip
+    from mathlib import P, x
+    if 'acoth' not in it['q'] + ' '.join(it['answer']):
+        return None
+    flip = lambda e: e.replace(sp.acoth, lambda z: -sp.acoth(z))
+    terms = [P(t) for t in it['answer']]
+    if it['task'] != 'diff':
+        out = [flip(t) for t in terms]
+        _record('doctor coth', any(sp.simplify(a - b) != 0 for a, b in zip(out, terms)), item=it['id'])
+        return out
+    target = sp.diff(flip(P(_strip(it['q']))), x)
+    br = P(it['branches'][0]) if it.get('branches') else x
+    for signs in sorted(itertools.product((1, -1), repeat=len(terms)), key=lambda v: v.count(-1)):
+        cand = [sg * t for sg, t in zip(signs, terms)]
+        if sp.simplify((sum(cand) - target).subs(x, br)) == 0:
+            _record('doctor coth', -1 in signs, item=it['id'])
+            return cand
+    raise BuildError('no doctor form for %s' % it['id'])
+
+
 def answer_box(it, where):
-    """Check the answer and print it in the green box (derivatives start with y' =)."""
+    """Check the answer and print it in the green box (derivatives start with y' =). With coth⁻¹ the doctor's sign
+    comes first (he marks the quiz) and the true sign in a small line under it."""
+    from mathlib import texsum as _ts
     html = _final(it, where)
-    return md("y' = " + ans_tex(it), 'ans') if it['task'] == 'diff' else html
+    html = md("y' = " + ans_tex(it), 'ans') if it['task'] == 'diff' else html
+    doc = doctor_terms(it)
+    if doc is None:
+        return html
+    body = _ts([str(t) for t in doc])
+    lhs = "y' = " if it['task'] == 'diff' else '= '
+    tail = ' + C' if it['task'] == 'int' else ''
+    return (md(lhs + body + tail, 'ans') + p('✍️ هذا بإشارة دكتورك في ' + mi(r'\coth^{-1}') + ' (اكتبه كذا في الكويز). '
+                                             'رياضيًا الإشارة بالعكس:', 'small doctor') + html.replace("md ans", "md truesign"))
 
 
 def final(it, where):
@@ -232,11 +364,13 @@ class Unit:
         COUNTER[0] += 1
         day, pages = DAY_OF.get(uid, day), PAGES.get(uid, pages)
         self.uid, self.num, self.title, self.section, self.pages, self.day = uid, COUNTER[0], title, section, pages, day
-        self.ref = 'النوع %d' % self.num
+        self.ref = 'الحالة %d' % self.num
         self.parts, self.drills, self.sols = [], [], []
         self.gist_html = ''
         LESSON_OF_UID[uid] = section
         DAYS.setdefault(day, []).append((uid, self.num, title))
+        NUM[uid] = self.num
+        CASES.append((uid, self.num, title))
 
     def add(self, kind, label, inner):
         self.parts.append((kind, label, inner))
@@ -251,20 +385,23 @@ class Unit:
     def gist(self, see, first, rule):
         """The one-line summary at the end of the type (also a row of the lesson map)."""
         GIST[self.uid] = (self.num, self.title, see, first, rule)
-        self.gist_html = box('gist', '📌 الخلاصة', '<div class="gist-row"><span>' + rich('<b>إذا شفت:</b> ' + see) + '</span><span>'
-                             + rich('<b>أول خطوة:</b> ' + first) + '</span><span>' + rich('<b>ثم:</b> ' + rule) + '</span></div>')
+        self.gist_html = p('📌 ' + rich('<b>الخلاصة:</b> إذا شفت ' + see + ' ← ' + first + ' ← ' + rule), 'gist')
 
     def drill(self, tag, item_id, level, hint, first=None, claims=(), mids=(), sol_rows=None, extra_lines=0):
         from guide_sols import SOLS
         it = ITEMS[item_id]
+        if len(self.drills) >= cap(self.uid):     # over the page budget: not printed (a past-exam one goes to the mastery checks)
+            if item_id not in BLOCKED and not self.uid.startswith('P-'):
+                EXTRA.append((self.uid, item_id))
+            return
         sol_rows = sol_rows if sol_rows is not None else SOLS.get(item_id, {}).get('rows')
         mids = list(mids) or SOLS.get(item_id, {}).get('mids', [])
         where = '%s drill %s' % (self.uid, tag)
         lvl = {'G': 'موجّه', 'P': 'ناقص الخطوات', 'I': 'لحالك'}[level]
         dtag = '%s-%s' % (self.uid, tag)
         DRILLS_N[self.uid] = DRILLS_N.get(self.uid, 0) + 1
-        head = ('<div class="drill-head" id="d-%s"><b>تمرين %s</b> %s<span class="help">%s</span></div>'
-                % (dtag, tag, chip(lvl, 'lvl'), link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag), 'btn')))
+        head = ('<div class="drill-head" id="d-%s"><b>%s تمرين %s</b> %s<span class="help">%s</span></div>'
+                % (dtag, src_icon(it), tag, chip(lvl, 'lvl'), link('s-' + dtag, '✅ الحل ص ' + pgref('s-' + dtag), 'btn')))
         body = drill_question(it, where)
         first_tex = arith(first, claims, where + ' first') if first else None
         n = WRITE[level][self.section] + extra_lines
@@ -276,12 +413,10 @@ class Unit:
             body += lines(n, 'write tight')
         self.drills.append((prompt(it), '<div class="drill">' + head + body + '</div>'))
         # level 3: the full explained solution, on the page after the exercises
-        sol = ''
-        if first_tex:
-            sol += md(first_tex)
+        sol = ''                         # the given first line of a guided exercise is printed with the exercise only
         cells = step_cells(it, sol_rows, where) if sol_rows else []
         if cells:
-            sol += steps_table(cells)
+            sol += lean_steps(cells)
         mid_tex = []
         for m in mids:
             if it['task'] == 'diff':
@@ -307,51 +442,79 @@ class Unit:
         HELP.append(dict(dtag=dtag, num=self.num, tag=tag, hint=hint, step=step, guided=level == 'G'))
 
     def head_html(self):
-        needs = '، '.join(link(a, '📚 %s (ص ' % NEED_LABEL.get(a, a) + pgref(a) + ')') for a in NEEDS.get(self.uid, []))
-        meta = ' · '.join(x for x in ['درس ' + self.section, DAY_NAME.get(self.day, ''), '⏱️ %d دقيقة' % unit_minutes(self.uid),
-                                      ('تحتاج: ' + needs) if needs else ''] if x)
-        if self.section in MAPS_READY:
-            meta += ' · ' + link('map-' + self.section, '🗺️ خريطة الدرس')
-        return ('<div class="unit-head %s" id="%s"><span class="num">%d</span><h3>%s</h3></div><p class="unit-meta">%s</p>'
-                % (LESSON_CLS.get(self.section, ''), self.uid, self.num, self.title, meta))
+        m = METHOD_OF.get(self.uid, 'B')
+        needs = '، '.join(link(a, '📚 %s (ص ' % NEED_LABEL[a] + pgref(a) + ')') for a in NEEDS.get(self.uid, []) if a in NEED_LABEL)
+        musa = MUSA_COUNT.get(self.uid)
+        meta = ['📍 الشجرة: ' + rich(TREE.get(self.uid, TREE_DEFAULT[m])), fire(self.uid)]
+        if musa:
+            meta.append('📗 في مذكرة د. موسى: %d' % musa)
+        meta.append('⏱️ %d دقيقة' % unit_minutes(self.uid))
+        if needs:
+            meta.append('تحتاج: ' + needs)
+        if self.uid in OLD_NUM:
+            meta.append('<span class="oldnum">رقمها القديم %d</span>' % OLD_NUM[self.uid])
+        return ('<div class="unit-head %s" id="%s"><span class="num">%d</span><h3>%s</h3><span class="mtag">%s %s</span></div>'
+                '<p class="unit-meta">%s</p>'
+                % (METHODS[m][2], self.uid, self.num, self.title, METHODS[m][0], METHODS[m][1], ' · '.join(meta)))
 
-    def html(self):
+    def body_parts(self):
+        """The case page in one column: متى؟ ← ليش تشتغل؟ ← الخطوات ← 🧱 ← ⚡ ← قبل ما تسلّم (no boxes)."""
         from guide_checks import CHECKS
-        head = self.head_html()
-        idea = [inner for kind, _, inner in self.parts if kind == 'idea']
-        oks = [inner for kind, _, inner in self.parts if kind == 'ok']
-        traps = [inner for kind, _, inner in self.parts if kind == 'trap']
-        prev = [inner for kind, _, inner in self.parts if kind == 'prev']
+        by = lambda k: [inner for kind, _, inner in self.parts if kind == k]
+        oks, traps = by('ok'), by('trap')
         out = []
+        if by('sign'):
+            out.append(part('🔎 متى؟', ''.join(by('sign')), 'p-when'))
+        if by('idea'):
+            out.append(part('💡 ليش تشتغل؟', ''.join(by('idea')), 'p-why'))
         for kind, label, inner in self.parts:
-            if kind in ('idea', 'ok', 'trap', 'prev'):
+            if kind in ('idea', 'sign', 'ok', 'trap', 'prev'):
                 continue
             if kind == 'raw':
                 out.append(inner)
                 continue
-            if kind == 'sign':              # one card: why it works, how to recognise it, how it differs from the type before
-                inner = ((_lead('<b>💡 الفكرة:</b>', idea[0]) if idea else '') + _lead('<b>🔎 العلامة:</b>', inner)
-                         + ''.join(p('<b>🔗 الفرق عن النوع اللي قبله:</b> ' + rich(t), 'prevline') for t in prev))
-                kind, label = 'idea', '🎯 وش هذا النوع'
             if kind == 'paper':             # before you hand in: the trap, what to write, a quick check
                 check = _lead('<b>✔ تأكد:</b>', ''.join(oks)) if oks else ''
                 if self.uid in CHECKS:
                     check += p('<b>✔ تأكد:</b> ' + rich(CHECKS[self.uid]))
                 elif not oks:
                     raise BuildError('unit %s has no quick check' % self.uid)
-                trap = ''.join(_lead('<b>⚠️ انتبه:</b>', t) for t in traps)
-                inner = trap + _lead('<b>✍️ في ورقة الكويز:</b>', inner) + check
-                label = '✔ قبل ما تسلّم'
-            out.append(box(kind, label, inner))
+                trap = ''.join('<div class="danger">' + _lead('<b>🔴 انتبه:</b>', t) + '</div>' for t in traps)
+                out.append(part('✔ قبل ما تسلّم', trap + _lead('<b>✍️ في ورقة الكويز:</b>', inner) + check, 'p-paper'))
+                continue
+            if kind == 'short':
+                heading = label.replace('🧭 الطريقة', '🪜 الخطوات')
+                out.append(part(heading, inner, 'p-quick' if label.startswith('⚡') else 'p-steps'))
+            elif kind == 'ex':
+                out.append(part(ex_label(label), inner, 'p-ex'))
+            elif kind != 'note':
+                out.append(part('📎 ' + label, inner, 'p-' + kind))
+        return out
+
+    def html(self):
         first_prompt = self.drills[0][0] if self.drills else ''
-        drills = ('<h4 class="drills-title">تمارين %s</h4>' % self.ref + (en(first_prompt) if first_prompt else '')
+        drills = ('<h4 class="drills-title">تمارين %s</h4>' % self.ref
+                  + p('📝 اختبار سابق · 📗 مذكرة د. موسى · 📘 مذكرة د. طارق · ✏️ تدريب إضافي. موجّه ← ناقص الخطوات ← لحالك.', 'small')
+                  + (en(first_prompt) if first_prompt else '')
                   + ''.join(html.replace('<div class="q">', '<div class="q">' + en(pr), 1) if pr != first_prompt else html
-                            for pr, html in self.drills))
-        src = p('المصدر: ' + (self.pages if self.pages.startswith('من') else 'مذكرة د. طارق، ' + self.pages), 'srcline')
-        sols = ('<section class="sols"><h4>حلول تمارين %s: %s</h4>' % (self.ref, self.title)
-                + p('حاولت؟ قارن حلك سطرًا سطرًا. إذا اختلف جوابك، سجّل الغلطة في سجل الأخطاء آخر المذكرة.', 'small')
-                + ''.join(self.sols) + '</section>')
-        return '<article class="unit">' + head + ''.join(out) + self.gist_html + src + drills + sols + '</article>'
+                            for pr, html in self.drills)
+                  + '<div class="confidence"><b>ثقتك بهذي الحالة؟</b> <span>☐ ✓ أحلها لحالي</span>'
+                    '<span>☐ ؟ أحتاج المثال</span><span>☐ ✗ ارجع لها بكرة</span></div>')
+        if self.sols:                    # solutions are printed together at the end of the method (no page break per case)
+            SOLS_BY_METHOD.setdefault(METHOD_OF.get(self.uid, 'B'), []).append(
+                '<div class="solcase"><h4>%s: %s %s</h4>%s</div>' % (self.ref, self.title, link(self.uid, '↩'), ''.join(self.sols)))
+        return ('<article class="unit">' + self.head_html() + ''.join(self.body_parts()) + self.gist_html
+                + drills + '</article>')
+
+
+def sols_section(m):
+    """«✅ حلول تمارين الطريقة»: every solution of the method's cases, one after the other."""
+    blocks = SOLS_BY_METHOD.get(m, [])
+    if not blocks:
+        return ''
+    return ('<section class="sols" id="sols-%s"><h3>✅ حلول تمارين %s. %s</h3>' % (m, METHODS[m][0], METHODS[m][1])
+            + p('حاولت؟ قارن حلك سطر سطر. الشرح الكامل في 🧱 حالته. جوابك شكله غير؟ شوف '
+                + link('differs', 'جوابك يختلف عن المفتاح؟') + '.', 'small') + ''.join(blocks) + '</section>')
 
 
 def tricks(items, label='trick'):
@@ -380,19 +543,13 @@ def shortcut(it, label, saves, origin, steps_, rows, memo, never, tries, paper=N
     (short_steps rows, checked), the memory line, when it does not work, and a few half-minute tries whose answers
     sit at the end of the box. tries: (question latex, answer latex, claims); every answer is checked."""
     part = lambda title, body: '<div class="sc-part"><b>%s</b> %s</div>' % (title, body)
-    html = part('وش يوفر لك:', rich(saves)) + part('من وين جا:', rich(origin)) + origin_html
+    html = part('وش يوفر لك:', rich(saves))
     html += '<div class="sc-part"><b>الخطوات:</b></div><ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in steps_) + '</ol>'
     html += '<div class="sc-part"><b>%s</b></div>' % on + example_html + short_steps(it, rows, label, lead=False) + after_rows
     html += '<div class="memo-inline"><b>🧠 جملة الحفظ:</b> ' + rich(memo) + '</div>'
-    html += '<div class="sc-part never"><b>⚠️ متى ما ينفع:</b></div>' + ul([rich(t) for t in never])
-    if paper:
-        html += part('✍️ في الكويز:', rich(paper))
-    qs, ans = [], []
-    for k, (q, a, claims) in enumerate(tries, 1):
-        qs.append('<li>%s</li>' % mi(r'\displaystyle ' + q))
-        ans.append(mi(r'\displaystyle ' + arith(a, claims, '%s try %d' % (label, k))))
-    html += ('<div class="tries"><b>🏃 جرّب بسرعة</b> (نص دقيقة لكل واحد، %s):<ol>' % rich(ask) + ''.join(qs) + '</ol>'
-             + '<div class="tries-ans"><b>الأجوبة:</b><ol>' + ''.join('<li>%s</li>' % a for a in ans) + '</ol></div></div>')
+    html += '<div class="sc-part never"><b>⚠️ متى ما ينفع:</b> ' + '، و'.join(rich(t).rstrip('.') for t in never) + '.</div>'
+    for k, (q, a, claims) in enumerate(tries, 1):   # v7: still checked, no longer printed (one explanation per case)
+        arith(a, claims, '%s try %d' % (label, k))
     return html
 
 

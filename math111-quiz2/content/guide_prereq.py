@@ -9,7 +9,7 @@ examples, the trap, a quick check, and exercises with writing space whose full s
 Every rule, example row, exercise answer and quick-check answer is checked while building.
 """
 from booklet_engine import ITEMS, arith, formula
-from guide_kit import DRILLS_N, HELP, WRITE, Unit, alg, method, pgref, rich, steps_table, tricks
+from guide_kit import DRILLS_N, HELP, NEED_LABEL, WRITE, Unit, alg, method, part, pgref, rich, steps_table, tricks
 from html_kit import box, chip, en, lines, link, md, mi, p, table, ul
 
 LESSON = {'pre42': '4.2', 'pre51': '5.1', 'pre52': '5.2'}
@@ -17,6 +17,7 @@ TITLES = {'pre42': 'قبل درس 4.2: الأساسيات اللي تحتاجه�
           'pre52': 'قبل درس 5.2: الأساسيات اللي تحتاجها'}
 PARTS = {}        # chapter -> [(uid, label, title)]
 PART_MINUTES = 20
+LEAN = True       # v7: rules, the explanation and one example; no exercises, no solutions
 HTML = {}         # chapter -> finished html
 KEYS = []         # (chapter, rows) answers of the quick checks, printed in the keys section
 SHEET = {}        # formula-sheet tables
@@ -40,6 +41,7 @@ class PreUnit(Unit):
     """A prerequisite part: same boxes, exercises and solutions as a question type, with its own label (أ1…ج3)."""
 
     def __init__(self, uid, label, title, chapter, source):
+        label = NEED_LABEL.get(uid, label)          # v7: «أساس N», numbered in document order
         self.uid, self.num, self.ref, self.title = uid, label, label, title
         self.section, self.pages, self.chapter, self.day = LESSON[chapter], source, chapter, 0
         self.parts, self.drills, self.sols = [], [], []
@@ -47,15 +49,15 @@ class PreUnit(Unit):
         PARTS.setdefault(chapter, []).append((uid, label, title))
 
     def head_html(self):
-        return ('<div class="unit-head pre" id="%s"><span class="num">%s</span><h3>%s</h3>%s%s</div>'
-                % (self.uid, self.num, self.title, chip('📚 قبل درس %s' % self.section, 'pq'), chip(self.source_text(), 'src')))
+        return ('<div class="unit-head pre" id="%s"><span class="num">📚 %s</span><h3>%s</h3>%s</div>'
+                % (self.uid, self.num, self.title, chip(self.source_text(), 'src')))
 
     def source_text(self):
         return self.pages
 
     def why(self, text, uses):
         links = '، '.join(link(uid, 'النوع %s' % n) for uid, n in uses)
-        self.add('idea', '💡 ليش تحتاجه في درس %s' % self.section, p(rich(text)) + (p('تحتاجه في: ' + links, 'small') if uses else ''))
+        self.add('idea', '💡 ليش تحتاجه؟', p(rich(text)) + (p('تحتاجه في: ' + links, 'small') if uses else ''))
 
     def explain(self, steps):
         """Numbered explanation: (text, latex or None, claims)."""
@@ -74,6 +76,9 @@ class PreUnit(Unit):
 
     def task(self, tag, level, ask, instruction, q_latex, rows, hint):
         """An exercise that is not a derivative or an integral (simplify, rewrite, evaluate)."""
+        if LEAN:                  # v7: the basics are a short reference, without exercises (rows still checked)
+            _cells(rows, '%s drill %s' % (self.uid, tag))
+            return
         where = '%s drill %s' % (self.uid, tag)
         dtag = '%s-%s' % (self.uid, tag)
         lvl = {'G': 'موجّه', 'P': 'ناقص الخطوات', 'I': 'لحالك'}[level]
@@ -96,8 +101,14 @@ class PreUnit(Unit):
 
     def html(self):
         out = [self.head_html()]
-        for kind, label, inner in self.parts:
-            out.append(inner if kind == 'raw' else box(kind, label, inner))
+        seen_ex = False
+        for kind, label, inner in self.parts:          # v7: one column, a heading per part (no boxes)
+            if LEAN and (kind in ('trap', 'paper', 'ok', 'memo') or (kind == 'ex' and seen_ex)):
+                continue
+            seen_ex = seen_ex or kind == 'ex'
+            out.append(inner if kind == 'raw' else part(label, inner, 'p-' + kind))
+        if LEAN:
+            return '<article class="unit prereq-unit lean">' + ''.join(out) + '</article>'
         first = next((pr for pr, _ in self.drills if pr), '')
         drills = ('<h4 class="drills-title">تمارين %s: اكتب الحل بنفسك</h4>' % self.ref + (en(first) if first else '')
                   + ''.join(html.replace('<div class="q">', '<div class="q">' + en(pr), 1) if pr and pr != first else html

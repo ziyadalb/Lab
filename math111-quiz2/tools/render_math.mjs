@@ -8,12 +8,16 @@ const katex = require('katex');
 const [, , inFile, outFile] = process.argv;
 let html = fs.readFileSync(inFile, 'utf8');
 const unescape = (s) => s.replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+// colour meanings, the same everywhere: 🔵 u (the inside), 🟢 du (the derivative of the inside), 🟠 the adjustment number,
+// 🔴 a minus sign or a danger
+const MACROS = { '\\cU': '\\textcolor{##1565c0}{#1}', '\\cD': '\\textcolor{##1b7a2e}{#1}',
+                 '\\cA': '\\textcolor{##d35400}{#1}', '\\cR': '\\textcolor{##c0181f}{#1}' };
 let count = 0;
 const errors = [];
 const render = (tex, display) => {
   count += 1;
   try {
-    return katex.renderToString(tex, { displayMode: display, throwOnError: true, output: 'htmlAndMathml', strict: 'ignore', trust: false });
+    return katex.renderToString(tex, { displayMode: display, throwOnError: true, output: 'htmlAndMathml', strict: 'ignore', trust: false, macros: { ...MACROS } });
   } catch (e) {
     errors.push({ tex, message: String(e.message || e) });
     return '<span class="katex-error">' + tex + '</span>';

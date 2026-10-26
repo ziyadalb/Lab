@@ -1,64 +1,4 @@
 {
- "G-46": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A2 drill 1"
- },
- "M-05": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A2 drill 2"
- },
- "G-48": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A2 drill 3"
- },
- "G-49": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A2 drill 4"
- },
- "G-50": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A2 drill 5"
- },
- "G-51": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A3 drill 1"
- },
- "M-06": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A3 drill 2"
- },
- "G-53": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A3 drill 3"
- },
- "G-54": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A3 drill 4"
- },
- "M-07": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A3 drill 5"
- },
- "G-56": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A4 drill 1"
- },
- "G-57": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A4 drill 2"
- },
- "M-08": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A4 drill 3"
- },
- "M-09": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A4 drill 4"
- },
- "G-60": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-A4 drill 5"
- },
  "N42-E1-1": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-D1 example 1"
@@ -98,6 +38,18 @@
  "1446-S1-FE-Q1.3": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-D2 drill 3"
+ },
+ "MC-01": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-LD example"
+ },
+ "MC-02": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-LD drill 1"
+ },
+ "MC-04": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-LD drill 2"
  },
  "N42-E2-3": {
   "usage": "مستخدم في المذكرة الكاملة",
@@ -139,10 +91,6 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I2 drill 3"
  },
- "M-10": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I2 drill 4"
- },
  "N42-E2-5": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I3 example"
@@ -158,26 +106,6 @@
  "1445-S2-SE-Q2.4": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I3 drill 3"
- },
- "1446-S2-SE-Q2.7": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I4 example"
- },
- "N42-E2-6": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I4 drill 1"
- },
- "1447-S1-SE-Q2.2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I4 drill 2"
- },
- "N42-X2-10": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I4 drill 3"
- },
- "N42-X2-12": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I4 drill 4"
  },
  "N42-E2-4": {
   "usage": "مستخدم في المذكرة الكاملة",
@@ -195,9 +123,93 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I5 drill 3"
  },
- "G-86": {
+ "N42-X2-09": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I5 drill 4"
+  "location": "U-I7 example"
+ },
+ "G-88": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-I7 drill 1"
+ },
+ "G-02": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-I7 drill 2"
+ },
+ "N52-E1-1": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T1 example"
+ },
+ "G-09": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T1 drill 1"
+ },
+ "N52-E1-2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T1 drill 2"
+ },
+ "1446-S1-SE-Q2.6": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T2 example"
+ },
+ "1447-S1-SE-Q2.3": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T2 drill 1"
+ },
+ "N52-X01": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T2 drill 2"
+ },
+ "N52-E2-2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T2 drill 3"
+ },
+ "1447-S1-FE-Q2.6": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T4 example"
+ },
+ "G-91": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T4 drill 1"
+ },
+ "M-21": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T4 drill 2"
+ },
+ "G-92": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T4 drill 3"
+ },
+ "1447-S2-SE-Q3.3": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T5 example"
+ },
+ "G-13": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T5 drill 1"
+ },
+ "N52-E3-4": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T5 drill 2"
+ },
+ "N52-X06": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T5 drill 3"
+ },
+ "1446-S2-SE-Q2.4": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T7 example"
+ },
+ "N52-X08": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T7 drill 1"
+ },
+ "N52-X09": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T7 drill 2"
+ },
+ "N52-E4-2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T7 drill 3"
  },
  "N42-X2-07": {
   "usage": "مستخدم في المذكرة الكاملة",
@@ -211,33 +223,73 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I6 drill 2"
  },
- "N42-X2-08": {
+ "MC-08": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I6 drill 3"
+  "location": "U-X2 example"
  },
- "M-13": {
+ "MC-09": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I6 drill 4"
+  "location": "U-X2 drill 1"
  },
- "N42-X2-09": {
+ "MC-10": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I7 example"
+  "location": "U-X2 drill 2"
  },
- "G-88": {
+ "MC-11": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I7 drill 1"
+  "location": "U-LN example"
  },
- "G-02": {
+ "MC-13": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I7 drill 2"
+  "location": "U-LN drill 1"
  },
- "G-03": {
+ "MC-12": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I7 drill 3"
+  "location": "U-LN drill 2"
  },
- "M-14": {
+ "1446-S2-SE-Q2.7": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-I7 drill 4"
+  "location": "U-I4 example"
+ },
+ "N42-E2-6": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-I4 drill 1"
+ },
+ "1447-S1-SE-Q2.2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-I4 drill 2"
+ },
+ "N42-X2-10": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-I4 drill 3"
+ },
+ "GC-01": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-CH example"
+ },
+ "MC-16": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-CH drill 1"
+ },
+ "GC-03": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-CH drill 2"
+ },
+ "1446-S1-SE-Q2.3": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-P9 example"
+ },
+ "N51-X13": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-P9 drill 1"
+ },
+ "N51-X14": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-P9 drill 2"
+ },
+ "1445-S1-SE-Q2.1": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-P9 drill 3"
  },
  "1446-S1-SE-Q2.2": {
   "usage": "مستخدم في المذكرة الكاملة",
@@ -275,45 +327,65 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-I9 drill 3"
  },
- "G-61": {
+ "1446-S2-FE-Q2.1": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B1 drill 1"
+  "location": "U-34 example"
  },
- "M-02": {
+ "1445-S1-FE-Q2.1": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B1 drill 2"
+  "location": "U-34 drill 1"
  },
- "M-01": {
+ "1446-S1-FE-Q2.1": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B1 drill 3"
+  "location": "U-34 drill 2"
  },
- "M-27": {
+ "MC-07": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B1 drill 4"
+  "location": "U-34 drill 3"
  },
- "M-28": {
+ "N52-X13": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B1 drill 5"
+  "location": "U-T3 example 1"
  },
- "M-03": {
+ "N52-E1-3": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B2 drill 1"
+  "location": "U-T3 example 2"
  },
- "G-67": {
+ "N52-X14": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B2 drill 2"
+  "location": "U-T3 drill 1"
  },
- "G-68": {
+ "M-19": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B2 drill 3"
+  "location": "U-T3 drill 2"
  },
- "G-69": {
+ "N52-E5-1": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B2 drill 4"
+  "location": "U-T8 example"
  },
- "M-04": {
+ "N52-X10": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-B2 drill 5"
+  "location": "U-T8 drill 1"
+ },
+ "N52-E5-2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T8 drill 2"
+ },
+ "N52-E3-2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T6 example 1"
+ },
+ "N52-E3-1": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T6 example 2"
+ },
+ "G-93": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T6 drill 1"
+ },
+ "N52-X16": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "U-T6 drill 2"
  },
  "1446-S1-SE-Q2.4": {
   "usage": "مستخدم في المذكرة الكاملة",
@@ -379,34 +451,6 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-P4 drill 2"
  },
- "N51-E4": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P4 drill 3"
- },
- "G-80": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P4 drill 4"
- },
- "1445-S1-SE-Q2.3": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P5 example"
- },
- "G-05": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P5 drill 1"
- },
- "G-81": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P5 drill 2"
- },
- "G-06": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P5 drill 3"
- },
- "G-82": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P5 drill 4"
- },
  "1445-S1-SE-Q2.5": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-P6 example"
@@ -455,22 +499,6 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-P8 drill 3"
  },
- "1446-S1-SE-Q2.3": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P9 example"
- },
- "N51-X13": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P9 drill 1"
- },
- "N51-X14": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P9 drill 2"
- },
- "1445-S1-SE-Q2.1": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P9 drill 3"
- },
  "N51-X15": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-P10 example"
@@ -483,197 +511,77 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "U-P10 drill 2"
  },
- "N51-X18": {
+ "1445-S1-SE-Q2.3": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-P10 drill 3"
+  "location": "U-P5 example"
  },
- "G-71": {
+ "G-05": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-C1 drill 2"
+  "location": "U-P5 drill 1"
  },
- "M-29": {
+ "G-81": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-C1 drill 3"
+  "location": "U-P5 drill 2"
  },
- "G-73": {
+ "G-06": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-C1 drill 4"
+  "location": "U-P5 drill 3"
  },
- "G-74": {
+ "M-10": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-C3 drill 1"
+  "location": "mastery B"
  },
- "M-30": {
+ "M-14": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-C3 drill 2"
+  "location": "mastery B"
  },
- "G-76": {
+ "G-86": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-C3 drill 3"
- },
- "G-77": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-C3 drill 4"
- },
- "G-78": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "P-C3 drill 5"
- },
- "N52-E1-1": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T1 example"
- },
- "G-09": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T1 drill 1"
- },
- "N52-E1-2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T1 drill 2"
+  "location": "mastery B"
  },
  "G-10": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T1 drill 3"
- },
- "1446-S1-SE-Q2.6": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T2 example"
- },
- "1447-S1-SE-Q2.3": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T2 drill 1"
- },
- "N52-X01": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T2 drill 2"
- },
- "N52-E2-2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T2 drill 3"
- },
- "N52-X13": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T3 example 1"
- },
- "N52-E1-3": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T3 example 2"
- },
- "N52-X14": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T3 drill 1"
- },
- "M-19": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T3 drill 2"
- },
- "M-20": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T3 drill 3"
- },
- "N52-E2-4": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T3 drill 4"
- },
- "1447-S1-FE-Q2.6": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T4 example"
- },
- "G-91": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T4 drill 1"
- },
- "M-21": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T4 drill 2"
- },
- "G-92": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T4 drill 3"
+  "location": "mastery B"
  },
  "G-12": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T4 drill 4"
+  "location": "mastery B"
  },
- "1447-S2-SE-Q3.3": {
+ "M-13": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T5 example"
+  "location": "mastery P"
  },
- "G-13": {
+ "M-20": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T5 drill 1"
+  "location": "mastery P"
  },
- "N52-E3-4": {
+ "N42-X2-12": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T5 drill 2"
- },
- "N52-X06": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T5 drill 3"
- },
- "N52-E3-2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T6 example 1"
- },
- "N52-E3-1": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T6 example 2"
- },
- "G-93": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T6 drill 1"
- },
- "N52-X16": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T6 drill 2"
- },
- "G-94": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T6 drill 3"
+  "location": "mastery P"
  },
  "N52-X15": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T6 drill 4"
- },
- "1446-S2-SE-Q2.4": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T7 example"
- },
- "N52-X08": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T7 drill 1"
- },
- "N52-X09": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T7 drill 2"
- },
- "N52-E4-2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T7 drill 3"
- },
- "N52-E5-1": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T8 example"
- },
- "N52-X10": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T8 drill 1"
- },
- "N52-E5-2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T8 drill 2"
+  "location": "mastery P"
  },
  "G-14": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "U-T8 drill 3"
+  "location": "mastery P"
  },
- "G-38": {
+ "N51-E4": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 3 warm-up"
+  "location": "mastery C"
  },
- "N42-X2-04": {
+ "N51-X18": {
   "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 3 warm-up"
+  "location": "mastery C"
+ },
+ "G-82": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery C"
+ },
+ "G-80": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery C"
  },
  "N42-X2-13": {
   "usage": "مستخدم في المذكرة الكاملة",
@@ -715,22 +623,6 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed42"
  },
- "1445-S2-SE-Q2.2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 4 warm-up"
- },
- "N42-E1-2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 4 warm-up"
- },
- "G-42": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 5 warm-up"
- },
- "N51-X06": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 5 warm-up"
- },
  "N51-X01": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed51"
@@ -766,14 +658,6 @@
  "G-21": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "speed51"
- },
- "G-43": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 6 warm-up"
- },
- "1446-S1-FE-Q2.2": {
-  "usage": "مستخدم في المذكرة الكاملة",
-  "location": "day 6 warm-up"
  },
  "N52-X11": {
   "usage": "مستخدم في المذكرة الكاملة",
@@ -852,6 +736,14 @@
   "location": "mixed review"
  },
  "G-31": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "1445-S2-SE-Q2.2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mixed review"
+ },
+ "1446-S1-FE-Q2.2": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mixed review"
  }

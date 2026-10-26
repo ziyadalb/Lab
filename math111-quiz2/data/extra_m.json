@@ -1,0 +1,47 @@
+[
+ {
+  "id": "MU-94-3",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:cos(x)**7*sin(x)**6",
+  "answer": [
+   "sin(x)**7/7",
+   "-sin(x)**9/3",
+   "3*sin(x)**11/11",
+   "-sin(x)**13/13"
+  ],
+  "branches": [
+   "t"
+  ],
+  "case": "C52-SC",
+  "section": "5.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 94,
+   "number": "Q2 (3)"
+  },
+  "note": "mock A (replaces H03, which was one number away from a lecture example; no near copy among the guide questions)"
+ },
+ {
+  "id": "MU-101-3",
+  "kind": "musa",
+  "task": "int",
+  "q": "raw:tan(x)**5*sec(x)",
+  "answer": [
+   "sec(x)**5/5",
+   "-2*sec(x)**3/3",
+   "sec(x)"
+  ],
+  "branches": [
+   "t/(1+t)"
+  ],
+  "case": "C52-TS",
+  "section": "5.2",
+  "src": {
+   "file": "MUSA",
+   "pdf_page": 101,
+   "number": "Q(3)"
+  },
+  "note": "mock B (replaces H10, which was a lecture example)"
+ }
+]

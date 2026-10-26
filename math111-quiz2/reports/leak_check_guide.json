@@ -1,11 +1,30 @@
 {
  "document": "src/guide.katex.html",
  "pdf": "out/guide/MATH111_Quiz2_Guide.pdf",
- "formulas_scanned": 5361,
+ "formulas_scanned": 4122,
  "held_checked": 10,
- "avoid_checked": 7,
- "used_items": 214,
- "failures": [],
+ "avoid_checked": 9,
+ "used_items": 187,
+ "failures": [
+  {
+   "check": "symbolic",
+   "item": "H10",
+   "relation": "one_number_changed",
+   "used": "G-13"
+  },
+  {
+   "check": "symbolic",
+   "item": "H03",
+   "relation": "one_number_changed",
+   "used": "1446-S1-SE-Q2.6"
+  },
+  {
+   "check": "symbolic",
+   "item": "H03",
+   "relation": "one_number_changed",
+   "used": "1447-S1-SE-Q2.3"
+  }
+ ],
  "for_manual_review": [
   {
    "check": "same shape in a formula",
@@ -18,9 +37,45 @@
    "formula": "\\displaystyle \\int \\frac{1}{\\sqrt{9 x^{2} + 36 x + 45}}\\,dx"
   },
   {
+   "check": "used question of the same shape, several numbers changed",
+   "item": "H01",
+   "used": "1446-S1-FE-Q2.1",
+   "where": "U-34 drill 2"
+  },
+  {
    "check": "same shape in a formula",
-   "item": "H03",
-   "formula": "\\sin^{2}x+\\cos^{2}x="
+   "item": "H10",
+   "formula": "\\displaystyle \\int\\tan^{3}x\\sec x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\sec^{3}x\\tan^{3}x=\\sec^{2}x\\tan^{2}x\\cdot\\sec x\\tan x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\int \\tan^{3} x \\sec x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\tan^{3}x\\sec x=\\tan^{2}x\\cdot\\sec x\\tan x=(\\sec^{2}x-1)\\sec x\\tan x"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\int \\tan^{3} x \\sec x\\,dx"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\int\\tan^{3}x\\sec x\\,dx=\\int(u^{2}-1)\\,du"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H10",
+   "formula": "\\displaystyle \\sec x\\tan^{2}x=\\sec x\\,(\\sec^{2}x-1)"
   },
   {
    "check": "same shape in a formula",
@@ -41,16 +96,6 @@
    "check": "same shape in a formula",
    "item": "H03",
    "formula": "\\displaystyle \\sin^{2}x+\\cos^{2}x=1"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H03",
-   "formula": "\\sin^{2}x\\cos^{2}x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H03",
-   "formula": "\\displaystyle \\sin^{2}x\\cos^{2}x=\\left(\\sin x\\cos x\\right)^{2}"
   },
   {
    "check": "same shape in a formula",
@@ -150,37 +195,17 @@
   {
    "check": "same shape in a formula",
    "item": "H03",
-   "formula": "\\int \\sin^{2} x \\cos^{4} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H03",
    "formula": "\\displaystyle \\int \\sin^{2} x \\cos^{2} x\\,dx"
   },
   {
    "check": "same shape in a formula",
    "item": "H03",
+   "formula": "\\displaystyle \\sin^{2}x\\cos^{2}x=\\left(\\sin x\\cos x\\right)^{2}"
+  },
+  {
+   "check": "same shape in a formula",
+   "item": "H03",
    "formula": "\\displaystyle \\sin^{2}x\\cos^{2}x=\\frac18-\\frac{\\cos4x}{8}"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H03",
-   "formula": "\\displaystyle \\int \\sin^{2} x \\cos^{4} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H03",
-   "formula": "\\displaystyle \\sin^{2}x\\cos^{4}x=\\left(\\sin x\\cos x\\right)^{2}\\cos^{2}x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H03",
-   "formula": "\\displaystyle \\sin^{2}x\\cos^{4}x=\\frac{\\sin^{2}2x}{8}+\\frac{\\sin^{2}2x\\cos2x}{8}"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H03",
-   "formula": "\\int \\sin^{4} x \\cos^{3} x\\,dx"
   },
   {
    "check": "same shape in a formula",
@@ -196,23 +221,6 @@
    "check": "same shape in a formula",
    "item": "H03",
    "formula": "\\displaystyle \\sin^{2}x+\\cos^{2}x=1,\\quad \\sec^{2}x=1+\\tan^{2}x,\\quad \\csc^{2}x=1+\\cot^{2}x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H03",
-   "formula": "\\displaystyle \\int\\sin^{2}x,\\ \\cos^{4}x,\\ \\sin^{2}x\\cos^{2}x"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H03",
-   "used": "1446-S1-SE-Q2.6",
-   "where": "U-T2 example"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H03",
-   "used": "1447-S1-SE-Q2.3",
-   "where": "U-T2 drill 1"
   },
   {
    "check": "used question of the same shape, several numbers changed",
@@ -235,18 +243,6 @@
   {
    "check": "used question of the same shape, several numbers changed",
    "item": "H03",
-   "used": "N52-E2-4",
-   "where": "U-T3 drill 4"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H03",
-   "used": "G-43",
-   "where": "day 6 warm-up"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H03",
    "used": "N52-X04",
    "where": "speed52"
   },
@@ -264,268 +260,6 @@
   },
   {
    "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\cos^{2}x=1-\\sin^{2}x,\\qquad \\tan^{2}x=\\sec^{2}x-1"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int\\tan^{3}x\\sec^{2}x\\,dx=\\int u^{3}du=\\frac{\\tan^{4}x}{4}+C"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int \\tan^{4} x \\sec^{2} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int \\tan^{4} x \\sec^{2} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{4}x\\sec^{2}x\\,dx=\\int u^{4}du"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\tan^2x=\\sec^2x-1"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int\\tan^3x\\sec^2x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{3}x\\sec^{2}x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int \\tan^{3} x \\sec^{2} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{3}x\\sec^{2}x\\,dx=\\int u^{3}\\,du"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "u=\\tan x,\\quad du=\\sec^{2}x\\,dx,\\qquad \\int\\tan^{3}x\\sec^{2}x\\,dx=\\int u^{3}\\,du=\\frac{\\tan^{4}x}{4}+C"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\left(\\frac{\\tan^4x}{4}\\right)'=\\tan^3x\\cdot\\sec^2x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int \\tan^{6} x \\sec^{2} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\sec^{4}x=\\sec^{2}x\\cdot\\sec^{2}x=(1+\\tan^{2}x)\\sec^{2}x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int \\tan^{3} x \\sec^{6} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int \\tan^{6} x \\sec^{2} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{6}x\\sec^{2}x\\,dx=\\int u^{6}\\,du"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int \\tan^{3} x \\sec^{6} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{3}x\\sec^{6}x\\,dx=\\int u^{3}(1+u^{2})^{2}\\,du"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{3}x\\sec^{3}x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{4}x\\sec^{3}x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\tan^{2}x=\\sec^{2}x-1,\\qquad \\frac{d}{dx}\\sec x=\\sec x\\tan x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\sec^{3}x\\tan^{3}x=\\sec^{2}x\\tan^{2}x\\cdot\\sec x\\tan x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\tan^{2}x=\\sec^{2}x-1"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\sec^{3}x\\tan^{3}x=\\sec^{2}x\\,(\\sec^{2}x-1)\\sec x\\tan x,\\qquad u=\\sec x,\\quad du=\\sec x\\tan x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int \\tan^{5} x \\sec^{3} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int \\tan^{5} x \\sec^{5} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int \\tan^{5} x \\sec^{3} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\tan^{5}x\\sec^{3}x=\\tan^{4}x\\sec^{2}x\\cdot\\sec x\\tan x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{5}x\\sec^{3}x\\,dx=\\int(u^{2}-1)^{2}u^{2}\\,du"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int \\tan^{5} x \\sec^{5} x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\tan^{5}x\\sec^{5}x=\\tan^{4}x\\sec^{4}x\\cdot\\sec x\\tan x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\tan^{4}x=(\\sec^{2}x-1)^{2}"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{5}x\\sec^{5}x\\,dx=\\int(u^{2}-1)^{2}u^{4}\\,du"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\tan^{2}x=\\sec^{2}x-1"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\tan^{4}x=\\tan^{2}x\\,(\\sec^{2}x-1)"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle =\\tan^{2}x\\sec^{2}x-\\tan^{2}x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\int\\tan^{2}x\\,dx=\\int\\left(\\sec^{2}x-1\\right)dx=\\tan x-x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\tan^3x\\sec^2x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\tan^4x=\\tan^2x(\\sec^2x-1)"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\int\\tan^{4}x\\,dx=\\int\\tan^{2}x\\,(\\sec^{2}x-1)\\,dx=\\frac{\\tan^{3}x}{3}-\\int\\tan^{2}x\\,dx"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\tan^{6}x=\\tan^{4}x\\,(\\sec^{2}x-1)=\\tan^{4}x\\sec^{2}x-\\tan^{4}x"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle \\tan^{5}x=\\tan^{3}x\\,(\\sec^{2}x-1)"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H10",
-   "formula": "\\displaystyle =\\tan^{3}x\\sec^{2}x-\\tan^{3}x"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H10",
-   "used": "G-76",
-   "where": "P-C3 drill 3"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H10",
-   "used": "1447-S1-FE-Q2.6",
-   "where": "U-T4 example"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H10",
-   "used": "G-91",
-   "where": "U-T4 drill 1"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H10",
-   "used": "G-12",
-   "where": "U-T4 drill 4"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H10",
-   "used": "1447-S2-SE-Q3.3",
-   "where": "U-T5 example"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H10",
-   "used": "N52-E3-4",
-   "where": "U-T5 drill 2"
-  },
-  {
-   "check": "used question of the same shape, several numbers changed",
-   "item": "H10",
-   "used": "N52-X06",
-   "where": "U-T5 drill 3"
-  },
-  {
-   "check": "same shape in a formula",
    "item": "H06",
    "formula": "\\sin(-2x)=-\\sin2x,\\qquad \\cos(-2x)=\\cos2x"
   },
@@ -538,11 +272,6 @@
    "check": "same shape in a formula",
    "item": "H06",
    "formula": "\\sin5x\\sin x=\\frac12\\left[\\cos4x-\\cos6x\\right]"
-  },
-  {
-   "check": "same shape in a formula",
-   "item": "H06",
-   "formula": "\\displaystyle \\cos3x\\cos x=\\frac12\\left[\\cos2x+\\cos4x\\right]"
   }
  ]
 }

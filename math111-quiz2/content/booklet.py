@@ -68,6 +68,25 @@ def card(sid, num, title, section, pages, sign, short, memo, example, trap, pape
 
 
 # ================================================================== 4.2
+def doctor_coth(kind):
+    """The coth⁻¹ row as the course doctor writes it (lecture 13): the sign is the opposite of the true one.
+    Checked as exactly that: doctor's form = minus the true derivative / antiderivative."""
+    if kind == 'diff':
+        arith('', [('-1/(1-x**2)', '-diff(acoth(x),x)', '1+t')], 'doctor coth diff')
+        return r"-\frac{u'}{1-u^{2}}"
+    arith('', [('diff(-acoth(x/3)/3,x)', '-1/(9-x**2)', '3+t')], 'doctor coth int')
+    formula('1/(a**2-u**2)', 'acoth(u/a)/a', branches=('a+t', '-a-t'), pos=('a',), label='six coth (math sign)')
+    return r'-\frac{1}{a}\coth^{-1}\frac{u}{a}'
+
+
+def doctor_note(kind):
+    """One small line under a table with the coth⁻¹ row: why the sign is the doctor's, and the true sign."""
+    true = (formula('acoth(u)', '1/(1-u**2)', 'diff', branches=('1+t', '-1-t'), uprime=True, label='coth math sign')
+            if kind == 'diff' else formula('1/(a**2-u**2)', 'acoth(u/a)/a', branches=('a+t', '-a-t'), pos=('a',), label='coth math sign'))
+    return p('✎ صف ' + mi(r'\coth^{-1}') + ' مكتوب بإشارة دكتورك (محاضرة 13)، لأنه هو اللي يصحح: اكتبه مثله. '
+             'رياضيًا الإشارة موجبة: ' + mi(true[0] + ' = ' + true[1]) + '، ومذكرة د. طارق كتبتها سالبة مثله.', 'small doctor')
+
+
 def sc_twins():
     """Shortcut box and memory line of card twins (shared by the booklet and the full guide)."""
     rows = [formula('asinh(u)', '1/sqrt(u**2+1)', 'diff', branches=('t', '-t'), uprime=True, label='twins sinh'),
@@ -77,8 +96,10 @@ def sc_twins():
             formula('asech(u)', '-1/(u*sqrt(1-u**2))', 'diff', branches=('t/(1+t)',), uprime=True, label='twins sech'),
             formula('acsch(u)', '-1/(Abs(u)*sqrt(1+u**2))', 'diff', branches=('t', '-t'), uprime=True, label='twins csch')]
     conds = ['كل ' + mi('u'), mi('u>1'), mi('|u|<1'), mi('|u|>1'), mi('0<u<1'), mi(r'u\neq0')]
+    rows[3] = (rows[3][0], doctor_coth('diff'))          # the doctor's sign first (he marks the quiz); the math sign below
+    conds[3] += ' ✎ دكتورك'
     short = table(['المشتقة', 'تساوي', 'المجال'], [frow(r, c) for r, c in zip(rows, conds)], 'formula')
-    short += p(mi("u'") + ' مشتقة ما داخل الدالة (قاعدة السلسلة).', 'small')
+    short += p(mi("u'") + ' مشتقة ما داخل الدالة (قاعدة السلسلة).', 'small') + doctor_note('diff')
     memo = ul(['<b>sinh و cosh</b>: جذر؛ داخل الجذر ' + mi('+1') + ' مع sinh و ' + mi('-1') + ' مع cosh.',
                '<b>tanh و coth</b>: الصيغة نفسها تمامًا؛ الفرق في المجال فقط.',
                '<b>sech و csch</b>: إشارة سالبة و ' + mi('u') + ' خارج الجذر؛ sech معها ' + mi('1-u^{2}') + ' و csch معها '
@@ -116,7 +137,10 @@ def sc_six(adjust=True):
             formula('1/(u*sqrt(a**2-u**2))', '-asech(Abs(u)/a)/a', branches=('a*t/(1+t)', '-a*t/(1+t)'), pos=('a',), label='six sech'),
             formula('1/(u*sqrt(a**2+u**2))', '-acsch(Abs(u)/a)/a', pos=('a',), label='six csch')]
     conds = ['كل ' + mi('u'), mi('u>a'), mi('|u|<a'), mi('|u|>a'), mi('0<|u|<a'), mi(r'u\neq0')]
+    rows[3] = (rows[3][0], doctor_coth('int'))           # the doctor's sign first (he marks the quiz); the math sign below
+    conds[3] += ' ✎ دكتورك'
     short = table(['التكامل', 'الجواب (+C)', 'الشرط'], [frow(r, c) for r, c in zip(rows, conds)], 'formula')
+    short += doctor_note('int')
     adj = formula('c*x**(n-1)/sqrt((k*x**n)**2+a**2)', 'c*asinh(k*x**n/a)/(n*k)', var='x', branches=('t',),
                   pos=('a', 'c', 'k', 'n'), label='adjust rule (sinh row)')
     if adjust:

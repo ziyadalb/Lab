@@ -23,6 +23,14 @@ from mock_sols import MINUTES, MOCKS, SOLS, TYPE_OF, TYPES  # noqa: E402
 from bidi import isolate_runs  # noqa: E402
 
 HOLD = E.HOLD['held_items']
+# v7: the guide numbers cases by method; old type numbers (mock_sols.TYPE_OF) are mapped to the new case numbers
+_CASES = json.loads((ROOT / 'data' / 'case_numbers.json').read_text(encoding='utf-8'))
+NEW_NUM = {c['old']: (c['num'], c['title']) for c in _CASES.values() if c.get('old')}
+
+
+def case_ref(old):
+    num, title = NEW_NUM[old]
+    return 'الحالة %d (%s)' % (num, title)
 
 
 def order(which):
@@ -48,12 +56,12 @@ def instructions():
                 'الوقت تقديري: حوالي %d دقائق لسؤال المشتقة و %d دقيقة لكل تكامل، أي حوالي %d دقيقة، والباقي للمراجعة. '
                 'هذا تقدير حتى تجربه بنفسك.' % (MINUTES['diff'], MINUTES['int'], total['A'])]))
             + box('short', 'متى أحل؟', ul([
-                '<b>الاختبار A</b> في اليوم 6 (الأحد 25 أكتوبر)، ثم صحّح A فقط من صفحة حلوله.',
-                '<b>الاختبار B</b> في اليوم 7 (الاثنين 26 أكتوبر)، ثم صحّح B.',
+                '<b>الاختبار A</b> يوم الاثنين 26 أكتوبر بعد ما تخلص الطرق الأربع، ثم صحّح A فقط من صفحة حلوله.',
+                '<b>الاختبار B</b> إذا بقي وقت (الاثنين بالليل، أو قبلها لو خلصت بدري)، ثم صحّح B.',
                 'حلول كل اختبار بعد صفحة «قف» خاصة به. لا تفتح حلول B قبل ما تحل B.']))
             + box('warn', 'عن الأسئلة', ul([
-                'الأسئلة العشرة حقيقية: 9 من اختبارات المقرر السابقة (1445–1447) وواحد من تمارين مذكرة د. طارق. '
-                'حُجزت قبل كتابة المذكرة ولم تظهر فيها.',
+                'الأسئلة العشرة حقيقية: 7 من اختبارات المقرر السابقة (1445–1447)، وواحد من تمارين مذكرة د. طارق، '
+                'واثنين من مذكرة د. موسى (بدل سؤالين كانوا قريبين جدًا من أمثلة محاضرات دكتورك). كلها محجوزة وما تظهر في المذكرة.',
                 'لكن ما نقدر نضمن إنك ما شفتها قبل (مثلًا لو حليت الاختبارات السابقة). إذا عرفت سؤالًا، اكتب «شفته قبل» جنبه.',
                 'كل سؤال هنا جزء واحد من سؤال أصلي في الاختبار.']))
             + '</section>')
@@ -85,7 +93,7 @@ def solutions(which):
         cells = step_cells(it, SOLS[item_id], 'mock %s q%d' % (which, k))
         answer = answer_box(it, 'mock %s q%d' % (which, k))
         body = md(E.q_tex(it)) + steps_table(cells) + ('' if cells[-1][2] else answer)
-        types = '، '.join('النوع %d (%s)' % (t, TYPES[t]) for t in TYPE_OF[item_id])
+        types = '، '.join(case_ref(t) for t in TYPE_OF[item_id])
         extra = ' والمشتقات من 4.1' if item_id in ('1447-S1-SE-Q1.1', '1446-S1-SE-Q1.1') else ''
         body += p('<b>المصدر:</b> %s · معرّف الحجز %s' % (source_label(it), HOLD[item_id]), 'small')
         body += p('<b>إذا غلطت:</b> ارجع في المذكرة إلى %s%s، واقرأ ⚡ و🧱، وحل تمرينه الأخير.' % (types, extra), 'small')
@@ -98,13 +106,13 @@ def blueprint():
     for which in ('A', 'B'):
         for k, item_id in enumerate(order(which), 1):
             it = E.ITEMS[item_id]
-            rows.append(['%s%d' % (which, k), it['section'], '، '.join('النوع %d' % t for t in TYPE_OF[item_id]),
+            rows.append(['%s%d' % (which, k), it['section'], '، '.join('الحالة %d' % NEW_NUM[t][0] for t in TYPE_OF[item_id]),
                          'مشتقة' if it['task'] == 'diff' else 'تكامل', HOLD[item_id]])
     score = table(['الاختبار', 'صحيح كامل', 'بداية صحيحة فقط', 'خطأ أو فاضي'], [['A', '', '', ''], ['B', '', '', '']], 'errlog')
     return chapter('plan', 'مخطط الاختبارين ونتيجتك',
                    p('هذا اختيار تعليمي يوازن الدروس الثلاثة (مشتقة من 4.2 أولًا، ثم تكاملات من 4.2 و 5.1 و 5.2)، '
                      'وليس توزيعًا رسميًا للكويز؛ لا نعرف توزيعه الرسمي.')
-                   + table(['السؤال', 'الدرس', 'النوع في المذكرة', 'المطلوب', 'معرّف الحجز'], rows, 'answers')
+                   + table(['السؤال', 'الدرس', 'الحالة في المذكرة', 'المطلوب', 'معرّف الحجز'], rows, 'answers')
                    + '<h3>سجّل نتيجتك (عدد الأسئلة)</h3>' + score
                    + p(rich('«بداية صحيحة» يعني أول سطر صحيح (مثل $u$ و $du$، أو $u$ و $dv$) ثم تعطلت. هذه تعني أن المشكلة في التنفيذ أو الجبر، '
                             'لا في اختيار الطريقة.'), 'small'))

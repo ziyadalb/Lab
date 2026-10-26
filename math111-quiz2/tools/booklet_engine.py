@@ -144,7 +144,8 @@ def parts_rows(u, dv, du, v, label, branch=None):
     _record('parts_du', _zero(s.diff(U, x) - DU, branch), label=label, u=u, du=du)
     _record('parts_v', _zero(s.diff(V, x) - DV, branch), label=label, dv=dv, v=v)
     dv_tex = 'dx' if DV == 1 else tex(dv) + r'\,dx'
-    return (r'u = %s \qquad dv = %s \\ du = %s\,dx \qquad v = %s'
+    # colours (KaTeX macros of tools/render_math.mjs): 🔵 u, 🟢 du
+    return (r'\cU{u = %s} \qquad dv = %s \\ \cD{du = %s\,dx} \qquad v = %s'
             % (tex(u), dv_tex, tex(du), tex(v)))
 
 
@@ -152,7 +153,7 @@ def sub_row(u_of_x, du_claim, label, var='u', branch=None):
     U, DU = P(u_of_x), P(du_claim)
     _record('substitution', _zero(s.diff(U, x) - DU, branch), label=label, u=u_of_x, du=du_claim)
     dx = r'dx' if DU == 1 else r'-dx' if DU == -1 else tex(du_claim) + r'\,dx'
-    return r'%s = %s \qquad d%s = %s' % (var, tex(u_of_x), var, dx)
+    return r'\cU{%s = %s} \qquad \cD{d%s = %s}' % (var, tex(u_of_x), var, dx)
 
 
 def eq_chain(lhs_latex, rhs_list):

@@ -274,3 +274,66 @@ table.di { break-inside: avoid; }
 #night { break-before: page; }
 .tries-ans { margin: 1.5mm 0 0; padding-top: 1mm; border-top: 1px dotted var(--line); }
 .tries-ans ol { margin: 0.5mm 0; }
+
+/* ---------------- v7: ordered by method, one column, no boxes, colours with meaning ---------------- */
+:root { --mA: #6a3d9a; --mB: #0b5560; --mP: #8a5a00; --mC: #1f4e8c; --mT: #2e6b2f; --mD: #4a4a4a;
+        --cU: #1565c0; --cD: #1b7a2e; --cA: #d35400; --cR: #c0181f; }
+.unit-head.mA { border-bottom-color: var(--mA); } .unit-head.mA .num { background: var(--mA); }
+.unit-head.mB { border-bottom-color: var(--mB); } .unit-head.mB .num { background: var(--mB); }
+.unit-head.mP { border-bottom-color: var(--mP); } .unit-head.mP .num { background: var(--mP); }
+.unit-head.mC { border-bottom-color: var(--mC); } .unit-head.mC .num { background: var(--mC); }
+.unit-head .mtag { margin-inline-start: auto; font-size: 12pt; font-weight: 700; color: var(--muted); }
+.oldnum { color: #777; }
+.unit { margin-top: 6mm; }
+.part { margin: 2.2mm 0 0; }
+h4.ph { font-size: 13pt; margin: 0 0 0.8mm; padding-inline-start: 2mm; border-inline-start: 3.5px solid var(--accent); break-after: avoid; }
+.method.mA h4.ph, .unit-head.mA ~ .part h4.ph { border-inline-start-color: var(--mA); }
+.part.p-ex .q { break-after: avoid; }
+.part.p-paper { break-inside: avoid; }
+.danger { border-inline-start: 3px solid var(--cR); padding-inline-start: 2mm; margin: 0.8mm 0; }
+.danger p { margin: 0.3mm 0; }
+p.gist { margin: 2mm 0 1mm; padding: 1mm 2.5mm; background: var(--ok-tint); border-radius: 1.5mm; break-inside: avoid; }
+.confidence { display: flex; gap: 5mm; flex-wrap: wrap; margin: 2mm 0 0; font-size: 12pt; break-inside: avoid; }
+.drill { padding: 1mm 2.5mm; margin: 1.6mm 0; }
+h4.drills-title { margin: 3mm 0 0.5mm; font-size: 13.5pt; }
+p.leanwhy { margin: 0.5mm 0; color: var(--muted); }
+table.steps.lean td:nth-child(2) { width: auto; }
+table.steps.lean { margin: 0.5mm 0; }
+.sols { break-before: page; }
+.solcase { margin-top: 2.5mm; }
+.solcase > h4 { font-size: 13pt; color: var(--ok); margin: 0 0 0.5mm; break-after: avoid; }
+.sol { padding: 1mm 2.5mm; margin: 1.5mm 0; }
+.chapter.method > h2 { font-size: 20pt; }
+.chapter.mA > h2 { color: var(--mA); border-bottom-color: var(--mA); }
+.chapter.mB > h2 { color: var(--mB); border-bottom-color: var(--mB); }
+.chapter.mP > h2 { color: var(--mP); border-bottom-color: var(--mP); }
+.chapter.mC > h2 { color: var(--mC); border-bottom-color: var(--mC); }
+.chapter.mT > h2 { color: var(--mT); border-bottom-color: var(--mT); }
+ol.script { margin: 1mm 0; padding-inline-start: 7mm; font-weight: 600; }
+ol.script li { margin: 0.8mm 0; }
+ol.script-ex { margin: 1mm 0; padding-inline-start: 7mm; }
+ol.script-ex li { margin: 1mm 0; }
+ol.moves li { margin: 1.5mm 0; break-inside: avoid; }
+.numcheck { color: var(--muted); }
+.tree { margin: 2mm 0; }
+.tq { display: grid; grid-template-columns: 12mm 1fr; gap: 0 2mm; border: 1.5px solid var(--mT); border-radius: 2mm; padding: 1.5mm 2.5mm;
+      margin: 1.5mm 0; break-inside: avoid; }
+.tq .tl { grid-row: span 2; font-weight: 800; font-size: 16pt; color: var(--mT); align-self: center; }
+.tq .tg { font-weight: 700; }
+table.fam3 td { direction: ltr; text-align: left; }
+table.twins td:nth-child(1), table.twins td:nth-child(3) { direction: ltr; text-align: left; }
+table.twins tr, table.pairs tr, table.basic tr, table.dvtab tr { break-inside: avoid; }
+p.doctor { margin: 0.5mm 0; }
+.md.truesign { font-size: 0.92em; color: var(--muted); }
+table.oldnew td, table.oldnew th { padding: 0.3mm 2mm; }
+.fix { border-bottom: 1px dotted var(--line); padding: 1.5mm 0; break-inside: avoid; }
+.fixq { font-weight: 700; color: var(--cR); margin-top: 0.5mm; }
+.fixa { margin-top: 1mm; padding-inline-start: 2mm; border-inline-start: 3px solid var(--ok); }
+.fixa p { margin: 0.3mm 0; }
+/* v7: solutions in two columns (each solution stays whole) */
+section.sols { column-count: 2; column-gap: 5mm; column-rule: 1px solid #ddd; }
+section.sols > h3, section.sols > p { column-span: all; }
+.solcase > h4 { break-after: avoid; }
+.sol { break-inside: avoid; }
+section.sols .md .katex-display { margin: 0.4em 0; }
+section.sols table.steps.lean td { padding: 0.4mm 1mm; }

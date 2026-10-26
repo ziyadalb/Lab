@@ -106,7 +106,7 @@ def main():
     txt = subprocess.run(['pdftotext', '-layout', pdf_path, '-'], capture_output=True, text=True).stdout
     txt_n = unicodedata.normalize('NFKC', txt)
     probes_en = ['Evaluate the following integrals', 'Find dy/dx of the following']
-    probes_ar = ['الاختصار', 'العلامة', 'مثال من سؤال حقيقي', 'سلّم المساعدة']
+    probes_ar = ['الشجرة', 'متى؟', 'ليش تشتغل؟', 'الخطوات'] if 'guide' in pdf_path else ['الاختصار', 'العلامة', 'مثال من سؤال حقيقي', 'سلّم المساعدة']
     res['text_extraction'] = dict(
         tool='pdftotext (poppler)', characters=len(txt),
         english_found={w: w in txt for w in probes_en},
@@ -132,6 +132,10 @@ def main():
     res['fonts_loaded_in_browser'] = exp.get('fonts')
     if res['overflowing_formulas']:
         fails.append('formulas wider than their box: %d' % res['overflowing_formulas'])
+
+    # v7: the full guide must stay under 170 pages (Ziyad's limit), with a small margin
+    if 'Guide' in pdf_path and res['pages'] > 168:
+        fails.append('guide longer than 168 pages: %d' % res['pages'])
 
     res['failures'] = fails
     out_path.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding='utf-8')
