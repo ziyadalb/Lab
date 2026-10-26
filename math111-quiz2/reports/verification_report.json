@@ -6116,6 +6116,13 @@
       "symbolic_zero": true,
       "real_valued": true,
       "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
      }
     ]
    }

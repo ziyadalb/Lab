@@ -6,7 +6,7 @@
   "q": "raw:sin(4*x)*cos(3*x)", "answer": ["-cos(7*x)/14", "-cos(x)/2"], "branches": ["t", "-t"], "domain": "all real x",
   "case": "C52-PROD", "section": "5.2", "note": "products of different angles (case U-T8)"},
  {"id": "MU2-115-1", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 115, "number": "Home work (1)"}, "task": "int",
-  "q": "raw:1/(x*sqrt(25*x**2+16))", "answer": ["-acsch(5*x/4)/4"], "branches": ["t"], "domain": "x>0",
+  "q": "raw:1/(x*sqrt(25*x**2+16))", "answer": ["-acsch(5*Abs(x)/4)/4"], "branches": ["t", "-t"], "domain": "x!=0",
   "case": "C42-SECH", "section": "4.2", "note": "u outside the root, csch (case U-I3)"},
  {"id": "MU2-121-1", "kind": "musa", "src": {"file": "MUSA", "pdf_page": 121, "number": "1- Example"}, "task": "int",
   "q": "raw:(2*x-1)/(x**2-6*x+13)", "answer": ["log(x**2-6*x+13)", "5*atan((x-3)/2)/2"], "branches": ["t", "-t"], "domain": "all real x",

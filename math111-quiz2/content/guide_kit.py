@@ -167,7 +167,7 @@ def src_icon(it):
 def renum(text):
     """Rewrite old type numbers («النوع 12», «النوعين 14 و17», «الأنواع 22 إلى 25») as the new case numbers."""
     new = lambda n: NUM.get(OLD_ORDER[int(n) - 1]) if 1 <= int(n) <= len(OLD_ORDER) else None
-    text = text.replace('هذا النوع', 'هذي الحالة')
+    text = re.sub(r'هذا النوع (\d+)', lambda m: 'هذي الحالة %s' % (new(m.group(1)) or m.group(1)), text).replace('هذا النوع', 'هذي الحالة')
 
     def many(nums):
         got = sorted({new(n) for n in nums if new(n)})
@@ -636,9 +636,7 @@ class Unit:
         drills = ('<h4 class="drills-title">تمارين %s</h4>' % self.ref
                   + (en(first_prompt) if first_prompt else '')
                   + ''.join(html.replace('<div class="q">', '<div class="q">' + en(pr), 1) if pr != first_prompt else html
-                            for pr, html in self.drills)
-                  + '<div class="confidence"><b>ثقتك بهذي الحالة؟</b> <span>☐ ✓ أحلها لحالي</span>'
-                    '<span>☐ ؟ أحتاج المثال</span><span>☐ ✗ ارجع لها بكرة</span></div>')
+                            for pr, html in self.drills))
         if self.sols:                    # solutions are printed together at the end of the method (no page break per case)
             SOLS_BY_METHOD.setdefault(METHOD_OF.get(self.uid, 'B'), []).append(
                 '<div class="solcase"><h4>%s: %s %s</h4>%s</div>' % (self.ref, self.title, link(self.uid, '↩'), ''.join(self.sols)))

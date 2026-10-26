@@ -1910,8 +1910,8 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "U-I2 ex1 other side",
-   "claim": "diff(acoth(exp(x)/5)/5,x) = exp(x)/(25-exp(2*x))",
+   "label": "U-I2 ex1 other side (doctor sign)",
+   "claim": "diff(-acoth(exp(x)/5)/5,x) = -exp(x)/(25-exp(2*x))",
    "residual": "0"
   },
   {
@@ -2047,7 +2047,7 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I2 drill 1 step 2",
-   "claim": "diff(acoth(x/3)/3,x) = 1/(9-x**2)",
+   "claim": "diff(-acoth(x/3)/3,x) = -1/(9-x**2)",
    "residual": "0"
   },
   {
@@ -2404,7 +2404,14 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "U-I3 drill 1 step 3",
-   "claim": "diff(-acsch(x/4)/4,x) = 1/(x*sqrt(x**2+16))",
+   "claim": "diff(-acsch(Abs(x)/4)/4,x) = 1/(x*sqrt(x**2+16))",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "U-I3 drill 1 step 3",
+   "claim": "diff(-acsch(Abs(x)/4)/4,x) = 1/(x*sqrt(x**2+16))",
    "residual": "0"
   },
   {
@@ -2412,7 +2419,7 @@
    "ok": true,
    "item": "MU2-115-1",
    "label": "U-I3 drill 1 step 4",
-   "step": "-acsch(5*x/4)/4"
+   "step": "-acsch(5*Abs(x)/4)/4"
   },
   {
    "kind": "antiderivative",
@@ -8286,6 +8293,13 @@
   {
    "kind": "arithmetic",
    "ok": true,
+   "label": "U-P3 ex2 quick",
+   "claim": "diff(-1/x*(log(x)+1),x) = log(x)/x**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
    "label": "U-P3 ex1 short 1",
    "claim": "integrate(x**2,x) = x**3/3",
    "residual": "0"
@@ -12132,7 +12146,7 @@
   ]
  },
  "counts": {
-  "total": 1646,
-  "ok": 1646
+  "total": 1648,
+  "ok": 1648
  }
 }

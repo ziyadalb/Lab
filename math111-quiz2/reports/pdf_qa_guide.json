@@ -1,5 +1,5 @@
 {
- "pages": 169,
+ "pages": 167,
  "page_sizes_pt": [
   [
    595,
@@ -21,23 +21,23 @@
   "F16": "type3 (embedded glyph procedures)",
   "F166": "type3 (embedded glyph procedures)",
   "F17": "type3 (embedded glyph procedures)",
-  "F174": "type3 (embedded glyph procedures)",
-  "F178": "type3 (embedded glyph procedures)",
+  "F177": "type3 (embedded glyph procedures)",
+  "F180": "type3 (embedded glyph procedures)",
   "F19": "type3 (embedded glyph procedures)",
-  "F211": "type3 (embedded glyph procedures)",
-  "F234": "type3 (embedded glyph procedures)",
-  "F332": "type3 (embedded glyph procedures)",
+  "F213": "type3 (embedded glyph procedures)",
+  "F236": "type3 (embedded glyph procedures)",
+  "F334": "type3 (embedded glyph procedures)",
   "F451": "type3 (embedded glyph procedures)",
   "F493": "type3 (embedded glyph procedures)",
   "F55": "type3 (embedded glyph procedures)",
-  "F557": "type3 (embedded glyph procedures)",
+  "F555": "type3 (embedded glyph procedures)",
   "F558": "type3 (embedded glyph procedures)",
   "F56": "type3 (embedded glyph procedures)",
-  "F844": "type3 (embedded glyph procedures)",
-  "F852": "type3 (embedded glyph procedures)",
-  "F861": "type3 (embedded glyph procedures)",
-  "F876": "type3 (embedded glyph procedures)",
-  "F879": "type3 (embedded glyph procedures)",
+  "F842": "type3 (embedded glyph procedures)",
+  "F850": "type3 (embedded glyph procedures)",
+  "F859": "type3 (embedded glyph procedures)",
+  "F874": "type3 (embedded glyph procedures)",
+  "F877": "type3 (embedded glyph procedures)",
   "F88": "type3 (embedded glyph procedures)",
   "F93": "type3 (embedded glyph procedures)",
   "F94": "type3 (embedded glyph procedures)",
@@ -53,117 +53,15 @@
   "NAAAAA+KaTeX_Size3-Regular": "ttf",
   "OAAAAA+KaTeX_Size4-Regular": "ttf"
  },
- "min_arabic_pt": 11.46,
- "min_text_pt_excluding_math_and_page_numbers": 11.46,
- "small_arabic_spans": [
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": ".الحالة اقرأ غلط؟ ."
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "2 للحالة"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "روح صح؟ .أول"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": ")17 ص ،لحالك( 4 تمرين"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "حل"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "تعرفها؟"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "دالة منها 9و ،مجموعني ح"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "ّد"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "ين 12الـ من 10 .مرة كل مشتقتني 1 سؤال"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": ":الست الثانية الختبارات يف"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": ".تفرق"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "دكتورك فإشارة ،مرتني جات"
-  },
-  {
-   "page": 14,
-   "size": 11.46,
-   "text": "و .لحاله حد كل اشتق :عكسية زائدية دالة +"
-  },
-  {
-   "page": 18,
-   "size": 11.46,
-   "text": ".الحالة اقرأ غلط؟ ."
-  },
-  {
-   "page": 18,
-   "size": 11.46,
-   "text": "3 للحالة"
-  },
-  {
-   "page": 18,
-   "size": 11.46,
-   "text": "روح صح؟ .أول"
-  },
-  {
-   "page": 18,
-   "size": 11.46,
-   "text": ")20 ص ،لحالك( 3 تمرين"
-  },
-  {
-   "page": 18,
-   "size": 11.46,
-   "text": "حل"
-  },
-  {
-   "page": 18,
-   "size": 11.46,
-   "text": "تعرفها؟"
-  },
-  {
-   "page": 20,
-   "size": 11.46,
-   "text": ".الحالة اقرأ غلط؟ ."
-  }
- ],
+ "min_arabic_pt": 11.96,
+ "min_text_pt_excluding_math_and_page_numbers": 11.96,
  "internal_links": 554,
  "named_destinations": 252,
  "html_links": 515,
  "bookmarks": 65,
  "text_extraction": {
   "tool": "pdftotext (poppler)",
-  "characters": 909678,
+  "characters": 906583,
   "english_found": {
    "Evaluate the following integrals": true,
    "Find dy/dx of the following": true
@@ -182,8 +80,8 @@
   }
  },
  "math": {
-  "produced": 4366,
-  "rendered": 4366,
+  "produced": 4408,
+  "rendered": 4408,
   "mismatched": 0,
   "katex_errors": 0
  },
@@ -202,8 +100,5 @@
    true
   ]
  ],
- "failures": [
-  "Arabic text below 12 pt: 211 spans",
-  "guide longer than 168 pages: 169"
- ]
+ "failures": []
 }

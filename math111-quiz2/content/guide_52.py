@@ -297,7 +297,7 @@ def u_even():
          'نكامل كل حد ونقسم على رقم $x$: $\\frac12\\cdot\\frac14=\\frac18$، و $\\frac18\\cdot\\frac18=\\frac{1}{64}$.')], 'U-T3 ex2')
     ex += final(it, 'U-T3 example 2')
     U.add('ex', '🧱 مثال 2 محلول خطوة خطوة (من مذكرة د. طارق)', ex)
-    U.add('ok', '✔ تأكد', p(checked('U-T3 ok', 'في المثال 2، عوّض $x=0$ في السطر اللي قبل التكامل: $\\frac38+\\frac12+\\frac18=1$، '
+    U.add('ok', '✔ تأكد', p(checked('U-T3 ok', 'في $\\cos^{4}2x$ (ورقة الكويز تحت)، عوّض $x=0$ في السطر اللي قبل التكامل: $\\frac38+\\frac12+\\frac18=1$، '
                                     'و $\\cos^4(0)=1$ ✓. يعني فك المربع صح.',
                                     [('Rational(3,8)+Rational(1,2)+Rational(1,8)', '1'), ('cos(0)**4', '1')])))
     U.add('trap', '⚠️ الفخ', ul([rich('$\\int\\sin^2x\\,dx\\ne\\frac{\\sin^3x}{3}$، لأن مشتقة $\\sin x$ مو موجودة جنبه.'),
@@ -456,7 +456,7 @@ def u_tan_odd():
     U.add('sign', 'العلامة', when(
         'tan و sec مضروبتين، وأس tan فردي، ومعه sec واحد على الأقل: $\\int\\sec^3x\\tan^3x\\,dx$.',
         'أس tan زوجي وأس sec فردي ($\\tan^4x\\sec^3x$): تجزئة (حوّل كل tan لـ sec، ثم سلسلة sec). '
-        'وأس sec زوجي: احجز $\\sec^2x$ و $u=\\tan x$. وإذا الاثنين صح (tan فردي و sec زوجي)، أي واحد يمشي، وحجز $\\sec^2x$ أقصر.',
+        'وأس sec زوجي: احجز $\\sec^2x$ و $u=\\tan x$. وإذا الاثنين صح (tan فردي و sec زوجي)، أي واحد يمشي، وحجز $\\sec^2x$ غالبًا أقصر.',
         [(r'\int\tan^{3}x\sec^{3}x\,dx', 'تعويض: احجز $\\sec x\\tan x$، و $u=\\sec x$', '$m=3$ فردي'),
          (r'\int\tan^{4}x\sec^{3}x\,dx', 'تجزئة: حوّل كل tan لـ sec، ثم سلسلة sec', '$m$ زوجي و $n$ فردي')]))
     U.add('short', '🧭 الطريقة', TS_TREE + method(script(TRIG_SCRIPT, [
@@ -550,7 +550,7 @@ def u_reduce():
         checked('U-T6 check', 'عوّض $x=\\frac\\pi4$: $\\tan^4\\frac\\pi4=1$، و $1\\cdot(2-1)=1$ ✓',
                 [('tan(pi/4)**4', '1'), ('tan(pi/4)**2*(sec(pi/4)**2-1)', '1')]),
         'الحد اللي فيه $\\sec^2x$ تعويض $u=\\tan x$. والحد الثاني tan بأس أقل باثنين: اكسره مرة ثانية لين يصير الأس 1 أو يختفي'],
-        ['<b>و sec فردي لحاله</b> (عند دكتورك: $m$ زوجي و $n$ فردي ← تجزئة): $u=\\sec x$، و $dv=\\sec^2x\\,dx$. '
+        ['<b>و sec فردي لحاله</b> (عند دكتورك: $m$ زوجي و $n$ فردي ← تجزئة): $dv=\\sec^2x\\,dx$، و $u$ = باقي sec ($\\sec^3x$: $u=\\sec x$، و $\\sec^5x$: $u=\\sec^3x$). '
          'يرجع التكامل نفسه، فاجمعه في طرف واحد واقسم.']))
         + laws('U-T6', [(r'\tan^{2}x=\sec^{2}x-1', [('tan(x)**2', 'sec(x)**2-1')]),
                         (r'\int\tan x\,dx=\ln|\sec x|,\qquad \int\sec x\,dx=\ln|\sec x+\tan x|',
@@ -606,7 +606,7 @@ def u_reduce():
         rows=[('الأسس تبدأ من $4-1=3$ وتنزل 2، فتصير 3 ثم 1.', r'3,\ 1', [('4-1', '3'), ('3-2', '1')]),
               ('كل حد tan بالأس ÷ الأس، والإشارات $+$ ثم $-$.', r'\frac{\tan^{3}x}{3}-\frac{\tan^{1}x}{1}', [('tan(x)**3/3-tan(x)**1/1', 'tan(x)**3/3-tan(x)')]),
               ('الأس 4 زوجي، فآخر حد $x$، والدور على $+$. نفس جواب 🧱 ✓', r'\frac{\tan^{3}x}{3}-\tan x+x+C', [('=ANS', 'tan(x)**3/3-tan(x)+x')])],
-        after_rows=p(rich('<b>و sec الفردي:</b> $\\int\\sec^3x\\,dx$ جوابه جاهز «نص ونص»: $\\frac12\\sec x\\tan x+\\frac12\\ln|\\sec x+\\tan x|$، نفس مثال 2 ✓. '
+        after_rows=p(rich('<b>و sec الفردي:</b> $\\int\\sec^3x\\,dx$ جوابه جاهز «نص ونص»: $\\frac12\\sec x\\tan x+\\frac12\\ln|\\sec x+\\tan x|$. '
                           'ومع $\\sec^5$ ننزل مرة وحدة: $\\int\\sec^5x\\,dx=\\frac14\\sec^3x\\tan x+\\frac34\\int\\sec^3x\\,dx$، ثم «نص ونص».'
                           + arith('', [('diff(sec(x)*tan(x)/2+log(sec(x)+tan(x))/2,x)', 'sec(x)**3', 't/(1+t)'),
                                        ('diff(sec(x)**3*tan(x)/4,x)+Rational(3,4)*sec(x)**3', 'sec(x)**5')], 'U-T6 sec quick'))),

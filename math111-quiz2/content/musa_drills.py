@@ -27,10 +27,10 @@ MUSA_DRILLS = {
              sol_rows=[('sub', '5*x', '5', 'تحت الجذر $25x^2=(5x)^2$، فالداخل 🔵 $u=5x$.'),
                        ('tex', r'\frac{dx}{x}=\frac{du/5}{u/5}=\frac{du}{u}', [('(1/5)/(x/5)', '1/x')],
                         'الـ 5 فوق والـ 5 تحت يختصرون، فما فيه 🟠 رقم تعديل.'),
-                       ('tex', r'I=\int\frac{du}{u\sqrt{u^{2}+4^{2}}}=-\frac14\operatorname{csch}^{-1}\frac{u}{4}',
-                        [('diff(-acsch(x/4)/4,x)', '1/(x*sqrt(x**2+16))', 't')],
+                       ('tex', r'I=\int\frac{du}{u\sqrt{u^{2}+4^{2}}}=-\frac14\operatorname{csch}^{-1}\frac{|u|}{4}',
+                        [('diff(-acsch(Abs(x)/4)/4,x)', '1/(x*sqrt(x**2+16))', 't'), ('diff(-acsch(Abs(x)/4)/4,x)', '1/(x*sqrt(x**2+16))', '-t')],
                         '$u$ برّا الجذر وتحت الجذر زائد: قانون csch⁻¹، فيه 🔴 سالب و $\\frac1a=\\frac14$.'),
-                       ('line', '-acsch(5*x/4)/4', 'نرجّع $u=5x$.')])],
+                       ('line', '-acsch(5*Abs(x)/4)/4', 'نرجّع $u=5x$، ونخلي $|5x|$ لأن $x$ ممكن يكون سالب.')])],
     'U-I6': [
         dict(item='MU2-121-1', hint='البسط فيه جمع: اكتب $2x-1=(2x-6)+5$. الأول مشتقة المقام، والثاني رقم.',
              first=r'\frac{2x-1}{x^{2}-6x+13}=\frac{2x-6}{x^{2}-6x+13}+\frac{5}{x^{2}-6x+13}',

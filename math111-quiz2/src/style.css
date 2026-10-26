@@ -379,10 +379,13 @@ h3[id^="mastery-"] { break-after: avoid; }
 section.sols .katex { font-size: 0.86em; }
 /* v7 team pass: ⭐ core cases, «تعرفها؟» under the case header, «قبل ما تقرأ» on a method's first page, «ابدأ هنا» */
 .unit-head .star { font-size: 15pt; line-height: 1; }
-p.knowit { font-size: 11.5pt; margin: -1mm 0 2.5mm; padding: 0.8mm 2.5mm; border-inline-start: 3px solid #999;
+p.knowit { font-size: 12pt; margin: -1mm 0 2.5mm; padding: 0.8mm 2.5mm; border-inline-start: 3px solid #999;
            background: #f6f6f6; break-after: avoid; break-inside: avoid; }
 p.pretest { padding: 1.2mm 3mm; border: 1.5px dashed #888; border-radius: 2mm; break-inside: avoid; }
 p.starline { padding: 1.2mm 3mm; background: #fff8e1; border-inline-start: 3px solid #e0a800; }
-p.examline { font-size: 11.5pt; }
+p.examline { font-size: 12pt; }
 p.expect { padding: 1.2mm 3mm; border: 1.5px solid #333; border-radius: 2mm; break-inside: avoid; }
 ol.plan.start li { margin-bottom: 1.2mm; }
+/* the old → new numbers in the appendix: three columns of short lines */
+ul.oldnew { columns: 3; column-gap: 6mm; list-style: none; padding: 0; margin: 1mm 0 0; }
+ul.oldnew li { break-inside: avoid; }
