@@ -10752,9 +10752,51 @@
    "status": "symbolic"
   },
   {
+   "kind": "derivative",
+   "ok": true,
+   "item": "N42-X1-5",
+   "label": "mastery A",
+   "status": "symbolic"
+  },
+  {
+   "kind": "derivative",
+   "ok": true,
+   "item": "M-06",
+   "label": "mastery A",
+   "status": "symbolic"
+  },
+  {
    "kind": "antiderivative",
    "ok": true,
    "item": "N52-E2-2",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-04",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-X03",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E4-1",
+   "label": "mastery B",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N42-X2-01",
    "label": "mastery B",
    "status": "symbolic"
   },
@@ -10797,6 +10839,27 @@
    "kind": "antiderivative",
    "ok": true,
    "item": "1446-S1-SE-Q2.5",
+   "label": "mastery C",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X06",
+   "label": "mastery C",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N51-X08",
+   "label": "mastery C",
+   "status": "symbolic"
+  },
+  {
+   "kind": "antiderivative",
+   "ok": true,
+   "item": "N52-E3-1",
    "label": "mastery C",
    "status": "symbolic"
   },
@@ -11896,7 +11959,25 @@
   "1446-S2-FE-Q1.3": [
    "mastery A"
   ],
+  "N42-X1-5": [
+   "mastery A"
+  ],
+  "M-06": [
+   "mastery A"
+  ],
   "N52-E2-2": [
+   "mastery B"
+  ],
+  "N42-X2-04": [
+   "mastery B"
+  ],
+  "N52-X03": [
+   "mastery B"
+  ],
+  "N52-E4-1": [
+   "mastery B"
+  ],
+  "N42-X2-01": [
    "mastery B"
   ],
   "1445-S2-SE-Q2.7": [
@@ -11915,6 +11996,15 @@
    "mastery P"
   ],
   "1446-S1-SE-Q2.5": [
+   "mastery C"
+  ],
+  "N51-X06": [
+   "mastery C"
+  ],
+  "N51-X08": [
+   "mastery C"
+  ],
+  "N52-E3-1": [
    "mastery C"
   ],
   "N42-X2-13": [
@@ -12042,7 +12132,7 @@
   ]
  },
  "counts": {
-  "total": 1637,
-  "ok": 1637
+  "total": 1646,
+  "ok": 1646
  }
 }

@@ -519,7 +519,31 @@
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mastery A"
  },
+ "N42-X1-5": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery A"
+ },
+ "M-06": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery A"
+ },
  "N52-E2-2": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery B"
+ },
+ "N42-X2-04": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery B"
+ },
+ "N52-X03": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery B"
+ },
+ "N52-E4-1": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery B"
+ },
+ "N42-X2-01": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mastery B"
  },
@@ -544,6 +568,18 @@
   "location": "mastery P"
  },
  "1446-S1-SE-Q2.5": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery C"
+ },
+ "N51-X06": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery C"
+ },
+ "N51-X08": {
+  "usage": "مستخدم في المذكرة الكاملة",
+  "location": "mastery C"
+ },
+ "N52-E3-1": {
   "usage": "مستخدم في المذكرة الكاملة",
   "location": "mastery C"
  },

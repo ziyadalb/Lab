@@ -32,14 +32,18 @@ def F(f, F_, kind='int', label='', **kw):
 
 # ---------------------------------------------------------------- the fixed words of each method
 SCRIPTS = {
-    'A': ['وش الدالة اللي برّا؟', 'مشتقتها من الجدول، والداخل يبقى مثل ما هو', '🟢 × مشتقة الداخل', 'بسّط'],
+    'A': ['وش الدالة اللي برّا؟', 'مشتقتها من الجدول، والداخل يبقى مثل ما هو', '🟢 × مشتقة الداخل', 'بسّط',
+          '🔴 <b>لا تنسى:</b> كل حد له مشتقته، و $y\'=$ قبل الجواب'],
     'B': ['🔵 سمّ الداخل $u$', '🟢 اشتقه: $du=\\ldots\\,dx$',
           '🟠 اقسم اللي برّا على مشتقة الداخل: طلع رقم؟ هذا رقم التعديل، يطلع قدّام التكامل مرة وحدة بس',
-          'اكتب التكامل كله بـ $u$، وطبّق القانون', 'رجّع $x$، وحط $+C$'],
-    'P': ['وش الشكل اللي يدلك؟', 'سوّ الحركة', 'تأكد برقم إن الشكل الجديد يساوي القديم', 'ارجع للشجرة: الحين وش الطريقة؟'],
+          'اكتب التكامل كله بـ $u$، وطبّق القانون', 'رجّع $x$، وحط $+C$',
+          '🔴 <b>لا تنسى:</b> $|u|$ داخل ln، ورقم التعديل مرة وحدة، و $+C$'],
+    'P': ['وش الشكل اللي يدلك؟', 'سوّ الحركة', 'تأكد برقم إن الشكل الجديد يساوي القديم', 'ارجع للشجرة: الحين وش الطريقة؟',
+          '🔴 <b>لا تنسى:</b> التجهيز ما يغيّر القيمة؛ لو الرقم ما طابق، الحركة غلط'],
     'C': ['رتّب بـ LIATE: اللي أول هو 🔵 $u$، والباقي $dv$', 'المربع: $u$ و $dv$ فوق، و 🟢 $du$ و $v$ تحت',
           'القانون: $uv-\\int v\\,du$', 'كمّل $\\int v\\,du$؛ وإذا تكررت التجزئة: جدول DI، وعمود الإشارات 🔴 $+\\,-\\,+$ تكتبه أول',
-          '$+C$؛ وفي المحدد: احسب كامل، ثم عوّض'],
+          '$+C$؛ وفي المحدد: احسب كامل، ثم عوّض',
+          '🔴 <b>لا تنسى:</b> السالب قدّام $\\int v\\,du$ يدخل على كل حدوده'],
 }
 SEC_ID = {'A': 'sA', 'B': 'sB', 'P': 'sP', 'C': 'sC'}
 # the four questions of the tree: (label, question, where it sends you)
@@ -86,6 +90,13 @@ def howto(plan_rows, old_rows):
         '<b>جدول الحل</b> فيه عمودان: «الخطوة» تكتبها في الكويز، و«ليش؟» لك أنت عشان تفهم.',
         '<b>التمارين</b> متدرجة: موجّه (أول سطر جاهز)، ثم ناقص الخطوات، ثم لحالك. حاول بالقلم، وبعدين اضغط «✅ الحل».'])
     colours, marks = legend()
+    links = ul([rich('<b>4.1 ← 4.2:</b> 4.2 هو 4.1 بالعكس. $\\sinh$ تعطي $\\cosh$، والمعكوس $\\sinh^{-1}$ له مشتقة جديدة في الجدول.'),
+                rich('<b>المشتقة ← التكامل:</b> كل صف في جدول المشتقات، اقلبه يصير قانون تكامل: '
+                     '$(\\sinh^{-1}u)\'=\\frac{u\'}{\\sqrt{u^2+1}}$، فـ $\\int\\frac{du}{\\sqrt{u^2+1}}=\\sinh^{-1}u$.'),
+                rich('<b>التعويض = قاعدة السلسلة بالعكس:</b> في المشتقة تضرب في 🟢 مشتقة الداخل. في التكامل تلقاها جاهزة، وتشيلها بـ $du$.'),
+                rich('<b>التجزئة = قاعدة الضرب بالعكس:</b> $(uv)\'=u\'v+uv\'$، فـ $\\int u\\,dv=uv-\\int v\\,du$.'),
+                rich('<b>5.2 = تجهيز + تعويض:</b> تحجز $\\sin x$ أو $\\sec^2x$، فيصير السؤال تعويض عادي. وأحيانًا تجزئة ($\\sec^3x$).'),
+                rich('<b>فالكويز كله أربع أدوات:</b> جدول مشتقات، وجدول تكاملات، وتعويض، وتجزئة. والتجهيزات بس تصلّح الشكل.')])
     old = table(['الرقم القديم', 'الحالة الجديدة', 'العنوان', 'ص'], old_rows, 'answers oldnew')
     gloss = table(['في ورقة الكويز', 'معناها'], [
         [en('Evaluate the following integrals'), 'احسب التكاملات التالية'],
@@ -93,6 +104,7 @@ def howto(plan_rows, old_rows):
         [mi(r'\sinh^{-1}x') + ' أو ' + en('arcsinh x'), 'معكوس sinh (مو ' + mi(r'\frac{1}{\sinh x}') + ')'],
         [mi(r'\log x'), 'لوغاريتم بأساس 10؛ و ' + mi(r'\ln x') + ' الطبيعي']], 'glossary')
     return chapter('howto', 'كيف تذاكر منها', order
+                   + '<h3>🔗 هل الدروس مترابطة؟ إيه، وهذي الروابط</h3>' + links
                    + '<h3>📋 الترتيب</h3>' + '<ol class="plan">' + ''.join('<li>%s</li>' % r[1] for r in plan_rows) + '</ol>'
                    + '<h3>🎨 الألوان: نفس المعنى في كل المذكرة</h3>' + colours
                    + p('كل لون معه رمز، فلو طبعت المذكرة أبيض وأسود تعرف المعنى من الرمز.', 'small')
@@ -496,10 +508,18 @@ def fix_mistakes():
 MASTERY_KEYS = []
 
 
+# checked questions from Dr. Tariq's and Dr. Musa's notes that the guide does not use elsewhere: (case, item), by method
+MASTERY_FILL = {
+    'A': [('U-D1', 'N42-X1-5'), ('U-D2', 'M-06'), ('U-D1', 'N42-E1-3'), ('U-D2', 'M-28')],
+    'B': [('U-I3', 'N42-X2-04'), ('U-T2', 'N52-X03'), ('U-T7', 'N52-E4-1'), ('U-I1', 'N42-X2-01'), ('U-T2', 'N52-X02')],
+    'P': [('U-T3', 'N52-E1-3'), ('U-T8', 'N52-E5-2')],
+    'C': [('U-P3', 'N51-X06'), ('U-P6', 'N51-X08'), ('U-T6', 'N52-E3-1')]}
+
+
 def mastery():
     """Five unlabelled questions per method from past exams that did not fit in their case; answers in the keys."""
     from booklet import final as _fin, source_label
-    from booklet_engine import ITEMS, ans_tex, q_tex, use
+    from booklet_engine import BLOCKED, ITEMS, USED, ans_tex, q_tex, use
     out = p(rich('<b>فحص الإتقان:</b> بدون عناوين، مثل الكويز. حل الخمسة لحالك. <b>4 من 5 صح</b>؟ كمّل. '
                  'أقل؟ ارجع لحالة اللي غلطت فيه (رقمها في المفاتيح) وحل تمرينها الأخير.'))
     for m in 'ABPC':
@@ -513,6 +533,9 @@ def mastery():
         for c in pool:
             if c not in picks and len(picks) < 5:
                 picks.append(c)
+        for uid, i in MASTERY_FILL.get(m, []):     # still short: questions from the notes not used anywhere in the guide
+            if len(picks) < 5 and uid in K.NUM and i not in USED and i not in BLOCKED:
+                picks.append((uid, i))
         if not picks:
             continue
         qs, keys = '', []
@@ -523,7 +546,7 @@ def mastery():
             keys.append([str(k), link(uid, 'الحالة %d' % K.NUM[uid]), mi(r'\displaystyle ' + ans_tex(it).lstrip('= ')),
                          source_label(it)])
         MASTERY_KEYS.append((m, keys))
-        out += ('<h3 id="mastery-%s">%s %s. %s (%d أسئلة)</h3>' % (m, '✅', K.METHODS[m][0], K.METHODS[m][1], len(picks))
+        out += ('<h3 id="mastery-%s">✅ %s (%d أسئلة)</h3>' % (m, K.mname(m), len(picks))
                 + '<div class="chgrid">' + qs + '</div>' + p('المفتاح: ' + link('k-mastery', 'ص ' + pgref('k-mastery')), 'small'))
     return chapter('mastery', '✅ فحوص الإتقان', out, 'flow')
 
@@ -531,6 +554,6 @@ def mastery():
 def mastery_keys():
     out = ''
     for m, rows in MASTERY_KEYS:
-        out += ('<h4>%s. %s</h4>' % (K.METHODS[m][0], K.METHODS[m][1])
+        out += ('<h4>%s</h4>' % K.mname(m)
                 + table(['#', 'الحالة', 'الجواب', 'المصدر'], rows, 'answers'))
     return '<h3 id="k-mastery">مفتاح فحوص الإتقان</h3>' + out if out else ''

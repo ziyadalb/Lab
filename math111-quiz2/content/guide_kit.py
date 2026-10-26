@@ -140,6 +140,12 @@ def lean_steps(cells):
             + '<table class="steps lean"><tbody>' + body + '</tbody></table>')
 
 
+def mname(m):
+    """«ب. التعويض», «🔧 التجهيزات»."""
+    letter, name = METHODS[m][0], METHODS[m][1]
+    return ('%s %s' if letter == '🔧' else '%s. %s') % (letter, name)
+
+
 def times(n):
     """«مرة / مرتين / 3 مرات» in the guide's dialect."""
     return {1: 'مرة', 2: 'مرتين'}.get(n, '%d مرات' % n if 3 <= n <= 10 else '%d مرة' % n)
@@ -596,7 +602,7 @@ class Unit:
                 elif not oks:
                     raise BuildError('unit %s has no quick check' % self.uid)
                 trap = ''.join('<div class="danger">' + _lead('<b>🔴 انتبه:</b>', t) + '</div>' for t in traps)
-                out.append(part('✔ قبل ما تسلّم', trap + _lead('<b>✍️ في ورقة الكويز:</b>', inner) + check, 'p-paper'))
+                out.append(part('🔴 لا تنسى، قبل ما تسلّم', trap + _lead('<b>✍️ في ورقة الكويز:</b>', inner) + check, 'p-paper'))
                 continue
             if kind == 'short':
                 heading = label.replace('🧭 الطريقة', '🪜 الخطوات')
@@ -630,7 +636,7 @@ def sols_section(m):
     blocks = SOLS_BY_METHOD.get(m, [])
     if not blocks:
         return ''
-    return ('<section class="sols" id="sols-%s"><h3>✅ حلول تمارين %s. %s</h3>' % (m, METHODS[m][0], METHODS[m][1])
+    return ('<section class="sols" id="sols-%s"><h3>✅ حلول تمارين %s</h3>' % (m, mname(m))
             + p('حاولت؟ قارن حلك سطر سطر. الشرح الكامل في 🧱 حالته. جوابك شكله غير؟ شوف '
                 + link('differs', 'جوابك يختلف عن المفتاح؟') + '.', 'small') + ''.join(blocks) + '</section>')
 
