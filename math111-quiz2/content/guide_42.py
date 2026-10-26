@@ -318,8 +318,10 @@ def u_six():
          formula('1/(a**2-u**2)', 'acoth(u/a)/a', branches=('a+t', '-a-t'), pos=('a',), label='U-I1 law coth'),
          formula('1/(u*sqrt(a**2-u**2))', '-asech(Abs(u)/a)/a', branches=('a*t/(1+t)', '-a*t/(1+t)'), pos=('a',), label='U-I1 law sech'),
          formula('1/(u*sqrt(a**2+u**2))', '-acsch(Abs(u)/a)/a', pos=('a',), label='U-I1 law csch')]
-    conds = ['كل ' + mi('u'), mi('u>a'), mi('|u|<a'), mi('|u|>a'), mi('0<|u|<a'), mi(r'u\neq0')]
-    law = table(['التكامل', 'الجواب (+C)', 'الشرط'], [frow(z, c) for z, c in zip(r, conds)], 'formula')
+    conds = ['كل ' + mi('u'), mi('u>a'), mi('|u|<a'), mi('|u|>a') + ' ✎ دكتورك', mi('0<|u|<a'), mi(r'u\neq0')]
+    from booklet import doctor_coth, doctor_note
+    r[3] = (r[3][0], doctor_coth('int'))          # the doctor's sign first; the math sign in the note under the table
+    law = table(['التكامل', 'الجواب (+C)', 'الشرط'], [frow(z, c) for z, c in zip(r, conds)], 'formula') + doctor_note('int')
     law += p(rich('$a$ رقم موجب: الرقم اللي مربعه في السؤال. أول قانونين (جذر لحاله) بدون $\\frac1a$، والأربعة الباقية فيها $\\frac1a$.'), 'small')
     U.add('short', '📐 القانون: جدول التكاملات الستة', law + method([
         '<b>🔵 سمّ الداخل $u$:</b> نكتب كل حد تحت الجذر كمربع، مثل $4x^2=(2x)^2$. اللي داخل المربع هو $u$، والرقم $a^2$.',

@@ -565,7 +565,6 @@ class Unit:
         meta = ['📍 الشجرة: ' + rich(TREE.get(self.uid, TREE_DEFAULT[m])), fire(self.uid)]
         if musa:
             meta.append('📗 في مذكرة د. موسى: %d' % musa)
-        meta.append('⏱️ %d دقيقة' % unit_minutes(self.uid))
         if needs:
             meta.append('تحتاج: ' + needs)
         if self.uid in OLD_NUM:

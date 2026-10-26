@@ -1505,6 +1505,29 @@
   {
    "kind": "arithmetic",
    "ok": true,
+   "label": "doctor coth int",
+   "claim": "diff(-acoth(x/3)/3,x) = -1/(9-x**2)",
+   "residual": "0"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "six coth (math sign)",
+   "f": "1/(a**2-u**2)",
+   "F": "acoth(u/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "formula",
+   "ok": true,
+   "label": "coth math sign",
+   "f": "1/(a**2-u**2)",
+   "F": "acoth(u/a)/a",
+   "status": "symbolic"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
    "label": "U-I1 trick 1",
    "claim": "diff(3*x**2,x)/6 = x",
    "residual": "0"
@@ -12019,7 +12042,7 @@
   ]
  },
  "counts": {
-  "total": 1634,
-  "ok": 1634
+  "total": 1637,
+  "ok": 1637
  }
 }

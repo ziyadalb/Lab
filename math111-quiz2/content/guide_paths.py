@@ -93,8 +93,7 @@ def howto(plan_rows, old_rows):
         [mi(r'\sinh^{-1}x') + ' أو ' + en('arcsinh x'), 'معكوس sinh (مو ' + mi(r'\frac{1}{\sinh x}') + ')'],
         [mi(r'\log x'), 'لوغاريتم بأساس 10؛ و ' + mi(r'\ln x') + ' الطبيعي']], 'glossary')
     return chapter('howto', 'كيف تذاكر منها', order
-                   + '<h3>⏱️ خطة الاثنين (يوم قبل الكويز)</h3>' + table(['#', 'وش تسوي', 'الوقت'], plan_rows, 'compact plan')
-                   + p(rich('لو تعبت: الحالات اللي «🔥 ما جات في الاختبارات» وعليها ✗ خلّها لآخر شي.'), 'small')
+                   + '<h3>📋 الترتيب</h3>' + '<ol class="plan">' + ''.join('<li>%s</li>' % r[1] for r in plan_rows) + '</ol>'
                    + '<h3>🎨 الألوان: نفس المعنى في كل المذكرة</h3>' + colours
                    + p('كل لون معه رمز، فلو طبعت المذكرة أبيض وأسود تعرف المعنى من الرمز.', 'small')
                    + '<h3>الرموز</h3>' + marks
@@ -404,7 +403,7 @@ def intro_D():
               + '<h3>صف $\\coth^{-1}$ عند دكتورك، و $\\int a^u\\,du$</h3>' + blanks(2))
     body = (p(rich('في الكويز الأسئلة مخلوطة وبدون عناوين. هنا تتدرب على <b>القرار</b>: وش الطريقة؟ ووش أول سطر؟ '
                    'ثلاث صفحات «وش الحالة؟» (بدون حل)، ثم مراجعة مخلوطة تحلها كاملة، ثم صفحة من ذاكرتك.'))
-            + part('🧠 من ذاكرتك (10 دقائق)', memory))
+            + part('🧠 من ذاكرتك', memory))
     return chapter('sD', 'د. التمييز والتذكر', body, 'method mD')
 
 
@@ -426,7 +425,7 @@ def fullmark():
         ['$+C$', 'في كل تكامل غير محدد'], ['الإشارات', '🔴 sin و csc و cot و sech و csch، والسالب قدّام القوس'],
         ['رقم التعديل', '🟠 مرة وحدة بس'], ['المشتقة', '🟢 مضروبة في مشتقة الداخل؟'], ['تكامل جواب واحد على الأقل', 'اشتقه: يرجع السؤال؟']], 'compact')
     body = (part('✅ لازم ينكتب (عليه درجات)', must) + part('➖ ما يلزم (لا تضيّع وقتك فيه)', not_needed)
-            + part('⏱️ آخر دقيقتين قبل التسليم', rich(plan)))
+            + part('✔ قبل التسليم', rich(plan)))
     return chapter('fullmark', '💯 ورقة الدرجة الكاملة', body, 'flow')
 
 
@@ -501,7 +500,7 @@ def mastery():
     """Five unlabelled questions per method from past exams that did not fit in their case; answers in the keys."""
     from booklet import final as _fin, source_label
     from booklet_engine import ITEMS, ans_tex, q_tex, use
-    out = p(rich('<b>فحص الإتقان:</b> بدون عناوين، مثل الكويز. حل الخمسة في 15 دقيقة. <b>4 من 5 صح</b>؟ كمّل. '
+    out = p(rich('<b>فحص الإتقان:</b> بدون عناوين، مثل الكويز. حل الخمسة لحالك. <b>4 من 5 صح</b>؟ كمّل. '
                  'أقل؟ ارجع لحالة اللي غلطت فيه (رقمها في المفاتيح) وحل تمرينها الأخير.'))
     for m in 'ABPC':
         order = {'exam': 0, 'musa': 1, 'generated': 3}
@@ -519,7 +518,7 @@ def mastery():
         qs, keys = '', []
         for k, (uid, item_id) in enumerate(picks, 1):
             it = use(item_id, 'mastery %s' % m)
-            qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(q_tex(it)), lines(2, 'write tight'))
+            qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(q_tex(it)), lines(1, 'write tight'))
             _fin(it, 'mastery %s' % m)
             keys.append([str(k), link(uid, 'الحالة %d' % K.NUM[uid]), mi(r'\displaystyle ' + ans_tex(it).lstrip('= ')),
                          source_label(it)])

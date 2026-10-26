@@ -130,7 +130,7 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "mock A q5 step 1",
-   "claim": "sin(x)**7*cos(x)**5 = sin(x)**7*(1-sin(x)**2)**2*cos(x)",
+   "claim": "cos(x)**7*sin(x)**6 = sin(x)**6*(1-sin(x)**2)**3*cos(x)",
    "residual": "0"
   },
   {
@@ -144,20 +144,20 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "mock A q5 step 3",
-   "claim": "u**7*(1-2*u**2+u**4) = u**7-2*u**9+u**11",
+   "claim": "u**6*(1-u**2)**3 = u**6-3*u**8+3*u**10-u**12",
    "residual": "0"
   },
   {
    "kind": "step",
    "ok": true,
-   "item": "MU-93-3",
+   "item": "MU-94-3",
    "label": "mock A q5 step 4",
-   "step": "sin(x)**8/8-sin(x)**10/5+sin(x)**12/12"
+   "step": "sin(x)**7/7-sin(x)**9/3+3*sin(x)**11/11-sin(x)**13/13"
   },
   {
    "kind": "antiderivative",
    "ok": true,
-   "item": "MU-93-3",
+   "item": "MU-94-3",
    "label": "mock A q5",
    "status": "symbolic"
   },
@@ -322,7 +322,7 @@
   "1446-S2-SE-Q2.5": [
    "mock A"
   ],
-  "MU-93-3": [
+  "MU-94-3": [
    "mock A"
   ],
   "1446-S1-SE-Q1.1": [

@@ -343,3 +343,8 @@ section.sols table.steps.lean td { padding: 0.4mm 1mm; }
 /* v7: the «which case?» pages flow one after another (each was half a page) */
 section.chapter.flow[id^="speed"] { break-before: auto; margin-top: 6mm; }
 section.chapter.flow[id^="speed"] .ch { break-inside: avoid; }
+table.trigvals, table.four, table.fam3, table.oldnew { break-inside: avoid; }
+/* v7: in the two solution columns a long inline formula may break after + or = (instead of running out of its column) */
+section.sols .mi .katex { white-space: normal; }
+section.sols table.steps.lean td { overflow-wrap: anywhere; }
+section.sols .sol > .drill-head .mi .katex { font-size: 0.95em; }

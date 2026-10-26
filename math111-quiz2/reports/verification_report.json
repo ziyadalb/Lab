@@ -6048,11 +6048,172 @@
      }
     ]
    }
+  },
+  {
+   "id": "MU2-102-1",
+   "kind": "musa",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MU2-102-2",
+   "kind": "musa",
+   "task": "int",
+   "case": "C52-PROD",
+   "section": "5.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MU2-115-1",
+   "kind": "musa",
+   "task": "int",
+   "case": "C42-SECH",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MU2-121-1",
+   "kind": "musa",
+   "task": "int",
+   "case": "C42-SPLIT",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MU2-123-2",
+   "kind": "musa",
+   "task": "int",
+   "case": "C42-CS",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     },
+     {
+      "branch": "-t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "-t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MU2-52-4",
+   "kind": "musa",
+   "task": "int",
+   "case": "C42-SQRT",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MU2-52-2",
+   "kind": "musa",
+   "task": "int",
+   "case": "C42-INV",
+   "section": "4.2",
+   "answer": {
+    "status": "symbolic",
+    "details": [
+     {
+      "branch": "t",
+      "residual": "0",
+      "symbolic_zero": true,
+      "real_valued": true,
+      "probe_branch": "t"
+     }
+    ]
+   }
   }
  ],
  "items_summary": {
   "answer": {
-   "symbolic": 279
+   "symbolic": 286
   },
   "official": {
    "symbolic": 55,
