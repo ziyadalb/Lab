@@ -1,0 +1,419 @@
+{
+ "tool": "SymPy 1.14.0",
+ "assumptions": "x real; ln|f| differentiated as log(f) (same derivative wherever f != 0); a>0 in R2",
+ "questions": [
+  {
+   "id": "1445-S1-SE-Q2.8",
+   "location": "M 111 - (451-452) - English.pdf p8",
+   "branch": "B1",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "0": {
+     "official": "1/3",
+     "coverup": "1/3",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "2/5",
+     "decomposition": "2/5",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "-1/5",
+     "decomposition": "-1/5",
+     "ok": true
+    },
+    "2": {
+     "integrand": "5/26",
+     "decomposition": "5/26",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1445-S2-SE-Q2.8",
+   "location": "M 111 - (451-452) - English.pdf p24",
+   "branch": "B1",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "0": {
+     "official": "2",
+     "coverup": "2",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "14/5",
+     "decomposition": "14/5",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "-8/5",
+     "decomposition": "-8/5",
+     "ok": true
+    },
+    "2": {
+     "integrand": "13/8",
+     "decomposition": "13/8",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1446-S1-SE-Q2.8",
+   "location": "M111 - (461-462).pdf p8",
+   "branch": "B1",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "0": {
+     "official": "2",
+     "coverup": "2",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "14/5",
+     "decomposition": "14/5",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "-12/5",
+     "decomposition": "-12/5",
+     "ok": true
+    },
+    "2": {
+     "integrand": "15/8",
+     "decomposition": "15/8",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1446-S2-SE-Q2.9",
+   "location": "M111 - (461-462).pdf p24",
+   "branch": "B1",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "0": {
+     "official": "1",
+     "coverup": "1",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "11/10",
+     "decomposition": "11/10",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "-9/10",
+     "decomposition": "-9/10",
+     "ok": true
+    },
+    "2": {
+     "integrand": "15/26",
+     "decomposition": "15/26",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1447-S1-SE-Q2.8",
+   "location": "M111 (471-472)_2.pdf p7",
+   "branch": "B3",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {},
+   "spot_values": {
+    "1": {
+     "integrand": "3/2",
+     "decomposition": "3/2",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "-1/2",
+     "decomposition": "-1/2",
+     "ok": true
+    },
+    "2": {
+     "integrand": "1/4",
+     "decomposition": "1/4",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1447-S2-SE-Q3.6",
+   "location": "M111 (471-472)_2.pdf p22",
+   "branch": "B1",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "0": {
+     "official": "1",
+     "coverup": "1",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "8/5",
+     "decomposition": "8/5",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "-6/5",
+     "decomposition": "-6/5",
+     "ok": true
+    },
+    "2": {
+     "integrand": "9/8",
+     "decomposition": "9/8",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1445-S1-FE-Q2.4",
+   "location": "M 111 - (451-452) - English.pdf p12",
+   "branch": "B1",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "0": {
+     "official": "3",
+     "coverup": "3",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "3",
+     "decomposition": "3",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "-17/5",
+     "decomposition": "-17/5",
+     "ok": true
+    },
+    "2": {
+     "integrand": "13/8",
+     "decomposition": "13/8",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1445-S2-FE-Q2.4",
+   "location": "M 111 - (451-452) - English.pdf p28",
+   "branch": "B2",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "2": {
+     "official": "7/6",
+     "coverup": "7/6",
+     "ok": true
+    },
+    "-4": {
+     "official": "11/6",
+     "coverup": "11/6",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "-4/5",
+     "decomposition": "-4/5",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "2/9",
+     "decomposition": "2/9",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1446-S1-FE-Q2.4",
+   "location": "M111 - (461-462).pdf p12",
+   "branch": "B1",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "0": {
+     "official": "1",
+     "coverup": "1",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "2",
+     "decomposition": "2",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "1",
+     "decomposition": "1",
+     "ok": true
+    },
+    "2": {
+     "integrand": "7/10",
+     "decomposition": "7/10",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1446-S2-FE-Q2.3",
+   "location": "M111 - (461-462).pdf p26",
+   "branch": "B1",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "0": {
+     "official": "2",
+     "coverup": "2",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "12/5",
+     "decomposition": "12/5",
+     "ok": true
+    },
+    "-1": {
+     "integrand": "-2",
+     "decomposition": "-2",
+     "ok": true
+    },
+    "2": {
+     "integrand": "11/8",
+     "decomposition": "11/8",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1447-S1-FE-Q2.4",
+   "location": "M111 (471-472)_2.pdf p11",
+   "branch": "B4",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "-1": {
+     "official": "3",
+     "coverup": "3",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "1": {
+     "integrand": "5/2",
+     "decomposition": "5/2",
+     "ok": true
+    },
+    "2": {
+     "integrand": "12/7",
+     "decomposition": "12/7",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  },
+  {
+   "id": "1447-S2-FE-Q2.4",
+   "location": "M111 (471-472)_2.pdf p26",
+   "branch": "B5",
+   "decomposition_identity": true,
+   "apart_matches": true,
+   "answer_derivative": true,
+   "coverup": {
+    "1": {
+     "official": "1",
+     "coverup": "1",
+     "ok": true
+    },
+    "-1": {
+     "official": "-1",
+     "coverup": "-1",
+     "ok": true
+    }
+   },
+   "spot_values": {
+    "2": {
+     "integrand": "13/15",
+     "decomposition": "13/15",
+     "ok": true
+    }
+   },
+   "status": "مثبت (تطابق رمزي)"
+  }
+ ],
+ "rules": {
+  "R1_readoff_x(x^2+a^2)": {
+   "statement": "(p x^2+q x+r)/(x(x^2+a^2)) = (r/a^2)/x + ((p - r/a^2) x + q)/(x^2+a^2)",
+   "conditions": "a != 0; denominator exactly x times (x^2 + a^2): linear factor is x itself, quadratic has no x-term",
+   "symbolic": true
+  },
+  "R2_split": {
+   "statement": "int (Bx+C)/(x^2+a^2) dx = (B/2) ln(x^2+a^2) + (C/a) tan^-1(x/a) + c",
+   "conditions": "a>0",
+   "symbolic": true
+  },
+  "R3_coverup": {
+   "statement": "D=(x-s)E, E(s)!=0: coefficient of 1/(x-s) = N(s)/E(s)",
+   "conditions": "linear factor not repeated; proper fraction",
+   "symbolic_generic_quadratic_E": true,
+   "numeric_case_1447S1FE": true
+  }
+ },
+ "traps": [
+  {
+   "case": "R1 copied onto (x+1)(x^2+x+1) [1447-S1-FE-Q2.4]",
+   "wrong_equals_integrand": false,
+   "expected": false
+  },
+  {
+   "case": "cover-up on repeated x^2 [1447-S1-SE-Q2.8]: gives coefficient of 1/x^2 only",
+   "coverup_value": "1",
+   "official_A2_(1/x^2)": "1",
+   "official_A1_(1/x)": "2",
+   "note": "covering x^2 gives A2=1 (correct for 1/x^2); A1 must come from comparing coefficients"
+  }
+ ],
+ "all_ok": true
+}

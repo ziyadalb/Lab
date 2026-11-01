@@ -1,5 +1,9 @@
 # Lab
 
+## ريض 111 — اختبار 17 نوفمبر 2026 (النهائي المحتمل)
+
+العمل الحالي في المجلد [`riyad111/`](riyad111/README.md). ابدأ من [`riyad111/progress.md`](riyad111/progress.md)، والشرح في [`riyad111/chapters/P08_draft.md`](riyad111/chapters/P08_draft.md).
+
 ## ريض 111 — الكويز الثاني
 
 **الملف الذي تذاكر منه:**
