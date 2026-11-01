@@ -1,0 +1,6 @@
+{
+  "name": "riyad111-build",
+  "private": true,
+  "description": "Render math with KaTeX and export the memo PDF with Playwright (global).",
+  "dependencies": { "katex": "0.16.22" }
+}

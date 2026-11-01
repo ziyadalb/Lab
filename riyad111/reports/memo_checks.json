@@ -1,0 +1,407 @@
+[
+ {
+  "key": "m.add",
+  "desc": "3/x + (x-1)/(x^2+4) = (4x^2-x+12)/(x^3+4x)",
+  "ok": true
+ },
+ {
+  "key": "m.add.num",
+  "desc": "3(x^2+4)+(x-1)x = 4x^2-x+12",
+  "ok": true
+ },
+ {
+  "key": "m.fac",
+  "desc": "x^3+4x = x(x^2+4)",
+  "ok": true
+ },
+ {
+  "key": "m.disc",
+  "desc": "0^2-4*1*4 = -16",
+  "ok": true
+ },
+ {
+  "key": "m.expand",
+  "desc": "A(x^2+4)+(Bx+C)x = (A+B)x^2+Cx+4A",
+  "ok": true
+ },
+ {
+  "key": "m.solve",
+  "desc": "A=3,B=1,C=-1 solve the system",
+  "ok": true
+ },
+ {
+  "key": "m.dec",
+  "desc": "decomposition equals integrand",
+  "ok": true
+ },
+ {
+  "key": "m.spot-1",
+  "desc": "x=-1: both sides -17/5",
+  "ok": true
+ },
+ {
+  "key": "m.spot1",
+  "desc": "x=1: both sides 3",
+  "ok": true
+ },
+ {
+  "key": "m.ans",
+  "desc": "answer differentiates to integrand",
+  "ok": true
+ },
+ {
+  "key": "m.d1",
+  "desc": "d/dx (1/2)ln(x^2+4) = x/(x^2+4)",
+  "ok": true
+ },
+ {
+  "key": "m.d2",
+  "desc": "d/dx (1/2)tan^-1(x/2) = 1/(x^2+4)",
+  "ok": true
+ },
+ {
+  "key": "m.d2b",
+  "desc": "(1/2)(1/2)/(1+x^2/4) = 1/(x^2+4)",
+  "ok": true
+ },
+ {
+  "key": "m.usub",
+  "desc": "int x/(x^2+4): u=x^2+4, du=2x dx -> (1/2)ln u",
+  "ok": true
+ },
+ {
+  "key": "m.cover",
+  "desc": "cover-up A = 12/(0+4) = 3",
+  "ok": true
+ },
+ {
+  "key": "rule.readoff",
+  "desc": "(px^2+qx+r)/(x(x^2+a^2)) = (r/a^2)/x + ((p-r/a^2)x+q)/(x^2+a^2)",
+  "ok": true
+ },
+ {
+  "key": "rule.split",
+  "desc": "int (Bx+C)/(x^2+a^2) = (B/2)ln(x^2+a^2) + (C/a)tan^-1(x/a)",
+  "ok": true
+ },
+ {
+  "key": "rule.atan",
+  "desc": "int dx/(x^2+a^2) = (1/a)tan^-1(x/a)",
+  "ok": true
+ },
+ {
+  "key": "rule.cover",
+  "desc": "cover-up: N(s) = A E(s) from N = A E + (x-s)(...)",
+  "ok": true
+ },
+ {
+  "key": "b2.fac",
+  "desc": "x^2+2x-8 = (x-2)(x+4)",
+  "ok": true
+ },
+ {
+  "key": "b2.c1",
+  "desc": "x=2: (3*2+1)/(2+4) = 7/6",
+  "ok": true
+ },
+ {
+  "key": "b2.c2",
+  "desc": "x=-4: (3(-4)+1)/(-4-2) = 11/6",
+  "ok": true
+ },
+ {
+  "key": "b2.dec",
+  "desc": "7/6/(x-2) + 11/6/(x+4)",
+  "ok": true
+ },
+ {
+  "key": "b2.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "b3.expand",
+  "desc": "A1 x(1+x^2)+A2(1+x^2)+(Bx+C)x^2 = (A1+B)x^3+(A2+C)x^2+A1 x+A2",
+  "ok": true
+ },
+ {
+  "key": "b3.dec",
+  "desc": "2/x + 1/x^2 + (-2x-1)/(1+x^2)",
+  "ok": true
+ },
+ {
+  "key": "b3.cover",
+  "desc": "cover x^2 at 0: (2*0+1)/(1+0) = 1 = A2",
+  "ok": true
+ },
+ {
+  "key": "b3.pow",
+  "desc": "int x^-2 = -1/x",
+  "ok": true
+ },
+ {
+  "key": "b3.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "b4.disc",
+  "desc": "1-4 = -3",
+  "ok": true
+ },
+ {
+  "key": "b4.cover",
+  "desc": "x=-1: (5-6+4)/(1-1+1) = 3",
+  "ok": true
+ },
+ {
+  "key": "b4.expand",
+  "desc": "A(x^2+x+1)+(Bx+C)(x+1) = (A+B)x^2+(A+B+C)x+(A+C)",
+  "ok": true
+ },
+ {
+  "key": "b4.xcheck",
+  "desc": "x-coefficient check 3+2+1 = 6",
+  "ok": true
+ },
+ {
+  "key": "b4.dec",
+  "desc": "3/(x+1) + (2x+1)/(x^2+x+1)",
+  "ok": true
+ },
+ {
+  "key": "b4.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "b4.trap",
+  "desc": "read-off copied onto (x+1)(x^2+x+1) is wrong: at x=0 gives 10, original 4",
+  "ok": true
+ },
+ {
+  "key": "b5.fac",
+  "desc": "x^2-1 = (x-1)(x+1)",
+  "ok": true
+ },
+ {
+  "key": "b5.c1",
+  "desc": "x=1: (3+1)/((1+1)(1+1)) = 1",
+  "ok": true
+ },
+ {
+  "key": "b5.c2",
+  "desc": "x=-1: (3+1)/((-1-1)(1+1)) = -1",
+  "ok": true
+ },
+ {
+  "key": "b5.x3",
+  "desc": "x^3 coefficient A1+A2+B",
+  "ok": true
+ },
+ {
+  "key": "b5.x0",
+  "desc": "x=0: A1 - A2 - C",
+  "ok": true
+ },
+ {
+  "key": "b5.dec",
+  "desc": "1/(x-1) - 1/(x+1) + 1/(x^2+1)",
+  "ok": true
+ },
+ {
+  "key": "b5.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "pair.ln",
+  "desc": "int (2x+2)/(x^2+2x-8) = ln|x^2+2x-8|",
+  "ok": true
+ },
+ {
+  "key": "pair.pf",
+  "desc": "(2x+2)/((x-2)(x+4)) = 1/(x-2) + 1/(x+4)",
+  "ok": true
+ },
+ {
+  "key": "pair.same",
+  "desc": "ln|x-2|+ln|x+4| = ln|(x-2)(x+4)|",
+  "ok": true
+ },
+ {
+  "key": "t2a",
+  "desc": "int (2x+1)/(x^2+x+1) = ln(x^2+x+1)",
+  "ok": true
+ },
+ {
+  "key": "t2b",
+  "desc": "int (x+3)/(x^2+9) = (1/2)ln(x^2+9) + tan^-1(x/3)",
+  "ok": true
+ },
+ {
+  "key": "t2c.fac",
+  "desc": "x^3+2x^2 = x^2(x+2)",
+  "ok": true
+ },
+ {
+  "key": "t2c.dec",
+  "desc": "2/x - 1/x^2 + 3/(x+2)",
+  "ok": true
+ },
+ {
+  "key": "t2c.cov",
+  "desc": "x=-2: (20-6-2)/4 = 3; x^2 at 0: -2/2 = -1",
+  "ok": true
+ },
+ {
+  "key": "t2c.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "t3.read",
+  "desc": "A=3/9=1/3, C=1, B=0-1/3",
+  "ok": true
+ },
+ {
+  "key": "t3.dec",
+  "desc": "(1/3)/x + (-(1/3)x+1)/(x^2+9)",
+  "ok": true
+ },
+ {
+  "key": "t3.split",
+  "desc": "B/2 = -1/6, C/a = 1/3",
+  "ok": true
+ },
+ {
+  "key": "t3.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "t4.dec",
+  "desc": "2/x + (3x+1)/(x^2+4)",
+  "ok": true
+ },
+ {
+  "key": "t4.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "t5.dec",
+  "desc": "1/x + (2x+1)/(x^2+4)",
+  "ok": true
+ },
+ {
+  "key": "t5.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "t6.cov",
+  "desc": "x=2: 18/6=3; x=-4: -30/-6=5",
+  "ok": true
+ },
+ {
+  "key": "t6.dec",
+  "desc": "3/(x-2) + 5/(x+4)",
+  "ok": true
+ },
+ {
+  "key": "t6.notder",
+  "desc": "8x+2 is not a multiple of 2x+2",
+  "ok": true
+ },
+ {
+  "key": "t6.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "t7.cov",
+  "desc": "x=1: 1/(1+1) = 1/2",
+  "ok": true
+ },
+ {
+  "key": "t7.expand",
+  "desc": "A(x^2+1)+(Bx+C)(x-1) = (A+B)x^2+(C-B)x+(A-C)",
+  "ok": true
+ },
+ {
+  "key": "t7.dec",
+  "desc": "(1/2)/(x-1) + (-(1/2)x-1/2)/(x^2+1)",
+  "ok": true
+ },
+ {
+  "key": "t7.xcheck",
+  "desc": "x coefficient C-B = 0",
+  "ok": true
+ },
+ {
+  "key": "t7.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "t8.fac",
+  "desc": "x^3-2x^2 = x^2(x-2)",
+  "ok": true
+ },
+ {
+  "key": "t8.cov",
+  "desc": "x=2: 5/4; x^2 at 0: 1/(-2)",
+  "ok": true
+ },
+ {
+  "key": "t8.expand",
+  "desc": "Ax(x-2)+B(x-2)+Cx^2 = (A+C)x^2+(B-2A)x-2B",
+  "ok": true
+ },
+ {
+  "key": "t8.dec",
+  "desc": "-(1/4)/x - (1/2)/x^2 + (5/4)/(x-2)",
+  "ok": true
+ },
+ {
+  "key": "t8.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "t9.div",
+  "desc": "(x^3-1) = (x^2+x)(x-1) + (x-1)",
+  "ok": true
+ },
+ {
+  "key": "t9.dec",
+  "desc": "x-1 - 1/x + 2/(x+1)",
+  "ok": true
+ },
+ {
+  "key": "t9.cov",
+  "desc": "(x-1)/(x(x+1)): x=0 -> -1, x=-1 -> 2",
+  "ok": true
+ },
+ {
+  "key": "t9.ans",
+  "desc": "answer",
+  "ok": true
+ },
+ {
+  "key": "t10.fac",
+  "desc": "u^2+5u+6 = (u+2)(u+3)",
+  "ok": true
+ },
+ {
+  "key": "t10.dec",
+  "desc": "1/((u+2)(u+3)) = 1/(u+2) - 1/(u+3)",
+  "ok": true
+ },
+ {
+  "key": "t10.ans",
+  "desc": "answer ln(sin x+2) - ln(sin x+3)",
+  "ok": true
+ }
+]
