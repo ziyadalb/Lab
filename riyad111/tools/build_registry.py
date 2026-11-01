@@ -1,4 +1,5 @@
 """Build riyad111/data/questions.csv (batch 1: six finals + six second exams).
+Scope (student, 2026-11-01): Midterm 2, same as 1447-S2 second exam -> 4.2, 5.1-5.5, 6.1.
 
 IDs are reused from math111-quiz2/data/registry_full.csv (stable since Oct 2026).
 Q1/Q2 math text comes from that registry (automatic extraction + visual review there);
@@ -94,13 +95,30 @@ for i, m, pat, br in Q3:
     rows.append(dict(id=i, paper=paper(i), paper_type='نهائي', file=FILES[i[:4]], pdf_page=o.get('pdf_page', ''), marks='',
                      task='', math=m, pattern=pat, branch=br + ' (مبدئي)', solution='حل رسمي في الملف',
                      verification='لم يُحقق بعد (يفتح مع نمطه)', note='استخراج من طبقة النص الخام؛ مراجعة بصرية عند فتح النمط'))
+# --- scope (2026-11-01, student): Midterm 2 = same scope as 1447-S2 second exam -> 4.2, 5.1-5.5, 6.1
+SEC_BY_PAT = {'P01': '2.2', 'P02': '2.2', 'P03': '4.2', 'P04': '3.x', 'P06': '5.1', 'P07': '5.3', 'P08': '5.4',
+              'P09': '5.5', 'P10': '5.2', 'P12': '6.1', 'P13': '6.2', 'P14': '7.1', 'P15': '7.2', 'P16': '7.3',
+              'P17': '8.2', 'P18': '8.4'}
+SEC_FIX = {'1446-S2-FE-Q2.5': '3.4', '1447-S2-FE-Q2.2': '3.4', '1447-S1-FE-Q2.3': '2.4/3.x', '1447-S2-FE-Q2.1': '3.1',
+           '1447-S1-FE-Q1.3': '3.3', '1447-S2-FE-Q1.3': '3.1'}
+IN = {'4.2', '5.1', '5.2', '5.3', '5.4', '5.5', '6.1'}
+oldsec = {r['id']: r['section'] for r in old}
+for d in rows:
+    sec = SEC_FIX.get(d['id']) or SEC_BY_PAT.get(d['pattern'])
+    if d['pattern'] in ('P05', 'P11') and d['id'] not in SEC_FIX:
+        sec = oldsec.get(d['id'], '').split()[0]
+    d['section'] = sec
+    if sec in IN: d['in_scope'] = 'داخل'
+    elif sec in ('3.4', '4.1'): d['in_scope'] = 'أساس (خارج كسؤال مستقل)'
+    else: d['in_scope'] = 'خارج'
 rows.sort(key=lambda d: d['id'])
 out = ROOT/'riyad111/data/questions.csv'
 with open(out, 'w', newline='', encoding='utf-8-sig') as fh:
-    w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
+    w = csv.DictWriter(fh, fieldnames=['id','paper','paper_type','file','pdf_page','marks','section','in_scope','task','math','pattern','branch','solution','verification','note']); w.writeheader(); w.writerows(rows)
 # counts per pattern: questions and independent papers (union of ids)
 cnt = collections.defaultdict(lambda: {'q': set(), 'p': set(), 'pf': set()})
 for d in rows:
+    if d['in_scope'] != 'داخل': continue
     c = cnt[d['pattern']]; c['q'].add(d['id']); c['p'].add(d['paper'])
     if d['paper_type'] == 'نهائي': c['pf'].add(d['paper'])
 print(len(rows), 'rows')
