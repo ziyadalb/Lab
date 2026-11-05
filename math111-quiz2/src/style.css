@@ -428,3 +428,5 @@ section.chapter.oe .sol > .drill-head { break-after: avoid; }
 .oe-grid2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 4mm; align-items: start; }
 .oe-grid2 > .sbox { margin: 2mm 0; }
 ul.keylist.cols2 { column-count: 2; column-gap: 6mm; list-style: none; padding-inline-start: 0; }
+/* odd/even: the u/du page starts under the study plan (the 21-question tracker pushes the plan to its own page) */
+section.chapter.oe#udu { break-before: auto; margin-top: 8mm; }

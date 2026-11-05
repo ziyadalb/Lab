@@ -79,6 +79,12 @@ Q = {
            r'\frac15\sin^{5}x-\frac27\sin^{7}x+\frac19\sin^{9}x+c', 'twin'),
     'C3': (r'\int\cos^{7}x\sin^{6}x\,dx', 94, 3, 'C', 'cos(x)**7*sin(x)**6', 'sin(x)**7/7-sin(x)**9/3+3*sin(x)**11/11-sin(x)**13/13',
            r'\frac17\sin^{7}x-\frac13\sin^{9}x+\frac3{11}\sin^{11}x-\frac1{13}\sin^{13}x+c', 'hard'),
+    'C4': (r'\int\sqrt[3]{\cos x}\,\sin^{3}x\,dx', 107, 4, 'C', 'cos(x)**Rational(1,3)*sin(x)**3',
+           '-3*cos(x)**Rational(4,3)/4+3*cos(x)**Rational(10,3)/10', r'-\frac34\cos^{4/3}x+\frac3{10}\cos^{10/3}x+c', 'solo'),
+    'C5': (r'\int\sin^{3}x\cos^{4}x\,dx', 107, 1, 'C', 'sin(x)**3*cos(x)**4', '-cos(x)**5/5+cos(x)**7/7',
+           r'-\frac15\cos^{5}x+\frac17\cos^{7}x+c', 'check'),
+    'C6': (r'\int\sin^{2}x\cos^{5}x\,dx', 107, 2, 'C', 'sin(x)**2*cos(x)**5', 'sin(x)**3/3-2*sin(x)**5/5+sin(x)**7/7',
+           r'\frac13\sin^{3}x-\frac25\sin^{5}x+\frac17\sin^{7}x+c', 'test'),
     'D1': (r'\int\sin^{2}x\cos^{2}x\,dx', 96, 1, 'D', 'sin(x)**2*cos(x)**2', 'x/8-sin(4*x)/32', r'\frac18x-\frac1{32}\sin4x+c', 'worked'),
     'D2': (r'\int\sin^{4}x\cos^{2}x\,dx', 96, 2, 'D', 'sin(x)**4*cos(x)**2', 'x/16-sin(4*x)/64-sin(2*x)**3/48',
            r'\frac{x}{16}-\frac{\sin4x}{64}-\frac{\sin^{3}2x}{48}+c', 'fill'),
@@ -89,14 +95,16 @@ Q = {
     'D5': (r'\int\cos^{4}x\sin^{2}x\,dx', 96, 5, 'D', 'cos(x)**4*sin(x)**2', 'x/16-sin(4*x)/64+sin(2*x)**3/48',
            r'\frac{x}{16}-\frac{\sin4x}{64}+\frac{\sin^{3}2x}{48}+c', 'solo'),
 }
-GROUP = {'A': ('secA', '١. أسس لحالها', 'موسى ص 89–92'), 'C': ('secB', '٢. Odd and Even', 'موسى ص 94–95'),
+GROUP = {'A': ('secA', '١. أسس لحالها', 'موسى ص 89–92'), 'C': ('secB', '٢. Odd and Even', 'موسى ص 94–95 و 107'),
          'B': ('secC', '٣. Odd and Odd', 'موسى ص 93'), 'D': ('secD', '٤. Even and Even', 'موسى ص 96–97')}
-KIND = {'worked': '🧱 محلول', 'twin': '👯 توأم', 'solo': '✏️ لحالك', 'fill': '✍️ فراغات', 'hard': '⭐⭐ تحدي'}
+KIND = {'worked': '🧱 محلول', 'twin': '👯 توأم', 'solo': '✏️ لحالك', 'fill': '✍️ فراغات', 'hard': '⭐⭐ تحدي',
+        'check': '✅ الفحص الصغير', 'test': '📝 الاختبار (4)'}
+DUP = {'B1': 3, 'A1': 13, 'A4': 14}   # the same question again in Dr. Musa's mixed list on p. 107
 TWIN_OF = {'A2': 'A3', 'B2': 'B1', 'C2': 'C1'}
 
 
 def musa(k):
-    return 'موسى ص %d (%d)' % (Q[k][1], Q[k][2])
+    return 'موسى ص %d (%d)' % (Q[k][1], Q[k][2]) + ((' · وكمان ص 107 (%d)' % DUP[k]) if k in DUP else '')
 
 
 # ---------------------------------------------------------------- the steps of every question (checked)
@@ -281,6 +289,43 @@ ROWS = {
             [(D('5*x/128-sin(4*x)/128-sin(2*x)**3/48-sin(8*x)/1024'), 'sin(x)**6*cos(x)**2')], 'نفس جواب $\\cos^6\\sin^2$، والفرق إشارة وحدة.')],
 }
 
+ROWS.update({
+    'C4': [(r'I=\int\cos^{1/3}x\,\sin^{2}x\,\cD{\sin x\,dx}', [('cos(x)**Rational(1,3)*sin(x)**3', 'cos(x)**Rational(1,3)*sin(x)**2*sin(x)')],
+            '$\\sqrt[3]{\\cos x}=\\cos^{1/3}x$: الأس الكسري ما نحجز منه. و sin أسه فردي (3): نحجز $\\sin x\\,dx$ عشان تصير $du$.'),
+           (r'I=\int\cos^{1/3}x\,(1-\cos^{2}x)\,\cD{\sin x\,dx}', [('sin(x)**2', '1-cos(x)**2')], 'الباقي $\\sin^2x$ نحوّله لـ cos، عشان يصير كله $u$.'),
+           U_COS(),
+           (r'I=\int' + UB(r'\cos^{1/3}x', 'u^{1/3}') + r'\,' + UB(r'(1-\cos^{2}x)', r'(1-u^{2})') + r'\;' + UD(r'\sin x\,dx', MINUS_DU),
+            [('cos(x)**Rational(1,3)*sin(x)**3', '-cos(x)**Rational(1,3)*(1-cos(x)**2)*diff(cos(x),x)')], SWAP_WHY_MINUS, SWAP),
+           (r'I=\cR{-}\int u^{1/3}(1-u^{2})\,du=-\int\left(u^{1/3}-u^{7/3}\right)du', [('u**Rational(1,3)*(1-u**2)', 'u**Rational(1,3)-u**Rational(7,3)')],
+            'السالب قدّام التكامل. ونوزّع: $\\frac13+2=\\frac73$ (لأن $2=\\frac63$).'),
+           (r'I=-\left[\frac34u^{4/3}-\frac3{10}u^{10/3}\right]+c', [('integrate(u**Rational(1,3)-u**Rational(7,3),u)', '3*u**Rational(4,3)/4-3*u**Rational(10,3)/10')],
+            'زد 1 واقلب: $\\frac13+1=\\frac43$ فنضرب في $\\frac34$، و $\\frac73+1=\\frac{10}3$ فنضرب في $\\frac3{10}$.'),
+           (r'I=-\frac34\cos^{4/3}x+\frac3{10}\cos^{10/3}x+c', [(D('-3*cos(x)**Rational(4,3)/4+3*cos(x)**Rational(10,3)/10'), 'cos(x)**Rational(1,3)*sin(x)**3')],
+            'نوزّع السالب ونرجّع $u=\\cos x$. أعلى أس $\\frac{10}3=\\frac13+3$ ✓')],
+    'C5': [(r'I=\int\sin^{2}x\cos^{4}x\,\cD{\sin x\,dx}', [('sin(x)**3*cos(x)**4', 'sin(x)**2*cos(x)**4*sin(x)')],
+            'أس sin فردي (3)، وأس cos زوجي (4): نحجز $\\sin x\\,dx$ عشان تصير $du$.'),
+           (r'I=\int(1-\cos^{2}x)\cos^{4}x\,\cD{\sin x\,dx}', [('sin(x)**2', '1-cos(x)**2')], 'الباقي $\\sin^2x$ نحوّله لـ cos، عشان يصير كله $u$.'),
+           U_COS(),
+           (r'I=\int' + UB(r'(1-\cos^{2}x)', r'(1-u^{2})') + r'\,' + UB(r'\cos^{4}x', 'u^{4}') + r'\;' + UD(r'\sin x\,dx', MINUS_DU),
+            [('sin(x)**3*cos(x)**4', '-(1-cos(x)**2)*cos(x)**4*diff(cos(x),x)')], SWAP_WHY_MINUS, SWAP),
+           (r'I=\cR{-}\int(1-u^{2})u^{4}\,du=-\int(u^{4}-u^{6})\,du', [('(1-u**2)*u**4', 'u**4-u**6')], 'السالب قدّام التكامل. ونضرب $u^4$ في القوس.'),
+           (r'I=-\left[\frac15u^{5}-\frac17u^{7}\right]+c', [('integrate(u**4-u**6,u)', 'u**5/5-u**7/7')], 'كل حد لحاله، والسالب برّا القوس.'),
+           (r'I=-\frac15\cos^{5}x+\frac17\cos^{7}x+c', [(D('-cos(x)**5/5+cos(x)**7/7'), 'sin(x)**3*cos(x)**4')],
+            'نوزّع السالب ونرجّع $u=\\cos x$. أعلى أس 7 = 3 + 4 ✓')],
+    'C6': [(r'I=\int\sin^{2}x\cos^{4}x\,\cD{\cos x\,dx}', [('sin(x)**2*cos(x)**5', 'sin(x)**2*cos(x)**4*cos(x)')],
+            'أس cos فردي (5)، وأس sin زوجي (2): نحجز $\\cos x\\,dx$ عشان تصير $du$.'),
+           (r'I=\int\sin^{2}x\,(1-\sin^{2}x)^{2}\,\cD{\cos x\,dx}', [('cos(x)**4', '(1-sin(x)**2)**2')],
+            '$\\cos^4=(\\cos^2)^2$، ونحوّل لـ sin عشان يصير كله $u$.'),
+           U_SIN(),
+           (r'I=\int' + UB(r'\sin^{2}x', 'u^{2}') + r'\,' + UB(r'(1-\sin^{2}x)^{2}', r'(1-u^{2})^{2}') + r'\;' + UD(r'\cos x\,dx'),
+            [('sin(x)**2*cos(x)**5', 'sin(x)**2*(1-sin(x)**2)**2*diff(sin(x),x)')], SWAP_WHY, SWAP),
+           (r'I=\int u^{2}(1-2u^{2}+u^{4})\,du=\int(u^{2}-2u^{4}+u^{6})\,du', [('u**2*(1-u**2)**2', 'u**2-2*u**4+u**6')],
+            'نفك القوس (جاهز في الأدوات)، ونضرب في $u^2$.'),
+           (r'I=\frac13\sin^{3}x-\frac25\sin^{5}x+\frac17\sin^{7}x+c', [(D('sin(x)**3/3-2*sin(x)**5/5+sin(x)**7/7'), 'sin(x)**2*cos(x)**5')],
+            'كل حد لحاله، ونرجّع $u=\\sin x$. أعلى أس 7 = 2 + 5 ✓')],
+})
+
+
 # the fill-in-the-blanks lines of D2 (the full lines are the checked rows above)
 FILL_D2 = [r'\sin^{4}x\cos^{2}x=(\sin x\cos x)^{2}\sin^{2}x=\frac14\sin^{2}2x\cdot' + BLANK,
            r'=\frac18\sin^{2}2x-' + BLANK + r'\,\sin^{2}2x\cos2x',
@@ -312,7 +357,7 @@ def page_map():
         ('udu', '🔑 u و du'), ('tools', '🧰 الأدوات والجبر'), ('secA', GROUP['A'][1]), ('secB', GROUP['C'][1]), ('secC', GROUP['B'][1]),
         ('secD', GROUP['D'][1]), ('fix', '🔍 صحّح الغلط'), ('test', '📝 اختبار الإتقان'), ('key', '🔑 المفتاح'),
         ('sols', '✅ حلول أسئلة موسى'), ('recall', '🧠 استرجاع قبل الكويز')]]), 'contents')
-    order = ['A3', 'A5', 'A2', 'A1', 'A6', 'A4', 'A7', 'C1', 'C2', 'C3', 'B1', 'B2', 'B3', 'D1', 'D2', 'D5', 'D3', 'D4']   # study order
+    order = ['A3', 'A5', 'A2', 'A1', 'A6', 'A4', 'A7', 'C1', 'C2', 'C4', 'C3', 'C5', 'B1', 'B2', 'B3', 'D1', 'D2', 'D5', 'D3', 'D4', 'C6']   # study order
     tracker = table(['☐', 'السؤال', 'عند موسى', 'هنا', 'ص'], [
         ['☐', mi(Q[k][0]), musa(k), KIND[Q[k][7]], link('q-' + k, pgref('q-' + k))] for k in order], 'tracker')
     plan = ('<ol class="plan">' + ''.join('<li>%s</li>' % rich(t) for t in [
@@ -329,10 +374,11 @@ def page_map():
                    + '<div class="udu-hint">' + rich('🔑 <b>ما فهمت $u$ و $du$؟</b> ') + link('udu', 'صفحتها قبل أي حل: ص ' + pgref('udu')) + '</div>'
                    + '<h3>ليش؟ (3 أسطر تخليك تطلع القواعد بنفسك)</h3>' + why
                    + '<h3>أسماء موسى = نفس القاعدة</h3>' + names + urule
+                   + p(rich('🔹 <b>أس كسري</b> مثل $\\sqrt[3]{\\cos x}=\\cos^{1/3}x$ (موسى ص 107 (4))؟ ما تحجز منه، عامله مثل الزوجي: احجز من الثاني الفردي.'))
                    + p(rich('🚫 <b>مو هذا الدرس:</b> زاويتين مختلفتين مثل $\\sin3x\\cos2x$ (درس الضرب، موسى ص 102)، '
                             'أو tan و sec (موسى ص 98).'), 'small')
                    + '<h3>الأقسام</h3>' + contents
-                   + '<h3>📍 متتبع أسئلة موسى الـ18</h3>' + tracker
+                   + '<h3>📍 متتبع أسئلة موسى الـ21</h3>' + tracker
                    + '<h3>📋 خطة المذاكرة</h3>' + plan)
 
 
@@ -369,7 +415,7 @@ def page_udu():
                 + '<li>%s</li>' % mi(r'\text{let }u=\cos x\ \Rightarrow\ \sin x\,dx=' + BLANK)
                 + '<li>%s</li>' % mi(r'\text{let }u=\sin3x\ \Rightarrow\ \cos3x\,dx=' + BLANK)
                 + '<li>%s</li>' % mi(r'\displaystyle\int\cos^{4}x\,\sin x\,dx=\int(' + BLANK + r')^{4}\,(' + BLANK + r')') + '</ol>'
-                + p(rich('وكمّل الثالث لين الجواب:'), 'small') + lines(2, 'write tight'))
+                + p(rich('وكمّل الثالث لين الجواب:'), 'small') + lines(1, 'write tight'))
     checks = ul([rich(t) for t in ['✅ كتبت let $u$ و $du$؟', '✅ قطعة $du$ موجودة كاملة في السؤال؟',
                                      '✅ بعد التبديل: ما بقى ولا $x$ ولا $dx$؟', '✅ رجّعت $x$ في الآخر؟']], 'checks')
     return section('udu', '🔑 u و du من الصفر (اقرأها قبل أي حل)',
@@ -388,8 +434,7 @@ def page_udu():
                    + box('٤. $du$ لها 3 أشكال بس', forms)
                    + box('٥. مثال السالب: $\\int\\cos^2x\\sin x\\,dx$', ex2, 'worked')
                    + '<div class="oe-grid2">' + box('✅ 4 أسئلة قبل ما تكمّل أي حل', checks)
-                   + box('✍️ جرّب (الأجوبة في المفتاح ص ' + pgref('key') + ')', practice) + '</div>'
-                   + p(link('tools', 'كمّل: الأدوات ص ' + pgref('tools')) + ' · ' + link('secA', 'القسم ١ ص ' + pgref('secA')), 'small'))
+                   + box('✍️ جرّب (الأجوبة في المفتاح ص ' + pgref('key') + ')', practice) + '</div>')
 
 
 def page_tools():
@@ -443,6 +488,9 @@ def qblock(k):
     extra = p(rich('💡 $\\cos^6=(\\cos^2)^3=(1-\\sin^2)^3$، والتكعيب جاهز في الأدوات.'), 'small') if k == 'C3' else ''
     if k in ('D3', 'D4'):
         extra = p(rich('💡 نفس الحركات الثلاث، بس الباقي $\\cos^4$ أو $\\sin^4$ (مربع نص الزاوية)، وتطلع $\\sin^22x\\cos^22x=\\frac14\\sin^24x$.'), 'small')
+    if k == 'C4':
+        extra = p(rich('💡 $\\sqrt[3]{\\cos x}=\\cos^{1/3}x$: الأس الكسري ما تحجز منه، عامله مثل الزوجي. احجز $\\sin x\\,dx$ من sin الفردي، و let $u=\\cos x$. '
+                       'وفي التكامل «زد 1 واقلب».'), 'small')
     if k in ('A4', 'A7'):
         extra = p(rich('في الزوجي ما فيه قاعدة توأم: حلها، وقارن مع توأمها. الفرق في إشارة $\\sin2x$ بس.'), 'small')
     return box(head, md(qt) + extra + lines(6, 'write tight') + p(sol), kind, 'q-' + k)
@@ -453,14 +501,17 @@ def check_block(title, qs):
     for k, item in enumerate(qs, 1):
         qt, F, f = item[:3]
         antideriv(F, f, 'checkpoint %s %d' % (title, k))
-        tag = (' <span class="hardtag">%s</span>' % item[3]) if len(item) > 3 else ''
-        out += '<div class="ch"><b>%d</b>%s%s%s</div>' % (k, tag, md(qt), lines(3, 'write tight'))
+        tag = ''
+        if len(item) > 3:
+            tag = ' <span class="%s">%s</span>' % ('src' if item[3].startswith('📗') else 'hardtag', item[3])
+        aid = (' id="%s"' % item[4]) if len(item) > 4 else ''
+        out += '<div class="ch"%s><b>%d</b>%s%s%s</div>' % (aid, k, tag, md(qt), lines(3, 'write tight'))
     return box('✅ فحص صغير: صح الاثنين؟ كمّل. غلط؟ ارجع للمثال المحلول (الأجوبة في المفتاح)', '<div class="chgrid">' + out + '</div>', 'check')
 
 
 CHECKS = {
     'A': [(r'\int\cos^{5}x\,dx', 'sin(x)-2*sin(x)**3/3+sin(x)**5/5', 'cos(x)**5'), (r'\int\sin^{2}2x\,dx', 'x/2-sin(4*x)/8', 'sin(2*x)**2')],
-    'C': [(r'\int\sin^{3}x\cos^{4}x\,dx', '-cos(x)**5/5+cos(x)**7/7', 'sin(x)**3*cos(x)**4'), (r'\int\cos^{3}x\sin^{2}x\,dx', 'sin(x)**3/3-sin(x)**5/5', 'cos(x)**3*sin(x)**2')],
+    'C': [(r'\int\sin^{3}x\cos^{4}x\,dx', '-cos(x)**5/5+cos(x)**7/7', 'sin(x)**3*cos(x)**4', '📗 موسى ص 107 (1)', 'q-C5'), (r'\int\cos^{3}x\sin^{2}x\,dx', 'sin(x)**3/3-sin(x)**5/5', 'cos(x)**3*sin(x)**2')],
     'B': [(r'\int\sin^{3}x\cos^{3}x\,dx', 'sin(x)**4/4-sin(x)**6/6', 'sin(x)**3*cos(x)**3'), (r'\int\cos^{3}x\sin^{7}x\,dx', 'sin(x)**8/8-sin(x)**10/10', 'cos(x)**3*sin(x)**7')],
     'D': [(r'\int\sin^{2}3x\cos^{2}3x\,dx', 'x/8-sin(12*x)/96', 'sin(3*x)**2*cos(3*x)**2'),
           (r'\int\sin^{4}x\cos^{4}x\,dx', '3*x/128-sin(4*x)/128+sin(8*x)/1024', 'sin(x)**4*cos(x)**4', '⭐⭐ تحدي')]}
@@ -511,7 +562,7 @@ def page_A():
 def page_C():
     anchor, title, pages = GROUP['C']
     body = (p(rich('واحد فردي وواحد زوجي: <b>احجز من الفردي</b>. نفس خطوات الأسس لحالها، بس فيه دالة ثانية تمشي معك.'))
-            + qblock('C1') + qblock('C2') + qblock('C3'))
+            + qblock('C1') + qblock('C2') + qblock('C4') + qblock('C3'))
     return section(anchor, '%s <span class="musa">(%s)</span>' % (title, pages), body + check_block('C', CHECKS['C']))
 
 
@@ -526,7 +577,7 @@ MISTAKES = [
     (r'\int\sin^{3}x\,dx:\ u=\cos x,\ du=\sin x\,dx\ \Rightarrow', 'cos(x)-cos(x)**3/3', r'\cos x-\frac13\cos^{3}x',
      'مشتقة $\\cos x$ هي $-\\sin x$. نسيت السالب، فالجواب كله انقلب.', '-cos(x)+cos(x)**3/3', r'-\cos x+\frac13\cos^{3}x+c', 'sin(x)**3'),
     (r'\sin^{4}x=', '1-cos(x)**4', r'1-\cos^{4}x', 'المتطابقة تحوّل $\\sin^2$ بس. $\\sin^4=(\\sin^2)^2$: تحوّل اللي داخل القوس، والقوس يبقى مربع. '
-     'وتطلع في 5 من أسئلة موسى.', '(1-cos(x)**2)**2', r'(1-\cos^{2}x)^{2}', None),
+     'وتطلع في 6 من أسئلة موسى.', '(1-cos(x)**2)**2', r'(1-\cos^{2}x)^{2}', None),
     (r'(1-u^{2})^{2}=', '1-u**4', r'1-u^{4}', 'نسيت الحد الأوسط $2ab$.', '1-2*u**2+u**4', r'1-2u^{2}+u^{4}', None),
     (r'\int\cos^{2}x\,dx=\int\frac{1+\cos2x}{2}dx=', 'x/2+sin(2*x)/2', r'\frac x2+\frac12\sin2x',
      '$\\int\\cos2x\\,dx=\\frac12\\sin2x$، ومعه $\\frac12$ من قدّام: تصير $\\frac14$.', 'x/2+sin(2*x)/4', r'\frac x2+\frac14\sin2x+c', 'cos(x)**2'),
@@ -561,7 +612,7 @@ TEST = [  # (question, branch, first line, answer latex, F, f)
      r'\frac15\sin^{5}x-\frac17\sin^{7}x+c', 'sin(x)**5/5-sin(x)**7/7', 'cos(x)**3*sin(x)**4'),
     (r'\int\sin^{4}x\cos^{5}x\,dx', 'Odd and Even: احجز cos (📝 اختبار ثاني 1446)', r'(1-\sin^{2}x)^{2}\sin^{4}x\cos x,\ u=\sin x',
      r'\frac15\sin^{5}x-\frac27\sin^{7}x+\frac19\sin^{9}x+c', 'sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9', 'sin(x)**4*cos(x)**5'),
-    (r'\int\sin^{2}x\cos^{5}x\,dx', 'Odd and Even: احجز cos (📝 اختبار ثاني 1447)', r'(1-\sin^{2}x)^{2}\sin^{2}x\cos x,\ u=\sin x',
+    (r'\int\sin^{2}x\cos^{5}x\,dx', 'Odd and Even: احجز cos (📝 اختبار ثاني 1447، و 📗 موسى ص 107 (2))', r'(1-\sin^{2}x)^{2}\sin^{2}x\cos x,\ u=\sin x',
      r'\frac13\sin^{3}x-\frac25\sin^{5}x+\frac17\sin^{7}x+c', 'sin(x)**3/3-2*sin(x)**5/5+sin(x)**7/7', 'sin(x)**2*cos(x)**5'),
     (r'\int\sin^{3}x\cos^{7}x\,dx', 'Odd and Odd: الأصغر sin', r'(1-\cos^{2}x)\cos^{7}x\sin x,\ u=\cos x',
      r'-\frac18\cos^{8}x+\frac1{10}\cos^{10}x+c', '-cos(x)**8/8+cos(x)**10/10', 'sin(x)**3*cos(x)**7'),
@@ -596,10 +647,10 @@ def page_test():
     qs = ''
     for k, (qt, br, first, ans, F, f) in enumerate(TEST, 1):
         antideriv(F, f, 'test %d' % k)
-        qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(qt), lines(3, 'write tight'))
+        qs += '<div class="ch"%s><b>%d</b>%s%s</div>' % (' id="q-C6"' if k == 4 else '', k, md(qt), lines(3, 'write tight'))
     return section('test', '📝 اختبار الإتقان: 10 أسئلة جديدة',
                    p(rich('<b>الجولة الأولى:</b> اكتب تحت كل سؤال <b>القسم وأول سطر</b> بس (30 ثانية لكل سؤال). '
-                          '<b>الجولة الثانية:</b> حلها كاملة. 8 من 10 صح = أتقنته. ونفس أشكال موسى، بس بأسس ثانية. ')
+                          '<b>الجولة الثانية:</b> حلها كاملة. 8 من 10 صح = أتقنته. أشكال موسى بأسس ثانية، وسؤال 4 من قائمته ص 107. ')
                      + link('key', 'المفتاح ص ' + pgref('key')) + '.')
                    + '<div class="chgrid">' + qs + '</div>')
 
@@ -624,18 +675,21 @@ def page_key():
 
 def page_sols():
     out = ''
-    for k in ('A2', 'A4', 'A7', 'C2', 'C3', 'B2', 'B3', 'D2', 'D5', 'D3', 'D4'):
-        out += ('<div class="sol" id="s-%s"><div class="drill-head"><b>%s</b> %s %s</div>%s</div>'
-                % (k, musa(k), mi(r'\displaystyle ' + Q[k][0]), link('q-' + k, '↩', 'back btn'), steps(ROWS[k], 'sol ' + k)))
-    return section('sols', '✅ حلول أسئلة موسى اللي ما حلها (11)',
+    first = {'C5': '✅ هذا سؤال الفحص الصغير (القسم ٢): حله أول، بعدين شيك هنا.',
+             'C6': '📝 هذا سؤال 4 في الاختبار: حله أول، بعدين شيك هنا.'}
+    for k in ('A2', 'A4', 'A7', 'C2', 'C4', 'C5', 'C6', 'C3', 'B2', 'B3', 'D2', 'D5', 'D3', 'D4'):
+        note = p(rich(first[k]), 'small') if k in first else ''
+        out += ('<div class="sol" id="s-%s"><div class="drill-head"><b>%s</b> %s %s</div>%s%s</div>'
+                % (k, musa(k), mi(r'\displaystyle ' + Q[k][0]), link('q-' + k, '↩', 'back btn'), note, steps(ROWS[k], 'sol ' + k)))
+    return section('sols', '✅ حلول أسئلة موسى اللي ما حلها (14)',
                    p(rich('السبعة اللي حلها موسى موجودة في أقسامها بخطواته. وهذي الباقية بنفس أسلوبه.'), 'small') + out)
 
 
 def build():
     check_all()
-    title = ('<section class="summary" id="top"><div class="kicker">ريض 111 · درس 5.2 · مذكرة د. موسى ص 89–97</div>'
+    title = ('<section class="summary" id="top"><div class="kicker">ريض 111 · درس 5.2 · مذكرة د. موسى ص 89–97 و 107</div>'
              '<h1>odd و even: تكاملات sin و cos</h1>'
-             + p(rich('أسئلة موسى الـ18، كل واحد محلول. وكل سطر وكل جواب هنا فحصه الحاسوب.'), 'small')
+             + p(rich('أسئلة موسى الـ21 (ص 89–97، وأسئلة sin و cos من قائمته ص 107)، كل واحد محلول. وكل سطر وكل جواب هنا فحصه الحاسوب.'), 'small')
              + p(link('map', 'ابدأ من الخريطة ←'), 'small') + '</section>')
     return (title + page_map() + page_udu() + page_tools() + page_A() + page_C() + page_B() + page_D() + page_fix() + page_test()
             + page_key() + page_sols() + recall())
