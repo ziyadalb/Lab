@@ -398,3 +398,8 @@ section.summary h3 { break-after: avoid; }
 table.decide tr { break-inside: avoid; }
 section.summary#top h1 { margin: 2mm 0 2mm; }
 section.chapter.summary#memory { break-before: auto; margin-top: 4mm; }
+/* «odd و even» lesson file */
+.oe-q { font-size: 15pt; font-weight: 700; text-align: center; margin: 2mm 0 3mm; padding: 2mm; border: 2px solid var(--accent); border-radius: 2mm; }
+ol.fill li { margin: 2mm 0; }
+.ch .src { font-size: 12pt; color: var(--muted); }
+section.chapter.oe#map { break-before: auto; }
