@@ -411,3 +411,4 @@ table.tracker td:first-child { font-size: 14pt; text-align: center; }
 table.oekey td:nth-child(2) { min-width: 34mm; }
 .keylist li { margin: 1.5mm 0; break-inside: avoid; }
 .keylist li > div { margin-inline-start: 4mm; }
+.ch .hardtag { font-size: 12pt; color: #a33; font-weight: 700; }

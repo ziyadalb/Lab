@@ -3,6 +3,13 @@
   {
    "kind": "arithmetic",
    "ok": true,
+   "label": "checkpoint B 1 other choice answer",
+   "claim": "diff(-cos(x)**4/4+cos(x)**6/6,x) = sin(x)**3*cos(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
    "label": "Musa A1 answer",
    "claim": "diff(x/2-sin(2*x)/4,x) = sin(x)**2",
    "residual": "0"
@@ -278,6 +285,13 @@
    "ok": true,
    "label": "tool frac",
    "claim": "Rational(3,9) = Rational(1,3)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool angle",
+   "claim": "diff(sin(2*x),x) = 2*cos(2*x)",
    "residual": "0"
   },
   {
@@ -626,14 +640,14 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "mistake 3 right",
+   "label": "mistake 4 right",
    "claim": "diff(x/2+sin(2*x)/4,x) = cos(x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "mistake 4 right",
+   "label": "mistake 5 right",
    "claim": "diff(x/2-sin(2*x)/4,x) = sin(x)**2",
    "residual": "0"
   },
@@ -649,6 +663,13 @@
    "ok": true,
    "label": "mistakes right lines",
    "claim": "integrate(-(u**4-u**6),u) = -u**5/5+u**7/7",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistakes right lines",
+   "claim": "sin(x)**4 = (1-cos(x)**2)**2",
    "residual": "0"
   },
   {
@@ -1053,7 +1074,7 @@
  ],
  "used": {},
  "counts": {
-  "total": 150,
-  "ok": 150
+  "total": 153,
+  "ok": 153
  }
 }
