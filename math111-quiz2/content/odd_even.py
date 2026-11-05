@@ -229,6 +229,7 @@ FILL_D2 = [r'\sin^{4}x\cos^{2}x=(\sin x\cos x)^{2}\sin^{2}x=\frac14\sin^{2}2x\cd
 
 
 def check_all():
+    antideriv('-cos(x)**4/4+cos(x)**6/6', 'sin(x)**3*cos(x)**3', 'checkpoint B 1 other choice')
     for k, (qt, pg, n, g, f, F, Ft, kind) in Q.items():
         antideriv(F, f, 'Musa ' + k)
 
@@ -245,11 +246,11 @@ def page_map():
         ['<b>Odd and Even</b>', rich('احجز من <b>الفردي</b>'), 'الدالة الثانية'],
         ['<b>Odd and Odd</b>', rich('احجز من <b>الأصغر</b>'), 'الدالة الثانية'],
         ['<b>Even and Even</b>', rich('الحركات الثلاث: اجمع $\\sin x\\cos x$، ثم نص الزاوية، ثم $u=\\sin2x$ إذا لزم'), '—']], 'decide')
-    contents = ul([link(a, t) + ' (ص ' + pgref(a) + ')' for a, t in [
+    contents = p(' · '.join([link(a, t) + ' ص ' + pgref(a) for a, t in [
         ('tools', '🧰 الأدوات والجبر'), ('secA', GROUP['A'][1]), ('secB', GROUP['C'][1]), ('secC', GROUP['B'][1]),
         ('secD', GROUP['D'][1]), ('fix', '🔍 صحّح الغلط'), ('test', '📝 اختبار الإتقان'), ('key', '🔑 المفتاح'),
-        ('sols', '✅ حلول أسئلة موسى')]], 'contents')
-    order = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'C1', 'C2', 'C3', 'B1', 'B2', 'B3', 'D1', 'D2', 'D5', 'D3', 'D4']
+        ('sols', '✅ حلول أسئلة موسى'), ('recall', '🧠 استرجاع قبل الكويز')]]), 'contents')
+    order = ['A3', 'A5', 'A2', 'A1', 'A6', 'A4', 'A7', 'C1', 'C2', 'C3', 'B1', 'B2', 'B3', 'D1', 'D2', 'D5', 'D3', 'D4']   # study order
     tracker = table(['☐', 'السؤال', 'عند موسى', 'هنا', 'ص'], [
         ['☐', mi(Q[k][0]), musa(k), KIND[Q[k][7]], link('q-' + k, pgref('q-' + k))] for k in order], 'tracker')
     plan = ('<ol class="plan">' + ''.join('<li>%s</li>' % rich(t) for t in [
@@ -258,7 +259,7 @@ def page_map():
         'ثم «لحالك»، ثم الفحص الصغير. وعلّم ☐ في المتتبع. <b>75 دقيقة.</b>',
         '<b>صحّح الغلط.</b> <b>10 دقايق.</b>',
         '<b>اختبار الإتقان:</b> الجولة الأولى أول سطر بس، والثانية حل كامل. 8 من 10 = أتقنته. <b>25 دقيقة.</b>',
-        '<b>قبل الكويز:</b> هذي الصفحة، والجولة الأولى من الاختبار. <b>15 دقيقة.</b>']) + '</ol>')
+        '<b>قبل الكويز:</b> صفحة «🧠 استرجاع» (آخر الملف)، والجولة الأولى من الاختبار. <b>15 دقيقة.</b>']) + '</ol>')
     return section('map', '🗺️ odd و even: الخريطة',
                    '<div class="oe-q">' + rich('السؤال الوحيد: <b>فيه أس فردي؟</b>') + '</div>'
                    + p(rich('إيه ← <b>احجز</b> وحدة من الفردي، وحوّل الباقي، وعوّض $u$. لا ← <b>نص الزاوية</b>.'))
@@ -309,7 +310,7 @@ def qblock(k):
         return box(head + ' · محلول عنده', md(qt) + steps(ROWS[k], 'worked ' + k), 'worked', 'q-' + k)
     if kind == 'twin':
         tw = TWIN_OF[k]
-        return box(head + ' · توأم ' + musa(tw), md(qt)
+        return box(head + ' · توأم ' + musa(tw), md(qt) + p(link('q-' + tw, 'جواب توأمه ص ' + pgref('q-' + tw)), 'small')
                    + p(rich('<b>توقّع أول:</b> خذ جواب توأمه، وبدّل sin مع cos، واقلب إشارة الجواب كله. اكتب توقّعك:')) + lines(1, 'write tight')
                    + p('<b>وبعدين حلها كاملة:</b>') + lines(5, 'write tight') + p(sol), 'twin', 'q-' + k)
     if kind == 'fill':
@@ -336,7 +337,7 @@ CHECKS = {
     'C': [(r'\int\sin^{3}x\cos^{4}x\,dx', '-cos(x)**5/5+cos(x)**7/7', 'sin(x)**3*cos(x)**4'), (r'\int\cos^{3}x\sin^{2}x\,dx', 'sin(x)**3/3-sin(x)**5/5', 'cos(x)**3*sin(x)**2')],
     'B': [(r'\int\sin^{3}x\cos^{3}x\,dx', 'sin(x)**4/4-sin(x)**6/6', 'sin(x)**3*cos(x)**3'), (r'\int\cos^{3}x\sin^{7}x\,dx', 'sin(x)**8/8-sin(x)**10/10', 'cos(x)**3*sin(x)**7')],
     'D': [(r'\int\sin^{2}3x\cos^{2}3x\,dx', 'x/8-sin(12*x)/96', 'sin(3*x)**2*cos(3*x)**2'),
-          (r'\int\sin^{4}x\cos^{4}x\,dx', '3*x/128-sin(4*x)/128+sin(8*x)/1024', 'sin(x)**4*cos(x)**4')]}
+          (r'\int\sin^{4}x\cos^{4}x\,dx\ \ \star\star', '3*x/128-sin(4*x)/128+sin(8*x)/1024', 'sin(x)**4*cos(x)**4')]}
 CHECK_KEYS = {
     'A': [r'\sin x-\frac23\sin^{3}x+\frac15\sin^{5}x+c', r'\frac x2-\frac18\sin4x+c'],
     'C': [r'-\frac15\cos^{5}x+\frac17\cos^{7}x+c', r'\frac13\sin^{3}x-\frac15\sin^{5}x+c'],
@@ -416,8 +417,8 @@ def page_fix():
         diff = [abs(complex((a - b).subs({x: v, u: v}).evalf())) for v in (0.7, 1.3)]
         if max(diff) < 1e-9:
             raise BuildError('mistake %d: the wrong version is not wrong' % k)
-        rows += ('<div class="fix"><b>%d.</b> %s %s<div class="fixq">🔍 وين الغلط؟</div><div class="fixa">%s %s</div></div>'
-                 % (k, mi(qq), mi(r'\cR{' + wrong_tex + '}'), p('<b>الجواب:</b> ' + rich(why)), md(right_tex)))
+        rows += ('<div class="fix"><b>%d.</b> %s<div class="fixq">🔍 وين الغلط؟</div><div class="fixa">%s %s</div></div>'
+                 % (k, mi(qq + r'\ \cR{' + wrong_tex + '}'), p('<b>الجواب:</b> ' + rich(why)), md(right_tex)))
     arith('', [('(1-u**2)**2', '1-2*u**2+u**4'), ('integrate(-(u**4-u**6),u)', '-u**5/5+u**7/7')], 'mistakes right lines')
     return section('fix', '🔍 صحّح الغلط: الأغلاط الخمس المشهورة',
                    p(rich('كل سطر أحمر فيه غلطة. غطِّ «الجواب» ولقها أول. الحاسوب تأكد إن كل «غلط» غلط فعلًا، وكل «صح» صح.')) + rows)
@@ -445,11 +446,27 @@ TEST = [  # (question, branch, first line, answer latex, F, f)
      r'\frac16\sin^{6}x-\frac14\sin^{8}x+\frac1{10}\sin^{10}x+c', 'sin(x)**6/6-sin(x)**8/4+sin(x)**10/10', 'sin(x)**5*cos(x)**5')]
 
 
+def recall():
+    """Six prompts to write from memory the night or the morning before the quiz; each links to its answer."""
+    prompts = [('القاعدة كلها في سؤال واحد، وفرعيه.', 'map'),
+               ('ليش نحجز وحدة؟ وليش لازم أس فردي؟', 'map'),
+               ('المتطابقة، وقانونا نص الزاوية، و $\\sin x\\cos x$.', 'tools'),
+               ('$(1-u^2)^2$ و $(1-u^2)^3$.', 'tools'),
+               ('الحركات الثلاث في Even and Even.', 'secD'),
+               ('قاعدة التوأم، وعادة السالب، وفحص «أعلى أس».', 'secA')]
+    rows = ''.join('<div class="ch"><b>%d</b>%s%s%s</div>' % (k, p(rich(t)), lines(2, 'write tight'),
+                                                          p(link(a, 'الجواب ص ' + pgref(a)), 'small'))
+                   for k, (t, a) in enumerate(prompts, 1))
+    return section('recall', '🧠 استرجاع قبل الكويز (اكتب من راسك، ثم شيك)',
+                   p(rich('في الكويز، أول 3 أسطر (القسمة، والمتطابقة، و $u$ و $du$) عليها درجات حتى لو ما كملت. هذي الصفحة تثبّتها.'))
+                   + '<div class="chgrid">' + rows + '</div>')
+
+
 def page_test():
     qs = ''
     for k, (qt, br, first, ans, F, f) in enumerate(TEST, 1):
         antideriv(F, f, 'test %d' % k)
-        qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(qt), lines(4, 'write tight'))
+        qs += '<div class="ch"><b>%d</b>%s%s</div>' % (k, md(qt), lines(3, 'write tight'))
     return section('test', '📝 اختبار الإتقان: 10 أسئلة جديدة',
                    p(rich('<b>الجولة الأولى:</b> اكتب تحت كل سؤال <b>القسم وأول سطر</b> بس (30 ثانية لكل سؤال). '
                           '<b>الجولة الثانية:</b> حلها كاملة. 8 من 10 صح = أتقنته. ونفس أشكال موسى، بس بأسس ثانية.'))
@@ -464,7 +481,7 @@ def page_key():
     for g in ('A', 'C', 'B', 'D'):
         checks += '<li><b>%s</b>%s</li>' % (GROUP[g][1], ''.join('<div>(%d) %s</div>' % (n, mi(r'\displaystyle ' + a))
                                                                  for n, a in enumerate(CHECK_KEYS[g], 1)))
-    fill = ul([rich(t) for t in ['$\\frac{1-\\cos2x}{2}$', '$\\frac18$', '$\\frac{\\sin4x}{8}$',
+    fill = ul([rich(t.replace('$', '$\\displaystyle ', 1)) for t in ['$\\frac{1-\\cos2x}{2}$', '$\\frac18$', '$\\frac{\\sin4x}{8}$',
                                   '$u=\\sin2x$، و $\\frac{\\sin^32x}{6}$', '$\\frac{x}{16}-\\frac{\\sin4x}{64}-\\frac{\\sin^32x}{48}$']], 'keylist')
     return section('key', '🔑 المفتاح',
                    '<h3>اختبار الإتقان: القسم، وأول سطر، والجواب</h3><ol class="keylist">' + items + '</ol>'
@@ -489,9 +506,10 @@ def build():
              + p(rich('أسئلة موسى الـ18، كل واحد محلول. وكل سطر وكل جواب هنا فحصه الحاسوب.'), 'small')
              + p(link('map', 'ابدأ من الخريطة ←'), 'small') + '</section>')
     return (title + page_map() + page_tools() + page_A() + page_C() + page_B() + page_D() + page_fix() + page_test()
-            + page_key() + page_sols())
+            + page_key() + page_sols() + recall())
 
 
 OUTLINE = [[1, '🗺️ الخريطة والمتتبع', ['map']], [1, '🧰 الأدوات والجبر', ['tools']], [1, '١. أسس لحالها', ['secA']],
            [1, '٢. Odd and Even', ['secB']], [1, '٣. Odd and Odd', ['secC']], [1, '٤. Even and Even', ['secD']],
-           [1, '🔍 صحّح الغلط', ['fix']], [1, '📝 اختبار الإتقان', ['test']], [1, '🔑 المفتاح', ['key']], [1, '✅ حلول أسئلة موسى', ['sols']]]
+           [1, '🔍 صحّح الغلط', ['fix']], [1, '📝 اختبار الإتقان', ['test']], [1, '🔑 المفتاح', ['key']], [1, '✅ حلول أسئلة موسى', ['sols']],
+           [1, '🧠 استرجاع قبل الكويز', ['recall']]]
