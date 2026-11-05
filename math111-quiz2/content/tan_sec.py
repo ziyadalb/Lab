@@ -41,12 +41,20 @@ def mathnums(text):
 
 
 def steps(rows, label):
-    """(latex, claims, why) rows; every claim is checked; the last row is the answer."""
+    """(latex, claims, why[, 'swap']) rows; every claim is checked; the last row is the answer.
+    A 🔁 swap row shows, under each piece, what it becomes in u: it is not numbered (done with the eyes, not written)."""
     body = ''
-    for k, (latex, claims, why) in enumerate(rows, 1):
+    n = 0
+    for k, row in enumerate(rows, 1):
+        latex, claims, why = row[:3]
         arith(latex, claims, '%s step %d' % (label, k))
+        if len(row) > 3 and row[3] == SWAP:
+            body += ('<tr class="swap"><td class="n">🔁</td><td colspan="2">%s<div class="swhy">%s</div></td></tr>'
+                     % (mi(r'\displaystyle ' + latex), rich('<b>التبديل</b> (بعيونك، ما يلزم تكتبه): ' + why)))
+            continue
+        n += 1
         cls = ' class="final"' if k == len(rows) else ''
-        body += '<tr%s><td class="n">%d</td><td>%s</td><td>%s</td></tr>' % (cls, k, mi(r'\displaystyle ' + latex), rich(mathnums(why)))
+        body += '<tr%s><td class="n">%d</td><td>%s</td><td>%s</td></tr>' % (cls, n, mi(r'\displaystyle ' + latex), rich(mathnums(why)))
     return ('<table class="steps"><thead><tr><th>#</th><th>الخطوة (تكتبها)</th><th>ليش؟ (لك أنت)</th></tr></thead>'
             '<tbody>' + body + '</tbody></table>')
 
@@ -110,31 +118,52 @@ SEC, TAN = 'sec(x)', 'tan(x)'
 
 
 def U_TAN():
-    return (r'\cU{u=\tan x}\ \Rightarrow\ \cD{du=\sec^{2}x\,dx}', [(D(TAN), 'sec(x)**2')], 'القطعة الخضرا صارت $du$ بالضبط.')
+    return (r'\text{let }\cU{u=\tan x},\quad \cD{du=\sec^{2}x\,dx}', [(D(TAN), 'sec(x)**2')],
+            'اشتق $u$ وحط جنبها $dx$: $du=\\sec^2x\\,dx$. وهذي بالضبط القطعة الخضرا.')
 
 
 def U_SEC():
-    return (r'\cU{u=\sec x}\ \Rightarrow\ \cD{du=\sec x\tan x\,dx}', [(D(SEC), 'sec(x)*tan(x)')], 'مشتقة $\\sec x$ هي $\\sec x\\tan x$: هي القطعة الخضرا.')
+    return (r'\text{let }\cU{u=\sec x},\quad \cD{du=\sec x\tan x\,dx}', [(D(SEC), 'sec(x)*tan(x)')],
+            'مشتقة $\\sec x$ هي $\\sec x\\tan x$: هي بالضبط القطعة الخضرا. (وما فيه سالب هنا.)')
+
+
+SWAP = 'swap'          # a 🔁 row: under each piece, what it becomes in u (done with the eyes, not numbered)
+SWAP_WHY = 'كل قطعة صارت $u$، والخضرا صارت $du$. ما بقى ولا $x$ ولا $dx$ ✓'
+
+
+def UB(x_tex, u_tex):
+    """A piece of the integral and, under it, what it becomes in u."""
+    return r'\underbrace{%s}_{\displaystyle \cU{%s}}' % (x_tex, u_tex)
+
+
+def UD(x_tex, du_tex=r'\cD{du}'):
+    """The kept (green) piece and, under it, its du form."""
+    return r'\underbrace{\cD{%s}}_{\displaystyle %s}' % (x_tex, du_tex)
 
 
 # ---------------------------------------------------------------- the steps of every question (checked), in the doctor's style (I = ...)
 ROWS = {
     'S1': [(r'I=\int\sec^{2}x\cdot\cD{\sec^{2}x\,dx}', [('sec(x)**4', 'sec(x)**2*sec(x)**2')],
             'أس sec زوجي (4): نحجز $\\sec^2x$ ونكتبها آخر شي، لأنها $du$ حق $u=\\tan x$.'),
-           (r'I=\int(1+\tan^{2}x)\,\cD{\sec^{2}x\,dx}', [('sec(x)**2', '1+tan(x)**2')], 'الباقي $\\sec^2x$ نحوّله لـ tan: $\\sec^2=1+\\tan^2$.'),
+           (r'I=\int(1+\tan^{2}x)\,\cD{\sec^{2}x\,dx}', [('sec(x)**2', '1+tan(x)**2')], 'الباقي $\\sec^2x$ نحوّله لـ tan بـ $\\sec^2=1+\\tan^2$، عشان يصير كله $u$.'),
            U_TAN(),
+           (r'I=\int' + UB(r'(1+\tan^{2}x)', r'(1+u^{2})') + r'\;' + UD(r'\sec^{2}x\,dx'), [('sec(x)**4', '(1+tan(x)**2)*diff(tan(x),x)')], SWAP_WHY, SWAP),
            (r'I=\int(1+u^{2})\,du=u+\frac13u^{3}+c', [('integrate(1+u**2,u)', 'u+u**3/3')], 'كل حد: زد الأس 1 واقسم عليه.'),
            (r'I=\tan x+\frac13\tan^{3}x+c', [(D('tan(x)+tan(x)**3/3'), 'sec(x)**4')], 'نرجّع $u=\\tan x$. فحص: أكبر أس 3 = 4 − 1 ✓')],
     'S2': [(r'I=\int\tan^{3}x\,\sec^{2}x\cdot\cD{\sec^{2}x\,dx}', [('tan(x)**3*sec(x)**4', 'tan(x)**3*sec(x)**2*sec(x)**2')],
-            'أس sec زوجي (4): نحجز $\\sec^2x$. (tan فردي بعد، بس نبدأ بـ sec الزوجي مثل موسى.)'),
-           (r'I=\int\tan^{3}x\,(1+\tan^{2}x)\,\cD{\sec^{2}x\,dx}', [('sec(x)**2', '1+tan(x)**2')], 'الباقي $\\sec^2=1+\\tan^2$.'),
+            'أس sec زوجي (4): نحجز $\\sec^2x$. (tan فردي بعد: القسمين ينفعون. نبدأ بـ sec الزوجي مثل موسى، وبالقسم ٢ يطلع جوابك شكله غير وهو صح.)'),
+           (r'I=\int\tan^{3}x\,(1+\tan^{2}x)\,\cD{\sec^{2}x\,dx}', [('sec(x)**2', '1+tan(x)**2')], 'الباقي $\\sec^2=1+\\tan^2$، عشان يصير كله $u$.'),
            U_TAN(),
+           (r'I=\int' + UB(r'\tan^{3}x', 'u^{3}') + r'\,' + UB(r'(1+\tan^{2}x)', r'(1+u^{2})') + r'\;' + UD(r'\sec^{2}x\,dx'),
+            [('tan(x)**3*sec(x)**4', 'tan(x)**3*(1+tan(x)**2)*diff(tan(x),x)')], SWAP_WHY, SWAP),
            (r'I=\int u^{3}(1+u^{2})\,du=\int(u^{3}+u^{5})\,du', [('u**3*(1+u**2)', 'u**3+u**5')], 'نوزّع $u^3$: الأسس تنجمع.'),
            (r'I=\frac14\tan^{4}x+\frac16\tan^{6}x+c', [(D('tan(x)**4/4+tan(x)**6/6'), 'tan(x)**3*sec(x)**4')], 'فحص: 6 = 3 + 4 − 1 ✓')],
     'S3': [(r'I=\int\tan^{1/2}x\,\sec^{2}x\cdot\cD{\sec^{2}x\,dx}', [('sqrt(tan(x))*sec(x)**4', 'tan(x)**Rational(1,2)*sec(x)**2*sec(x)**2')],
             '$\\sqrt{\\tan x}=\\tan^{1/2}x$. وأس sec زوجي: نحجز $\\sec^2x$.'),
-           (r'I=\int\tan^{1/2}x\,(1+\tan^{2}x)\,\cD{\sec^{2}x\,dx}', [('sec(x)**2', '1+tan(x)**2')], 'الباقي لـ tan.'),
+           (r'I=\int\tan^{1/2}x\,(1+\tan^{2}x)\,\cD{\sec^{2}x\,dx}', [('sec(x)**2', '1+tan(x)**2')], 'الباقي لـ tan، عشان يصير كله $u$.'),
            U_TAN(),
+           (r'I=\int' + UB(r'\tan^{1/2}x', 'u^{1/2}') + r'\,' + UB(r'(1+\tan^{2}x)', r'(1+u^{2})') + r'\;' + UD(r'\sec^{2}x\,dx'),
+            [('sqrt(tan(x))*sec(x)**4', 'tan(x)**Rational(1,2)*(1+tan(x)**2)*diff(tan(x),x)')], SWAP_WHY, SWAP),
            (r'I=\int u^{1/2}(1+u^{2})\,du=\int(u^{1/2}+u^{5/2})\,du', [('u**Rational(1,2)*(1+u**2)', 'u**Rational(1,2)+u**Rational(5,2)')],
             '$\\frac12+2=\\frac52$ (لأن $2=\\frac42$).'),
            (r'I=\frac23u^{3/2}+\frac27u^{7/2}+c', [('integrate(u**Rational(1,2)+u**Rational(5,2),u)', '2*u**Rational(3,2)/3+2*u**Rational(7,2)/7')],
@@ -144,16 +173,20 @@ ROWS = {
     'T1': [(r'I=\int\tan^{4}x\,\sec^{4}x\cdot\cD{\sec x\tan x\,dx}', [('tan(x)**5*sec(x)**5', 'tan(x)**4*sec(x)**4*sec(x)*tan(x)')],
             'أس sec فردي (5)، فالقاعدة ١ ما تنفع. أس tan فردي (5): نحجز $\\sec x\\tan x$.'),
            (r'I=\int(\sec^{2}x-1)^{2}\sec^{4}x\,\cD{\sec x\tan x\,dx}', [('tan(x)**4', '(sec(x)**2-1)**2')],
-            'الباقي $\\tan^4=(\\tan^2)^2$، وكل $\\tan^2=\\sec^2-1$.'),
+            'الباقي $\\tan^4=(\\tan^2)^2$، وكل $\\tan^2=\\sec^2-1$، عشان يصير كله $u$.'),
            U_SEC(),
+           (r'I=\int' + UB(r'(\sec^{2}x-1)^{2}', r'(u^{2}-1)^{2}') + r'\,' + UB(r'\sec^{4}x', 'u^{4}') + r'\;' + UD(r'\sec x\tan x\,dx'),
+            [('tan(x)**5*sec(x)**5', '(sec(x)**2-1)**2*sec(x)**4*diff(sec(x),x)')], SWAP_WHY, SWAP),
            (r'I=\int(u^{2}-1)^{2}u^{4}\,du=\int(u^{8}-2u^{6}+u^{4})\,du', [('(u**2-1)**2*u**4', 'u**8-2*u**6+u**4')],
             'نفك القوس (جاهز في الأدوات)، ونضرب في $u^4$.'),
            (r'I=\frac19\sec^{9}x-\frac27\sec^{7}x+\frac15\sec^{5}x+c', [(D('sec(x)**9/9-2*sec(x)**7/7+sec(x)**5/5'), 'tan(x)**5*sec(x)**5')],
             'نرجّع $u=\\sec x$. فحص: 9 = 5 + 5 − 1 ✓')],
     'T2': [(r'I=\int\tan^{4}x\cdot\cD{\sec x\tan x\,dx}', [('tan(x)**5*sec(x)', 'tan(x)**4*sec(x)*tan(x)')],
             'tan فردي، و sec أسه 1 بس: يروح كله في القطعة المحجوزة.'),
-           (r'I=\int(\sec^{2}x-1)^{2}\,\cD{\sec x\tan x\,dx}', [('tan(x)**4', '(sec(x)**2-1)**2')], '$\\tan^4=(\\sec^2-1)^2$.'),
+           (r'I=\int(\sec^{2}x-1)^{2}\,\cD{\sec x\tan x\,dx}', [('tan(x)**4', '(sec(x)**2-1)**2')], '$\\tan^4=(\\sec^2-1)^2$، عشان يصير كله $u$.'),
            U_SEC(),
+           (r'I=\int' + UB(r'(\sec^{2}x-1)^{2}', r'(u^{2}-1)^{2}') + r'\;' + UD(r'\sec x\tan x\,dx'),
+            [('tan(x)**5*sec(x)', '(sec(x)**2-1)**2*diff(sec(x),x)')], SWAP_WHY, SWAP),
            (r'I=\int(u^{4}-2u^{2}+1)\,du', [('(u**2-1)**2', 'u**4-2*u**2+1')], 'نفك القوس.'),
            (r'I=\frac15\sec^{5}x-\frac23\sec^{3}x+\sec x+c', [(D('sec(x)**5/5-2*sec(x)**3/3+sec(x)'), 'tan(x)**5*sec(x)')],
             'فحص: 5 = 5 + 1 − 1 ✓')],
@@ -162,6 +195,8 @@ ROWS = {
     'L2': [(r'I=\int\tan^{2}x\,\tan x\,dx=\int(\sec^{2}x-1)\tan x\,dx', [('tan(x)**3', '(sec(x)**2-1)*tan(x)')], 'نقص $\\tan^2$ ونحوّلها.'),
            (r'I=\int\tan x\,\cD{\sec^{2}x\,dx}-\int\tan x\,dx', [('(sec(x)**2-1)*tan(x)', 'tan(x)*sec(x)**2-tan(x)')], 'نوزّع: صار عندنا قطعتين.'),
            U_TAN(),
+           (r'\int' + UB(r'\tan x', 'u') + r'\;' + UD(r'\sec^{2}x\,dx') + r'\ -\int\tan x\,dx', [('tan(x)*sec(x)**2', 'tan(x)*diff(tan(x),x)')],
+            'القطعة الأولى صارت $\\int u\\,du$. والثانية من الأربع اللي تحفظها ✓', SWAP),
            (r'I=\int u\,du+\ln|\cos x|+c', [('integrate(u,u)', 'u**2/2'), (D('log(cos(x))'), '-tan(x)')],
             '$\\int\\tan x\\,dx=-\\ln|\\cos x|$، والسالب اللي قدامها يخليها $+$.'),
            (r'I=\frac12\tan^{2}x+\ln|\cos x|+c', [(D('tan(x)**2/2+log(cos(x))'), 'tan(x)**3')],
@@ -179,13 +214,13 @@ ROWS = {
            (r'I=\frac15\tan^{5}x-\left(\frac13\tan^{3}x-\tan x+x\right)+c', [], '$\\int\\tan^4x$ حليناها في الدرجة اللي قبل.'),
            (r'I=\frac15\tan^{5}x-\frac13\tan^{3}x+\tan x-x+c', [(D('tan(x)**5/5-tan(x)**3/3+tan(x)-x'), 'tan(x)**6')],
             'السالب يدخل على كل القوس. فحص: 5 = 6 − 1 ✓')],
-    'P1': [(r'I=\int\sec x\cdot\sec^{2}x\,dx', [('sec(x)**3', 'sec(x)*sec(x)**2')], 'أس sec فردي (3): لو حجزنا $\\sec^2$ يبقى $\\sec x$ وحدة ما تتحول لـ tan. فتجزئة مثل دكتورك.'),
+    'P1': [(r'I=\int\sec x\cdot\sec^{2}x\,dx', [('sec(x)**3', 'sec(x)*sec(x)**2')], 'لو حجزنا $\\sec^2$ يبقى $\\sec x$ ما تتحول لـ tan: فتجزئة مثل دكتورك.'),
            (r'\begin{aligned}&\cU{u=\sec x} &&dv=\sec^{2}x\,dx\\ &\cD{du=\sec x\tan x\,dx} &&v=\tan x\end{aligned}', [(D(SEC), 'sec(x)*tan(x)'), (D(TAN), 'sec(x)**2')],
             '$dv=\\sec^2x\\,dx$ لأن تكاملها سهل: $v=\\tan x$.'),
            (r'I=\sec x\tan x-\int\sec x\tan^{2}x\,dx', [('sec(x)**3', 'diff(sec(x)*tan(x),x)-sec(x)*tan(x)**2')], '$I=uv-\\int v\\,du$.'),
            (r'I=\sec x\tan x-\int\sec x(\sec^{2}x-1)\,dx', [('tan(x)**2', 'sec(x)**2-1')], '$\\tan^2=\\sec^2-1$.'),
            (r'I=\sec x\tan x-\int\sec^{3}x\,dx+\int\sec x\,dx', [('sec(x)*(sec(x)**2-1)', 'sec(x)**3-sec(x)')], 'نوزّع. انتبه: رجع لنا $\\int\\sec^3x$ نفسه!'),
-           (r'I=\sec x\tan x-\cR{I}+\ln|\sec x+\tan x|', [(D('log(sec(x)+tan(x))'), 'sec(x)')], '🔁 $I$ رجع. ننقله للطرف الثاني.'),
+           (r'I=\sec x\tan x-\cR{I}+\ln|\sec x+\tan x|', [(D('log(sec(x)+tan(x))'), 'sec(x)')], '↩️ $I$ رجع! ننقله للطرف الثاني.'),
            (r'2I=\sec x\tan x+\ln|\sec x+\tan x|', [(D('sec(x)*tan(x)+log(sec(x)+tan(x))'), '2*sec(x)**3')], '$I+I=2I$.'),
            (r'I=\frac12\sec x\tan x+\frac12\ln|\sec x+\tan x|+c', [(D('sec(x)*tan(x)/2+log(sec(x)+tan(x))/2'), 'sec(x)**3')],
             'نقسم <b>كل</b> الحدود على 2: «نص ونص». فحص: $\\sec x\\tan x$ أسها $1+1=2=3-1$ ✓')],
@@ -284,10 +319,59 @@ def page_start():
             + '<div class="ts-sentence">' + rich('احجز دايم $du$: sec زوجي ← $u=\\tan x$ · tan فردي ← $u=\\sec x$') + '</div>'
             + '<h3>نفس الحركات، والفرق بس في الشريك</h3>' + same
             + '<h3>🧭 أربعة أسئلة، بالترتيب، وأول «إيه» هي قاعدتك</h3>' + qs + note
-            + '<div class="ts-go">' + link('secS', 'ابدأ: القسم ١ ←') + '</div>'
+            + '<div class="ts-go">' + link('udu', 'ابدأ: 🔑 u و du ←') + '</div>'
             + p(' · '.join(link(an, t + ' ص ' + pgref(an)) for an, t in [
-                ('map', '🗺️ المتتبع'), ('tools', '🧰 الأدوات'), ('fix', '🔍 صحّح الغلط'), ('test', '📝 الاختبار'),
+                ('udu', '🔑 u و du'), ('map', '🗺️ المتتبع'), ('tools', '🧰 الأدوات'), ('fix', '🔍 صحّح الغلط'), ('test', '📝 الاختبار'),
                 ('key', '🔑 المفتاح'), ('sols', '✅ الحلول'), ('recall', '🧠 الاسترجاع')]), 'small center') + '</section>')
+
+
+UDU_KEY = ['(1) $\\displaystyle \\sec^{2}x\\,dx=du$',
+           '(2) $\\displaystyle \\sec2x\\tan2x\\,dx=\\frac12\\,du$ (لأن $du=2\\sec2x\\tan2x\\,dx$)',
+           '(3) $u$، و $du$: $\\displaystyle \\int u^{4}\\,du=\\frac15\\tan^{5}x+c$']
+
+
+def page_udu():
+    """u and du from zero, in tan and sec: the exchange idea, the two lines to write, why the kept piece is needed (the
+    whole secret of sections 1 and 2), one full example with the 🔁 swap, the shapes of du, a note on the other u of parts,
+    four questions and practice."""
+    ex = steps([
+        (r'\text{let }\cU{u=\tan x},\quad \cD{du=\sec^{2}x\,dx}', [(D(TAN), 'sec(x)**2')], 'سطرين «سعر الصرف»: اشتق $u$ وحط جنبها $dx$.'),
+        (r'I=\int' + UB(r'\tan^{2}x', 'u^{2}') + r'\;' + UD(r'\sec^{2}x\,dx'), [('tan(x)**2*sec(x)**2', 'tan(x)**2*diff(tan(x),x)')],
+         '$\\tan^2x$ صارت $u^2$، و $\\sec^2x\\,dx$ كلها مع بعض صارت $du$. ما بقى ولا $x$ ✓', SWAP),
+        (r'I=\int u^{2}\,du=\frac13u^{3}+c', [('integrate(u**2,u)', 'u**3/3')], 'صار سهل: زد الأس 1 واقسم عليه.'),
+        (r'I=\frac13\tan^{3}x+c', [(D('tan(x)**3/3'), 'tan(x)**2*sec(x)**2')], 'نرجّع $u=\\tan x$. وتأكد: اشتقه، يرجع السؤال ✓')], 'udu ex')
+    forms = table([rich('let $u$'), rich('$du$'), 'القطعة اللي في السؤال تصير', ''], [
+        [mi(r'u=\tan x'), mi(r'du=\sec^{2}x\,dx'), mi(r'\sec^{2}x\,dx=du'), ''],
+        [mi(r'u=\sec x'), mi(r'du=\sec x\tan x\,dx'), mi(r'\sec x\tan x\,dx=du'), ''],
+        [mi(r'u=\tan3x'), mi(r'du=3\sec^{2}3x\,dx'), mi(r'\sec^{2}3x\,dx=\tfrac13\,du'), 'اقسم الطرفين على 3']], 'duforms')
+    arith('', [(D('tan(x)'), 'sec(x)**2'), (D('sec(x)'), 'sec(x)*tan(x)'), (D('tan(3*x)'), '3*sec(3*x)**2')], 'udu forms')
+    arith('', [(D('sec(2*x)'), '2*sec(2*x)*tan(2*x)')], 'udu practice 2')
+    antideriv('tan(x)**5/5', 'tan(x)**4*sec(x)**2', 'udu practice 3')
+    practice = ('<ol class="fill">'
+                + '<li>%s</li>' % mi(r'\text{let }u=\tan x\ \Rightarrow\ \sec^{2}x\,dx=' + BLANK)
+                + '<li>%s</li>' % mi(r'\text{let }u=\sec2x\ \Rightarrow\ \sec2x\tan2x\,dx=' + BLANK)
+                + '<li>%s</li>' % mi(r'\displaystyle\int\tan^{4}x\,\sec^{2}x\,dx=\int(' + BLANK + r')^{4}\,(' + BLANK + r')') + '</ol>'
+                + p(rich('وكمّل الثالث لين الجواب:'), 'small') + lines(2, 'write tight'))
+    checks = ul([rich(t) for t in ['✅ كتبت let $u$ و $du$؟', '✅ قطعة $du$ موجودة كاملة في السؤال؟',
+                                     '✅ بعد التبديل: ما بقى ولا $x$ ولا $dx$؟', '✅ رجّعت $x$ في الآخر؟']], 'checks')
+    return ('<section class="chapter" id="udu"><div class="ts-head ts-plain"><div class="top"><h2>🔑 u و du من الصفر (اقرأها قبل أي حل)</h2></div></div>'
+            + '<div class="ts-sentence">' + rich('الفكرة: نحوّل التكامل الصعب لتكامل سهل مثل $\\int u^2\\,du$') + '</div>'
+            + p(rich('مثل تصريف الفلوس: كل شي بـ«عملة $x$» يتصرّف لـ«عملة $u$». ولو بقى شي واحد بعملة $x$، التصريف خربان.'))
+            + '<div class="toolgrid">'
+            + sbox(rich('١. سعر الصرف: سطرين تكتبهم دايم (مثل دكتورك)'), md(r'\begin{gathered}\text{let }\cU{u=\tan x}\\ \cD{du=\sec^{2}x\,dx}\end{gathered}')
+                   + p(rich('اشتق $u$، وحط جنبها $dx$. <b>ليش $dx$؟</b> كل تكامل آخره $dx$. ولما نصرف لـ $u$، القطعة $\\sec^2x\\,dx$ '
+                            '<b>كلها مع بعض</b> تصير $du$.')))
+            + sbox(rich('٢. ليش لازم القطعة الخضرا؟'),
+                   p(rich('$du$ هي «تذكرة» التصريف. مثلًا $\\int\\tan^2x\\,dx$ ما فيها $\\sec^2x$، فـ $u=\\tan x$ ما تنفع، وعشان كذا لها قاعدة لحالها (القسم ٣).'))
+                   + p(rich('<b>وهذا سر القسمين ١ و ٢:</b> sec الزوجي يعطيك $\\sec^2x$ تحجزها، و tan الفردي مع sec يعطيك $\\sec x\\tan x$.')))
+            + '</div>'
+            + sbox(rich('٣. مثال كامل: $\\int\\tan^2x\\sec^2x\\,dx$'), ex
+                   + p(rich('السطور المرقّمة تكتبها في الكويز. وسطر 🔁 تسويه بعيونك: قوس تحت كل قطعة، ومكتوب تحته وش صارت.'), 'small'), 'worked')
+            + sbox(rich('٤. أشكال $du$ هنا (وما فيه سالب أبد، أسهل من cos!)'), forms)
+            + '<div class="tip">' + rich('⚠️ <b>في القسم ٤ (التجزئة) $u$ معناها شي ثاني:</b> القطعة اللي نشتقها، و $dv$ اللي نكاملها. مو تعويض.') + '</div>'
+            + '<div class="toolgrid">' + sbox(rich('✅ 4 أسئلة قبل ما تكمّل أي حل'), checks)
+            + sbox(rich('✍️ جرّب (الأجوبة في المفتاح ص ') + pgref('key') + ')', practice) + '</div>'
+            + '<div class="ts-go">' + link('secS', 'يلا: القسم ١ ←') + '</div></section>')
 
 
 def page_map():
@@ -306,7 +390,7 @@ def page_map():
         rows.append(['☐', '<span class="dot %s"></span>' % RULES[r][0] + mi(Q[k][0]), where, kind(Q[k][6]), link('q-' + k, pgref('q-' + k))])
     tracker = table(['☐', 'السؤال', 'عند موسى (✔ محلول عند)', 'هنا', 'ص'], rows, 'tracker')
     plan = ('<ol class="plan">' + ''.join('<li>%s</li>' % rich(t) for t in [
-        '<b>«ابدأ هنا» والأدوات:</b> غطِّ واكتب المشتقتين، والمتطابقة، والتكاملات الأربعة.',
+        '<b>«ابدأ هنا»، و 🔑 u و du، والأدوات:</b> غطِّ واكتب المشتقتين، والمتطابقة، والتكاملات الأربعة.',
         '<b>الأقسام الأربعة بالترتيب:</b> 🧱 غطِّ عمود «الخطوة» وتوقّع السطر الجاي، ✍️ عبّي، ✏️ حل لحالك، ✅ الفحص. وعلّم ☐ هنا.',
         '<b>🔍 صحّح الغلط، ثم 📝 الاختبار:</b> جولة أول سطر بس، وجولة حل كامل. 8 من 10 = أتقنته.',
         '<b>أمثلة دكتورك</b> (محاضرة 15 ص 2، ومحاضرة 16 ص 1): غطِّ حله وحلها. <b>وقبل الكويز:</b> 🧠 الاسترجاع.']) + '</ol>')
@@ -377,8 +461,9 @@ def qblock(k):
     hint = {'T2': rich('💡 sec أسه 1: بعد ما تحجز $\\sec x\\tan x$ ما يبقى sec. يبقى $\\tan^4=(\\sec^2-1)^2$ بس.'),
             'L4': rich('💡 نفس حركة $\\tan^4$ مرة زيادة. وتأكد بالسلسلة (فوق).'),
             'P3': rich('⭐⭐⭐ <b>أطول سؤال في الباب، وما جا في أي اختبار من الـ12.</b> حوّل كل tan لـ sec، ثم حركة $\\sec^5$ ثلاث مرات. '
-                       'واجب دكتورك $\\int\\tan^2x\\sec^3x\\,dx$ (محاضرة 16) نفس الفكرة وأقصر.')}.get(k, '')
-    return sbox(head, md(qt) + p(hint, 'small') + predict + lines(6 if k == 'P3' else 4, 'write tight') + p(sol), kd, 'q-' + k)
+                       'واجب دكتورك $\\int\\tan^2x\\sec^3x\\,dx$ (محاضرة 16) نفس الفكرة وأقصر. 📄 <b>حلها على ورقة لحالها.</b>')}.get(k, '')
+    space = '' if k == 'P3' else lines({'L4': 3}.get(k, 4), 'write tight')
+    return sbox(head, md(qt) + p(hint, 'small') + predict + space + p(sol), kd, 'q-' + k)
 
 
 def check_block(r, qs, done=''):
@@ -390,7 +475,7 @@ def check_block(r, qs, done=''):
     return sbox('✅ فحص صغير: صح الاثنين؟ كمّل. غلط؟ ارجع للمحلول (الأجوبة في المفتاح ص %s)' % pgref('key'), '<div class="chgrid">' + out + '</div>' + ('<div class="ts-done">%s</div>' % done if done else ''), 'check')
 
 
-CHECK_LINES = {'S': 3, 'T': 4, 'L': 2, 'P': 2}
+CHECK_LINES = {'S': 2, 'T': 4, 'L': 2, 'P': 2}
 CHECKS = {
     'S': [(r'\int\tan^{2}x\sec^{4}x\,dx', 'tan(x)**3/3+tan(x)**5/5', 'tan(x)**2*sec(x)**4', '📝 اختبار ثاني 1445'),
           (r'\int\sec^{6}x\,dx', 'tan(x)+2*tan(x)**3/3+tan(x)**5/5', 'sec(x)**6', '')],
@@ -408,13 +493,14 @@ CHECK_KEYS = {
 
 METHOD = {
     'S': ['<b>احجز</b> $\\cD{\\sec^2x\\,dx}$ واكتبها آخر شي.', '<b>حوّل</b> الباقي من sec بـ $\\sec^2=1+\\tan^2$ (جدول «كم قوس؟»).',
-          '<b>عوّض</b> $\\cU{u=\\tan x}$، و $du=\\sec^2x\\,dx$.', '<b>فك القوس</b> ووزّع، ثم كامل كل حد.', '<b>رجّع</b> $\\tan x$، وافحص: أكبر أس = المجموع − 1.'],
+          '<b>let</b> $\\cU{u=\\tan x}$، و $du=\\sec^2x\\,dx$ (هي القطعة الخضرا).', '<b>بدّل</b> كل قطعة بـ $u$ (سطر 🔁).', '<b>فك القوس</b> ووزّع، ثم كامل كل حد.', '<b>رجّع</b> $\\tan x$، وافحص: أكبر أس = المجموع − 1.'],
     'T': ['<b>احجز</b> $\\cD{\\sec x\\tan x\\,dx}$ (وحدة sec ووحدة tan).', '<b>حوّل</b> الباقي من tan (صار زوجي) بـ $\\tan^2=\\sec^2-1$.',
-          '<b>عوّض</b> $\\cU{u=\\sec x}$، و $du=\\sec x\\tan x\\,dx$.', '<b>فك القوس</b> ووزّع، ثم كامل.', '<b>رجّع</b> $\\sec x$، وافحص.'],
+          '<b>let</b> $\\cU{u=\\sec x}$، و $du=\\sec x\\tan x\\,dx$ (هي القطعة الخضرا).', '<b>بدّل</b> كل قطعة بـ $u$ (سطر 🔁).', '<b>فك القوس</b> ووزّع، ثم كامل.', '<b>رجّع</b> $\\sec x$، وافحص.'],
     'L': ['<b>قص</b> $\\tan^2x=\\sec^2x-1$ من السؤال.', '<b>وزّع:</b> قطعة فيها $\\sec^2x$ (تنحل بـ $u=\\tan x$)، وقطعة tan بأس أقل بـ 2.',
           '<b>كرر</b> على القطعة الثانية لين توصل $\\tan^2$ (جوابها $\\tan x-x$) أو $\\tan$ (جوابها $\\ln|\\sec x|$).'],
-    'P': ['<b>خل</b> $dv=\\sec^2x\\,dx$، و $u$ = باقي الـ sec.', '<b>$uv-\\int v\\,du$</b>، وحوّل $\\tan^2=\\sec^2-1$ ووزّع.',
-          '<b>$I$ يرجع لك:</b> انقله للطرف الثاني، واقسم <b>كل</b> الحدود.', 'tan زوجي مع sec فردي؟ حوّل كل tan لـ sec أول.'],
+    'P': ['⚠️ <b>$u$ هنا معناها شي ثاني:</b> القطعة اللي نشتقها، و $dv$ اللي نكاملها (مو تعويض).', '<b>خل</b> $dv=\\sec^2x\\,dx$، و $u$ = باقي الـ sec.', '<b>$uv-\\int v\\,du$</b>، وحوّل $\\tan^2=\\sec^2-1$ ووزّع.',
+          '<b>$I$ يرجع لك:</b> انقله للطرف الثاني، واقسم <b>كل</b> الحدود.', 'tan زوجي مع sec فردي؟ حوّل كل tan لـ sec أول.',
+          '✍️ <b>في الكويز:</b> اكتب التجزئة كاملة مثل دكتورك. «نص ونص» تحفظها بس عشان تتأكد من جوابك.'],
 }
 DONE = {'S': 'خلصت القسم ١! هذا أكثر شي جا في الاختبارات. علّم ☐ وكمّل للقسم ٢.',
         'T': 'خلصت القسمين اللي جوا في الاختبارات القديمة 💪 علّم ☐.',
@@ -426,17 +512,12 @@ def page_rule(r):
     cls, anchor = RULES[r][0], RULES[r][1]
     method = '<ol class="ts-steps">' + ''.join('<li>%s</li>' % rich(t) for t in METHOD[r]) + '</ol>'
     extra = ''
-    if r == 'S':
-        extra = ('<div class="both">' + rich('🤝 <b>سؤال ينفع فيه القسمين؟</b> (tan فردي و sec زوجي، مثل $\\tan^3x\\sec^4x$) ابدأ بهذا القسم مثل موسى. '
-                                             'ولو حليته بالقسم ٢ يطلع جوابك شكله غير ($\\frac16\\sec^6x-\\frac14\\sec^4x$)، وهو صح: الفرق ثابت.') + '</div>')
     if r == 'L':
         chain = arith(r'\int\tan^{6}x\,dx:\quad 5,\ 3,\ 1\ \Rightarrow\ \frac{\tan^{5}x}{5}-\frac{\tan^{3}x}{3}+\frac{\tan x}{1}-x+c',
                       [(D('tan(x)**5/5-tan(x)**3/3+tan(x)-x'), 'tan(x)**6')], 'chain tan6')
         extra = ('<div class="tip">' + rich('⚡ <b>سلسلة tan (نفس اللي في المذكرة الكبيرة): تأكد فيها من جوابك</b><br>'
                                             'الأسس تبدأ من (أس السؤال − 1) وتنزل 2 2 · كل حد على أسه · الإشارات تتبادل $+\\ -\\ +$ · '
                                             'وآخر حد (بالإشارة اللي عليها الدور): $x$ إذا أس السؤال زوجي، و $\\ln|\\sec x|$ إذا فردي.') + md(chain) + '</div>')
-    if r == 'P':
-        extra = ('<div class="tip">' + rich('✍️ <b>في الكويز:</b> اكتب التجزئة كاملة مثل دكتورك. «نص ونص» تحفظها بس عشان تتأكد من جوابك.') + '</div>')
     if r == 'L':
         body = method + extra + ''.join(qblock(k) for k in ORDER if Q[k][2] == r) + check_block(r, CHECKS[r], DONE[r])
     else:
@@ -522,7 +603,8 @@ def page_key():
             + '<h3>اختبار الإتقان: القسم، وأول سطر، والجواب</h3><ol class="keylist">' + items + '</ol>'
             + p(rich('جوابك شكله غير؟ اشتقه: إذا رجع السؤال فهو صح. والفرق بثابت عادي لما القسمين ينفعون.'), 'small')
             + '<h3>الفحوص الصغيرة</h3><ul class="keylist">' + checks + '</ul>'
-            + '<h3>الفراغات (بالترتيب)</h3><ul class="keylist two">' + fills + '</ul></section>')
+            + '<h3>الفراغات (بالترتيب)</h3><ul class="keylist two">' + fills + '</ul>'
+            + '<h3>🔑 صفحة u و du: جرّب</h3><ul class="keylist two">' + ''.join('<li>%s</li>' % rich(t) for t in UDU_KEY) + '</ul></section>')
 
 
 def page_sols():
@@ -536,7 +618,7 @@ def page_sols():
 
 def recall():
     prompts = [('الأسئلة الأربعة بالترتيب، ووش تسوي في كل وحدة.', 'start'),
-               ('المشتقتين، والمتطابقة (ومن وين جت).', 'tools'),
+               ('let $u$ و $du$ (الشكلين)، والمتطابقة ومن وين جت.', 'udu'),
                ('التكاملات الأربعة: $\\sec^2$، و $\\sec\\tan$، و $\\tan$، و $\\sec$.', 'tools'),
                ('أول 3 أسطر في $\\int\\sec^3x\\,dx$، وجوابها «نص ونص».', 'q-P1'),
                ('سلسلة tan: الأسس، والإشارات، وآخر حد.', 'secL'),
@@ -550,12 +632,12 @@ def recall():
 
 def build():
     check_all()
-    body = (page_start() + page_map() + page_tools() + ''.join(page_rule(r) for r in ('S', 'T', 'L', 'P'))
+    body = (page_start() + page_udu() + page_map() + page_tools() + ''.join(page_rule(r) for r in ('S', 'T', 'L', 'P'))
             + page_fix() + page_test() + page_key() + page_sols() + recall())
     return '<main class="ts">' + body + '</main>'
 
 
-OUTLINE = [[1, '🚪 ابدأ هنا', ['start']], [1, '🗺️ المتتبع والخطة', ['map']], [1, '🧰 الأدوات', ['tools']],
+OUTLINE = [[1, '🚪 ابدأ هنا', ['start']], [1, '🔑 u و du', ['udu']], [1, '🗺️ المتتبع والخطة', ['map']], [1, '🧰 الأدوات', ['tools']],
            [1, '١. أس sec زوجي', ['secS']], [1, '٢. tan فردي ومعه sec', ['secT']], [1, '٣. سلسلة tan', ['secL']],
            [1, '٤. تجزئة', ['secP']], [1, '🔍 صحّح الغلط', ['fix']], [1, '📝 اختبار الإتقان', ['test']], [1, '🔑 المفتاح', ['key']],
            [1, '✅ الحلول', ['sols']], [1, '🧠 الاسترجاع', ['recall']]]

@@ -27,12 +27,20 @@ def antideriv(F, f, label, branch=None):
 
 
 def steps(rows, label):
-    """(latex, claims, why) rows; every claim is checked; the last row is the answer."""
+    """(latex, claims, why[, 'swap']) rows; every claim is checked; the last row is the answer.
+    A 🔁 swap row shows, under each piece, what it becomes in u: it is not numbered (done with the eyes, not written)."""
     body = ''
-    for k, (latex, claims, why) in enumerate(rows, 1):
+    n = 0
+    for k, row in enumerate(rows, 1):
+        latex, claims, why = row[:3]
         arith(latex, claims, '%s step %d' % (label, k))
+        if len(row) > 3 and row[3] == 'swap':
+            body += ('<tr class="swap"><td class="n">🔁</td><td colspan="2">%s<div class="swhy">%s</div></td></tr>'
+                     % (mi(r'\displaystyle ' + latex), rich('<b>التبديل</b> (بعيونك، ما يلزم تكتبه): ' + why)))
+            continue
+        n += 1
         cls = ' class="final"' if k == len(rows) else ''
-        body += '<tr%s><td class="n">%d</td><td>%s</td><td>%s</td></tr>' % (cls, k, mi(r'\displaystyle ' + latex), rich(why))
+        body += '<tr%s><td class="n">%d</td><td>%s</td><td>%s</td></tr>' % (cls, n, mi(r'\displaystyle ' + latex), rich(why))
     return ('<table class="steps"><thead><tr><th>#</th><th>الخطوة (تكتبها)</th><th>ليش؟ (لك أنت)</th></tr></thead>'
             '<tbody>' + body + '</tbody></table>')
 
@@ -93,44 +101,72 @@ def musa(k):
 
 # ---------------------------------------------------------------- the steps of every question (checked)
 def U_SIN():
-    return (r'\cU{u=\sin x}\ \Rightarrow\ \cD{du=\cos x\,dx}', [(D(S), C)], 'نسمّي الدالة الثانية $u$، ومشتقتها هي القطعة اللي حجزناها.')
+    return (r'\text{let }\cU{u=\sin x},\quad \cD{du=\cos x\,dx}', [(D(S), C)],
+            'اشتق $u$ وحط جنبها $dx$: $du=\\cos x\\,dx$. وهذي بالضبط القطعة الخضرا اللي حجزناها.')
 
 
 def U_COS():
-    return (r'\cU{u=\cos x}\ \Rightarrow\ \cD{du=\cR{-}\sin x\,dx}', [(D(C), '-' + S)], '🔴 مشتقة cos فيها سالب.')
+    return (r'\text{let }\cU{u=\cos x},\quad du=\cR{-}\sin x\,dx\ \Rightarrow\ \cD{\sin x\,dx}=\cR{-}\cD{du}', [(D(C), '-' + S)],
+            '🔴 مشتقة cos فيها سالب. نضرب الطرفين في $-1$: القطعة الخضرا $\\sin x\\,dx$ صار اسمها $-du$.')
 
+
+SWAP = 'swap'          # a 🔁 row: under each piece, what it becomes in u (done with the eyes, not numbered)
+MINUS_DU = r'\cR{-}\cD{du}'
+HALF_DU = r'\cD{\tfrac12\,du}'
+
+
+def UB(x_tex, u_tex):
+    """A piece of the integral and, under it, what it becomes in u."""
+    return r'\underbrace{%s}_{\displaystyle \cU{%s}}' % (x_tex, u_tex)
+
+
+def UD(x_tex, du_tex=r'\cD{du}'):
+    """The kept (green) piece and, under it, its du form."""
+    return r'\underbrace{\cD{%s}}_{\displaystyle %s}' % (x_tex, du_tex)
+
+
+SWAP_WHY = 'كل قطعة صارت $u$، والخضرا صارت $du$. ما بقى ولا $x$ ولا $dx$ ✓'
+SWAP_WHY_MINUS = 'كل قطعة صارت $u$، والخضرا صارت $-du$. ما بقى ولا $x$ ولا $dx$ ✓'
 
 ROWS = {
-    'A1': [(r'\sin^{2}x=\frac{1-\cos2x}{2}', [('sin(x)**2', '(1-cos(2*x))/2')], 'أس زوجي لحاله: ما فيه شي نحجزه، فنص الزاوية. «سين وسالب».'),
+    'A1': [(r'\sin^{2}x=\frac{1-\cos2x}{2}', [('sin(x)**2', '(1-cos(2*x))/2')],
+            'أس زوجي لحاله: ما فيه قطعة نحجزها تصير $du$، فنص الزاوية. «سين وسالب».'),
            (r'I=\frac12\int(1-\cos2x)\,dx', [], 'الـ $\\frac12$ تطلع برّا التكامل.'),
            (r'I=\frac12\left[x-\frac12\sin2x\right]+c', [(D('(x-sin(2*x)/2)/2'), 'sin(x)**2')], r'$\int\cos2x\,dx=\frac12\sin2x$: نقسم على رقم الزاوية.'),
            (r'I=\frac12x-\frac14\sin2x+c', [(D('x/2-sin(2*x)/4'), 'sin(x)**2')], 'نوزّع $\\frac12$ على القوس.')],
-    'A2': [(r'I=\int\sin^{2}x\,\sin x\,dx', [('sin(x)**3', 'sin(x)**2*sin(x)')], 'أس sin فردي: نحجز $\\sin x$.'),
-           (r'=\int(1-\cos^{2}x)\,\cD{\sin x\,dx}', [('sin(x)**2', '1-cos(x)**2')], 'الباقي لـ cos.'),
+    'A2': [(r'I=\int\sin^{2}x\,\cD{\sin x\,dx}', [('sin(x)**3', 'sin(x)**2*sin(x)')], 'أس sin فردي (3): نحجز $\\sin x\\,dx$ وحدة، عشان تصير $du$.'),
+           (r'I=\int(1-\cos^{2}x)\,\cD{\sin x\,dx}', [('sin(x)**2', '1-cos(x)**2')], 'الباقي $\\sin^2x$ نحوّله لـ cos بالمتطابقة، عشان يصير كله $u$.'),
            U_COS(),
-           (r'=\cR{-}\int(1-u^{2})\,du=-\left[u-\frac13u^{3}\right]+c', [('integrate(1-u**2,u)', 'u-u**3/3')], 'السالب برّا القوس الكبير لين آخر سطر.'),
-           (r'I=-\cos x+\frac13\cos^{3}x+c', [(D('-cos(x)+cos(x)**3/3'), 'sin(x)**3')],
-            'نوزّع السالب ونرجّع $u$. ونفس توقّع التوأم ✓')],
-    'A3': [(r'I=\int\cos^{2}x\,\cos x\,dx', [('cos(x)**3', 'cos(x)**2*cos(x)')], 'أس cos فردي (3): نحجز $\\cos x$ وحدة، لأنها مشتقة $\\sin x$.'),
-           (r'=\int(1-\sin^{2}x)\,\cD{\cos x\,dx}', [('cos(x)**2', '1-sin(x)**2')], 'الباقي أسه زوجي: نحوّله لـ sin بالمتطابقة.'),
+           (r'I=\int' + UB(r'(1-\cos^{2}x)', r'(1-u^{2})') + r'\;' + UD(r'\sin x\,dx', MINUS_DU),
+            [('sin(x)**3', '-(1-cos(x)**2)*diff(cos(x),x)')], SWAP_WHY_MINUS, SWAP),
+           (r'I=\cR{-}\int(1-u^{2})\,du=-\left[u-\frac13u^{3}\right]+c', [('integrate(1-u**2,u)', 'u-u**3/3')],
+            'السالب قدّام التكامل، وبرّا قوس كبير لأنه يضرب كل الحدود.'),
+           (r'I=-\cos x+\frac13\cos^{3}x+c', [(D('-cos(x)+cos(x)**3/3'), 'sin(x)**3')], 'نوزّع السالب ونرجّع $u=\\cos x$. ونفس توقّع التوأم ✓')],
+    'A3': [(r'I=\int\cos^{2}x\,\cD{\cos x\,dx}', [('cos(x)**3', 'cos(x)**2*cos(x)')],
+            'أس cos فردي (3): نحجز $\\cos x\\,dx$ وحدة، عشان تصير $du$ (مشتقة $\\sin x$ هي $\\cos x$).'),
+           (r'I=\int(1-\sin^{2}x)\,\cD{\cos x\,dx}', [('cos(x)**2', '1-sin(x)**2')], 'الباقي $\\cos^2x$ أسه زوجي: نحوّله لـ sin بالمتطابقة، عشان يصير كله $u$.'),
            U_SIN(),
-           (r'=\int(1-u^{2})\,du=u-\frac13u^{3}+c', [('integrate(1-u**2,u)', 'u-u**3/3')], 'كل حد: زد الأس 1 واقسم عليه.'),
+           (r'I=\int' + UB(r'(1-\sin^{2}x)', r'(1-u^{2})') + r'\;' + UD(r'\cos x\,dx'),
+            [('cos(x)**3', '(1-sin(x)**2)*diff(sin(x),x)')], SWAP_WHY, SWAP),
+           (r'I=\int(1-u^{2})\,du=u-\frac13u^{3}+c', [('integrate(1-u**2,u)', 'u-u**3/3')], 'صار سهل: كل حد زد أسه 1 واقسم عليه.'),
            (r'I=\sin x-\frac13\sin^{3}x+c', [(D('sin(x)-sin(x)**3/3'), 'cos(x)**3')], 'نرجّع $u=\\sin x$. أعلى أس 3 = أس السؤال ✓')],
-    'A4': [(r'\cos^{2}x=\frac{1+\cos2x}{2}', [('cos(x)**2', '(1+cos(2*x))/2')], 'أس زوجي: نص الزاوية. و cos معها زائد.'),
+    'A4': [(r'\cos^{2}x=\frac{1+\cos2x}{2}', [('cos(x)**2', '(1+cos(2*x))/2')], 'أس زوجي: ما فيه قطعة تصير $du$، فنص الزاوية. و cos معها زائد.'),
            (r'I=\frac12\int(1+\cos2x)\,dx', [], 'الـ $\\frac12$ برّا.'),
            (r'I=\frac12x+\frac14\sin2x+c', [(D('x/2+sin(2*x)/4'), 'cos(x)**2')], 'نفس $\\sin^2$ بس الإشارة زائد.')],
-    'A5': [(r'I=\int\sin^{4}x\,\sin x\,dx=\int(\sin^{2}x)^{2}\sin x\,dx', [('sin(x)**5', '(sin(x)**2)**2*sin(x)')],
-            'أس sin فردي (5): نحجز $\\sin x$، والباقي $\\sin^4=(\\sin^2)^2$.'),
-           (r'=\int(1-\cos^{2}x)^{2}\,\cD{\sin x\,dx}', [('(sin(x)**2)**2', '(1-cos(x)**2)**2')], 'نحوّل $\\sin^2$ لـ cos داخل القوس.'),
+    'A5': [(r'I=\int\sin^{4}x\,\cD{\sin x\,dx}=\int(\sin^{2}x)^{2}\,\cD{\sin x\,dx}', [('sin(x)**5', '(sin(x)**2)**2*sin(x)')],
+            'أس sin فردي (5): نحجز $\\sin x\\,dx$ وحدة عشان تصير $du$، والباقي $\\sin^4=(\\sin^2)^2$.'),
+           (r'I=\int(1-\cos^{2}x)^{2}\,\cD{\sin x\,dx}', [('(sin(x)**2)**2', '(1-cos(x)**2)**2')], 'نحوّل $\\sin^2$ اللي داخل القوس لـ cos، عشان يصير كله $u$.'),
            U_COS(),
-           (r'=\cR{-}\int(1-u^{2})^{2}\,du=-\int(1-2u^{2}+u^{4})\,du', [('(1-u**2)**2', '1-2*u**2+u**4')],
-            'السالب برّا. ونفك القوس من صفحة الجبر.'),
-           (r'=-\left[u-\frac23u^{3}+\frac15u^{5}\right]+c', [('integrate(1-2*u**2+u**4,u)', 'u-2*u**3/3+u**5/5')],
-            'كل حد لحاله. (عند موسى هالقوس مرسوم بخطين | |، وهو قوس عادي.)'),
+           (r'I=\int' + UB(r'(1-\cos^{2}x)^{2}', r'(1-u^{2})^{2}') + r'\;' + UD(r'\sin x\,dx', MINUS_DU),
+            [('sin(x)**5', '-(1-cos(x)**2)**2*diff(cos(x),x)')], SWAP_WHY_MINUS, SWAP),
+           (r'I=\cR{-}\int(1-u^{2})^{2}\,du=-\int(1-2u^{2}+u^{4})\,du', [('(1-u**2)**2', '1-2*u**2+u**4')],
+            'السالب قدّام التكامل. ونفك القوس (جاهز في الأدوات).'),
+           (r'I=-\left[u-\frac23u^{3}+\frac15u^{5}\right]+c', [('integrate(1-2*u**2+u**4,u)', 'u-2*u**3/3+u**5/5')],
+            'كل حد لحاله، والسالب برّا قوس كبير لأنه يضرب الكل. (عند موسى هالقوس مرسوم بخطين | |، وهو قوس عادي.)'),
            (r'I=-\cos x+\frac23\cos^{3}x-\frac15\cos^{5}x+c', [(D('-cos(x)+2*cos(x)**3/3-cos(x)**5/5'), 'sin(x)**5')],
-            'نوزّع السالب آخر شي ونرجّع $u$. أعلى أس 5 ✓')],
+            'نوزّع السالب آخر شي ونرجّع $u=\\cos x$. أعلى أس 5 ✓')],
     'A6': [(r'\sin^{4}x=(\sin^{2}x)^{2}=\left(\frac{1-\cos2x}{2}\right)^{2}=\frac14(1-\cos2x)^{2}',
-            [('sin(x)**4', '((1-cos(2*x))/2)**2'), ('((1-cos(2*x))/2)**2', '(1-cos(2*x))**2/4')], 'أس زوجي: نص الزاوية للمربع.'),
+            [('sin(x)**4', '((1-cos(2*x))/2)**2'), ('((1-cos(2*x))/2)**2', '(1-cos(2*x))**2/4')], 'أس زوجي: ما فيه قطعة تصير $du$، فنص الزاوية للمربع.'),
            (r'=\frac14\left(1-2\cos2x+\cos^{2}2x\right)', [('(1-cos(2*x))**2/4', '(1-2*cos(2*x)+cos(2*x)**2)/4')], 'نفك المربع: $(a-b)^2=a^2-2ab+b^2$.'),
            (r'\cos^{2}2x=\frac12+\frac12\cos4x', [('cos(2*x)**2', 'Rational(1,2)+cos(4*x)/2')],
             'طلع $\\cos^2$ مرة ثانية: نص الزاوية، و $2x$ تصير $4x$.'),
@@ -142,74 +178,97 @@ ROWS = {
            (r'=\frac14\left(\frac32+2\cos2x+\frac12\cos4x\right)', [('cos(x)**4', '(Rational(3,2)+2*cos(2*x)+cos(4*x)/2)/4')], 'نص الزاوية لـ $\\cos^22x$.'),
            (r'I=\frac38x+\frac14\sin2x+\frac1{32}\sin4x+c', [(D('3*x/8+sin(2*x)/4+sin(4*x)/32'), 'cos(x)**4')],
             'نفس جواب $\\sin^4$، والفرق إشارة $\\sin2x$ بس.')],
-    'B1': [(r'I=\int\sin^{5}x\cos^{2}x\,\cos x\,dx', [('sin(x)**5*cos(x)**3', 'sin(x)**5*cos(x)**2*cos(x)')],
-            'الاثنين فرديين (5 و 3): نحجز من الأصغر، $\\cos x$.'),
-           (r'=\int\sin^{5}x\,(1-\sin^{2}x)\,\cD{\cos x\,dx}', [('cos(x)**2', '1-sin(x)**2')], 'الباقي لـ sin.'),
+    'B1': [(r'I=\int\sin^{5}x\cos^{2}x\,\cD{\cos x\,dx}', [('sin(x)**5*cos(x)**3', 'sin(x)**5*cos(x)**2*cos(x)')],
+            'الاثنين فرديين (5 و 3): نحجز من الأصغر $\\cos x\\,dx$، عشان تصير $du$.'),
+           (r'I=\int\sin^{5}x\,(1-\sin^{2}x)\,\cD{\cos x\,dx}', [('cos(x)**2', '1-sin(x)**2')], 'الباقي $\\cos^2x$ نحوّله لـ sin، عشان يصير كله $u$.'),
            U_SIN(),
-           (r'=\int u^{5}(1-u^{2})\,du=\int(u^{5}-u^{7})\,du', [('u**5*(1-u**2)', 'u**5-u**7')], 'نوزّع $u^5$: الأسس تنجمع.'),
-           (r'=\frac16u^{6}-\frac18u^{8}+c', [('integrate(u**5-u**7,u)', 'u**6/6-u**8/8')], 'كل حد لحاله.'),
-           (r'I=\frac16\sin^{6}x-\frac18\sin^{8}x+c', [(D('sin(x)**6/6-sin(x)**8/8'), 'sin(x)**5*cos(x)**3')], 'أعلى أس 8 = 5 + 3 ✓')],
-    'B2': [(r'I=\int\cos^{5}x\sin^{2}x\,\sin x\,dx', [('cos(x)**5*sin(x)**3', 'cos(x)**5*sin(x)**2*sin(x)')], 'الأصغر $\\sin^3$: نحجز $\\sin x$.'),
-           (r'=\int\cos^{5}x\,(1-\cos^{2}x)\,\cD{\sin x\,dx}', [('sin(x)**2', '1-cos(x)**2')], 'الباقي لـ cos.'),
+           (r'I=\int' + UB(r'\sin^{5}x', 'u^{5}') + r'\,' + UB(r'(1-\sin^{2}x)', r'(1-u^{2})') + r'\;' + UD(r'\cos x\,dx'),
+            [('sin(x)**5*cos(x)**3', 'sin(x)**5*(1-sin(x)**2)*diff(sin(x),x)')], SWAP_WHY, SWAP),
+           (r'I=\int u^{5}(1-u^{2})\,du=\int(u^{5}-u^{7})\,du', [('u**5*(1-u**2)', 'u**5-u**7')], 'نوزّع $u^5$: الأسس تنجمع.'),
+           (r'I=\frac16u^{6}-\frac18u^{8}+c', [('integrate(u**5-u**7,u)', 'u**6/6-u**8/8')], 'كل حد لحاله.'),
+           (r'I=\frac16\sin^{6}x-\frac18\sin^{8}x+c', [(D('sin(x)**6/6-sin(x)**8/8'), 'sin(x)**5*cos(x)**3')], 'نرجّع $u=\\sin x$. أعلى أس 8 = 5 + 3 ✓')],
+    'B2': [(r'I=\int\cos^{5}x\sin^{2}x\,\cD{\sin x\,dx}', [('cos(x)**5*sin(x)**3', 'cos(x)**5*sin(x)**2*sin(x)')],
+            'الأصغر $\\sin^3$: نحجز $\\sin x\\,dx$ عشان تصير $du$.'),
+           (r'I=\int\cos^{5}x\,(1-\cos^{2}x)\,\cD{\sin x\,dx}', [('sin(x)**2', '1-cos(x)**2')], 'الباقي لـ cos، عشان يصير كله $u$.'),
            U_COS(),
-           (r'=\cR{-}\int u^{5}(1-u^{2})\,du=-\left[\frac16u^{6}-\frac18u^{8}\right]+c', [('integrate(u**5*(1-u**2),u)', 'u**6/6-u**8/8')],
+           (r'I=\int' + UB(r'\cos^{5}x', 'u^{5}') + r'\,' + UB(r'(1-\cos^{2}x)', r'(1-u^{2})') + r'\;' + UD(r'\sin x\,dx', MINUS_DU),
+            [('cos(x)**5*sin(x)**3', '-cos(x)**5*(1-cos(x)**2)*diff(cos(x),x)')], SWAP_WHY_MINUS, SWAP),
+           (r'I=\cR{-}\int u^{5}(1-u^{2})\,du=-\left[\frac16u^{6}-\frac18u^{8}\right]+c', [('integrate(u**5*(1-u**2),u)', 'u**6/6-u**8/8')],
             'السالب برّا القوس.'),
-           (r'I=-\frac16\cos^{6}x+\frac18\cos^{8}x+c', [(D('-cos(x)**6/6+cos(x)**8/8'), 'cos(x)**5*sin(x)**3')], 'نفس توقّع التوأم ✓')],
-    'B3': [(r'I=\int\sin^{7}x\cos^{4}x\,\cos x\,dx', [('sin(x)**7*cos(x)**5', 'sin(x)**7*cos(x)**4*cos(x)')], 'الأصغر $\\cos^5$: نحجز $\\cos x$.'),
-           (r'=\int\sin^{7}x\,(1-\sin^{2}x)^{2}\,\cD{\cos x\,dx}', [('cos(x)**4', '(1-sin(x)**2)**2')], '$\\cos^4=(\\cos^2)^2$.'),
+           (r'I=-\frac16\cos^{6}x+\frac18\cos^{8}x+c', [(D('-cos(x)**6/6+cos(x)**8/8'), 'cos(x)**5*sin(x)**3')],
+            'نوزّع السالب ونرجّع $u=\\cos x$. ونفس توقّع التوأم ✓')],
+    'B3': [(r'I=\int\sin^{7}x\cos^{4}x\,\cD{\cos x\,dx}', [('sin(x)**7*cos(x)**5', 'sin(x)**7*cos(x)**4*cos(x)')],
+            'الأصغر $\\cos^5$: نحجز $\\cos x\\,dx$ عشان تصير $du$.'),
+           (r'I=\int\sin^{7}x\,(1-\sin^{2}x)^{2}\,\cD{\cos x\,dx}', [('cos(x)**4', '(1-sin(x)**2)**2')],
+            '$\\cos^4=(\\cos^2)^2$، ونحوّل لـ sin عشان يصير كله $u$.'),
            U_SIN(),
-           (r'=\int u^{7}(1-2u^{2}+u^{4})\,du=\int(u^{7}-2u^{9}+u^{11})\,du', [('u**7*(1-u**2)**2', 'u**7-2*u**9+u**11')], 'نفك القوس ونوزّع.'),
+           (r'I=\int' + UB(r'\sin^{7}x', 'u^{7}') + r'\,' + UB(r'(1-\sin^{2}x)^{2}', r'(1-u^{2})^{2}') + r'\;' + UD(r'\cos x\,dx'),
+            [('sin(x)**7*cos(x)**5', 'sin(x)**7*(1-sin(x)**2)**2*diff(sin(x),x)')], SWAP_WHY, SWAP),
+           (r'I=\int u^{7}(1-2u^{2}+u^{4})\,du=\int(u^{7}-2u^{9}+u^{11})\,du', [('u**7*(1-u**2)**2', 'u**7-2*u**9+u**11')], 'نفك القوس ونوزّع.'),
            (r'I=\frac18\sin^{8}x-\frac15\sin^{10}x+\frac1{12}\sin^{12}x+c', [(D('sin(x)**8/8-sin(x)**10/5+sin(x)**12/12'), 'sin(x)**7*cos(x)**5')],
             '$\\frac{2}{10}=\\frac15$. أعلى أس 12 = 7 + 5 ✓')],
-    'C1': [(r'I=\int\sin^{4}x\cos^{4}x\,\sin x\,dx=\int(\sin^{2}x)^{2}\cos^{4}x\,\sin x\,dx',
-            [('sin(x)**5*cos(x)**4', '(sin(x)**2)**2*cos(x)**4*sin(x)')], 'أس sin فردي (5)، وأس cos زوجي (4): نحجز $\\sin x$.'),
-           (r'=\int(1-\cos^{2}x)^{2}\cos^{4}x\,\cD{\sin x\,dx}', [('(sin(x)**2)**2', '(1-cos(x)**2)**2')], 'الباقي لـ cos.'),
+    'C1': [(r'I=\int\sin^{4}x\cos^{4}x\,\cD{\sin x\,dx}=\int(\sin^{2}x)^{2}\cos^{4}x\,\cD{\sin x\,dx}',
+            [('sin(x)**5*cos(x)**4', '(sin(x)**2)**2*cos(x)**4*sin(x)')],
+            'أس sin فردي (5)، وأس cos زوجي (4): نحجز $\\sin x\\,dx$ عشان تصير $du$.'),
+           (r'I=\int(1-\cos^{2}x)^{2}\cos^{4}x\,\cD{\sin x\,dx}', [('(sin(x)**2)**2', '(1-cos(x)**2)**2')], 'نحوّل $\\sin^2$ لـ cos، عشان يصير كله $u$.'),
            U_COS(),
-           (r'=\cR{-}\int(1-u^{2})^{2}u^{4}\,du=-\int(u^{4}-2u^{6}+u^{8})\,du', [('(1-u**2)**2*u**4', 'u**4-2*u**6+u**8')],
+           (r'I=\int' + UB(r'(1-\cos^{2}x)^{2}', r'(1-u^{2})^{2}') + r'\,' + UB(r'\cos^{4}x', 'u^{4}') + r'\;' + UD(r'\sin x\,dx', MINUS_DU),
+            [('sin(x)**5*cos(x)**4', '-(1-cos(x)**2)**2*cos(x)**4*diff(cos(x),x)')], SWAP_WHY_MINUS, SWAP),
+           (r'I=\cR{-}\int(1-u^{2})^{2}u^{4}\,du=-\int(u^{4}-2u^{6}+u^{8})\,du', [('(1-u**2)**2*u**4', 'u**4-2*u**6+u**8')],
             'نفك القوس، ونضرب كل حد في $u^4$.'),
-           (r'=-\left[\frac15u^{5}-\frac27u^{7}+\frac19u^{9}\right]+c', [('integrate(u**4-2*u**6+u**8,u)', 'u**5/5-2*u**7/7+u**9/9')], 'كل حد لحاله.'),
+           (r'I=-\left[\frac15u^{5}-\frac27u^{7}+\frac19u^{9}\right]+c', [('integrate(u**4-2*u**6+u**8,u)', 'u**5/5-2*u**7/7+u**9/9')],
+            'كل حد لحاله، والسالب برّا القوس.'),
            (r'I=-\frac15\cos^{5}x+\frac27\cos^{7}x-\frac19\cos^{9}x+c', [(D('-cos(x)**5/5+2*cos(x)**7/7-cos(x)**9/9'), 'sin(x)**5*cos(x)**4')],
-            'نوزّع السالب. أعلى أس 9 = 5 + 4 ✓')],
-    'C2': [(r'I=\int\cos^{4}x\sin^{4}x\,\cos x\,dx', [('cos(x)**5*sin(x)**4', 'cos(x)**4*sin(x)**4*cos(x)')], 'أس cos فردي: نحجز $\\cos x$.'),
-           (r'=\int(1-\sin^{2}x)^{2}\sin^{4}x\,\cD{\cos x\,dx}', [('cos(x)**4', '(1-sin(x)**2)**2')], 'الباقي لـ sin.'),
+            'نوزّع السالب ونرجّع $u=\\cos x$. أعلى أس 9 = 5 + 4 ✓')],
+    'C2': [(r'I=\int\cos^{4}x\sin^{4}x\,\cD{\cos x\,dx}', [('cos(x)**5*sin(x)**4', 'cos(x)**4*sin(x)**4*cos(x)')],
+            'أس cos فردي: نحجز $\\cos x\\,dx$ عشان تصير $du$.'),
+           (r'I=\int(1-\sin^{2}x)^{2}\sin^{4}x\,\cD{\cos x\,dx}', [('cos(x)**4', '(1-sin(x)**2)**2')], 'الباقي لـ sin، عشان يصير كله $u$.'),
            U_SIN(),
-           (r'=\int(u^{4}-2u^{6}+u^{8})\,du', [('(1-u**2)**2*u**4', 'u**4-2*u**6+u**8')], 'نفس قوس $\\sin^5\\cos^4$ بالضبط.'),
+           (r'I=\int' + UB(r'(1-\sin^{2}x)^{2}', r'(1-u^{2})^{2}') + r'\,' + UB(r'\sin^{4}x', 'u^{4}') + r'\;' + UD(r'\cos x\,dx'),
+            [('cos(x)**5*sin(x)**4', '(1-sin(x)**2)**2*sin(x)**4*diff(sin(x),x)')], SWAP_WHY, SWAP),
+           (r'I=\int(u^{4}-2u^{6}+u^{8})\,du', [('(1-u**2)**2*u**4', 'u**4-2*u**6+u**8')], 'نفس قوس $\\sin^5\\cos^4$ بالضبط.'),
            (r'I=\frac15\sin^{5}x-\frac27\sin^{7}x+\frac19\sin^{9}x+c', [(D('sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9'), 'cos(x)**5*sin(x)**4')],
-            'نفس توقّع التوأم ✓')],
-    'C3': [(r'I=\int(\cos^{2}x)^{3}\sin^{6}x\,\cos x\,dx', [('cos(x)**7*sin(x)**6', '(cos(x)**2)**3*sin(x)**6*cos(x)')],
-            'أس cos فردي (7): نحجز $\\cos x$، والباقي $\\cos^6=(\\cos^2)^3$.'),
-           (r'=\int(1-\sin^{2}x)^{3}\sin^{6}x\,\cD{\cos x\,dx}', [('(cos(x)**2)**3', '(1-sin(x)**2)**3')], 'الباقي لـ sin.'),
+            'نرجّع $u=\\sin x$. ونفس توقّع التوأم ✓')],
+    'C3': [(r'I=\int(\cos^{2}x)^{3}\sin^{6}x\,\cD{\cos x\,dx}', [('cos(x)**7*sin(x)**6', '(cos(x)**2)**3*sin(x)**6*cos(x)')],
+            'أس cos فردي (7): نحجز $\\cos x\\,dx$ عشان تصير $du$، والباقي $\\cos^6=(\\cos^2)^3$.'),
+           (r'I=\int(1-\sin^{2}x)^{3}\sin^{6}x\,\cD{\cos x\,dx}', [('(cos(x)**2)**3', '(1-sin(x)**2)**3')], 'الباقي لـ sin، عشان يصير كله $u$.'),
            U_SIN(),
-           (r'=\int(1-3u^{2}+3u^{4}-u^{6})\,u^{6}\,du=\int(u^{6}-3u^{8}+3u^{10}-u^{12})\,du',
+           (r'I=\int' + UB(r'(1-\sin^{2}x)^{3}', r'(1-u^{2})^{3}') + r'\,' + UB(r'\sin^{6}x', 'u^{6}') + r'\;' + UD(r'\cos x\,dx'),
+            [('cos(x)**7*sin(x)**6', '(1-sin(x)**2)**3*sin(x)**6*diff(sin(x),x)')], SWAP_WHY, SWAP),
+           (r'I=\int(1-3u^{2}+3u^{4}-u^{6})\,u^{6}\,du=\int(u^{6}-3u^{8}+3u^{10}-u^{12})\,du',
             [('(1-u**2)**3*u**6', 'u**6-3*u**8+3*u**10-u**12')], 'التكعيب من صفحة الجبر، ثم نضرب في $u^6$.'),
            (r'I=\frac17\sin^{7}x-\frac13\sin^{9}x+\frac3{11}\sin^{11}x-\frac1{13}\sin^{13}x+c',
             [(D('sin(x)**7/7-sin(x)**9/3+3*sin(x)**11/11-sin(x)**13/13'), 'cos(x)**7*sin(x)**6')], '$\\frac39=\\frac13$. أعلى أس 13 = 7 + 6 ✓')],
     'D1': [(r'I=\int\frac12(1-\cos2x)\cdot\frac12(1+\cos2x)\,dx', [('sin(x)**2*cos(x)**2', '(1-cos(2*x))*(1+cos(2*x))/4')],
-            'الاثنين زوجيين: نص الزاوية لكل واحد.'),
-           (r'=\int\frac14(1-\cos^{2}2x)\,dx', [('(1-cos(2*x))*(1+cos(2*x))/4', '(1-cos(2*x)**2)/4')], '$(a-b)(a+b)=a^2-b^2$.'),
-           (r'=\int\left[\frac14-\frac14\cdot\frac12(1+\cos4x)\right]dx=\int\left[\frac18-\frac18\cos4x\right]dx',
+            'الاثنين زوجيين: ما فيه قطعة تصير $du$، فنص الزاوية لكل واحد.'),
+           (r'I=\int\frac14(1-\cos^{2}2x)\,dx', [('(1-cos(2*x))*(1+cos(2*x))/4', '(1-cos(2*x)**2)/4')], '$(a-b)(a+b)=a^2-b^2$.'),
+           (r'I=\int\left[\frac14-\frac14\cdot\frac12(1+\cos4x)\right]dx=\int\left[\frac18-\frac18\cos4x\right]dx',
             [('(1-cos(2*x)**2)/4', 'Rational(1,8)-cos(4*x)/8')], 'نص الزاوية مرة ثانية لـ $\\cos^22x$.'),
            (r'I=\frac18x-\frac1{32}\sin4x+c', [(D('x/8-sin(4*x)/32'), 'sin(x)**2*cos(x)**2')], '$\\frac18\\cdot\\frac14=\\frac1{32}$.')],
     'D2': [(r'\sin^{4}x\cos^{2}x=(\sin x\cos x)^{2}\sin^{2}x=\frac14\sin^{2}2x\cdot\frac{1-\cos2x}{2}',
             [('sin(x)**4*cos(x)**2', 'sin(2*x)**2/4*(1-cos(2*x))/2')], 'الحركة 1: اجمع $\\sin x\\cos x$. والحركة 2: نص الزاوية للباقي $\\sin^2x$.'),
            (r'=\frac18\sin^{2}2x-\frac18\sin^{2}2x\cos2x', [('sin(2*x)**2/4*(1-cos(2*x))/2', 'sin(2*x)**2/8-sin(2*x)**2*cos(2*x)/8')], 'نوزّع.'),
            (r'\int\sin^{2}2x\,dx=\frac x2-\frac{\sin4x}{8}', [(D('x/2-sin(4*x)/8'), 'sin(2*x)**2')], 'نص الزاوية: $2x$ تصير $4x$.'),
-           (r'\cU{u=\sin2x},\ \cD{du=2\cos2x\,dx}:\ \int\sin^{2}2x\cos2x\,dx=\frac12\int u^{2}du=\frac{\sin^{3}2x}{6}',
-            [(D('sin(2*x)**3/6'), 'sin(2*x)**2*cos(2*x)')], 'الحركة 3: هذا فردي (cos أسه 1)، فنعوّض.'),
+           (r'\text{let }\cU{u=\sin2x},\quad du=2\cos2x\,dx\ \Rightarrow\ \cD{\cos2x\,dx}=' + HALF_DU, [(D('sin(2*x)'), '2*cos(2*x)')],
+            'الحركة 3: $\\sin^22x\\cos2x$ فيها cos أسه 1 (فردي)، فنحجزه. ومشتقة $\\sin2x$ فيها 2، فنقسم الطرفين على 2.'),
+           (r'\int' + UB(r'\sin^{2}2x', 'u^{2}') + r'\;' + UD(r'\cos2x\,dx', HALF_DU),
+            [('sin(2*x)**2*cos(2*x)', 'Rational(1,2)*sin(2*x)**2*diff(sin(2*x),x)')], 'كل قطعة صارت $u$، والخضرا صارت $\\frac12du$ ✓', SWAP),
+           (r'\int\sin^{2}2x\cos2x\,dx=\frac12\int u^{2}\,du=\frac{\sin^{3}2x}{6}', [(D('sin(2*x)**3/6'), 'sin(2*x)**2*cos(2*x)')],
+            '$\\frac12\\cdot\\frac{u^3}{3}=\\frac{u^3}{6}$، ونرجّع $u=\\sin2x$.'),
            (r'I=\frac{x}{16}-\frac{\sin4x}{64}-\frac{\sin^{3}2x}{48}+c', [(D('x/16-sin(4*x)/64-sin(2*x)**3/48'), 'sin(x)**4*cos(x)**2')],
             '$\\frac18\\cdot\\frac12=\\frac1{16}$، و $\\frac18\\cdot\\frac18=\\frac1{64}$، و $\\frac18\\cdot\\frac16=\\frac1{48}$.')],
     'D5': [(r'\cos^{4}x\sin^{2}x=\frac14\sin^{2}2x\cdot\frac{1+\cos2x}{2}', [('cos(x)**4*sin(x)**2', 'sin(2*x)**2/4*(1+cos(2*x))/2')],
             'نفس $\\sin^4\\cos^2$، والباقي $\\cos^2x$ معه زائد.'),
            (r'=\frac18\sin^{2}2x+\frac18\sin^{2}2x\cos2x', [('sin(2*x)**2/4*(1+cos(2*x))/2', 'sin(2*x)**2/8+sin(2*x)**2*cos(2*x)/8')], 'نوزّع.'),
            (r'I=\frac{x}{16}-\frac{\sin4x}{64}+\frac{\sin^{3}2x}{48}+c', [(D('x/16-sin(4*x)/64+sin(2*x)**3/48'), 'cos(x)**4*sin(x)**2')],
-            'نفس جواب التوأم، والفرق إشارة وحدة.')],
+            'نفس قطع التوأم ($u=\\sin2x$ للقطعة الثانية)، والفرق إشارة وحدة.')],
     'D3': [(r'\cos^{6}x\sin^{2}x=(\sin x\cos x)^{2}\cos^{4}x=\frac14\sin^{2}2x\cdot\frac{(1+\cos2x)^{2}}{4}',
             [('cos(x)**6*sin(x)**2', 'sin(2*x)**2/4*(1+cos(2*x))**2/4')], 'الحركة 1، ثم $\\cos^4=(\\cos^2)^2$ بنص الزاوية.'),
            (r'=\frac1{16}\left(\sin^{2}2x+2\sin^{2}2x\cos2x+\sin^{2}2x\cos^{2}2x\right)',
             [('sin(2*x)**2/4*(1+cos(2*x))**2/4', '(sin(2*x)**2+2*sin(2*x)**2*cos(2*x)+sin(2*x)**2*cos(2*x)**2)/16')], 'نفك المربع.'),
            (r'\sin^{2}2x\cos^{2}2x=\frac14\sin^{2}4x', [('sin(2*x)**2*cos(2*x)**2', 'sin(4*x)**2/4')], 'الحركة 1 مرة ثانية: $\\sin2x\\cos2x=\\frac12\\sin4x$.'),
            (r'=\frac1{16}\sin^{2}2x+\frac18\sin^{2}2x\cos2x+\frac1{64}\sin^{2}4x',
-            [('cos(x)**6*sin(x)**2', 'sin(2*x)**2/16+sin(2*x)**2*cos(2*x)/8+sin(4*x)**2/64')], 'ثلاث قطع، كل وحدة تعرفها.'),
+            [('cos(x)**6*sin(x)**2', 'sin(2*x)**2/16+sin(2*x)**2*cos(2*x)/8+sin(4*x)**2/64')], 'ثلاث قطع، كل وحدة تعرفها (الوسطى بـ $u=\\sin2x$).'),
            (r'\int\sin^{2}4x\,dx=\frac x2-\frac{\sin8x}{16}', [(D('x/2-sin(8*x)/16'), 'sin(4*x)**2')], 'نص الزاوية: $4x$ تصير $8x$.'),
            (r'I=\frac{5x}{128}-\frac{\sin4x}{128}+\frac{\sin^{3}2x}{48}-\frac{\sin8x}{1024}+c',
             [(D('5*x/128-sin(4*x)/128+sin(2*x)**3/48-sin(8*x)/1024'), 'cos(x)**6*sin(x)**2')],
@@ -238,25 +297,26 @@ def check_all():
 
 # ---------------------------------------------------------------- pages
 def page_map():
-    why = ul([rich('<b>نحجز وحدة</b> لأن $du$ لازم يكون موجود: مشتقة $\\sin x$ هي $\\cos x$، ومشتقة $\\cos x$ هي $-\\sin x$.'),
+    why = ul([rich('<b>نحجز وحدة</b> عشان تصير $du$: مشتقة $\\sin x$ هي $\\cos x$، ومشتقة $\\cos x$ هي $-\\sin x$. (الشرح الكامل في صفحة 🔑 u و du.)'),
               rich('<b>المتطابقة</b> $\\sin^2=1-\\cos^2$ تحوّل بس الأس <b>الزوجي</b>. فبعد ما تحجز لازم الباقي زوجي، يعني لازم يكون فيه أس <b>فردي</b> من البداية. '
                    'وإذا كلها زوجية ما فيه شي تحجزه، فنص الزاوية: ينزّل الأس للنص ويضاعف الزاوية.'),
               rich('<b>الأصغر</b> (لو الاثنين فرديين) يعني أقواس أقل تفكها.')])
-    names = table(['اسم موسى', 'وش تسوي', 'u'], [
-        ['أسس لحالها (فردي)', rich('احجز وحدة، والباقي بالمتطابقة'), mi(r'u=\cos x') + ' أو ' + mi(r'u=\sin x')],
-        ['أسس لحالها (زوجي)', 'نص الزاوية', '—'],
-        ['<b>Odd and Even</b>', rich('احجز من <b>الفردي</b>'), 'الدالة الثانية'],
-        ['<b>Odd and Odd</b>', rich('احجز من <b>الأصغر</b> (متساويين؟ أي واحد)'), 'الدالة الثانية'],
-        ['<b>Even and Even</b>', rich('الحركات الثلاث: اجمع $\\sin x\\cos x$، ثم نص الزاوية، ثم $u=\\sin2x$ إذا لزم'), '—']], 'decide')
+    names = table(['اسم موسى', 'وش تسوي'], [
+        ['أسس لحالها (فردي)', rich('احجز وحدة، والباقي بالمتطابقة')],
+        ['أسس لحالها (زوجي)', 'نص الزاوية'],
+        ['<b>Odd and Even</b>', rich('احجز من <b>الفردي</b>')],
+        ['<b>Odd and Odd</b>', rich('احجز من <b>الأصغر</b> (متساويين؟ أي واحد)')],
+        ['<b>Even and Even</b>', rich('الحركات الثلاث: اجمع $\\sin x\\cos x$، ثم نص الزاوية، ثم $u=\\sin2x$ إذا لزم')]], 'decide')
+    urule = p(rich('🔑 <b>وش $u$؟</b> حجزت $\\cos x\\,dx$ ← let $u=\\sin x$. حجزت $\\sin x\\,dx$ ← let $u=\\cos x$ (ويطلع سالب).'))
     contents = p(' · '.join([link(a, t) + ' ص ' + pgref(a) for a, t in [
-        ('tools', '🧰 الأدوات والجبر'), ('secA', GROUP['A'][1]), ('secB', GROUP['C'][1]), ('secC', GROUP['B'][1]),
+        ('udu', '🔑 u و du'), ('tools', '🧰 الأدوات والجبر'), ('secA', GROUP['A'][1]), ('secB', GROUP['C'][1]), ('secC', GROUP['B'][1]),
         ('secD', GROUP['D'][1]), ('fix', '🔍 صحّح الغلط'), ('test', '📝 اختبار الإتقان'), ('key', '🔑 المفتاح'),
         ('sols', '✅ حلول أسئلة موسى'), ('recall', '🧠 استرجاع قبل الكويز')]]), 'contents')
     order = ['A3', 'A5', 'A2', 'A1', 'A6', 'A4', 'A7', 'C1', 'C2', 'C3', 'B1', 'B2', 'B3', 'D1', 'D2', 'D5', 'D3', 'D4']   # study order
     tracker = table(['☐', 'السؤال', 'عند موسى', 'هنا', 'ص'], [
         ['☐', mi(Q[k][0]), musa(k), KIND[Q[k][7]], link('q-' + k, pgref('q-' + k))] for k in order], 'tracker')
     plan = ('<ol class="plan">' + ''.join('<li>%s</li>' % rich(t) for t in [
-        '<b>هذي الصفحة والأدوات:</b> الـ«ليش» أهم من القواعد. غطِّها واكتبها من راسك. <b>10 دقايق.</b>',
+        '<b>ما فهمت $u$ و $du$؟</b> صفحة 🔑 u و du أول. ثم <b>هذي الصفحة والأدوات:</b> الـ«ليش» أهم من القواعد. غطِّها واكتبها من راسك. <b>10 دقايق.</b>',
         '<b>الأقسام الأربعة بالترتيب.</b> في كل قسم: المثال المحلول (غطِّ عمود «الخطوة» وتوقّع)، ثم التوأم (توقّع جوابه بسطر، ثم حله)، '
         'ثم «لحالك»، ثم الفحص الصغير. وعلّم ☐ في المتتبع. <b>75 دقيقة.</b>',
         '<b>صحّح الغلط.</b> <b>10 دقايق.</b>',
@@ -266,8 +326,9 @@ def page_map():
     return section('map', '🗺️ odd و even: الخريطة',
                    '<div class="oe-q">' + rich('السؤال الوحيد: <b>فيه أس فردي؟</b>') + '</div>'
                    + p(rich('إيه ← <b>احجز</b> وحدة من الفردي، وحوّل الباقي، وعوّض $u$. لا ← <b>نص الزاوية</b>.'))
+                   + '<div class="udu-hint">' + rich('🔑 <b>ما فهمت $u$ و $du$؟</b> ') + link('udu', 'صفحتها قبل أي حل: ص ' + pgref('udu')) + '</div>'
                    + '<h3>ليش؟ (3 أسطر تخليك تطلع القواعد بنفسك)</h3>' + why
-                   + '<h3>أسماء موسى = نفس القاعدة</h3>' + names
+                   + '<h3>أسماء موسى = نفس القاعدة</h3>' + names + urule
                    + p(rich('🚫 <b>مو هذا الدرس:</b> زاويتين مختلفتين مثل $\\sin3x\\cos2x$ (درس الضرب، موسى ص 102)، '
                             'أو tan و sec (موسى ص 98).'), 'small')
                    + '<h3>الأقسام</h3>' + contents
@@ -275,9 +336,67 @@ def page_map():
                    + '<h3>📋 خطة المذاكرة</h3>' + plan)
 
 
+UDU_KEY = ['(1) $\\displaystyle \\sin x\\,dx=-du$ (اضرب الطرفين في $-1$)',
+           '(2) $\\displaystyle \\cos3x\\,dx=\\frac13\\,du$ (لأن $du=3\\cos3x\\,dx$)',
+           '(3) $u$، و $-du$: $\\displaystyle \\int u^{4}(-du)=-\\frac15\\cos^{5}x+c$']
+
+
+def page_udu():
+    """u and du from zero: the exchange idea, the two lines to write, one full example with the 🔁 swap, why the kept piece
+    is needed (the whole secret of odd and even), the three shapes of du, the minus example, four questions, and practice."""
+    ex1 = steps([
+        (r'\text{let }\cU{u=\sin x},\quad \cD{du=\cos x\,dx}', [(D(S), C)], 'سطرين «سعر الصرف»: اشتق $u$ وحط جنبها $dx$.'),
+        (r'I=\int' + UB(r'\sin^{2}x', 'u^{2}') + r'\;' + UD(r'\cos x\,dx'), [('sin(x)**2*cos(x)', 'sin(x)**2*diff(sin(x),x)')],
+         '$\\sin^2x$ صارت $u^2$، و $\\cos x\\,dx$ كلها مع بعض صارت $du$. ما بقى ولا $x$ ✓', SWAP),
+        (r'I=\int u^{2}\,du=\frac13u^{3}+c', [('integrate(u**2,u)', 'u**3/3')], 'صار سهل: زد الأس 1 واقسم عليه.'),
+        (r'I=\frac13\sin^{3}x+c', [(D('sin(x)**3/3'), 'sin(x)**2*cos(x)')], 'نرجّع $u=\\sin x$. وتأكد: اشتقه، يرجع السؤال ✓')], 'udu ex1')
+    ex2 = steps([
+        (r'\text{let }\cU{u=\cos x},\quad du=\cR{-}\sin x\,dx', [(D(C), '-' + S)], 'مشتقة cos فيها سالب.'),
+        (r'\cR{-}du=\cD{\sin x\,dx}', [('-diff(cos(x),x)', 'sin(x)')], 'نضرب الطرفين في $-1$. الحين القطعة اللي في السؤال صار اسمها $-du$.'),
+        (r'I=\int' + UB(r'\cos^{2}x', 'u^{2}') + r'\;' + UD(r'\sin x\,dx', MINUS_DU), [('cos(x)**2*sin(x)', '-cos(x)**2*diff(cos(x),x)')],
+         '$\\cos^2x$ صارت $u^2$، و $\\sin x\\,dx$ صارت $-du$ ✓', SWAP),
+        (r'I=\cR{-}\int u^{2}\,du=-\frac13u^{3}+c', [('integrate(u**2,u)', 'u**3/3')],
+         'السالب يطلع قدّام التكامل. ولو بعده أكثر من حد، نحطه برّا قوس $-[\\ldots]$ لأنه يضرب الكل.'),
+        (r'I=-\frac13\cos^{3}x+c', [(D('-cos(x)**3/3'), 'cos(x)**2*sin(x)')], 'نرجّع $u=\\cos x$ ✓')], 'udu ex2')
+    forms = table([rich('let $u$'), rich('$du$'), 'القطعة اللي في السؤال تصير', ''], [
+        [mi(r'u=\sin x'), mi(r'du=\cos x\,dx'), mi(r'\cos x\,dx=du'), ''],
+        [mi(r'u=\cos x'), mi(r'du=-\sin x\,dx'), mi(r'\sin x\,dx=-du'), rich('اضرب الطرفين في $-1$')],
+        [mi(r'u=\sin2x'), mi(r'du=2\cos2x\,dx'), mi(r'\cos2x\,dx=\tfrac12\,du'), 'اقسم الطرفين على 2']], 'duforms')
+    arith('', [(D('sin(x)'), 'cos(x)'), (D('cos(x)'), '-sin(x)'), (D('sin(2*x)'), '2*cos(2*x)')], 'udu forms')
+    arith('', [(D('sin(3*x)'), '3*cos(3*x)')], 'udu practice 2')
+    antideriv('-cos(x)**5/5', 'cos(x)**4*sin(x)', 'udu practice 3')
+    practice = ('<ol class="fill">'
+                + '<li>%s</li>' % mi(r'\text{let }u=\cos x\ \Rightarrow\ \sin x\,dx=' + BLANK)
+                + '<li>%s</li>' % mi(r'\text{let }u=\sin3x\ \Rightarrow\ \cos3x\,dx=' + BLANK)
+                + '<li>%s</li>' % mi(r'\displaystyle\int\cos^{4}x\,\sin x\,dx=\int(' + BLANK + r')^{4}\,(' + BLANK + r')') + '</ol>'
+                + p(rich('وكمّل الثالث لين الجواب:'), 'small') + lines(2, 'write tight'))
+    checks = ul([rich(t) for t in ['✅ كتبت let $u$ و $du$؟', '✅ قطعة $du$ موجودة كاملة في السؤال؟',
+                                     '✅ بعد التبديل: ما بقى ولا $x$ ولا $dx$؟', '✅ رجّعت $x$ في الآخر؟']], 'checks')
+    return section('udu', '🔑 u و du من الصفر (اقرأها قبل أي حل)',
+                   '<div class="oe-q">' + rich('الفكرة: نحوّل التكامل الصعب لتكامل سهل مثل $\\int u^2\\,du$') + '</div>'
+                   + p(rich('مثل تصريف الفلوس: كل شي بـ«عملة $x$» يتصرّف لـ«عملة $u$». ولو بقى شي واحد بعملة $x$، التصريف خربان.'))
+                   + '<div class="oe-grid2">'
+                   + box('١. سعر الصرف: سطرين تكتبهم دايم (مثل دكتورك)', md(r'\begin{gathered}\text{let }\cU{u=\sin x}\\ \cD{du=\cos x\,dx}\end{gathered}')
+                         + p(rich('اشتق $u$، وحط جنبها $dx$. <b>ليش $dx$؟</b> كل تكامل آخره $dx$. ولما نصرف لـ $u$، القطعة $\\cos x\\,dx$ '
+                                  '<b>كلها مع بعض</b> تصير $du$.')))
+                   + box('٢. ليش لازم القطعة الخضرا؟ (وهذا كل سر odd و even)',
+                         p(rich('$du$ هي «تذكرة» التصريف: بدونها يبقى $dx$ بعملة $x$. مثلًا $\\int\\sin^2x\\,dx$ ما فيها $\\cos x$، فـ $u=\\sin x$ ما تنفع.'))
+                         + p(rich('<b>الأس الفردي</b> يعطيك قطعة زيادة ($\\sin x$ أو $\\cos x$) تحجزها وتصير $du$. <b>والزوجي</b> ما يعطيك، فتروح لنص الزاوية.')))
+                   + '</div>'
+                   + box('٣. مثال كامل: $\\int\\sin^2x\\cos x\\,dx$', ex1
+                         + p(rich('السطور المرقّمة تكتبها في الكويز. وسطر 🔁 تسويه بعيونك: قوس تحت كل قطعة، ومكتوب تحته وش صارت.'), 'small'), 'worked')
+                   + box('٤. $du$ لها 3 أشكال بس', forms)
+                   + box('٥. مثال السالب: $\\int\\cos^2x\\sin x\\,dx$', ex2, 'worked')
+                   + '<div class="oe-grid2">' + box('✅ 4 أسئلة قبل ما تكمّل أي حل', checks)
+                   + box('✍️ جرّب (الأجوبة في المفتاح ص ' + pgref('key') + ')', practice) + '</div>'
+                   + p(link('tools', 'كمّل: الأدوات ص ' + pgref('tools')) + ' · ' + link('secA', 'القسم ١ ص ' + pgref('secA')), 'small'))
+
+
 def page_tools():
     t1 = arith(r'\sin^{2}x+\cos^{2}x=1\ \Rightarrow\ \sin^{2}x=1-\cos^{2}x,\quad \cos^{2}x=1-\sin^{2}x',
                [('sin(x)**2+cos(x)**2', '1'), ('sin(x)**2', '1-cos(x)**2'), ('cos(x)**2', '1-sin(x)**2')], 'tool pyth')
+    t1b = arith(r'\begin{gathered}\sin^{2}x+\cos^{2}x=1\\ \sin^{2}x=1-\cos^{2}x\\ \cos^{2}x=1-\sin^{2}x\end{gathered}',
+                [('sin(x)**2+cos(x)**2', '1'), ('sin(x)**2', '1-cos(x)**2'), ('cos(x)**2', '1-sin(x)**2')], 'tool pyth b')
     t2 = arith(r"(\sin x)'=\cos x\qquad (\cos x)'=\cR{-}\sin x", [(D(S), C), (D(C), '-' + S)], 'tool d')
     t3 = arith(r'\sin^{2}x=\frac{1-\cos2x}{2}\qquad \cos^{2}x=\frac{1+\cos2x}{2}\qquad \sin x\cos x=\frac12\sin2x',
                [('sin(x)**2', '(1-cos(2*x))/2'), ('cos(x)**2', '(1+cos(2*x))/2'), ('sin(x)*cos(x)', 'sin(2*x)/2')], 'tool half')
@@ -288,23 +407,23 @@ def page_tools():
                  ('(1+cos(2*x))**2', '1+2*cos(2*x)+cos(2*x)**2'), ('(1-cos(2*x))**2', '1-2*cos(2*x)+cos(2*x)**2'),
                  ('(sin(x)*cos(x))**2', 'sin(2*x)**2/4')], 'tool alg')
     num = arith(r'u=2:\quad (1-4)^{2}=9,\quad 1-8+16=9\ \checkmark', [('(1-4)**2', '9'), ('1-8+16', '9')], 'tool num')
-    frac = arith(r'\frac14\cdot\frac12=\frac18\qquad \frac18\cdot\frac12=\frac1{16}\qquad \frac1{16}\cdot\frac14=\frac1{64}\qquad \frac{2}{10}=\frac15\qquad \frac39=\frac13',
+    frac = arith(r'\begin{gathered}\frac14\cdot\frac12=\frac18\qquad \frac18\cdot\frac12=\frac1{16}\\ \frac1{16}\cdot\frac14=\frac1{64}\qquad \frac{2}{10}=\frac15\qquad \frac39=\frac13\end{gathered}',
                  [('Rational(1,4)*Rational(1,2)', 'Rational(1,8)'), ('Rational(1,8)*Rational(1,2)', 'Rational(1,16)'),
                   ('Rational(1,16)*Rational(1,4)', 'Rational(1,64)'), ('Rational(2,10)', 'Rational(1,5)'), ('Rational(3,9)', 'Rational(1,3)')], 'tool frac')
     return section('tools', '🧰 الأدوات والجبر',
-                   box('١. المتطابقة: تحوّل الباقي', md(t1))
-                   + box('٢. المشتقات: تعطيك $du$', md(t2))
+                   '<div class="oe-grid2">' + box('١. المتطابقة: تحوّل الباقي', md(t1b))
+                   + box('٢. المشتقات: تعطيك $du$', md(t2) + p(rich('let $u=\\sin x$ ← $du=\\cos x\\,dx$.<br>let $u=\\cos x$ ← $\\sin x\\,dx=-du$.'), 'small')) + '</div>'
                    + box('٣. نص الزاوية: «سين وسالب»، والزاوية تتضاعف', md(t3))
                    + box('٤. التكامل', md(t4) + p(rich('مع $kx$ اقسم على $k$: $\\int\\cos4x\\,dx=\\frac14\\sin4x$.'), 'small')
                          + p(rich('ومع زاوية في الفردي: $u=\\sin2x$ يعني ') + mi(arith(r'du=2\cos2x\,dx', [(D('sin(2*x)'), '2*cos(2*x)')], 'tool angle'))
                              + rich('، فيطلع $\\frac12$ قدّام التكامل.'), 'small'))
                    + box('٥. الأقواس اللي تطلع في أسئلة موسى (جاهزة)', md(r'\begin{gathered}' + alg + r'\end{gathered}')
                          + p(rich('تشك؟ عوّض رقم في الطرفين:'), 'small') + md(num))
-                   + box('🔴 عادة السالب', p(rich('مع $u=\\cos x$: اكتب السالب <b>برّا قوس كبير</b>، $-\\left[\\ldots\\right]$، ولا توزعه إلا آخر سطر. '
-                                                 'مثل ما يسوي موسى.')))
-                   + box('🔢 الكسور اللي تطلع', md(frac))
+                   + box('🔴 عادة السالب (ومن وين يجي)', p(rich('مع $u=\\cos x$: $du=-\\sin x\\,dx$، يعني $\\sin x\\,dx=-du$. فالسالب يطلع قدّام التكامل. '
+                                                 'اكتبه <b>برّا قوس كبير</b> $-\\left[\\ldots\\right]$ لأنه يضرب كل الحدود، ولا توزعه إلا آخر سطر. مثل ما يسوي موسى.')))
+                   + '<div class="oe-grid2">' + box('🔢 الكسور اللي تطلع', md(frac))
                    + box('👀 تنبيه على مذكرة موسى', p(rich('في ص 91 كتب القوس بخطين عموديين: $-|u-\\frac23u^3+\\frac15u^5|$. '
-                                                         '<b>هذا قوس عادي، مو قيمة مطلقة.</b>'))))
+                                                         '<b>هذا قوس عادي، مو قيمة مطلقة.</b>'))) + '</div>')
 
 
 def qblock(k):
@@ -316,7 +435,7 @@ def qblock(k):
     if kind == 'twin':
         tw = TWIN_OF[k]
         return box(head + ' · توأم ' + musa(tw), md(qt) + p(link('q-' + tw, 'جواب توأمه ص ' + pgref('q-' + tw)), 'small')
-                   + p(rich('<b>توقّع أول:</b> خذ جواب توأمه، وبدّل sin مع cos، واقلب إشارة الجواب كله. اكتب توقّعك:')) + lines(1, 'write tight')
+                   + p(rich('<b>(اختياري) توقّع:</b> خذ جواب توأمه، وبدّل sin مع cos، واقلب إشارة الجواب كله. اكتب توقّعك:')) + lines(1, 'write tight')
                    + p('<b>وبعدين حلها كاملة:</b>') + lines(5, 'write tight') + p(sol), 'twin', 'q-' + k)
     if kind == 'fill':
         return box(head + ' · عبّي الفراغات', md(qt) + '<ol class="fill">' + ''.join('<li>%s</li>' % mi(r'\displaystyle ' + t) for t in FILL_D2)
@@ -357,7 +476,7 @@ def page_D():
     moves = ('<ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in [
         '<b>اجمع</b> كل $\\sin x\\cos x$ في $\\frac12\\sin2x$ (أكثر ما تقدر).',
         '<b>الباقي</b> ($\\sin^2$ أو $\\cos^2$ أو مربعهم) بنص الزاوية.',
-        '<b>طلع</b> $\\sin^22x\\cos2x$؟ هذا فردي: $u=\\sin2x$. وطلع $\\sin^2$ أو $\\cos^2$ ثاني؟ نص الزاوية مرة ثانية.']) + '</ol>')
+        '<b>طلع</b> $\\sin^22x\\cos2x$؟ هذا فردي: let $u=\\sin2x$، و $\\cos2x\\,dx=\\frac12du$. وطلع $\\sin^2$ أو $\\cos^2$ ثاني؟ نص الزاوية مرة ثانية.']) + '</ol>')
     three = box('🧱 نفس السؤال بالحركات الثلاث (أقصر، وتمشي على كل Even and Even)', steps([
         (r'\sin^{2}x\cos^{2}x=(\sin x\cos x)^{2}=\frac14\sin^{2}2x', [('sin(x)**2*cos(x)**2', 'sin(2*x)**2/4')],
          'الحركة 1: اجمع $\\sin x\\cos x=\\frac12\\sin2x$.'),
@@ -369,20 +488,21 @@ def page_D():
     return section(anchor, '%s <span class="musa">(%s)</span>' % (title, pages), body + check_block('D', CHECKS['D']))
 
 
-ODD_STEPS = ['<b>احجز</b> وحدة من صاحب الأس الفردي. الاثنين فرديين؟ من الأصغر.',
-             '<b>حوّل</b> الباقي (صار أسه زوجي) بالمتطابقة للدالة الثانية.',
-             '<b>عوّض</b>: $u$ = الدالة الثانية. 🔴 مع $u=\\cos x$ يطلع سالب، خله برّا قوس كبير.',
+ODD_STEPS = ['<b>احجز</b> $\\sin x\\,dx$ أو $\\cos x\\,dx$ وحدة من صاحب الأس الفردي، عشان تصير $du$. الاثنين فرديين؟ من الأصغر.',
+             '<b>حوّل</b> الباقي (صار أسه زوجي) بالمتطابقة، عشان يصير كله $u$.',
+             '<b>let:</b> حجزت $\\cos x\\,dx$؟ $u=\\sin x$. حجزت $\\sin x\\,dx$؟ $u=\\cos x$، و 🔴 $\\sin x\\,dx=-du$ (السالب برّا قوس كبير).',
+             '<b>بدّل</b> كل قطعة بـ $u$ (سطر 🔁): ما يبقى ولا $x$ ولا $dx$.',
              '<b>فك القوس</b> (جاهز في الأدوات) ووزّع، ثم <b>كامل</b> كل حد.',
              '<b>رجّع</b> $x$ وحط $+c$. وتأكد: <b>أعلى أس في جوابك = مجموع الأسين</b>.']
-TWIN = ('<div class="twinrule">' + '<b>👯 قاعدة التوأم (في الفردي بس):</b> سؤال وتوأمه = نفس الأسس بعد ما تبدّل sin و cos. '
+TWIN = ('<div class="twinrule">' + '<b>👯 حيلة إضافية (اختياري، بعد ما تفهم الحل اللي فوق): قاعدة التوأم.</b> في الفردي بس: سؤال وتوأمه = نفس الأسس بعد ما تبدّل sin و cos. '
         'جوابه = <b>نفس الأرقام</b>، وتبدّل sin مع cos، و<b>تنقلب إشارة الجواب كله</b>.</div>')
 
 
 def page_A():
     anchor, title, pages = GROUP['A']
     body = (p(rich('أبسط شكل: sin أو cos لحالها. الفردي بالحجز، والزوجي بنص الزاوية.'))
-            + '<h3>الفردي</h3><ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in ODD_STEPS) + '</ol>' + rich(TWIN)
-            + qblock('A3') + qblock('A5') + qblock('A2')
+            + '<h3>الفردي</h3><ol class="method">' + ''.join('<li>%s</li>' % rich(t) for t in ODD_STEPS) + '</ol>'
+            + qblock('A3') + rich(TWIN) + qblock('A5') + qblock('A2')
             + '<h3>الزوجي</h3>' + p(rich('نص الزاوية، ولو طلع $\\cos^2$ ثاني: نص الزاوية مرة ثانية.'))
             + qblock('A1') + qblock('A6') + qblock('A4') + qblock('A7'))
     return section(anchor, '%s <span class="musa">(%s)</span>' % (title, pages), body + check_block('A', CHECKS['A']))
@@ -463,7 +583,7 @@ def recall():
                ('المتطابقة، وقانونا نص الزاوية، و $\\sin x\\cos x$.', 'tools'),
                ('$(1-u^2)^2$ و $(1-u^2)^3$.', 'tools'),
                ('الحركات الثلاث في Even and Even.', 'secD'),
-               ('قاعدة التوأم، وعادة السالب، وفحص «أعلى أس».', 'secA')]
+               ('let $u$ و $du$: أشكال $du$ الثلاثة، ومن وين يجي السالب، وفحص «أعلى أس».', 'udu')]
     rows = ''.join('<div class="ch"><b>%d</b>%s%s%s</div>' % (k, p(rich(t)), lines(2, 'write tight'),
                                                           p(link(a, 'الجواب ص ' + pgref(a)), 'small'))
                    for k, (t, a) in enumerate(prompts, 1))
@@ -493,12 +613,13 @@ def page_key():
         checks += '<li><b>%s</b>%s</li>' % (GROUP[g][1], ''.join('<div>(%d) %s</div>' % (n, mi(r'\displaystyle ' + a))
                                                                  for n, a in enumerate(CHECK_KEYS[g], 1)))
     fill = ul([rich(re.sub(r'\$([^$]+)\$', lambda m: '$\\displaystyle ' + m.group(1) + '$', t)) for t in ['$\\frac{1-\\cos2x}{2}$', '$\\frac18$', '$\\frac{\\sin4x}{8}$',
-                                  '$u=\\sin2x$، و $\\frac{\\sin^32x}{6}$', '$\\frac{x}{16}-\\frac{\\sin4x}{64}-\\frac{\\sin^32x}{48}$']], 'keylist')
+                                  '$u=\\sin2x$، و $\\frac{\\sin^32x}{6}$', '$\\frac{x}{16}-\\frac{\\sin4x}{64}-\\frac{\\sin^32x}{48}$']], 'keylist cols2')
     return section('key', '🔑 المفتاح',
                    '<h3>اختبار الإتقان: القسم، وأول سطر، والجواب</h3><ol class="keylist">' + items + '</ol>'
                    + p(rich('جوابك شكله غير؟ اشتقه: إذا رجع السؤال فهو صح. والفرق بثابت عادي (مثلًا في Odd and Odd لو حجزت من الثاني).'), 'small')
                    + '<h3>الفحوص الصغيرة</h3><ul class="keylist">' + checks + '</ul>'
-                   + '<h3>فراغات ' + mi(r'\sin^{4}x\cos^{2}x') + ' (بالترتيب)</h3>' + fill)
+                   + '<h3>فراغات ' + mi(r'\sin^{4}x\cos^{2}x') + ' (بالترتيب)</h3>' + fill
+                   + '<h3>🔑 صفحة u و du: جرّب</h3>' + ul([rich(t) for t in UDU_KEY], 'keylist cols2'))
 
 
 def page_sols():
@@ -516,11 +637,11 @@ def build():
              '<h1>odd و even: تكاملات sin و cos</h1>'
              + p(rich('أسئلة موسى الـ18، كل واحد محلول. وكل سطر وكل جواب هنا فحصه الحاسوب.'), 'small')
              + p(link('map', 'ابدأ من الخريطة ←'), 'small') + '</section>')
-    return (title + page_map() + page_tools() + page_A() + page_C() + page_B() + page_D() + page_fix() + page_test()
+    return (title + page_map() + page_udu() + page_tools() + page_A() + page_C() + page_B() + page_D() + page_fix() + page_test()
             + page_key() + page_sols() + recall())
 
 
-OUTLINE = [[1, '🗺️ الخريطة والمتتبع', ['map']], [1, '🧰 الأدوات والجبر', ['tools']], [1, '١. أسس لحالها', ['secA']],
+OUTLINE = [[1, '🗺️ الخريطة والمتتبع', ['map']], [1, '🔑 u و du', ['udu']], [1, '🧰 الأدوات والجبر', ['tools']], [1, '١. أسس لحالها', ['secA']],
            [1, '٢. Odd and Even', ['secB']], [1, '٣. Odd and Odd', ['secC']], [1, '٤. Even and Even', ['secD']],
            [1, '🔍 صحّح الغلط', ['fix']], [1, '📝 اختبار الإتقان', ['test']], [1, '🔑 المفتاح', ['key']], [1, '✅ حلول أسئلة موسى', ['sols']],
            [1, '🧠 استرجاع قبل الكويز', ['recall']]]

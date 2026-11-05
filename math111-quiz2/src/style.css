@@ -412,3 +412,19 @@ table.oekey td:nth-child(2) { min-width: 34mm; }
 .keylist li { margin: 1.5mm 0; break-inside: avoid; }
 .keylist li > div { margin-inline-start: 4mm; }
 .ch .hardtag { font-size: 12pt; color: #a33; font-weight: 700; }
+/* 🔁 swap rows (odd/even and tan/sec files): under each piece, what it becomes in u; not numbered */
+table.steps tbody tr.swap:nth-child(n) td { background: #f2f6fd; border-top: 1.5px dashed #9bb3d6; border-bottom: 1.5px dashed #9bb3d6; }
+table.steps tr.swap td[colspan] { direction: ltr; text-align: left; padding: 1.2mm 2mm 1mm; }
+table.steps tr.swap .swhy { direction: rtl; text-align: right; font-size: 12pt; margin-top: 0.8mm; }
+table.steps tr.swap td.n { font-size: 13pt; }
+.udu-hint { margin: 1mm 0 2mm; padding: 1.5mm 3mm; border: 2px solid #1565c0; border-radius: 2mm; background: #f2f6fd; font-weight: 700; }
+table.duforms td { text-align: center; }
+table.duforms tr { break-inside: avoid; }
+/* odd/even file packing: worked examples and solutions may break between rows; two-column helpers */
+section.chapter.oe .sbox.worked { break-inside: auto; }
+section.chapter.oe .sbox.worked > h3, section.chapter.oe .sbox.worked > .md { break-after: avoid; }
+section.chapter.oe .sol { break-inside: auto; }
+section.chapter.oe .sol > .drill-head { break-after: avoid; }
+.oe-grid2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 4mm; align-items: start; }
+.oe-grid2 > .sbox { margin: 2mm 0; }
+ul.keylist.cols2 { column-count: 2; column-gap: 6mm; list-style: none; padding-inline-start: 0; }

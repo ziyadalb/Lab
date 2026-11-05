@@ -146,3 +146,7 @@ main.ts .sbox { margin: 2mm 0; }
 #test .write.tight > i { height: 6.6mm; }
 #test .ch .md { margin: 0.2mm 0; }
 #test .chgrid { gap: 1.4mm 5mm; }
+main.ts .sbox > h3 { break-inside: avoid; break-after: avoid; }
+main.ts ol.fill li { margin: 0.8mm 0; }
+/* section 4 may start under the last check of section 3 (no near-empty page) */
+main.ts section#secP { break-before: auto; margin-top: 6mm; }
