@@ -1,0 +1,95 @@
+{
+ "pages": 19,
+ "page_sizes_pt": [
+  [
+   595,
+   842
+  ]
+ ],
+ "fonts": {
+  "AAAAAA+IBMPlexSansArabic-Regular": "ttf",
+  "BAAAAA+IBMPlexSansArabic-Regular": "ttf",
+  "CAAAAA+IBMPlexSansArabic-Bold": "ttf",
+  "DAAAAA+IBMPlexSansArabic-Bold": "ttf",
+  "EAAAAA+DejaVuSans-Bold": "ttf",
+  "F106": "type3 (embedded glyph procedures)",
+  "F116": "type3 (embedded glyph procedures)",
+  "F122": "type3 (embedded glyph procedures)",
+  "F123": "type3 (embedded glyph procedures)",
+  "F124": "type3 (embedded glyph procedures)",
+  "F132": "type3 (embedded glyph procedures)",
+  "F19": "type3 (embedded glyph procedures)",
+  "F29": "type3 (embedded glyph procedures)",
+  "F32": "type3 (embedded glyph procedures)",
+  "F33": "type3 (embedded glyph procedures)",
+  "F34": "type3 (embedded glyph procedures)",
+  "F35": "type3 (embedded glyph procedures)",
+  "F57": "type3 (embedded glyph procedures)",
+  "F59": "type3 (embedded glyph procedures)",
+  "F61": "type3 (embedded glyph procedures)",
+  "F62": "type3 (embedded glyph procedures)",
+  "F63": "type3 (embedded glyph procedures)",
+  "F83": "type3 (embedded glyph procedures)",
+  "F92": "type3 (embedded glyph procedures)",
+  "F97": "type3 (embedded glyph procedures)",
+  "F98": "type3 (embedded glyph procedures)",
+  "GAAAAA+KaTeX_Math-Italic": "ttf",
+  "HAAAAA+KaTeX_Main-Regular": "ttf",
+  "IAAAAA+DejaVuSans": "ttf",
+  "JAAAAA+KaTeX_Size1-Regular": "ttf",
+  "KAAAAA+KaTeX_Size2-Regular": "ttf",
+  "LAAAAA+IBMPlexSansArabic-SemiBold": "ttf",
+  "MAAAAA+IBMPlexSansArabic-SemiBold": "ttf",
+  "NAAAAA+KaTeX_Size3-Regular": "ttf"
+ },
+ "min_arabic_pt": 12.0,
+ "min_text_pt_excluding_math_and_page_numbers": 12.0,
+ "internal_links": 48,
+ "named_destinations": 30,
+ "html_links": 47,
+ "bookmarks": 12,
+ "text_extraction": {
+  "tool": "pdftotext (poppler)",
+  "characters": 60406,
+  "english_found": {
+   "Evaluate the following integrals": false,
+   "Find dy/dx of the following": false
+  },
+  "arabic_found": {
+   "الاختصار": false,
+   "العلامة": false,
+   "مثال من سؤال حقيقي": false,
+   "سلّم المساعدة": false
+  },
+  "arabic_found_in_logical_order": {
+   "الاختصار": false,
+   "العلامة": false,
+   "مثال من سؤال حقيقي": false,
+   "سلّم المساعدة": false
+  }
+ },
+ "math": {
+  "produced": 404,
+  "rendered": 404,
+  "mismatched": 0,
+  "katex_errors": 0
+ },
+ "overflowing_formulas": 0,
+ "fonts_loaded_in_browser": [
+  [
+   "Plex Arabic",
+   true
+  ],
+  [
+   "KaTeX_Main",
+   true
+  ],
+  [
+   "KaTeX_Math",
+   true
+  ]
+ ],
+ "failures": [
+  "English prompts not extractable"
+ ]
+}

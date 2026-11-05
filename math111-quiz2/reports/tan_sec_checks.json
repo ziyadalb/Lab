@@ -1,0 +1,933 @@
+{
+ "checks": [
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa S1 answer",
+   "claim": "diff(tan(x)+tan(x)**3/3,x) = sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa S2 answer",
+   "claim": "diff(tan(x)**4/4+tan(x)**6/6,x) = tan(x)**3*sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa S3 answer",
+   "claim": "diff(2*tan(x)**Rational(3,2)/3+2*tan(x)**Rational(7,2)/7,x) = sqrt(tan(x))*sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa T1 answer",
+   "claim": "diff(sec(x)**9/9-2*sec(x)**7/7+sec(x)**5/5,x) = tan(x)**5*sec(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa T2 answer",
+   "claim": "diff(sec(x)**5/5-2*sec(x)**3/3+sec(x),x) = tan(x)**5*sec(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa L1 answer",
+   "claim": "diff(tan(x)-x,x) = tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa L2 answer",
+   "claim": "diff(tan(x)**2/2+log(cos(x)),x) = tan(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa L3 answer",
+   "claim": "diff(tan(x)**3/3-tan(x)+x,x) = tan(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa L4 answer",
+   "claim": "diff(tan(x)**5/5-tan(x)**3/3+tan(x)-x,x) = tan(x)**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa P1 answer",
+   "claim": "diff(sec(x)*tan(x)/2+log(sec(x)+tan(x))/2,x) = sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa P2 answer",
+   "claim": "diff(sec(x)**3*tan(x)/4+3*sec(x)*tan(x)/8+3*log(sec(x)+tan(x))/8,x) = sec(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa P3 answer",
+   "claim": "diff(sec(x)**5*tan(x)/6-7*sec(x)**3*tan(x)/24+sec(x)*tan(x)/16+log(sec(x)+tan(x))/16,x) = tan(x)**4*sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S2 other route answer",
+   "claim": "diff(sec(x)**6/6-sec(x)**4/4,x) = tan(x)**3*sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "S2 routes differ by a constant",
+   "claim": "sec(x)**6/6-sec(x)**4/4-(tan(x)**4/4+tan(x)**6/6) = Rational(-1,12)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "start identity",
+   "claim": "sec(x)**2-tan(x)**2 = 1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool d",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool d",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool ident",
+   "claim": "tan(x)**2+1 = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool ident",
+   "claim": "(sin(x)**2+cos(x)**2)/cos(x)**2 = tan(x)**2+1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool two",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool two",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool ints",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool ints",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool ints",
+   "claim": "diff(-log(cos(x)),x) = tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool ints",
+   "claim": "diff(log(sec(x)),x) = tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool ints",
+   "claim": "diff(log(sec(x)+tan(x)),x) = sec(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool why tan",
+   "claim": "tan(x) = sin(x)/cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool why tan",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool why tan",
+   "claim": "diff(-log(cos(x)),x) = tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool why sec",
+   "claim": "diff(sec(x)+tan(x),x) = sec(x)*tan(x)+sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool why sec",
+   "claim": "sec(x)*(sec(x)+tan(x)) = sec(x)*tan(x)+sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool howmany",
+   "claim": "sec(x)**4 = (1+tan(x)**2)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool howmany",
+   "claim": "sec(x)**6 = (1+tan(x)**2)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool howmany",
+   "claim": "tan(x)**4 = (sec(x)**2-1)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool alg",
+   "claim": "(1+u**2)**2 = 1+2*u**2+u**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool alg",
+   "claim": "(u**2-1)**2 = u**4-2*u**2+1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool alg",
+   "claim": "(1+u**2)**3 = 1+3*u**2+3*u**4+u**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool alg",
+   "claim": "u**2*u**3 = u**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool frac",
+   "claim": "integrate(u**Rational(1,2),u) = 2*u**Rational(3,2)/3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool frac",
+   "claim": "Rational(1,2)+2 = Rational(5,2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool angle",
+   "claim": "diff(tan(3*x),x) = 3*sec(3*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S1 step 1",
+   "claim": "sec(x)**4 = sec(x)**2*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S1 step 2",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S1 step 3",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S1 step 4",
+   "claim": "integrate(1+u**2,u) = u+u**3/3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S1 step 5",
+   "claim": "diff(tan(x)+tan(x)**3/3,x) = sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S2 step 1",
+   "claim": "tan(x)**3*sec(x)**4 = tan(x)**3*sec(x)**2*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S2 step 2",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S2 step 3",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S2 step 4",
+   "claim": "u**3*(1+u**2) = u**3+u**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked S2 step 5",
+   "claim": "diff(tan(x)**4/4+tan(x)**6/6,x) = tan(x)**3*sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "check S 1 answer",
+   "claim": "diff(tan(x)**3/3+tan(x)**5/5,x) = tan(x)**2*sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "check S 2 answer",
+   "claim": "diff(tan(x)+2*tan(x)**3/3+tan(x)**5/5,x) = sec(x)**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked T1 step 1",
+   "claim": "tan(x)**5*sec(x)**5 = tan(x)**4*sec(x)**4*sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked T1 step 2",
+   "claim": "tan(x)**4 = (sec(x)**2-1)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked T1 step 3",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked T1 step 4",
+   "claim": "(u**2-1)**2*u**4 = u**8-2*u**6+u**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked T1 step 5",
+   "claim": "diff(sec(x)**9/9-2*sec(x)**7/7+sec(x)**5/5,x) = tan(x)**5*sec(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "check T 1 answer",
+   "claim": "diff(sec(x)**5/5-sec(x)**3/3,x) = sec(x)**3*tan(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "check T 2 answer",
+   "claim": "diff(sec(x)**3/3-sec(x),x) = tan(x)**3*sec(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "chain tan6",
+   "claim": "diff(tan(x)**5/5-tan(x)**3/3+tan(x)-x,x) = tan(x)**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked L1 step 1",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked L1 step 2",
+   "claim": "diff(tan(x)-x,x) = tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked L2 step 1",
+   "claim": "tan(x)**3 = (sec(x)**2-1)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked L2 step 2",
+   "claim": "(sec(x)**2-1)*tan(x) = tan(x)*sec(x)**2-tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked L2 step 3",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked L2 step 4",
+   "claim": "integrate(u,u) = u**2/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked L2 step 4",
+   "claim": "diff(log(cos(x)),x) = -tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked L2 step 5",
+   "claim": "diff(tan(x)**2/2+log(cos(x)),x) = tan(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "check L 1 answer",
+   "claim": "diff(tan(x)**4/4-tan(x)**2/2+log(sec(x)),x) = tan(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "check L 2 answer",
+   "claim": "diff(tan(2*x)/2-x,x) = tan(2*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 1",
+   "claim": "sec(x)**3 = sec(x)*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 2",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 2",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 3",
+   "claim": "sec(x)**3 = diff(sec(x)*tan(x),x)-sec(x)*tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 4",
+   "claim": "tan(x)**2 = sec(x)**2-1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 5",
+   "claim": "sec(x)*(sec(x)**2-1) = sec(x)**3-sec(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 6",
+   "claim": "diff(log(sec(x)+tan(x)),x) = sec(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 7",
+   "claim": "diff(sec(x)*tan(x)+log(sec(x)+tan(x)),x) = 2*sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked P1 step 8",
+   "claim": "diff(sec(x)*tan(x)/2+log(sec(x)+tan(x))/2,x) = sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "check P 1 answer",
+   "claim": "diff(sec(x)*tan(x)/2-log(sec(x)+tan(x))/2,x) = tan(x)**2*sec(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "check P 2 answer",
+   "claim": "diff(sec(2*x)*tan(2*x)/4+log(sec(2*x)+tan(2*x))/4,x) = sec(2*x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 2 right",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 5 right",
+   "claim": "diff(-log(cos(x)),x) = tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistake 6 right",
+   "claim": "diff(sec(x)*tan(x)/2+log(sec(x)+tan(x))/2,x) = sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistakes right lines",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistakes right lines",
+   "claim": "tan(x)**4 = (sec(x)**2-1)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "mistakes right lines",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 1 answer",
+   "claim": "diff(tan(x)**4/4,x) = tan(x)**3*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 2 answer",
+   "claim": "diff(sec(x)**7/7-2*sec(x)**5/5+sec(x)**3/3,x) = tan(x)**5*sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 3 answer",
+   "claim": "diff(tan(x)**5/5+2*tan(x)**7/7+tan(x)**9/9,x) = tan(x)**4*sec(x)**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 4 answer",
+   "claim": "diff(tan(3*x)/3+tan(3*x)**3/9,x) = sec(3*x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 5 answer",
+   "claim": "diff(2*sec(x)**Rational(5,2)/5-2*sqrt(sec(x)),x) = tan(x)**3*sqrt(sec(x))",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 6 answer",
+   "claim": "diff(tan(x)**6/6-tan(x)**4/4+tan(x)**2/2-log(sec(x)),x) = tan(x)**7",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 7 answer",
+   "claim": "diff(sec(x)**4/4,x) = tan(x)*sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 8 answer",
+   "claim": "diff(tan(x)+tan(x)**3+3*tan(x)**5/5+tan(x)**7/7,x) = sec(x)**8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 9 answer",
+   "claim": "diff(sec(x)**5/5,x) = sec(x)**5*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 10 answer",
+   "claim": "diff(2*tan(x)+2*sec(x)-x,x) = (tan(x)+sec(x))**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test other routes",
+   "claim": "diff(sec(x)**4/4,x) = diff(tan(x)**2/2+tan(x)**4/4,x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test other routes",
+   "claim": "diff(sec(x)**4/4-sec(x)**2/2,x) = tan(x)**3*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol S3 step 1",
+   "claim": "sqrt(tan(x))*sec(x)**4 = tan(x)**Rational(1,2)*sec(x)**2*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol S3 step 2",
+   "claim": "sec(x)**2 = 1+tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol S3 step 3",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol S3 step 4",
+   "claim": "u**Rational(1,2)*(1+u**2) = u**Rational(1,2)+u**Rational(5,2)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol S3 step 5",
+   "claim": "integrate(u**Rational(1,2)+u**Rational(5,2),u) = 2*u**Rational(3,2)/3+2*u**Rational(7,2)/7",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol S3 step 6",
+   "claim": "diff(2*tan(x)**Rational(3,2)/3+2*tan(x)**Rational(7,2)/7,x) = sqrt(tan(x))*sec(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol T2 step 1",
+   "claim": "tan(x)**5*sec(x) = tan(x)**4*sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol T2 step 2",
+   "claim": "tan(x)**4 = (sec(x)**2-1)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol T2 step 3",
+   "claim": "diff(sec(x),x) = sec(x)*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol T2 step 4",
+   "claim": "(u**2-1)**2 = u**4-2*u**2+1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol T2 step 5",
+   "claim": "diff(sec(x)**5/5-2*sec(x)**3/3+sec(x),x) = tan(x)**5*sec(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol L3 step 1",
+   "claim": "tan(x)**4 = tan(x)**2*(sec(x)**2-1)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol L3 step 2",
+   "claim": "tan(x)**2*(sec(x)**2-1) = tan(x)**2*sec(x)**2-tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol L3 step 3",
+   "claim": "diff(tan(x)**3/3,x) = tan(x)**2*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol L3 step 5",
+   "claim": "diff(tan(x)**3/3-tan(x)+x,x) = tan(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol L4 step 1",
+   "claim": "tan(x)**6 = tan(x)**4*sec(x)**2-tan(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol L4 step 2",
+   "claim": "diff(tan(x)**5/5,x) = tan(x)**4*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol L4 step 4",
+   "claim": "diff(tan(x)**5/5-tan(x)**3/3+tan(x)-x,x) = tan(x)**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P2 step 1",
+   "claim": "sec(x)**5 = sec(x)**3*sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P2 step 2",
+   "claim": "diff(sec(x)**3,x) = 3*sec(x)**3*tan(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P2 step 2",
+   "claim": "diff(tan(x),x) = sec(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P2 step 3",
+   "claim": "sec(x)**5 = diff(sec(x)**3*tan(x),x)-3*sec(x)**3*tan(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P2 step 4",
+   "claim": "sec(x)**3*tan(x)**2 = sec(x)**5-sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P2 step 6",
+   "claim": "diff(sec(x)**3*tan(x)/4+Rational(3,4)*(sec(x)*tan(x)/2+log(sec(x)+tan(x))/2),x) = sec(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P2 step 7",
+   "claim": "diff(sec(x)**3*tan(x)/4+3*sec(x)*tan(x)/8+3*log(sec(x)+tan(x))/8,x) = sec(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P3 step 1",
+   "claim": "tan(x)**4 = (sec(x)**2-1)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P3 step 1",
+   "claim": "(sec(x)**2-1)**2 = sec(x)**4-2*sec(x)**2+1",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P3 step 2",
+   "claim": "tan(x)**4*sec(x)**3 = sec(x)**7-2*sec(x)**5+sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P3 step 3",
+   "claim": "sec(x)**7 = diff(sec(x)**5*tan(x)/6,x)+Rational(5,6)*sec(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P3 step 4",
+   "claim": "tan(x)**4*sec(x)**3 = diff(sec(x)**5*tan(x)/6,x)-Rational(7,6)*sec(x)**5+sec(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P3 step 5",
+   "claim": "tan(x)**4*sec(x)**3 = diff(sec(x)**5*tan(x)/6-7*sec(x)**3*tan(x)/24,x)+sec(x)**3/8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol P3 step 6",
+   "claim": "diff(sec(x)**5*tan(x)/6-7*sec(x)**3*tan(x)/24+sec(x)*tan(x)/16+log(sec(x)+tan(x))/16,x) = tan(x)**4*sec(x)**3",
+   "residual": "0"
+  }
+ ],
+ "used": {},
+ "counts": {
+  "total": 132,
+  "ok": 132
+ }
+}

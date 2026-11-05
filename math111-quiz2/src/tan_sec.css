@@ -1,0 +1,148 @@
+/* «tan و sec» lesson file: a calm, motivating look on top of style.css (scoped to main.ts).
+   One colour per rule (badge, header band, chips); the maths colours stay those of the odd/even file:
+   blue = u, green = the piece you keep (du), red = careful. Everything still reads in black and white. */
+main.ts { --r1: #3949ab; --r1t: #eef0fb; --r2: #00838f; --r2t: #e6f5f6; --r3: #b86e00; --r3t: #fdf3e3;
+          --r4: #8e44ad; --r4t: #f6eefa; --ink2: #2b2f36; --soft: #f7f8fa; --edge: #dfe3ea; }
+main.ts h2 { border-bottom: none; padding-bottom: 0; margin: 0; color: inherit; }
+main.ts .chapter { break-before: page; }
+main.ts .chapter.first { break-before: auto; }
+
+/* ---------- start page */
+.ts-hero { border-radius: 4mm; padding: 6mm 7mm 5mm; background: linear-gradient(135deg, #eef0fb 0%, #e6f5f6 55%, #fdf3e3 100%);
+           border: 1px solid var(--edge); margin-bottom: 4mm; }
+.ts-hero .kicker { font-size: 12pt; color: #555; }
+.ts-hero h1 { font-size: 34pt; margin: 1mm 0 0; line-height: 1.25; color: var(--ink2); }
+.ts-hero .sub { font-size: 15pt; margin: 1mm 0 3mm; color: #333; }
+.ts-chips { display: flex; flex-wrap: wrap; gap: 2mm; }
+.ts-chip { display: inline-block; font-size: 12pt; font-weight: 700; padding: 0.8mm 3.5mm; border-radius: 10mm; background: #fff;
+           border: 1.2px solid var(--edge); color: var(--ink2); }
+.ts-sentence { font-size: 15pt; font-weight: 700; text-align: center; padding: 3mm 4mm; margin: 3mm 0; border-radius: 3mm;
+               background: #fff; border: 2px solid var(--ink2); }
+table.same { font-size: 12.5pt; margin: 2mm 0 3mm; }
+table.same th { background: var(--soft); text-align: center; }
+table.same td { text-align: center; padding: 1.2mm 2mm; }
+table.same td:first-child { font-weight: 700; text-align: start; background: var(--soft); white-space: nowrap; }
+table.same tr { break-inside: avoid; }
+
+/* the four questions, in order */
+.ts-q { display: flex; gap: 3mm; align-items: center; padding: 2mm 3mm; margin: 2mm 0; border-radius: 3mm; break-inside: avoid;
+        border: 1.5px solid var(--edge); border-inline-start: 5px solid var(--c); background: var(--ct); }
+.ts-q .num { flex: none; width: 10mm; height: 10mm; border-radius: 50%; background: var(--c); color: #fff; font-size: 15pt; font-weight: 700;
+             display: flex; align-items: center; justify-content: center; }
+.ts-q .txt { flex: 1; }
+.ts-q .ask { font-size: 13.5pt; font-weight: 700; }
+.ts-q .go { flex: none; font-size: 12pt; font-weight: 700; color: var(--c); border: 1.5px solid var(--c); border-radius: 10mm; padding: 0.5mm 3mm; background: #fff; }
+.r1 { --c: var(--r1); --ct: var(--r1t); } .r2 { --c: var(--r2); --ct: var(--r2t); }
+.r3 { --c: var(--r3); --ct: var(--r3t); } .r4 { --c: var(--r4); --ct: var(--r4t); }
+.ts-note { padding: 1.5mm 3.5mm; border-radius: 2.5mm; background: #fff6f6; border: 1.2px solid #e7b7b9; margin: 2mm 0; break-inside: avoid; }
+.ts-go { text-align: center; margin: 4mm 0 0; }
+.ts-go a { display: inline-block; font-size: 15pt; font-weight: 700; padding: 2mm 8mm; border-radius: 10mm; background: var(--ink2); color: #fff; border: none; }
+
+/* ---------- section header */
+.ts-head { border-radius: 4mm; padding: 3.5mm 5mm; margin-bottom: 3mm; background: var(--ct); border: 1.5px solid var(--edge);
+           border-top: 5px solid var(--c); break-inside: avoid; break-after: avoid; }
+.ts-head .top { display: flex; align-items: center; gap: 3mm; }
+.ts-head .num { flex: none; width: 12mm; height: 12mm; border-radius: 50%; background: var(--c); color: #fff; font-size: 18pt; font-weight: 700;
+                display: flex; align-items: center; justify-content: center; }
+.ts-head h2 { font-size: 19pt; color: var(--c); }
+.ts-head .of { margin-inline-start: auto; font-size: 12pt; color: #555; white-space: nowrap; }
+.ts-head .rule { font-size: 14pt; font-weight: 700; margin: 2mm 0 0.5mm; }
+.ts-head .meta { font-size: 12pt; color: #555; }
+.ts-plain { border-top-color: var(--ink2); --c: var(--ink2); --ct: var(--soft); }
+ol.ts-steps { margin: 1mm 0 2mm; padding-inline-start: 7mm; }
+ol.ts-steps li { margin: 0.8mm 0; }
+ol.ts-steps li::marker { font-weight: 700; color: var(--c, #333); }
+
+/* ---------- question boxes */
+main.ts .sbox { border: 1.5px solid var(--edge); border-radius: 3mm; padding: 2mm 3.5mm; margin: 3mm 0; background: #fff; }
+main.ts .sbox > h3 { display: flex; align-items: center; flex-wrap: wrap; gap: 1mm 2.5mm; font-size: 13pt; margin: 0 0 1.5mm; }
+.kind { display: inline-block; font-size: 12pt; font-weight: 700; padding: 0.3mm 2.8mm; border-radius: 10mm; color: #fff; background: #555; }
+.kind.worked { background: #37474f; } .kind.fill { background: #1565c0; } .kind.solo { background: #2e7d32; } .kind.hard { background: #b0303a; }
+.src { font-size: 12pt; color: #555; font-weight: 400; }
+main.ts .sbox.worked { border-color: #b8c0cc; background: #fbfcfd; }
+main.ts .sbox.hard { border-color: #e2b4b8; }
+main.ts table.steps { margin: 1mm 0; }
+main.ts table.steps th { background: var(--soft); }
+main.ts table.steps tr.final td { background: #edf7ef; }
+main.ts table.steps tr.final td:nth-child(2) { box-shadow: inset 0 0 0 1.5px #2e7d32; }
+.predict { display: inline-block; font-size: 12pt; padding: 0.4mm 3mm; border-radius: 2mm; border: 1.2px dashed #888; margin: 0.5mm 0 1mm; }
+.tip { padding: 1.5mm 3.5mm; border-radius: 2.5mm; background: var(--soft); border-inline-start: 4px solid var(--c, #555); margin: 2mm 0; break-inside: avoid; }
+.both { padding: 1.5mm 3.5mm; border-radius: 2.5mm; background: #fffbea; border: 1.2px solid #ecd98b; margin: 2mm 0; break-inside: avoid; }
+ol.fill li { margin: 2.5mm 0; }
+
+/* ---------- small checks and the finish line */
+main.ts .sbox.check { border: 2px solid var(--c, #2e7d32); background: #fff; }
+main.ts .chgrid { gap: 2mm 5mm; }
+main.ts .ch { border-color: var(--edge); border-radius: 2.5mm; }
+.ts-done { text-align: center; font-size: 13pt; font-weight: 700; padding: 2mm; margin: 3mm 0 0; border-radius: 3mm;
+           border: 1.5px dashed var(--c, #555); color: var(--c, #333); break-inside: avoid; }
+
+/* ---------- tracker, tools */
+table.tracker th { background: var(--soft); }
+table.tracker td { padding: 0.9mm 2mm; }
+table.tracker td:first-child { font-size: 15pt; text-align: center; width: 8mm; }
+table.tracker tr { break-inside: avoid; }
+table.tracker td .dot { display: inline-block; width: 3mm; height: 3mm; border-radius: 50%; background: var(--c); margin-inline-end: 1.5mm; }
+table.doc td:first-child { direction: ltr; text-align: left; font-family: 'DejaVu Sans', sans-serif; }
+table.doc tr { break-inside: avoid; }
+.toolgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4mm; }
+.toolgrid .sbox { margin: 1.5mm 0; }
+table.howmany td { text-align: center; }
+table.howmany tr { break-inside: avoid; }
+
+/* ---------- mistakes, test, key */
+main.ts .fix { border: 1.5px solid var(--edge); border-radius: 3mm; padding: 1.5mm 3.5mm; margin: 2.5mm 0; break-inside: avoid; }
+main.ts .fixq { font-weight: 700; margin-top: 1mm; }
+main.ts .fixa { border-top: 1px dashed #ccc; margin-top: 1mm; padding-top: 1mm; }
+.keylist li { margin: 1.8mm 0; break-inside: avoid; }
+.keylist li > div { margin-inline-start: 4mm; }
+main.ts .sol { border: 1.5px solid var(--edge); border-radius: 3mm; padding: 2mm 3.5mm; margin: 3mm 0; break-inside: avoid; }
+main.ts .sol .drill-head { border-bottom: 1px solid var(--edge); padding-bottom: 1mm; margin-bottom: 1mm; }
+p.center { text-align: center; }
+
+/* ---------- fit: one start page, one tools page, sections without stranded checks */
+main.ts h3 { margin: 2.5mm 0 1.2mm; }
+.ts-hero { padding: 4mm 6mm 3.5mm; margin-bottom: 2.5mm; }
+.ts-hero h1 { font-size: 30pt; }
+.ts-hero .sub { font-size: 14pt; margin: 0.5mm 0 2mm; }
+.ts-sentence { padding: 2mm 3mm; margin: 2mm 0; font-size: 14pt; }
+table.same { font-size: 12pt; margin: 1mm 0 2mm; }
+table.same td { padding: 0.7mm 2mm; }
+.ts-q { padding: 1.3mm 3mm; margin: 1.4mm 0; }
+.ts-q .num { width: 9mm; height: 9mm; font-size: 14pt; }
+.ts-q .ask { font-size: 13pt; }
+.ts-go { margin: 2mm 0 0; }
+.ts-go a { font-size: 14pt; padding: 1.5mm 7mm; }
+table.tracker td { padding: 0.5mm 2mm; }
+table.tracker td:first-child { font-size: 14pt; }
+main.ts table.steps td:nth-child(2) { width: 52%; }
+main.ts table.steps td:nth-child(3) { width: 42%; }
+main.ts table.steps td { padding: 0.6mm 1.8mm; }
+main.ts .sbox { margin: 2.2mm 0; padding: 1.6mm 3mm; }
+.predict { margin: 0 0 0.8mm; }
+.toolgrid { align-items: start; }
+ul.keylist.two { column-count: 2; column-gap: 6mm; padding-inline-start: 4mm; }
+main.ts .sol { break-inside: auto; }
+main.ts .sol .drill-head { break-after: avoid; }
+main.ts .sol table.steps tr { break-inside: avoid; }
+.toolgrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+/* pack: worked examples may break between rows; the prediction sits in the box header */
+main.ts .sbox.worked { break-inside: auto; }
+main.ts .sbox.worked > h3, main.ts .sbox.worked > .md { break-after: avoid; }
+main.ts .sbox > h3 .predict { font-weight: 400; margin: 0; margin-inline-start: auto; }
+ul.keylist.two .mi .katex { white-space: normal; }
+main.ts .keylist li { margin: 1mm 0; }
+ul.keylist.two { list-style: none; padding-inline-start: 0; }
+main.ts .sbox.check .ts-done { margin: 2mm 0 0.5mm; }
+/* tighter plain heads, tracker and fill lists so nothing is stranded */
+.ts-head.ts-plain { padding: 2.2mm 4mm; margin-bottom: 2mm; }
+.ts-head.ts-plain h2 { font-size: 17pt; }
+table.tracker td { padding: 0.2mm 2mm; }
+table.tracker .kind { padding: 0 2.4mm; }
+ol.fill li { margin: 1.4mm 0; }
+ol.ts-steps li { margin: 0.4mm 0; }
+main.ts .sbox.check .ts-done { margin: 1.5mm 0 0.3mm; padding: 1.2mm; }
+main.ts .sbox { margin: 2mm 0; }
+#test .write.tight > i { height: 6.6mm; }
+#test .ch .md { margin: 0.2mm 0; }
+#test .chgrid { gap: 1.4mm 5mm; }
