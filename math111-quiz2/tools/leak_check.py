@@ -2,6 +2,7 @@
 """Check that no held-out mock question (or a near copy of one) appears in a study document.
 
 Usage: python3 tools/leak_check.py <document.katex.html> [<document.pdf>] [--report reports/leak_check.json]
+       [--allow H03,N52-E2-1]  (held tags or item ids released for this one document only; the hold list is unchanged)
 
 Held = data/holdout_ids.json: the 10 held items and their exact copies; 'avoid' = near copies of a
 held item (constant multiple / one number changed). Checks, all against the document actually produced:
@@ -103,8 +104,9 @@ def main():
     plain = html.unescape(re.sub(r'<[^>]+>', ' ', doc))
     usage_file = Path(sys.argv[sys.argv.index('--usage') + 1]) if '--usage' in sys.argv else ROOT / 'data' / 'usage.json'
     usage = json.loads(usage_file.read_text(encoding='utf-8'))
-    held = held_set()
-    avoid = {a: 'near copy %d' % n for n, a in enumerate(HOLD['avoid'], 1)}
+    allow = set(sys.argv[sys.argv.index('--allow') + 1].split(',')) if '--allow' in sys.argv else set()
+    held = {i: t for i, t in held_set().items() if i not in allow and t.split()[0] not in allow}
+    avoid = {a: 'near copy %d' % n for n, a in enumerate(HOLD['avoid'], 1) if a not in allow}
     failures, review, seen = [], [], set()
     for item_id, tag in sorted(held.items()) + sorted(avoid.items()):
         it = ITEMS[item_id]
@@ -142,7 +144,7 @@ def main():
             elif rel == 'numbers_changed':
                 review.append(dict(check='used question of the same shape, several numbers changed', item=tag,
                                    used=used_id, where=usage[used_id]['location']))
-    out = dict(document=args[0], pdf=args[1] if len(args) > 1 else None, formulas_scanned=len(annotations),
+    out = dict(document=args[0], pdf=args[1] if len(args) > 1 else None, allowed=sorted(allow), formulas_scanned=len(annotations),
                held_checked=len(held), avoid_checked=len(avoid), used_items=len(usage), failures=failures, for_manual_review=review)
     report_path.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps(dict(formulas_scanned=len(annotations), held_checked=len(held), avoid_checked=len(avoid), used_items=len(usage),

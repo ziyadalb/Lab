@@ -403,3 +403,11 @@ section.chapter.summary#memory { break-before: auto; margin-top: 4mm; }
 ol.fill li { margin: 2mm 0; }
 .ch .src { font-size: 12pt; color: var(--muted); }
 section.chapter.oe#map { break-before: auto; }
+.twinrule { margin: 2mm 0; padding: 1.2mm 3mm; border-inline-start: 3px solid #6a4c93; background: #f5f1fa; }
+.sbox.worked { border-color: #555; }
+.sbox.hard > h3 { color: #a33; }
+.musa { font-size: 12pt; color: var(--muted); font-weight: 400; }
+table.tracker td:first-child { font-size: 14pt; text-align: center; }
+table.oekey td:nth-child(2) { min-width: 34mm; }
+.keylist li { margin: 1.5mm 0; break-inside: avoid; }
+.keylist li > div { margin-inline-start: 4mm; }

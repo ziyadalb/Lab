@@ -1,0 +1,18 @@
+{
+ "out": "out/odd_even/MATH111_Odd_Even.pdf",
+ "fonts": [
+  [
+   "Plex Arabic",
+   true
+  ],
+  [
+   "KaTeX_Main",
+   true
+  ],
+  [
+   "KaTeX_Math",
+   true
+  ]
+ ],
+ "overflow": []
+}

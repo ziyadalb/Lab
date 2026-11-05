@@ -3,15 +3,127 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "map du",
-   "claim": "diff(cos(x),x) = -sin(x)",
+   "label": "Musa A1 answer",
+   "claim": "diff(x/2-sin(2*x)/4,x) = sin(x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "map du",
-   "claim": "diff(sin(x),x) = cos(x)",
+   "label": "Musa A2 answer",
+   "claim": "diff(-cos(x)+cos(x)**3/3,x) = sin(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa A3 answer",
+   "claim": "diff(sin(x)-sin(x)**3/3,x) = cos(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa A4 answer",
+   "claim": "diff(x/2+sin(2*x)/4,x) = cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa A5 answer",
+   "claim": "diff(-cos(x)+2*cos(x)**3/3-cos(x)**5/5,x) = sin(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa A6 answer",
+   "claim": "diff(3*x/8-sin(2*x)/4+sin(4*x)/32,x) = sin(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa A7 answer",
+   "claim": "diff(3*x/8+sin(2*x)/4+sin(4*x)/32,x) = cos(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa B1 answer",
+   "claim": "diff(sin(x)**6/6-sin(x)**8/8,x) = sin(x)**5*cos(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa B2 answer",
+   "claim": "diff(-cos(x)**6/6+cos(x)**8/8,x) = cos(x)**5*sin(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa B3 answer",
+   "claim": "diff(sin(x)**8/8-sin(x)**10/5+sin(x)**12/12,x) = sin(x)**7*cos(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa C1 answer",
+   "claim": "diff(-cos(x)**5/5+2*cos(x)**7/7-cos(x)**9/9,x) = sin(x)**5*cos(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa C2 answer",
+   "claim": "diff(sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9,x) = cos(x)**5*sin(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa C3 answer",
+   "claim": "diff(sin(x)**7/7-sin(x)**9/3+3*sin(x)**11/11-sin(x)**13/13,x) = cos(x)**7*sin(x)**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa D1 answer",
+   "claim": "diff(x/8-sin(4*x)/32,x) = sin(x)**2*cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa D2 answer",
+   "claim": "diff(x/16-sin(4*x)/64-sin(2*x)**3/48,x) = sin(x)**4*cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa D3 answer",
+   "claim": "diff(5*x/128-sin(4*x)/128+sin(2*x)**3/48-sin(8*x)/1024,x) = cos(x)**6*sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa D4 answer",
+   "claim": "diff(5*x/128-sin(4*x)/128-sin(2*x)**3/48-sin(8*x)/1024,x) = sin(x)**6*cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "Musa D5 answer",
+   "claim": "diff(x/16-sin(4*x)/64+sin(2*x)**3/48,x) = cos(x)**4*sin(x)**2",
    "residual": "0"
   },
   {
@@ -33,6 +145,20 @@
    "ok": true,
    "label": "tool pyth",
    "claim": "cos(x)**2 = 1-sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool d",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool d",
+   "claim": "diff(cos(x),x) = -sin(x)",
    "residual": "0"
   },
   {
@@ -73,13 +199,6 @@
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "tool int",
-   "claim": "diff(-cos(4*x)/4,x) = sin(4*x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
    "label": "tool alg",
    "claim": "(1-u**2)**2 = 1-2*u**2+u**4",
    "residual": "0"
@@ -95,280 +214,406 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "tool alg",
-   "claim": "u**4*(1-u**2) = u**4-u**6",
+   "claim": "(1+cos(2*x))**2 = 1+2*cos(2*x)+cos(2*x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "tool alg num",
+   "label": "tool alg",
+   "claim": "(1-cos(2*x))**2 = 1-2*cos(2*x)+cos(2*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool alg",
+   "claim": "(sin(x)*cos(x))**2 = sin(2*x)**2/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool num",
    "claim": "(1-4)**2 = 9",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "tool alg num",
+   "label": "tool num",
    "claim": "1-8+16 = 9",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "tool d",
-   "claim": "diff(sin(x),x) = cos(x)",
+   "label": "tool frac",
+   "claim": "Rational(1,4)*Rational(1,2) = Rational(1,8)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "tool d",
-   "claim": "diff(cos(x),x) = -sin(x)",
+   "label": "tool frac",
+   "claim": "Rational(1,8)*Rational(1,2) = Rational(1,16)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e1 step 1",
+   "label": "tool frac",
+   "claim": "Rational(1,16)*Rational(1,4) = Rational(1,64)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool frac",
+   "claim": "Rational(2,10) = Rational(1,5)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "tool frac",
+   "claim": "Rational(3,9) = Rational(1,3)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked A3 step 1",
    "claim": "cos(x)**3 = cos(x)**2*cos(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e1 step 2",
+   "label": "worked A3 step 2",
    "claim": "cos(x)**2 = 1-sin(x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e1 step 3",
+   "label": "worked A3 step 3",
    "claim": "diff(sin(x),x) = cos(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e1 step 4",
+   "label": "worked A3 step 4",
    "claim": "integrate(1-u**2,u) = u-u**3/3",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e1 step 5",
+   "label": "worked A3 step 5",
    "claim": "diff(sin(x)-sin(x)**3/3,x) = cos(x)**3",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e2 step 1",
-   "claim": "sin(x)**3*cos(x)**4 = sin(x)**2*cos(x)**4*sin(x)",
+   "label": "worked A5 step 1",
+   "claim": "sin(x)**5 = (sin(x)**2)**2*sin(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e2 step 2",
-   "claim": "sin(x)**2 = 1-cos(x)**2",
+   "label": "worked A5 step 2",
+   "claim": "(sin(x)**2)**2 = (1-cos(x)**2)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e2 step 3",
+   "label": "worked A5 step 3",
    "claim": "diff(cos(x),x) = -sin(x)",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e2 step 4",
-   "claim": "(1-u**2)*u**4 = u**4-u**6",
+   "label": "worked A5 step 4",
+   "claim": "(1-u**2)**2 = 1-2*u**2+u**4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e2 step 5",
-   "claim": "integrate(-(u**4-u**6),u) = -u**5/5+u**7/7",
+   "label": "worked A5 step 5",
+   "claim": "integrate(1-2*u**2+u**4,u) = u-2*u**3/3+u**5/5",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e2 step 6",
-   "claim": "diff(-cos(x)**5/5+cos(x)**7/7,x) = sin(x)**3*cos(x)**4",
+   "label": "worked A5 step 6",
+   "claim": "diff(-cos(x)+2*cos(x)**3/3-cos(x)**5/5,x) = sin(x)**5",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e3 step 1",
-   "claim": "sin(x)**5*cos(x)**3 = sin(x)**5*cos(x)**2*cos(x)",
+   "label": "worked A1 step 1",
+   "claim": "sin(x)**2 = (1-cos(2*x))/2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e3 step 2",
-   "claim": "cos(x)**2 = 1-sin(x)**2",
+   "label": "worked A1 step 3",
+   "claim": "diff((x-sin(2*x)/2)/2,x) = sin(x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "odd e3 step 3",
-   "claim": "diff(sin(x),x) = cos(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "odd e3 step 4",
-   "claim": "u**5*(1-u**2) = u**5-u**7",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "odd e3 step 5",
-   "claim": "diff(sin(x)**6/6-sin(x)**8/8,x) = sin(x)**5*cos(x)**3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "odd c1",
-   "claim": "cos(x)**5*sin(x)**4 = cos(x)**4*sin(x)**4*cos(x)",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "odd c1",
-   "claim": "cos(x)**4 = (1-sin(x)**2)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "odd c1",
-   "claim": "u**4*(1-u**2)**2 = u**4-2*u**6+u**8",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "odd c1 answer",
-   "claim": "diff(sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9,x) = cos(x)**5*sin(x)**4",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "odd s1 answer",
-   "claim": "diff(-cos(x)**5/5+2*cos(x)**7/7-cos(x)**9/9,x) = sin(x)**5*cos(x)**4",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "odd s2 answer",
-   "claim": "diff(sin(x)**3/3-2*sin(x)**5/5+sin(x)**7/7,x) = sin(x)**2*cos(x)**5",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "even e4 step 1",
-   "claim": "sin(x)**2 = Rational(1,2)-cos(2*x)/2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "even e4 step 3",
+   "label": "worked A1 step 4",
    "claim": "diff(x/2-sin(2*x)/4,x) = sin(x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even e5 step 1",
+   "label": "worked A6 step 1",
    "claim": "sin(x)**4 = ((1-cos(2*x))/2)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even e5 step 2",
-   "claim": "((1-cos(2*x))/2)**2 = (1-2*cos(2*x)+cos(2*x)**2)/4",
+   "label": "worked A6 step 1",
+   "claim": "((1-cos(2*x))/2)**2 = (1-cos(2*x))**2/4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even e5 step 3",
-   "claim": "cos(2*x)**2 = (1+cos(4*x))/2",
+   "label": "worked A6 step 2",
+   "claim": "(1-cos(2*x))**2/4 = (1-2*cos(2*x)+cos(2*x)**2)/4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even e5 step 4",
-   "claim": "sin(x)**4 = Rational(3,8)-cos(2*x)/2+cos(4*x)/8",
+   "label": "worked A6 step 3",
+   "claim": "cos(2*x)**2 = Rational(1,2)+cos(4*x)/2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even e5 step 5",
+   "label": "worked A6 step 4",
+   "claim": "sin(x)**4 = (Rational(3,2)-2*cos(2*x)+cos(4*x)/2)/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked A6 step 5",
+   "claim": "diff((3*x/2-sin(2*x)+sin(4*x)/8)/4,x) = sin(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked A6 step 6",
    "claim": "diff(3*x/8-sin(2*x)/4+sin(4*x)/32,x) = sin(x)**4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even c2",
+   "label": "checkpoint A 1 answer",
+   "claim": "diff(sin(x)-2*sin(x)**3/3+sin(x)**5/5,x) = cos(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "checkpoint A 2 answer",
+   "claim": "diff(x/2-sin(4*x)/8,x) = sin(2*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked C1 step 1",
+   "claim": "sin(x)**5*cos(x)**4 = (sin(x)**2)**2*cos(x)**4*sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked C1 step 2",
+   "claim": "(sin(x)**2)**2 = (1-cos(x)**2)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked C1 step 3",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked C1 step 4",
+   "claim": "(1-u**2)**2*u**4 = u**4-2*u**6+u**8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked C1 step 5",
+   "claim": "integrate(u**4-2*u**6+u**8,u) = u**5/5-2*u**7/7+u**9/9",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked C1 step 6",
+   "claim": "diff(-cos(x)**5/5+2*cos(x)**7/7-cos(x)**9/9,x) = sin(x)**5*cos(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "checkpoint C 1 answer",
+   "claim": "diff(-cos(x)**5/5+cos(x)**7/7,x) = sin(x)**3*cos(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "checkpoint C 2 answer",
+   "claim": "diff(sin(x)**3/3-sin(x)**5/5,x) = cos(x)**3*sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked B1 step 1",
+   "claim": "sin(x)**5*cos(x)**3 = sin(x)**5*cos(x)**2*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked B1 step 2",
+   "claim": "cos(x)**2 = 1-sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked B1 step 3",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked B1 step 4",
+   "claim": "u**5*(1-u**2) = u**5-u**7",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked B1 step 5",
+   "claim": "integrate(u**5-u**7,u) = u**6/6-u**8/8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked B1 step 6",
+   "claim": "diff(sin(x)**6/6-sin(x)**8/8,x) = sin(x)**5*cos(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "checkpoint B 1 answer",
+   "claim": "diff(sin(x)**4/4-sin(x)**6/6,x) = sin(x)**3*cos(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "checkpoint B 2 answer",
+   "claim": "diff(sin(x)**8/8-sin(x)**10/10,x) = cos(x)**3*sin(x)**7",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "D1 three moves step 1",
    "claim": "sin(x)**2*cos(x)**2 = sin(2*x)**2/4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even c2",
-   "claim": "sin(2*x)**2 = (1-cos(4*x))/2",
+   "label": "D1 three moves step 2",
+   "claim": "sin(2*x)**2/4 = Rational(1,8)-cos(4*x)/8",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even c2",
-   "claim": "sin(x)**2*cos(x)**2 = Rational(1,8)-cos(4*x)/8",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "even c2 answer",
+   "label": "D1 three moves step 3",
    "claim": "diff(x/8-sin(4*x)/32,x) = sin(x)**2*cos(x)**2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even s3 answer",
-   "claim": "diff(3*x/8+sin(2*x)/4+sin(4*x)/32,x) = cos(x)**4",
+   "label": "worked D1 step 1",
+   "claim": "sin(x)**2*cos(x)**2 = (1-cos(2*x))*(1+cos(2*x))/4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "even s4 answer",
-   "claim": "diff(x/2+sin(6*x)/12,x) = cos(3*x)**2",
+   "label": "worked D1 step 2",
+   "claim": "(1-cos(2*x))*(1+cos(2*x))/4 = (1-cos(2*x)**2)/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked D1 step 3",
+   "claim": "(1-cos(2*x)**2)/4 = Rational(1,8)-cos(4*x)/8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "worked D1 step 4",
+   "claim": "diff(x/8-sin(4*x)/32,x) = sin(x)**2*cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "checkpoint D 1 answer",
+   "claim": "diff(x/8-sin(12*x)/96,x) = sin(3*x)**2*cos(3*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "checkpoint D 2 answer",
+   "claim": "diff(3*x/128-sin(4*x)/128+sin(8*x)/1024,x) = sin(x)**4*cos(x)**4",
    "residual": "0"
   },
   {
@@ -403,83 +648,412 @@
    "kind": "arithmetic",
    "ok": true,
    "label": "mistakes right lines",
-   "claim": "sin(x)**2 = (1-cos(2*x))/2",
+   "claim": "integrate(-(u**4-u**6),u) = -u**5/5+u**7/7",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "mixed 1 answer",
-   "claim": "diff(-cos(x)+2*cos(x)**3/3-cos(x)**5/5,x) = sin(x)**5",
+   "label": "test 1 answer",
+   "claim": "diff(-cos(x)**7/7+cos(x)**9/9,x) = sin(x)**3*cos(x)**6",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "mixed 2 answer",
-   "claim": "diff(x/2+sin(4*x)/8,x) = cos(2*x)**2",
+   "label": "test 2 answer",
+   "claim": "diff(sin(x)**5/5-sin(x)**7/7,x) = cos(x)**3*sin(x)**4",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "mixed 3 answer",
-   "claim": "diff(-cos(x)**6/6+cos(x)**8/8,x) = cos(x)**5*sin(x)**3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "mixed 4 answer",
-   "claim": "diff(-cos(x)**3/3+cos(x)**5/5,x) = sin(x)**3*cos(x)**2",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "mixed 5 answer",
-   "claim": "diff(sin(2*x)/2-sin(2*x)**3/6,x) = cos(2*x)**3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "mixed 6 answer",
-   "claim": "diff(2*sin(x)**Rational(3,2)/3-2*sin(x)**Rational(7,2)/7,x) = sqrt(sin(x))*cos(x)**3",
-   "residual": "0"
-  },
-  {
-   "kind": "arithmetic",
-   "ok": true,
-   "label": "mixed 7 answer",
+   "label": "test 3 answer",
    "claim": "diff(sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9,x) = sin(x)**4*cos(x)**5",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "mixed 8 answer",
+   "label": "test 4 answer",
+   "claim": "diff(sin(x)**3/3-2*sin(x)**5/5+sin(x)**7/7,x) = sin(x)**2*cos(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 5 answer",
+   "claim": "diff(-cos(x)**8/8+cos(x)**10/10,x) = sin(x)**3*cos(x)**7",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 6 answer",
+   "claim": "diff(sin(2*x)/2-sin(2*x)**3/6,x) = cos(2*x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 7 answer",
+   "claim": "diff(x/2-sin(6*x)/12,x) = sin(3*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 8 answer",
+   "claim": "diff(-cos(x)+cos(x)**3-3*cos(x)**5/5+cos(x)**7/7,x) = sin(x)**7",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 9 answer",
+   "claim": "diff(-cos(x)/2-cos(5*x)/10,x) = sin(3*x)*cos(2*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "test 10 answer",
+   "claim": "diff(sin(x)**6/6-sin(x)**8/4+sin(x)**10/10,x) = sin(x)**5*cos(x)**5",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A2 step 1",
+   "claim": "sin(x)**3 = sin(x)**2*sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A2 step 2",
+   "claim": "sin(x)**2 = 1-cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A2 step 3",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A2 step 4",
+   "claim": "integrate(1-u**2,u) = u-u**3/3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A2 step 5",
+   "claim": "diff(-cos(x)+cos(x)**3/3,x) = sin(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A4 step 1",
+   "claim": "cos(x)**2 = (1+cos(2*x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A4 step 3",
+   "claim": "diff(x/2+sin(2*x)/4,x) = cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A7 step 1",
+   "claim": "cos(x)**4 = (1+2*cos(2*x)+cos(2*x)**2)/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A7 step 2",
+   "claim": "cos(x)**4 = (Rational(3,2)+2*cos(2*x)+cos(4*x)/2)/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol A7 step 3",
+   "claim": "diff(3*x/8+sin(2*x)/4+sin(4*x)/32,x) = cos(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C2 step 1",
+   "claim": "cos(x)**5*sin(x)**4 = cos(x)**4*sin(x)**4*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C2 step 2",
+   "claim": "cos(x)**4 = (1-sin(x)**2)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C2 step 3",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C2 step 4",
+   "claim": "(1-u**2)**2*u**4 = u**4-2*u**6+u**8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C2 step 5",
+   "claim": "diff(sin(x)**5/5-2*sin(x)**7/7+sin(x)**9/9,x) = cos(x)**5*sin(x)**4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C3 step 1",
+   "claim": "cos(x)**7*sin(x)**6 = (cos(x)**2)**3*sin(x)**6*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C3 step 2",
+   "claim": "(cos(x)**2)**3 = (1-sin(x)**2)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C3 step 3",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C3 step 4",
+   "claim": "(1-u**2)**3*u**6 = u**6-3*u**8+3*u**10-u**12",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol C3 step 5",
+   "claim": "diff(sin(x)**7/7-sin(x)**9/3+3*sin(x)**11/11-sin(x)**13/13,x) = cos(x)**7*sin(x)**6",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B2 step 1",
+   "claim": "cos(x)**5*sin(x)**3 = cos(x)**5*sin(x)**2*sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B2 step 2",
+   "claim": "sin(x)**2 = 1-cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B2 step 3",
+   "claim": "diff(cos(x),x) = -sin(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B2 step 4",
+   "claim": "integrate(u**5*(1-u**2),u) = u**6/6-u**8/8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B2 step 5",
+   "claim": "diff(-cos(x)**6/6+cos(x)**8/8,x) = cos(x)**5*sin(x)**3",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B3 step 1",
+   "claim": "sin(x)**7*cos(x)**5 = sin(x)**7*cos(x)**4*cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B3 step 2",
+   "claim": "cos(x)**4 = (1-sin(x)**2)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B3 step 3",
+   "claim": "diff(sin(x),x) = cos(x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B3 step 4",
+   "claim": "u**7*(1-u**2)**2 = u**7-2*u**9+u**11",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol B3 step 5",
    "claim": "diff(sin(x)**8/8-sin(x)**10/5+sin(x)**12/12,x) = sin(x)**7*cos(x)**5",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "mixed 9 answer",
-   "claim": "diff(-3*cos(x)**Rational(4,3)/4+3*cos(x)**Rational(10,3)/10,x) = cos(x)**Rational(1,3)*sin(x)**3",
+   "label": "sol D2 step 1",
+   "claim": "sin(x)**4*cos(x)**2 = sin(2*x)**2/4*(1-cos(2*x))/2",
    "residual": "0"
   },
   {
    "kind": "arithmetic",
    "ok": true,
-   "label": "mixed 10 answer",
-   "claim": "diff(-cos(x)**7/7+2*cos(x)**9/9-cos(x)**11/11,x) = sin(x)**5*cos(x)**6",
+   "label": "sol D2 step 2",
+   "claim": "sin(2*x)**2/4*(1-cos(2*x))/2 = sin(2*x)**2/8-sin(2*x)**2*cos(2*x)/8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D2 step 3",
+   "claim": "diff(x/2-sin(4*x)/8,x) = sin(2*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D2 step 4",
+   "claim": "diff(sin(2*x)**3/6,x) = sin(2*x)**2*cos(2*x)",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D2 step 5",
+   "claim": "diff(x/16-sin(4*x)/64-sin(2*x)**3/48,x) = sin(x)**4*cos(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D5 step 1",
+   "claim": "cos(x)**4*sin(x)**2 = sin(2*x)**2/4*(1+cos(2*x))/2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D5 step 2",
+   "claim": "sin(2*x)**2/4*(1+cos(2*x))/2 = sin(2*x)**2/8+sin(2*x)**2*cos(2*x)/8",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D5 step 3",
+   "claim": "diff(x/16-sin(4*x)/64+sin(2*x)**3/48,x) = cos(x)**4*sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D3 step 1",
+   "claim": "cos(x)**6*sin(x)**2 = sin(2*x)**2/4*(1+cos(2*x))**2/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D3 step 2",
+   "claim": "sin(2*x)**2/4*(1+cos(2*x))**2/4 = (sin(2*x)**2+2*sin(2*x)**2*cos(2*x)+sin(2*x)**2*cos(2*x)**2)/16",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D3 step 3",
+   "claim": "sin(2*x)**2*cos(2*x)**2 = sin(4*x)**2/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D3 step 4",
+   "claim": "cos(x)**6*sin(x)**2 = sin(2*x)**2/16+sin(2*x)**2*cos(2*x)/8+sin(4*x)**2/64",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D3 step 5",
+   "claim": "diff(x/2-sin(8*x)/16,x) = sin(4*x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D3 step 6",
+   "claim": "diff(5*x/128-sin(4*x)/128+sin(2*x)**3/48-sin(8*x)/1024,x) = cos(x)**6*sin(x)**2",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D4 step 1",
+   "claim": "sin(x)**6*cos(x)**2 = sin(2*x)**2/4*(1-cos(2*x))**2/4",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D4 step 2",
+   "claim": "sin(x)**6*cos(x)**2 = sin(2*x)**2/16-sin(2*x)**2*cos(2*x)/8+sin(4*x)**2/64",
+   "residual": "0"
+  },
+  {
+   "kind": "arithmetic",
+   "ok": true,
+   "label": "sol D4 step 3",
+   "claim": "diff(5*x/128-sin(4*x)/128-sin(2*x)**3/48-sin(8*x)/1024,x) = sin(x)**6*cos(x)**2",
    "residual": "0"
   }
  ],
  "used": {},
  "counts": {
-  "total": 68,
-  "ok": 68
+  "total": 150,
+  "ok": 150
  }
 }
